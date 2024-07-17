@@ -234,7 +234,6 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 RELA InGameCharacter
 2 NOTE Wang Miao interacts with Fu Xi in the Three Body game. Fu Xi offers mystical and philosophical insights into the game world.
 
-
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
 1 SEX M
@@ -491,6 +490,12 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 1 ASSO @I0007@
 2 RELA InGameCharacter
 2 NOTE King Wen of Zhou interacts with Wang Miao in the Three Body game, helping him understand the survival strategies and the nature of the game's world.
+1 ASSO @I0020@
+2 RELA Leader
+2 NOTE King Wen of Zhou is the leader of Follower in the Three Body game.
+1 ASSO @I0021@
+2 RELA Colleague
+2 NOTE King Wen of Zhou interacts with King Zhou in the Three Body game, providing insights into the survival mechanisms during chaotic and stable eras.
 
 0 @I0020@ INDI
 1 NAME Follower /Follower of King Wen/
@@ -506,6 +511,9 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 1 ASSO @I0007@
 2 RELA InGameCharacter
 2 NOTE Follower interacts with Wang Miao in the Three Body game, providing practical advice and assistance in navigating the game's challenges.
+1 ASSO @I0019@
+2 RELA Subordinate
+2 NOTE Follower is a subordinate to King Wen of Zhou in the Three Body game.
 
 0 @I0021@ INDI
 1 NAME Zhou /King/
@@ -518,9 +526,16 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 CONT Physical traits: Regal, imposing. Mental traits: Authoritative, strategic.
 2 CONT Role: Provides a broader perspective on the world's survival mechanisms in the game.
 2 CONT Main decisive actions: Commands the rehydration process, interacts with Fu Xi about the sun god.
+1 QUOT "Re-hy-drate…"
 1 ASSO @I0007@
 2 RELA InGameCharacter
 2 NOTE King Zhou interacts with Wang Miao in the Three Body game, providing insights into the survival strategies during chaotic and stable eras.
+1 ASSO @I0019@
+2 RELA Colleague
+2 NOTE King Zhou and King Wen of Zhou interact in the Three Body game, discussing strategies for surviving chaotic eras.
+1 ASSO @I0022@
+2 RELA Advisor
+2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
 0 @I0022@ INDI
 1 NAME Xi /Fu/
@@ -533,9 +548,13 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 CONT Physical traits: Mysterious, pale-faced. Mental traits: Mystical, philosophical.
 2 CONT Role: Offers insights into the sun god's behavior and the chaotic nature of the game world.
 2 CONT Main decisive actions: Suggests the pendulums to hypnotize the sun god, participates in philosophical discussions.
+1 QUOT "The sun is a temperamental god. When the god is awake, his moods are unpredictable, and thus we have a Chaotic Era. But when he’s asleep, his breathing evens out, and thus we have a Stable Era."
 1 ASSO @I0007@
 2 RELA InGameCharacter
 2 NOTE Fu Xi interacts with Wang Miao in the Three Body game, offering philosophical and mystical perspectives on the game's world.
+1 ASSO @I0021@
+2 RELA Advisor
+2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
 0 TRLR
 0 @F0001@ FAM
