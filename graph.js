@@ -136,8 +136,7 @@ node.on("mouseover", (event, d) => {
 link.on("mouseover", (event, d) => {
     tooltip.style("display", "block");
     tooltip.html(`
-        <strong>Relationship:</strong><br>
-        ${d.relation}<br>
+        <strong>Relationship:</strong> ${d.relation}<br><br>
         Between: ${d.source.name} and ${d.target.name}
     `);
 }).on("mousemove", (event) => {

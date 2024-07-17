@@ -69,7 +69,9 @@
 1 ASSO @I4@
 2 RELA Colleague
 1 ASSO @I6@
-2 RELA Colleague
+2 RELA Acquaintance
+1 ASSO @I14@
+2 RELA InterrogatedBy
 1 NOTE "It was impossible to expect a moral awakening from humankind itself, just like it was impossible to expect humans to lift off the earth by pulling up on their own hair."
 1 NOTE Physical traits: Young, intelligent appearance. Mental traits: Disillusioned, determined, brilliant.
 0 @I4@ INDI
@@ -141,7 +143,7 @@
 1 ASSO @I9@
 2 RELA Colleague
 1 ASSO @I11@
-2 RELA Investigator
+2 RELA Investigated
 1 ASSO @I10@
 2 RELA Acquaintance
 1 NOTE "It's impossible to lift off the earth by pulling up on one's own hair."
@@ -160,7 +162,7 @@
 1 ASSO @I7@
 2 RELA Friend
 1 ASSO @I11@
-2 RELA Investigator
+2 RELA Investigated
 1 NOTE "Sometimes, being tough is the only way to get things done."
 0 @I9@ INDI
 1 NAME Yi /Ding/
@@ -195,7 +197,8 @@
 2 RELA Acquaintance
 1 ASSO @I8@
 2 RELA Colleague
-1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+1 NOTE Physical traits: Authoritative presence, physically imposing. Mental traits: Strategic, authoritative, disciplined.
+1 NOTE Role: Provides military insights and ensures security.
 0 @I11@ INDI
 1 NAME Dong /Yang/
 1 SEX F
@@ -216,9 +219,9 @@
 2 DATE unknown
 2 PLAC China
 1 ASSO @I7@
-2 RELA InvestigatedBy
+2 RELA Investigated
 1 ASSO @I8@
-2 RELA InvestigatedBy
+2 RELA Investigated
 1 ASSO @I9@
 2 RELA Friend
 1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
@@ -239,7 +242,8 @@
 2 RELA Parent
 1 ASSO @I3@
 2 RELA Sibling
-1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+1 NOTE Physical traits: Young, fervent revolutionary. Mental traits: Ideologically driven, estranged from family.
+1 NOTE Role: Represents the ideological divide within families during the Cultural Revolution.
 0 @I13@ INDI
 1 NAME Weining /Yang/
 1 SEX M
@@ -250,7 +254,9 @@
 1 NOTE "I want to devote myself to the times, to make some real-world contributions."
 1 ASSO @I3@
 2 RELA Colleague
-1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+1 NOTE Physical traits: Intellectual, determined appearance. Mental traits: Idealistic, loyal, dedicated.
+1 NOTE Role: Key supporter of Wenjie Ye at Red Coast Base.
+1 NOTE Important interaction: Collaborates with Wenjie Ye on her scientific endeavors.
 0 @I14@ INDI
 1 NAME Lihua /Cheng/
 1 SEX F
@@ -259,5 +265,8 @@
 2 PLAC China
 1 OCCU Military representative from Intermediate People’s Court
 1 NOTE "What young person hasn’t made some mistakes? I made mistakes myself."
-1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+1 ASSO @I3@
+2 RELA Interrogated
+1 NOTE Physical traits: Authoritative, military appearance. Mental traits: Disciplinarian, fair-minded, strategic.
+1 NOTE Role: Oversees political and disciplinary actions at Red Coast Base.
 0 TRLR
