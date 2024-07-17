@@ -1,0 +1,263 @@
+0 HEAD
+1 SOUR The Three-Body Problem
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Zhetai /Ye/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE 1967
+2 PLAC Beijing, China
+1 OCCU Physicist, professor at Tsinghua University
+1 NOTE Traditional scientist, viewed as reactionary during the Cultural Revolution.
+1 EVEN
+2 TYPE Death during struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I2@
+2 RELA Wife
+1 ASSO @I3@
+2 RELA Child
+1 ASSO @I12@
+2 RELA Child
+1 NOTE "Theory is the foundation of application. Isn’t discovering fundamental laws the biggest contribution to our time?"
+1 NOTE Physical traits: Elderly, scholarly appearance. Mental traits: Rational, committed to scientific principles.
+0 @I2@ INDI
+1 NAME Lin /Shao/
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Physicist
+1 NOTE Supports the Cultural Revolution, denounces her husband.
+1 EVEN
+2 TYPE Participation in struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I1@
+2 RELA Husband
+1 ASSO @I3@
+2 RELA Child
+1 ASSO @I12@
+2 RELA Child
+1 NOTE "With the help of the revolutionary youths, I want to stand on the side of the revolution, the side of the people!"
+1 NOTE Physical traits: Dressed in an ill-fitting green outfit mimicking the Red Guards. Mental traits: Fearful, desperate to align with the political climate.
+0 @I3@ INDI
+1 NAME Wenjie /Ye/
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Astrophysicist
+1 NOTE Disillusioned with humanity and the political climate.
+1 EVEN
+2 TYPE Witnessed father's death
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I1@
+2 RELA Parent
+1 ASSO @I2@
+2 RELA Parent
+1 ASSO @I12@
+2 RELA Sibling
+1 ASSO @I5@
+2 RELA Partner
+1 ASSO @I4@
+2 RELA Colleague
+1 ASSO @I6@
+2 RELA Colleague
+1 NOTE "It was impossible to expect a moral awakening from humankind itself, just like it was impossible to expect humans to lift off the earth by pulling up on their own hair."
+1 NOTE Physical traits: Young, intelligent appearance. Mental traits: Disillusioned, determined, brilliant.
+0 @I4@ INDI
+1 NAME Zhicheng /Lei/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Political commissar at Red Coast Base
+1 NOTE Firm believer in the Party and its directives.
+1 EVEN
+2 TYPE Supervision at Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I3@
+2 RELA Supervisor
+1 NOTE "Given the nature of this work, we can’t have someone who doesn’t want to be here."
+1 NOTE Physical traits: Authoritative appearance. Mental traits: Strict, adheres to Party lines.
+0 @I5@ INDI
+1 NAME Weining /Yang/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base
+1 NOTE Loyal to scientific inquiry.
+1 EVEN
+2 TYPE Work at Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I3@
+2 RELA Partner
+1 ASSO @I1@
+2 RELA FormerStudent
+1 NOTE "I want to devote myself to the times, to make some real-world contributions."
+1 NOTE Physical traits: Young, determined. Mental traits: Loyal, dedicated.
+0 @I6@ INDI
+1 NAME Mulin /Bai/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Reporter for Great Production News
+1 NOTE Supportive of the Party's initiatives.
+1 EVEN
+2 TYPE Visit to Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I3@
+2 RELA Acquaintance
+1 ASSO @I5@
+2 RELA Acquaintance
+1 NOTE "I can tell how you’re feeling. The two of us are the only ones who feel this way."
+1 NOTE Physical traits: Typical reporter's appearance. Mental traits: Curious, observant.
+0 @I7@ INDI
+1 NAME Miao /Wang/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Nanomaterials researcher
+1 NOTE Neutral political views; focused on scientific advancement.
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I8@
+2 RELA Friend
+1 ASSO @I9@
+2 RELA Colleague
+1 ASSO @I11@
+2 RELA Investigator
+1 ASSO @I10@
+2 RELA Acquaintance
+1 NOTE "It's impossible to lift off the earth by pulling up on one's own hair."
+0 @I8@ INDI
+1 NAME Qiang /Shi/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Police detective
+1 NOTE Practical and pragmatic political views.
+1 EVEN
+2 TYPE Investigation of Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I7@
+2 RELA Friend
+1 ASSO @I11@
+2 RELA Investigator
+1 NOTE "Sometimes, being tough is the only way to get things done."
+0 @I9@ INDI
+1 NAME Yi /Ding/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Theoretical physicist
+1 NOTE Intellectual curiosity and skepticism.
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I7@
+2 RELA Colleague
+1 ASSO @I11@
+2 RELA Friend
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 @I10@ INDI
+1 NAME Unknown /Chang/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Military officer
+1 NOTE Strongly aligned with state security and national defense.
+1 EVEN
+2 TYPE Meeting about Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I7@
+2 RELA Acquaintance
+1 ASSO @I8@
+2 RELA Colleague
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 @I11@ INDI
+1 NAME Dong /Yang/
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE unknown
+2 PLAC China
+1 OCCU Physicist
+1 NOTE Scientific skepticism.
+1 EVEN
+2 TYPE Mysterious death
+2 DATE unknown
+2 PLAC China
+1 EVEN
+2 TYPE Suicide
+2 DATE unknown
+2 PLAC China
+1 ASSO @I7@
+2 RELA InvestigatedBy
+1 ASSO @I8@
+2 RELA InvestigatedBy
+1 ASSO @I9@
+2 RELA Friend
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 @I12@ INDI
+1 NAME Wenxue /Ye/
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE 1969
+2 PLAC Beijing, China
+1 OCCU Red Guard, Ye Wenjie's sister
+1 NOTE Ever since her little sister had made a clean break with her reactionary academic authority family, Wenjie had heard no news about her.
+1 ASSO @I1@
+2 RELA Parent
+1 ASSO @I2@
+2 RELA Parent
+1 ASSO @I3@
+2 RELA Sibling
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 @I13@ INDI
+1 NAME Weining /Yang/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base, once a student of Zhetai Ye
+1 NOTE "I want to devote myself to the times, to make some real-world contributions."
+1 ASSO @I3@
+2 RELA Colleague
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 @I14@ INDI
+1 NAME Lihua /Cheng/
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Military representative from Intermediate People’s Court
+1 NOTE "What young person hasn’t made some mistakes? I made mistakes myself."
+1 NOTE "Science is about exploring the unknown, not just confirming what we already know."
+0 TRLR
