@@ -46,13 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (level === '1') {
                             if (tag === 'NAME') {
                                 currentIndividual.name = formatName(value);
-                                currentField = null;
-                            } else if (tag === 'NICK') {
-                                currentIndividual.nickname = value;
-                                currentField = null;
-                            } else if (tag === 'EMAIL') {
-                                currentIndividual.email = value;
-                                currentField = null;
+                                currentField = 'name';
                             } else if (tag === 'NOTE') {
                                 currentField = currentIndividual.notes;
                                 currentIndividual.notes.push(value);
@@ -78,6 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 currentField = null;
                             }
                         } else if (level === '2') {
+                            if (currentField === 'name') {
+                                if (tag === 'NICK') {
+                                    currentIndividual.nickname = value;
+                                }
+                                if (tag === 'EMAIL') {
+                                    currentIndividual.email = value;
+                                }
+                            }
                             if (tag === 'DATE') {
                                 const dateValue = value.toLowerCase() === 'unknown' ? null : value;
                                 if (currentIndividual.birth && !currentIndividual.birth.date) currentIndividual.birth.date = dateValue;
@@ -116,6 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        console.log(individuals); // Log the individuals to see the parsed data
+        console.log(families); // Log the families to see the parsed data
 
         let nodes = Object.values(individuals);
         let links = [];
