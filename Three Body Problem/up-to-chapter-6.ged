@@ -352,6 +352,45 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 RELA Interrogated
 2 NOTE Lihua Cheng attempts to coerce Ye Wenjie into signing false documents.
 
+0 @I0015@ INDI
+1 NAME Yufei /Shen/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Scientist, member of the Frontiers of Science
+1 NOTE Mysterious and intelligent member of the Frontiers of Science.
+2 CONT Physical traits: N/A. Mental traits: Subtle, probing, intelligent.
+2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Involved in high-level discussions and decisions within the Frontiers of Science.
+1 ASSO @I0016@
+2 RELA Colleague
+2 NOTE Shen Yufei and Pan Han are colleagues within the Frontiers of Science.
+
+
+0 @I0016@ INDI
+1 NAME Han /Pan/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Biologist, member of the Frontiers of Science
+1 NOTE Mysterious and somewhat enigmatic figure within the Frontiers of Science.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, secretive, and persuasive.
+2 CONT Role: Key member of the Frontiers of Science, involved in the overarching intrigue of the story.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Engages in significant scientific and philosophical discussions.
+1 QUOT "The universe is a dark forest."
+1 ASSO @I0007@
+2 RELA Colleague
+2 NOTE Pan Han and Wang Miao are colleagues through their involvement with the Frontiers of Science.
+1 ASSO @I0015@
+2 RELA Acquaintance
+2 NOTE Pan Han interacts with Shen Yufei within the Frontiers of Science.
+
+
+
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@
