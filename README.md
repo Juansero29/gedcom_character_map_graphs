@@ -14,6 +14,9 @@ The `index.html` file proposes a website in which one selects a `*.ged` file, an
 1. Click on a node to show exclusively neighbors (direct relationships)
 1. Hover over a relationship link to look at the specifc relationship and any notes that may go alongside it
 1. Hover over a node (person) to see its details, full names and nicknames, sex, birth, death, notes, events and quotes.
+1. Blood-related people (family) are linked with red thick lines, associated people (friends, acquintances, etc) are linked with black thin lines.
+1. Males are blue and Females are pink (yikes toxic sexism, but it's simple...)
+1. Deceased characters have a Cross on top of their node
 
 ## Features I Want To Implement
 
