@@ -166,33 +166,41 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 1 NAME Miao /Wang/
 1 SEX M
 1 BIRT
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
 1 OCCU Nanomaterials researcher
 1 NOTE Respected scientist working in the field of nanomaterials.
 2 CONT Physical traits: N/A. Mental traits: Intelligent, analytical.
-2 CONT Role: Scientist introduced in "The Frontiers of Science".
-2 CONT Political views: N/A
-2 CONT Main decisive actions: Works in nanomaterials research, associated with the scientific community.
+2 CONT Role: Scientist introduced in "The Frontiers of Science", now involved in investigating the mysterious suicides.
+2 CONT Political views: Neutral, focused on scientific advancement.
+2 CONT Main decisive actions: Agrees to infiltrate the "Frontiers of Science" to gather information.
 1 EVEN
 2 TYPE Involvement in Frontiers of Science
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
-1 ASSO @I0011@
+1 ASSO @I0010@
 2 RELA Acquaintance
-2 NOTE Miao Wang and Sha Ruishan are acquainted through their work in the scientific community.
-1 ASSO @I0012@
-2 RELA Superior
-2 NOTE Miao Wang's superior in the research field, providing guidance and direction.
+2 NOTE Acquainted with Colonel Chang Weisi through the investigation.
 1 ASSO @I0008@
 2 RELA Friend
-2 NOTE Miao Wang and Qiang Shi are friends through their professional interactions.
+2 NOTE Qiang Shi and Wang Miao are friends through their professional interactions, but their relationship is strained.
+2 NOTE Wang Miao often feels frustrated with Shi Qiang's blunt and rough mannerisms.
+2 NOTE Despite their differences, Wang relies on Shi Qiang's practical insights during the investigation.
 1 ASSO @I0009@
 2 RELA Colleague
-2 NOTE Miao Wang and Yi Ding work together in the scientific community.
+2 NOTE Works together with Yi Ding in the scientific community.
 1 ASSO @I0011@
 2 RELA Investigated
-2 NOTE Miao Wang was investigated in connection with the mysterious events.
+2 NOTE Investigated in connection with the mysterious events.
+1 ASSO @I0015@
+2 RELA Acquaintance
+2 NOTE Acquainted with Shen Yufei through the Frontiers of Science.
+1 ASSO @I0016@
+2 RELA Colleague
+2 NOTE Pan Han and Wang Miao are colleagues through their involvement with the Frontiers of Science.
+1 QUOT "It's impossible to lift off the earth by pulling up on one's own hair."
+1 QUOT "The countdown continued. 1175:10:02, 1175:10:01, 1175:10:00, 1175:09:59 ..."
+
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
@@ -213,7 +221,9 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 PLAC China
 1 ASSO @I0007@
 2 RELA Friend
-2 NOTE Qiang Shi and Miao Wang are friends through their professional interactions.
+2 NOTE Qiang Shi and Wang Miao are friends through their professional interactions, but their relationship is strained.
+2 NOTE Wang Miao often feels frustrated with Shi Qiang's blunt and rough mannerisms.
+2 NOTE Despite their differences, Wang relies on Shi Qiang's practical insights during the investigation.
 1 ASSO @I0011@
 2 RELA Investigated
 2 NOTE Qiang Shi investigated Dong Yang in connection with the mysterious events.
@@ -364,7 +374,11 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
 2 CONT Political views: N/A
 2 CONT Main decisive actions: Involved in high-level discussions and decisions within the Frontiers of Science.
+1 QUOT "Three days from now—that’s the fourteenth—between one and five in the morning, the entire universe will flicker for you."
 1 ASSO @I0007@
+2 RELA Acquaintance
+2 NOTE Shen Yufei and Wang Miao interact as part of the Frontiers of Science.
+1 ASSO @I0016@
 2 RELA Colleague
 2 NOTE Shen Yufei and Pan Han are colleagues within the Frontiers of Science.
 
@@ -379,14 +393,14 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 1 NOTE Mysterious and somewhat enigmatic figure within the Frontiers of Science.
 2 CONT Physical traits: N/A. Mental traits: Intelligent, secretive, and persuasive.
 2 CONT Role: Key member of the Frontiers of Science, involved in the overarching intrigue of the story.
-2 CONT Political views: N/A
+2 CONT Political views: Believes in de-urbanization and advocates for an agricultural society.
 2 CONT Main decisive actions: Engages in significant scientific and philosophical discussions.
 1 QUOT "The universe is a dark forest."
 1 ASSO @I0007@
 2 RELA Colleague
 2 NOTE Pan Han and Wang Miao are colleagues through their involvement with the Frontiers of Science.
 1 ASSO @I0015@
-2 RELA Acquaintance
+2 RELA Colleague
 2 NOTE Pan Han interacts with Shen Yufei within the Frontiers of Science.
 
 

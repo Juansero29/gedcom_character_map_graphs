@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                     currentIndividual.associations[currentIndividual.associations.length - 1].relation = value;
                                 }
                                 if (tag === 'NOTE') {
-                                    currentField = currentIndividual.associations[currentIndividual.associations.length - 1].notes;
                                     currentIndividual.associations[currentIndividual.associations.length - 1].notes.push(value);
                                 }
                             }
