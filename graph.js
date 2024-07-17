@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = parts.slice(2).join(' ');
 
             if (level === '0' && tag.startsWith('@I')) {
-                currentIndividual = { id: tag, notes: [], events: [], associations: [], quotes: [] };
+                currentIndividual = { id: tag, notes: [], events: [], associations: [], quotes: [], families: [] };
                 individuals[tag] = currentIndividual;
                 currentFamily = null;
                 currentNote = null;
@@ -94,6 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 currentField = null;
                             } else if (tag === 'OCCU') {
                                 currentIndividual.occupation = value;
+                                currentField = null;
+                            } else if (tag === 'FAMC') {
+                                currentIndividual.families.push(value);
                                 currentField = null;
                             } else {
                                 currentField = null;
@@ -181,6 +184,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let nodes = Object.values(individuals);
         let links = [];
+
+        // Create sibling links
+        Object.values(families).forEach(fam => {
+            const children = fam.children;
+            children.forEach((child, index) => {
+                for (let i = index + 1; i < children.length; i++) {
+                    links.push({
+                        source: child,
+                        target: children[i],
+                        relation: 'Sibling',
+                        type: 'family'
+                    });
+                }
+            });
+        });
 
         nodes.forEach(node => {
             node.associations.forEach(assoc => {

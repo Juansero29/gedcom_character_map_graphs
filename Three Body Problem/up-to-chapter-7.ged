@@ -61,7 +61,7 @@
 1 NAME Wenjie /Ye/
 1 SEX F
 1 BIRT
-2 DATE 1940
+2 DATE 1948
 2 PLAC China
 1 OCCU Astrophysicist
 1 NOTE Astrophysicist, traumatized by her father’s death.
@@ -78,8 +78,6 @@
 2 RELA Parent
 1 ASSO @I0002@
 2 RELA Parent
-1 ASSO @I0012@
-2 RELA Sibling
 1 ASSO @I0005@
 2 RELA Partner
 1 ASSO @I0004@
@@ -88,6 +86,7 @@
 2 RELA Acquaintance
 1 ASSO @I0014@
 2 RELA InterrogatedBy
+1 FAMC @F0001@
 
 0 @I0004@ INDI
 1 NAME Zhicheng /Lei/
@@ -349,11 +348,12 @@
 2 RELA Friend
 2 NOTE Dong Yang and Yi Ding are friends through their mutual interest in theoretical physics.
 
+
 0 @I0012@ INDI
 1 NAME Wenxue /Ye/
 1 SEX F
 1 BIRT
-2 DATE 1942
+2 DATE 1950
 2 PLAC China
 1 DEAT
 2 DATE 1969
@@ -368,10 +368,7 @@
 1 ASSO @I0002@
 2 RELA Parent
 2 NOTE Wenxue Ye is the child of Lin Shao.
-1 ASSO @I0003@
-2 RELA Sibling
-2 NOTE Wenxue Ye is the sibling of Wenjie Ye.
-
+1 FAMC @F0001@
 
 
 0 @I0014@ INDI
@@ -544,7 +541,6 @@
 2 RELA Advisor
 2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
-0 TRLR
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@

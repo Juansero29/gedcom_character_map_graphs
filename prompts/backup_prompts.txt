@@ -30,3 +30,7 @@ Uncaught ReferenceError: node is not defined
     at HTMLInputElement.oninput (index.html:56:91)
 
 In this part of the code: filteredNodes.find(node === link.target.id)
+
+
+
+It seems like sibling links are not interpreted correctly by the script since they are not being marked in red. It seems like in GEDCOM they are described by using the 1 FAMC @F0001@ tag, where the value varies depending on the family id that the child is from. Can you please help me adapt the script to take this into account and mark links red between siblings?
