@@ -119,7 +119,14 @@ function createGraph(data) {
 
     node.append("circle")
         .attr("r", 10)
-        .attr("fill", d => d.death && d.death.status ? "red" : "lightblue"); // Mark deceased individuals with a different color
+        .attr("fill", "lightblue"); // Use a uniform color for all nodes
+
+    // Add a cross mark for deceased individuals
+    node.append("text")
+        .attr("x", -6)
+        .attr("y", 3)
+        .attr("class", "cross")
+        .text(d => d.death && d.death.status ? '✝' : '');
 
     node.append("title")
         .html(d => {
@@ -189,7 +196,7 @@ function createGraph(data) {
 function formatName(name) {
     const parts = name.split('/');
     if (parts.length === 3) {
-        return `${parts[0]} ${parts[1].toUpperCase()} ${parts[2]}`;
+        return `${parts[0]} <strong>${parts[1].toUpperCase()}</strong> ${parts[2]}`;
     }
     return name;
 }
