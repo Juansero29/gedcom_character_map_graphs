@@ -175,6 +175,7 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 CONT Role: Scientist introduced in "The Frontiers of Science", now involved in investigating the mysterious suicides.
 2 CONT Political views: Neutral, focused on scientific advancement.
 2 CONT Main decisive actions: Agrees to infiltrate the "Frontiers of Science" to gather information.
+2 CONT Experiencing unexplained countdown in photos taken with his camera, leading to psychological distress.
 1 QUOT "It's impossible to lift off the earth by pulling up on one's own hair."
 1 QUOT "The countdown continued. 1175:10:02, 1175:10:01, 1175:10:00, 1175:09:59 ..."
 1 EVEN
@@ -211,6 +212,12 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 DATE Unknown
 2 PLAC China
 2 NOTE Wang Miao starts playing the Three Body game, where he interacts with fictional characters such as King Wen of Zhou and Follower. The game presents a chaotic world where the sun's movements are unpredictable, and people must survive extreme conditions by dehydrating and rehydrating.
+1 ASSO @I0009@
+2 RELA Colleague
+2 NOTE Works together with Yi Ding in the scientific community.
+1 ASSO @I0011@
+2 RELA Investigated
+2 NOTE Investigated in connection with the mysterious events.
 1 ASSO @I0015@
 2 RELA Acquaintance
 2 NOTE Wang Miao interacts with Shen Yufei through the Frontiers of Science and consults her about the countdown phenomenon.
@@ -220,7 +227,12 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 1 ASSO @I0020@
 2 RELA InGameCharacter
 2 NOTE Wang Miao interacts with Follower in the Three Body game. Follower's dialogue and actions help Wang understand the survival strategies in the game's world.
-
+1 ASSO @I0021@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with King Zhou in the Three Body game. King Zhou provides a broader perspective on the world within the game and its survival mechanisms.
+1 ASSO @I0022@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with Fu Xi in the Three Body game. Fu Xi offers mystical and philosophical insights into the game world.
 
 
 0 @I0008@ INDI
@@ -387,6 +399,7 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 RELA Interrogated
 2 NOTE Lihua Cheng attempts to coerce Ye Wenjie into signing false documents.
 
+
 0 @I0015@ INDI
 1 NAME Yufei /Shen/
 1 SEX F
@@ -397,7 +410,9 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 1 NOTE Mysterious and intelligent member of the Frontiers of Science.
 2 CONT Physical traits: N/A. Mental traits: Subtle, probing, intelligent.
 2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
+2 CONT Political views: N/A
 2 CONT Main decisive actions: Advises Wang Miao to stop his nanomaterial research project.
+2 CONT Engages in high-level discussions and decisions within the Frontiers of Science.
 1 QUOT "Three days from now—that’s the fourteenth—between one and five in the morning, the entire universe will flicker for you."
 1 ASSO @I0007@
 2 RELA Acquaintance
@@ -405,6 +420,7 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 1 ASSO @I0016@
 2 RELA Colleague
 2 NOTE Shen Yufei and Pan Han are colleagues within the Frontiers of Science.
+
 
 0 @I0016@ INDI
 1 NAME Han /Pan/
@@ -491,7 +507,37 @@ I will now read Chapter 7, "Three Body: King Wen of Zhou and the Long Night," fr
 2 RELA InGameCharacter
 2 NOTE Follower interacts with Wang Miao in the Three Body game, providing practical advice and assistance in navigating the game's challenges.
 
+0 @I0021@ INDI
+1 NAME Zhou /King/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC Unknown
+1 OCCU In-game character
+1 NOTE King Zhou is a fictional character in the Three Body game. He is the ruler during the chaotic times and interacts with King Wen of Zhou and Wang Miao.
+2 CONT Physical traits: Regal, imposing. Mental traits: Authoritative, strategic.
+2 CONT Role: Provides a broader perspective on the world's survival mechanisms in the game.
+2 CONT Main decisive actions: Commands the rehydration process, interacts with Fu Xi about the sun god.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE King Zhou interacts with Wang Miao in the Three Body game, providing insights into the survival strategies during chaotic and stable eras.
 
+0 @I0022@ INDI
+1 NAME Xi /Fu/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC Unknown
+1 OCCU In-game character
+1 NOTE Fu Xi is a fictional character in the Three Body game. He provides mystical and philosophical insights into the game's world.
+2 CONT Physical traits: Mysterious, pale-faced. Mental traits: Mystical, philosophical.
+2 CONT Role: Offers insights into the sun god's behavior and the chaotic nature of the game world.
+2 CONT Main decisive actions: Suggests the pendulums to hypnotize the sun god, participates in philosophical discussions.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE Fu Xi interacts with Wang Miao in the Three Body game, offering philosophical and mystical perspectives on the game's world.
+
+0 TRLR
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@
