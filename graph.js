@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function parseGedcom(data) {
         const lines = data.split('\n');
         let individuals = {};
+        let families = {};
         let currentIndividual = null;
-        let associations = [];
+        let currentFamily = null;
+        let currentField = null;
 
         lines.forEach(line => {
             const parts = line.trim().split(' ');
@@ -27,40 +29,89 @@ document.addEventListener('DOMContentLoaded', function() {
             if (level === '0' && tag.startsWith('@I')) {
                 currentIndividual = { id: tag, notes: [], events: [], associations: [] };
                 individuals[tag] = currentIndividual;
-            } else if (currentIndividual) {
-                if (level === '1') {
-                    if (tag === 'NAME') currentIndividual.name = formatName(value);
-                    if (tag === 'SEX') currentIndividual.sex = value;
-                    if (tag === 'BIRT') currentIndividual.birth = { date: null, place: null };
-                    if (tag === 'DEAT') currentIndividual.death = { date: null, place: null, status: true };
-                    if (tag === 'OCCU') currentIndividual.occupation = value;
-                    if (tag === 'NOTE') currentIndividual.notes.push(value);
-                    if (tag === 'ASSO') {
-                        currentIndividual.associations.push({ person: value, relation: null });
+                currentFamily = null;
+                currentField = null;
+            } else if (level === '0' && tag.startsWith('@F')) {
+                currentFamily = { id: tag, husband: null, wife: null, children: [] };
+                families[tag] = currentFamily;
+                currentIndividual = null;
+                currentField = null;
+            } else if (currentIndividual || currentFamily) {
+                if (tag === 'CONC') {
+                    if (currentField) {
+                        currentField[currentField.length - 1] += value;
                     }
-                    if (tag === 'EVEN') currentIndividual.events.push({ type: null, date: null, place: null });
-                } else if (level === '2') {
-                    if (tag === 'DATE') {
-                        const dateValue = value.toLowerCase() === 'unknown' ? null : value;
-                        if (currentIndividual.birth && !currentIndividual.birth.date) currentIndividual.birth.date = dateValue;
-                        if (currentIndividual.death && !currentIndividual.death.date) currentIndividual.death.date = dateValue;
-                        if (currentIndividual.events.length > 0) {
-                            currentIndividual.events[currentIndividual.events.length - 1].date = dateValue;
+                } else {
+                    if (currentIndividual) {
+                        if (level === '1') {
+                            if (tag === 'NAME') {
+                                currentIndividual.name = formatName(value);
+                                currentField = null;
+                            } else if (tag === 'NICK') {
+                                currentIndividual.nickname = value;
+                                currentField = null;
+                            } else if (tag === 'EMAIL') {
+                                currentIndividual.email = value;
+                                currentField = null;
+                            } else if (tag === 'NOTE') {
+                                currentField = currentIndividual.notes;
+                                currentIndividual.notes.push(value);
+                            } else if (tag === 'ASSO') {
+                                currentIndividual.associations.push({ person: value, relation: null });
+                                currentField = null;
+                            } else if (tag === 'EVEN') {
+                                currentIndividual.events.push({ value: value, type: null, date: null, place: null });
+                                currentField = null;
+                            } else if (tag === 'SEX') {
+                                currentIndividual.sex = value;
+                                currentField = null;
+                            } else if (tag === 'BIRT') {
+                                currentIndividual.birth = { date: null, place: null };
+                                currentField = null;
+                            } else if (tag === 'DEAT') {
+                                currentIndividual.death = { date: null, place: null, status: true };
+                                currentField = null;
+                            } else if (tag === 'OCCU') {
+                                currentIndividual.occupation = value;
+                                currentField = null;
+                            } else {
+                                currentField = null;
+                            }
+                        } else if (level === '2') {
+                            if (tag === 'DATE') {
+                                const dateValue = value.toLowerCase() === 'unknown' ? null : value;
+                                if (currentIndividual.birth && !currentIndividual.birth.date) currentIndividual.birth.date = dateValue;
+                                if (currentIndividual.death && !currentIndividual.death.date) currentIndividual.death.date = dateValue;
+                                if (currentIndividual.events.length > 0) {
+                                    currentIndividual.events[currentIndividual.events.length - 1].date = dateValue;
+                                }
+                                currentField = null;
+                            }
+                            if (tag === 'PLAC') {
+                                const placeValue = value.toLowerCase() === 'unknown' ? null : value;
+                                if (currentIndividual.birth && !currentIndividual.birth.place) currentIndividual.birth.place = placeValue;
+                                if (currentIndividual.death && !currentIndividual.death.place) currentIndividual.death.place = placeValue;
+                                if (currentIndividual.events.length > 0) {
+                                    currentIndividual.events[currentIndividual.events.length - 1].place = placeValue;
+                                }
+                                currentField = null;
+                            }
+                            if (tag === 'RELA' && currentIndividual.associations.length > 0) {
+                                currentIndividual.associations[currentIndividual.associations.length - 1].relation = value;
+                                currentField = null;
+                            }
+                            if (tag === 'TYPE' && currentIndividual.events.length > 0) {
+                                currentIndividual.events[currentIndividual.events.length - 1].type = value;
+                                currentField = null;
+                            }
                         }
-                    }
-                    if (tag === 'PLAC') {
-                        const placeValue = value.toLowerCase() === 'unknown' ? null : value;
-                        if (currentIndividual.birth && !currentIndividual.birth.place) currentIndividual.birth.place = placeValue;
-                        if (currentIndividual.death && !currentIndividual.death.place) currentIndividual.death.place = placeValue;
-                        if (currentIndividual.events.length > 0) {
-                            currentIndividual.events[currentIndividual.events.length - 1].place = placeValue;
+                    } else if (currentFamily) {
+                        if (level === '1') {
+                            if (tag === 'HUSB') currentFamily.husband = value;
+                            if (tag === 'WIFE') currentFamily.wife = value;
+                            if (tag === 'CHIL') currentFamily.children.push(value);
+                            currentField = null;
                         }
-                    }
-                    if (tag === 'RELA' && currentIndividual.associations.length > 0) {
-                        currentIndividual.associations[currentIndividual.associations.length - 1].relation = value;
-                    }
-                    if (tag === 'TYPE' && currentIndividual.events.length > 0) {
-                        currentIndividual.events[currentIndividual.events.length - 1].type = value;
                     }
                 }
             }
@@ -74,8 +125,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 links.push({
                     source: node.id,
                     target: assoc.person,
-                    relation: assoc.relation
+                    relation: assoc.relation,
+                    type: 'association'
                 });
+            });
+        });
+
+        Object.values(families).forEach(fam => {
+            if (fam.husband && fam.wife) {
+                links.push({
+                    source: fam.husband,
+                    target: fam.wife,
+                    relation: 'Spouse',
+                    type: 'family'
+                });
+            }
+            fam.children.forEach(child => {
+                if (fam.husband) {
+                    links.push({
+                        source: fam.husband,
+                        target: child,
+                        relation: 'Parent',
+                        type: 'family'
+                    });
+                }
+                if (fam.wife) {
+                    links.push({
+                        source: fam.wife,
+                        target: child,
+                        relation: 'Parent',
+                        type: 'family'
+                    });
+                }
             });
         });
 
@@ -118,7 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .selectAll("line")
             .data(data.links)
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            .attr("stroke", d => d.type === 'family' ? 'red' : '#000')
+            .attr("stroke-width", d => d.type === 'family' ? 2 : 0.5);
 
         const node = container.append("g")
             .attr("class", "nodes")
@@ -151,6 +234,8 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.style("display", "block");
             let details = `
                 <strong>Name:</strong> ${d.name}<br>
+                ${d.nickname ? `<strong>Nickname:</strong> ${d.nickname}<br>` : ''}
+                ${d.email ? `<strong>Email:</strong> ${d.email}<br>` : ''}
                 <strong>Sex:</strong> ${d.sex}<br>
                 <strong>Occupation:</strong> ${d.occupation || 'unknown occupation'}<br>
                 <strong>Birth:</strong> ${d.birth ? `${d.birth.date || 'unknown date'} at ${d.birth.place || 'unknown place'}` : 'unknown birth'}<br>`;
@@ -163,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <strong>Notes:</strong><br>
                 <ul>${d.notes.length ? d.notes.map(note => `<li>${note}</li>`).join('') : '<li>no notes</li>'}</ul>
                 <strong>Events:</strong><br>
-                <ul>${d.events.length ? d.events.map(event => `<li>${event.type || 'unknown type'}: ${event.date || 'unknown date'} at ${event.place || 'unknown place'}</li>`).join('') : '<li>no events</li>'}</ul>
+                <ul>${d.events.length ? d.events.map(event => `<li>${event.type || 'unknown type'}: ${event.value ? event.value + ' - ' : ''}${event.date || 'unknown date'}${event.place ? ' at ' + event.place : ''}</li>`).join('') : '<li>no events</li>'}</ul>
             `;
             tooltip.html(details);
         }).on("mousemove", (event) => {
