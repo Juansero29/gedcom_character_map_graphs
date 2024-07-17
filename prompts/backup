@@ -1,0 +1,32 @@
+This part of the script is not working:
+
+ window.searchGraph = function() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const filteredNodes = allNodes.filter(node => 
+            node.name.toLowerCase().includes(query) ||
+            (node.nickname && node.nickname.toLowerCase().includes(query)) ||
+            node.name.split(' ').some(part => part.toLowerCase().includes(query))
+        );
+
+        const neighbors = new Set();
+        allLinks.forEach(link => {
+            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node === link.target.id)) {
+                neighbors.add(link.source.id);
+                neighbors.add(link.target.id);
+            }
+        });
+
+        const displayNodes = allNodes.filter(node => neighbors.has(node.id));
+        const displayLinks = allLinks.filter(link => neighbors.has(link.source.id) && neighbors.has(link.target.id));
+
+        createGraph({ nodes: displayNodes, links: displayLinks });
+    }
+
+I am getting this error 
+Uncaught ReferenceError: node is not defined
+    at graph.js:447:94
+    at Array.forEach (<anonymous>)
+    at window.searchGraph (graph.js:446:18)
+    at HTMLInputElement.oninput (index.html:56:91)
+
+In this part of the code: filteredNodes.find(node === link.target.id)

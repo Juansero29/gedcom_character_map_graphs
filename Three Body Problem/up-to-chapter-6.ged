@@ -243,28 +243,28 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 NOTE Yi Ding and Dong Yang are friends through their mutual interest in theoretical physics.
 
 0 @I0010@ INDI
-1 NAME UNKNOWN /Chang/
+1 NAME Colonel Chang /Weisi/
 1 SEX M
 1 BIRT
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
-1 OCCU Military officer
+1 OCCU Colonel - Military officer
 1 NOTE Strongly aligned with state security and national defense.
 2 CONT Physical traits: Authoritative presence, physically imposing. Mental traits: Strategic, authoritative, disciplined.
-2 CONT Role: Provides military insights and ensures security.
+2 CONT Role: Provides military insights and ensures security in the investigation of the "Frontiers of Science".
 2 CONT Political views: N/A
-2 CONT Main decisive actions: Participates in meetings regarding the Frontiers of Science.
+2 CONT Main decisive actions: Convinces Wang Miao to infiltrate the "Frontiers of Science".
 2 CONT Quotes: "We must ensure the security of our nation above all."
 1 EVEN
 2 TYPE Meeting about Frontiers of Science
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
 1 ASSO @I0007@
 2 RELA Acquaintance
-2 NOTE Unknown Chang and Miao Wang are acquainted through security briefings and discussions.
+2 NOTE Acquainted with Wang Miao through the investigation.
 1 ASSO @I0008@
 2 RELA Colleague
-2 NOTE Unknown Chang and Qiang Shi work together to ensure the security of scientific endeavors.
+2 NOTE Works together with Shi Qiang to ensure the security of scientific endeavors.
 
 0 @I0011@ INDI
 1 NAME Dong /Yang/
@@ -364,7 +364,7 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
 2 CONT Political views: N/A
 2 CONT Main decisive actions: Involved in high-level discussions and decisions within the Frontiers of Science.
-1 ASSO @I0016@
+1 ASSO @I0007@
 2 RELA Colleague
 2 NOTE Shen Yufei and Pan Han are colleagues within the Frontiers of Science.
 

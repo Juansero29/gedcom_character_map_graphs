@@ -441,18 +441,18 @@ document.addEventListener('DOMContentLoaded', function() {
             (node.nickname && node.nickname.toLowerCase().includes(query)) ||
             node.name.split(' ').some(part => part.toLowerCase().includes(query))
         );
-
+    
         const neighbors = new Set();
         allLinks.forEach(link => {
-            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node === link.target.id)) {
+            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node => node.id === link.target.id)) {
                 neighbors.add(link.source.id);
                 neighbors.add(link.target.id);
             }
         });
-
+    
         const displayNodes = allNodes.filter(node => neighbors.has(node.id));
         const displayLinks = allLinks.filter(link => neighbors.has(link.source.id) && neighbors.has(link.target.id));
-
+    
         createGraph({ nodes: displayNodes, links: displayLinks });
     }
 });
