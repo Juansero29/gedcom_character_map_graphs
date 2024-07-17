@@ -1,0 +1,24 @@
+I need you to read until chapter 6 of the book “Three Body Problem” that I gave you in .txt file. The chapter is called “The Shooter and The Farmer. 
+
+After you have read carefully until there, and not any further, please make me a detailed GED text file with all the characters mentioned until now.
+
+For each individual, their id should be composed of 4 digit numbers, State their birth/death dates and places, gender in the appropriate GEDCOM tags. State in their NOTE tags, a description of the character, of their traits (physical and mental), role in the intrigue, occupation, main political views and main decisive actions as well as any quotes of important phrases they said in the chapter that made them stand out that give important cues of their personality and important actions in the plot. Be sure to include in the notes any important events in the character's story that lead to develop further the intrigue up to this point. Be sure of not reading any further in the book as to not spoil anything else.
+
+Also for each individual, be sure to establish association links with the tag ASSO between people that are not blood-related but still know each other or are related in any shape or form: they have talked. Describe the ASSO tag using the RELA tag to label their relationship and additional NOTE tags if necessary explaining the relationship or association between this people. The ASSO tags should be inside the INDI blocks, and not at the end of the file.
+
+Update any of the existing info as needed if any new info or developments have been stated for existing relationships or existing characters via NOTE tags.
+
+For people that are blood-related, be sure to create families with the tag FAM, and links along with HUSB, WIFE, CHILD tags  within the family for blood-related characters (same family). Please add NOTE fields to the ASSO and RELA fields stating what exactly in the plot made this characters know each other: how they meet and what were their important interactions and events that contributed to the intrigue, even if this relationship are merely friendships or acquaintances. 
+
+For each family, their id should also be composed of 4 digit numbers.
+
+Be sure to keep the 2 NOTE tags for ASSO tags since they describe important information between relationships of the characters, if there are any missing please add them with accurate NOTE information that describe the relation directly from the book text up until now.
+
+Be sure that Quotes of characters are correctly placed inside QUOT tags and not in NOTE tags
+
+DO NOT read further into future chapters as to not be spoiled. Be sure that each individual character appears only once in the file and is not repeated.
+
+Here is the up-to-date .ged file that had been updated up to the events in the previous chapter as well as the book in .txt format. Be sure to include all of the info in this previous take and update it or correct it if necessary.Please also fix and correct any incongruences or missing information that may be of interest:
+
+
+Please give me the missing lines in the .ged text you were generating
