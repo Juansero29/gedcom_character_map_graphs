@@ -278,15 +278,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 .on("end", dragended);
         }
     }
-
-    function formatName(name) {
-        const parts = name.split('/');
-        if (parts.length === 3) {
-            const firstName = parts[0].trim();
-            const surname = parts[1].toUpperCase();
-            const lastName = parts[2].trim();
-            return `${firstName} ${surname} ${lastName}`.trim();
-        }
-        return name.trim();
-    }
 });

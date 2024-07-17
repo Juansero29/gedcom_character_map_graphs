@@ -10,28 +10,36 @@
             font-family: 'Helvetica', 'Arial', sans-serif;
             overflow: hidden;
         }
-        #gedcomFile {
+        #gedcomFileContainer {
             position: absolute;
             top: 10px;
             left: 10px;
             z-index: 10;
+        }
+        #gedcomFileLabel {
+            display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
             font-family: 'Helvetica', 'Arial', sans-serif;
-            background-color: white;
+            background-color: #6200ea;
+            color: white;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #gedcomFileLabel:hover {
+            background-color: #3700b3;
+        }
+        #gedcomFile {
+            display: none;
         }
         svg {
             width: 100vw;
             height: 100vh;
         }
-
-
-
         .node text {
             font: 12px sans-serif;
         }
-
         .link {
             fill: none;
             stroke: #000;
@@ -40,7 +48,10 @@
     </style>
 </head>
 <body>
-    <input type="file" id="gedcomFile">
+    <div id="gedcomFileContainer">
+        <label for="gedcomFile" id="gedcomFileLabel">Choose File</label>
+        <input type="file" id="gedcomFile">
+    </div>
     <svg></svg>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="graph.js"></script>
