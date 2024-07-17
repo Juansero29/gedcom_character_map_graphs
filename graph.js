@@ -74,19 +74,29 @@ function createGraph(data) {
     const width = +svg.attr("width");
     const height = +svg.attr("height");
 
+    const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on("zoom", (event) => {
+            svg.attr("transform", event.transform);
+        });
+
+    svg.call(zoom);
+
+    const container = svg.append("g");
+
     const simulation = d3.forceSimulation(data.nodes)
         .force("link", d3.forceLink(data.links).id(d => d.id).distance(100))
         .force("charge", d3.forceManyBody().strength(-200))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-    const link = svg.append("g")
+    const link = container.append("g")
         .attr("class", "links")
         .selectAll("line")
         .data(data.links)
         .enter().append("line")
         .attr("class", "link");
 
-    const linkLabels = svg.append("g")
+    const linkLabels = container.append("g")
         .attr("class", "link-labels")
         .selectAll("text")
         .data(data.links)
@@ -94,7 +104,7 @@ function createGraph(data) {
         .attr("class", "link-label")
         .text(d => d.relation);
 
-    const node = svg.append("g")
+    const node = container.append("g")
         .attr("class", "nodes")
         .selectAll("g")
         .data(data.nodes)
@@ -105,14 +115,30 @@ function createGraph(data) {
         .attr("r", 10)
         .attr("fill", "lightblue");
 
-    node.append("title")
-        .text(d => {
-            let details = `${d.name}\n${d.occupation || ''}\nBorn: ${d.birth ? `${d.birth.date} at ${d.birth.place}` : 'unknown'}\nDied: ${d.death ? `${d.death.date} at ${d.death.place}` : 'unknown'}\n\nNotes:\n${d.notes.join('\n')}\n\nEvents:\n`;
-            d.events.forEach(event => {
-                details += `${event.type}: ${event.date} at ${event.place}\n`;
-            });
-            return details;
-        });
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "10px")
+        .style("display", "none");
+
+    node.on("mouseover", (event, d) => {
+        tooltip.style("display", "block");
+        tooltip.html(`
+            <strong>${d.name}</strong><br>
+            Sex: ${d.sex}<br>
+            Occupation: ${d.occupation}<br>
+            Birth: ${d.birth ? `${d.birth.date} at ${d.birth.place}` : 'unknown'}<br>
+            Death: ${d.death ? `${d.death.date} at ${d.death.place}` : 'unknown'}<br>
+            Notes: <br>${d.notes.join('<br>')}<br>
+            Events: <br>${d.events.map(e => `${e.type}: ${e.date} at ${e.place}`).join('<br>')}
+        `);
+    }).on("mousemove", (event) => {
+        tooltip.style("top", (event.pageY + 10) + "px").style("left", (event.pageX + 10) + "px");
+    }).on("mouseout", () => {
+        tooltip.style("display", "none");
+    });
 
     node.append("text")
         .attr("x", 15)
