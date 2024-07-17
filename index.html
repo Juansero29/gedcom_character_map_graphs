@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEDCOM Family Graph</title>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>GEDCOM Graph</title>
     <style>
-        .node circle {
-            fill: #ccc;
-            stroke: #000;
-            stroke-width: 1.5px;
+        body {
+            margin: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            overflow: hidden;
         }
+        #gedcomFile {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background-color: white;
+            cursor: pointer;
+        }
+        svg {
+            width: 100vw;
+            height: 100vh;
+        }
+
+
 
         .node text {
             font: 12px sans-serif;
@@ -19,13 +35,14 @@
         .link {
             fill: none;
             stroke: #000;
-            stroke-width: 1.5px;
+            stroke-width: 0.5px;
         }
     </style>
 </head>
 <body>
-    <svg width="960" height="600"></svg>
-    <input type="file" id="gedcomFile" accept=".ged" />
+    <input type="file" id="gedcomFile">
+    <svg></svg>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="graph.js"></script>
 </body>
 </html>
