@@ -1,0 +1,1 @@
+Please make it so that all DATE tags have a value, even if approximated, from the knowledge you have gathered after reading through the 7 chapters of this book with me. Make sure to keep all INDI blocks as well as all info in their NOTE and ASSO tags:
