@@ -22,8 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const lines = data.split('\n');
         let individuals = {};
         let families = {};
+        let notes = {};
         let currentIndividual = null;
         let currentFamily = null;
+        let currentNote = null;
         let currentField = null;
         let lastTag = null;
 
@@ -37,15 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentIndividual = { id: tag, notes: [], events: [], associations: [] };
                 individuals[tag] = currentIndividual;
                 currentFamily = null;
+                currentNote = null;
                 currentField = null;
                 lastTag = null;
             } else if (level === '0' && tag.startsWith('@F')) {
                 currentFamily = { id: tag, husband: null, wife: null, children: [] };
                 families[tag] = currentFamily;
                 currentIndividual = null;
+                currentNote = null;
                 currentField = null;
                 lastTag = null;
-            } else if (currentIndividual || currentFamily) {
+            } else if (level === '0' && tag.startsWith('@N')) {
+                currentNote = { id: tag, text: [] };
+                notes[tag] = currentNote;
+                currentIndividual = null;
+                currentFamily = null;
+                currentField = currentNote.text;
+                lastTag = null;
+            } else if (currentIndividual || currentFamily || currentNote) {
                 if (tag === 'CONC') {
                     if (currentField) {
                         currentField[currentField.length - 1] += value;
@@ -61,12 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 currentIndividual.name = formatName(value);
                                 currentField = 'name';
                             } else if (tag === 'NOTE') {
-                                if (value) {
-                                    currentField = currentIndividual.notes;
-                                    currentIndividual.notes.push(value);
-                                } else {
-                                    currentField = currentIndividual.notes;
-                                }
+                                currentField = currentIndividual.notes;
+                                currentIndividual.notes.push(value);
                             } else if (tag === 'ASSO') {
                                 currentIndividual.associations.push({ person: value, relation: null, notes: [] });
                                 currentField = 'asso';
@@ -146,13 +153,23 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (tag === 'CHIL') currentFamily.children.push(value);
                             currentField = null;
                         }
+                    } else if (currentNote) {
+                        if (level === '1' && tag === 'NOTE') {
+                            currentNote.text.push(value);
+                        }
                     }
                 }
             }
         });
 
+        // Replace note references with actual note content
+        Object.values(individuals).forEach(individual => {
+            individual.notes = individual.notes.map(noteId => notes[noteId] ? notes[noteId].text.join('') : '');
+        });
+
         console.log(individuals); // Log the individuals to see the parsed data
         console.log(families); // Log the families to see the parsed data
+        console.log(notes); // Log the notes to see the parsed notes data
 
         let nodes = Object.values(individuals);
         let links = [];
@@ -309,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <strong>Relationships:</strong><br>
                 ${d.source.name} to ${d.target.name}: ${d.relation}<br>
                 ${d.target.name} to ${d.source.name}: ${reverseRelation ? reverseRelation.relation : 'N/A'}<br>
-                ${d.notes.length ? `<strong>Notes:</strong> <ul>${d.notes.map(note => `<li>${note}</li>`).join('')}</ul>` : ''}
+                ${d.notes && d.notes.length ? `<strong>Notes:</strong> <ul>${d.notes.map(note => `<li>${note}</li>`).join('')}</ul>` : ''}
             `);
         }).on("mousemove", (event) => {
             tooltip.style("top", (event.pageY + 10) + "px").style("left", (event.pageX + 10) + "px");
@@ -416,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const neighbors = new Set();
         allLinks.forEach(link => {
-            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node => node.id === link.target.id)) {
+            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node === link.target.id)) {
                 neighbors.add(link.source.id);
                 neighbors.add(link.target.id);
             }
