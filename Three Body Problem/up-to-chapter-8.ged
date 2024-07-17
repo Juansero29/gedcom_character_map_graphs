@@ -1,0 +1,555 @@
+0 HEAD
+1 SOUR The Three-Body Problem
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+0 @I0001@ INDI
+1 NAME Zhetai /Ye/
+1 SEX M
+1 BIRT
+2 DATE 1900
+2 PLAC China
+1 DEAT
+2 DATE 1967
+2 PLAC Beijing, China
+1 OCCU Physicist, professor at Tsinghua University
+1 NOTE Traditional scientist, viewed as reactionary during the Cultural Revolution.
+2 CONT Physical traits: Elderly, scholarly appearance. Mental traits: Rational, committed to scientific principles.
+2 CONT Role: Victim of the Cultural Revolution.
+2 CONT Political views: Supports scientific rationalism.
+2 CONT Main decisive actions: Defends scientific principles against political persecution.
+1 QUOT "Theory is the foundation of application. Isn’t discovering fundamental laws the biggest contribution to our time?"
+1 EVEN
+2 TYPE Death during struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0002@
+2 RELA Wife
+1 ASSO @I0003@
+2 RELA Child
+1 ASSO @I0012@
+2 RELA Child
+
+0 @I0002@ INDI
+1 NAME Lin /Shao/
+1 SEX F
+1 BIRT
+2 DATE 1905
+2 PLAC China
+1 DEAT
+2 DATE 1980
+2 PLAC China
+1 OCCU Physicist
+1 NOTE Physicist, influenced by political winds.
+2 CONT Physical traits: Traditional Chinese woman, wore qipao. Mental traits: Smart, adaptable, politically aware.
+2 CONT Role: Participates in the Cultural Revolution struggle sessions.
+2 CONT Political views: Initially influenced by scientific rationalism, later adapts to political climate.
+2 CONT Main decisive actions: Publicly denounces her husband during struggle sessions.
+1 QUOT "With the help of the revolutionary youths, I want to stand on the side of the revolution, the side of the people!"
+1 EVEN
+2 TYPE Participation in struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0001@
+2 RELA Husband
+1 ASSO @I0003@
+2 RELA Child
+1 ASSO @I0012@
+2 RELA Child
+
+0 @I0003@ INDI
+1 NAME Wenjie /Ye/
+1 SEX F
+1 BIRT
+2 DATE 1948
+2 PLAC China
+1 OCCU Astrophysicist
+1 NOTE Astrophysicist, traumatized by her father’s death.
+2 CONT Physical traits: Young, quiet. Mental traits: Intelligent, reserved, deeply affected by trauma.
+2 CONT Role: Main protagonist, driven by past trauma and scientific curiosity.
+2 CONT Political views: Disillusioned with the Cultural Revolution.
+2 CONT Main decisive actions: Observes father’s death, influenced by "Silent Spring".
+1 QUOT "It was impossible to expect a moral awakening from humankind itself, just like it was impossible to expect humans to lift off the earth by pulling up on their own hair."
+1 EVEN
+2 TYPE Witnessed father's death
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0001@
+2 RELA Parent
+1 ASSO @I0002@
+2 RELA Parent
+1 ASSO @I0005@
+2 RELA Partner
+1 ASSO @I0004@
+2 RELA Colleague
+1 ASSO @I0006@
+2 RELA Acquaintance
+1 ASSO @I0014@
+2 RELA InterrogatedBy
+1 FAMC @F0001@
+
+0 @I0004@ INDI
+1 NAME Zhicheng /Lei/
+1 SEX M
+1 BIRT
+2 DATE 1920
+2 PLAC China
+1 DEAT
+2 DATE 1980
+2 PLAC China
+1 OCCU Political commissar at Red Coast Base
+1 NOTE Stern, authoritative figure at Red Coast Base.
+2 CONT Physical traits: Stern expression. Mental traits: Authoritative, strict.
+2 CONT Role: Oversees political aspects at Red Coast Base.
+2 CONT Political views: Strongly supports the Communist Party.
+2 CONT Main decisive actions: Authorizes Ye Wenjie's recruitment to Red Coast Base.
+1 QUOT "Given the nature of this work, we can’t have someone who doesn’t want to be here."
+1 EVEN
+2 TYPE Supervision at Red Coast Base
+2 DATE 1970
+2 PLAC Red Coast Base, China
+1 ASSO @I0003@
+2 RELA Supervisor
+2 NOTE Zhicheng Lei authorizes Ye Wenjie's recruitment to Red Coast Base.
+
+0 @I0005@ INDI
+1 NAME Weining /Yang/
+1 SEX M
+1 BIRT
+2 DATE 1935
+2 PLAC China
+1 DEAT
+2 DATE 1990
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base
+1 NOTE Talented engineer, practical, politically aware.
+2 CONT Physical traits: Intellectual, determined appearance. Mental traits: Idealistic, loyal, dedicated.
+2 CONT Role: Mentor to Ye Wenjie at Red Coast Base, key supporter of Wenjie Ye at Red Coast Base.
+2 CONT Political views: Pragmatic, avoids ideological pitfalls.
+2 CONT Main decisive actions: Recruits Ye Wenjie to the Red Coast project, collaborates with her on scientific endeavors.
+1 QUOT "You should be cautious. Think through what this decision means."
+1 QUOT "I want to devote myself to the times, to make some real-world contributions."
+1 EVEN
+2 TYPE Work at Red Coast Base
+2 DATE 1970
+2 PLAC Red Coast Base, China
+1 ASSO @I0001@
+2 RELA Former Student
+2 NOTE Yang Weining was once a student of Ye Zhetai.
+
+0 @I0006@ INDI
+1 NAME Mulin /Bai/
+1 SEX M
+1 BIRT
+2 DATE 1940
+2 PLAC China
+1 DEAT
+2 DATE 1991
+2 PLAC Ottawa, Canada
+1 OCCU Reporter for the Great Production News
+1 NOTE Sensitive, poetic writer, initially idealistic but later self-serving.
+2 CONT Physical traits: Slender, delicate, wears glasses. Mental traits: Sensitive, intelligent, ultimately self-preserving.
+2 CONT Role: Influences Ye Wenjie with "Silent Spring", later betrays her.
+2 CONT Political views: Initially critical of environmental destruction, later conforms to political pressures.
+2 CONT Main decisive actions: Gives Ye Wenjie "Silent Spring", writes a letter criticizing deforestation, later betrays Ye Wenjie.
+1 QUOT "The book attracted the attention of the higher-ups."
+1 EVEN
+2 TYPE Visit to Red Coast Base
+2 DATE 1970
+2 PLAC Red Coast Base, China
+1 ASSO @I0003@
+2 RELA Acquaintance
+2 NOTE Bai Mulin influences Ye Wenjie with "Silent Spring", later betrays her by framing her.
+1 ASSO @I0005@
+2 RELA Acquaintance
+2 NOTE Bai Mulin and Yang Weining interacted during the visit to Red Coast Base.
+
+0 @I0007@ INDI
+1 NAME Miao /Wang/
+1 SEX M
+1 BIRT
+2 DATE 1970
+2 PLAC China
+1 OCCU Nanomaterials researcher
+1 NOTE Respected scientist working in the field of nanomaterials.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, analytical.
+2 CONT Role: Scientist introduced in "The Frontiers of Science", now involved in investigating the mysterious suicides.
+2 CONT Political views: Neutral, focused on scientific advancement.
+2 CONT Main decisive actions: Agrees to infiltrate the "Frontiers of Science" to gather information.
+2 CONT Experiencing unexplained countdown in photos taken with his camera, leading to psychological distress.
+1 QUOT "It's impossible to lift off the earth by pulling up on one's own hair."
+1 QUOT "The countdown continued. 1175:10:02, 1175:10:01, 1175:10:00, 1175:09:59 ..."
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE 2000
+2 PLAC China
+1 EVEN
+2 TYPE Discovers Countdown
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang Miao discovers a mysterious countdown in the photos he takes, which leads to significant psychological distress.
+1 EVEN
+2 TYPE Consults Shen Yufei
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang seeks advice from Shen Yufei regarding the countdown. She cryptically advises him to stop his nanomaterial project.
+1 EVEN
+2 TYPE Halts Nanomaterial Project
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang halts his nanomaterial project, which temporarily stops the countdown in his photos.
+1 EVEN
+2 TYPE Confronted by Shi Qiang
+2 DATE 2000
+2 PLAC China
+2 NOTE Shi Qiang confronts Wang about the strange occurrences and his findings.
+1 EVEN
+2 TYPE Encounters Pan Han
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang encounters Pan Han, who warns about the consequences of their actions.
+1 EVEN
+2 TYPE Plays Three Body game
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang Miao starts playing the Three Body game, where he interacts with fictional characters such as King Wen of Zhou and Follower. The game presents a chaotic world where the sun's movements are unpredictable, and people must survive extreme conditions by dehydrating and rehydrating.
+1 ASSO @I0009@
+2 RELA Colleague
+2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
+1 ASSO @I0011@
+2 RELA Investigated
+2 NOTE Investigated in connection with the mysterious events.
+1 ASSO @I0015@
+2 RELA Acquaintance
+2 NOTE Wang Miao interacts with Shen Yufei through the Frontiers of Science and consults her about the countdown phenomenon.
+1 ASSO @I0019@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with King Wen of Zhou in the Three Body game. The interactions in the game provide insights into the chaotic nature of the game's world and its underlying mysteries.
+1 ASSO @I0020@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with Follower in the Three Body game. Follower's dialogue and actions help Wang understand the survival strategies in the game's world.
+1 ASSO @I0021@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with King Zhou in the Three Body game. King Zhou provides a broader perspective on the world within the game and its survival mechanisms.
+1 ASSO @I0022@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with Fu Xi in the Three Body game. Fu Xi offers mystical and philosophical insights into the game world.
+
+0 @I0008@ INDI
+1 NAME Qiang /Shi/
+1 SEX M
+1 BIRT
+2 DATE 1965
+2 PLAC China
+1 OCCU Police detective
+1 NOTE Practical and pragmatic political views.
+2 CONT Physical traits: Stocky, imposing presence. Mental traits: Direct, pragmatic.
+2 CONT Role: Police officer involved in investigating the mysterious suicides.
+2 CONT Main decisive actions: Convinces Wang Miao to assist in the investigation.
+1 QUOT "Sometimes, being tough is the only way to get things done."
+1 EVEN
+2 TYPE Investigation of Frontiers of Science
+2 DATE 2000
+2 PLAC China
+1 EVEN
+2 TYPE Confronts Wang Miao
+2 DATE 2000
+2 PLAC China
+2 NOTE Shi Qiang confronts Wang Miao about the strange occurrences and his findings.
+1 ASSO @I0007@
+2 RELA Friend
+2 NOTE Qiang Shi and Wang Miao are friends through their professional interactions, but their relationship is strained.
+2 NOTE Shi Qiang often uses his blunt and rough mannerisms to push Wang Miao into action.
+2 NOTE Despite their differences, Shi Qiang values Wang Miao's scientific insights for the investigation.
+1 ASSO @I0011@
+2 RELA Investigated
+2 NOTE Investigated Dong Yang in connection with the mysterious events.
+1 ASSO @I0010@
+2 RELA Colleague
+2 NOTE Works together with Colonel Chang Weisi to ensure the security of scientific endeavors.
+
+0 @I0009@ INDI
+1 NAME Yi /Ding/
+1 SEX M
+1 BIRT
+2 DATE 1970
+2 PLAC China
+1 OCCU Theoretical physicist
+1 NOTE Intellectual curiosity and skepticism.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, curious.
+2 CONT Role: Scientist associated with the Frontiers of Science.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Engages in scientific debates and investigations.
+1 QUOT "Science is about exploring the unknown, not just confirming what we already know."
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE 2000
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Colleague
+2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
+1 ASSO @I0011@
+2 RELA Friend
+2 NOTE Yi Ding and Dong Yang are friends through their mutual interest in theoretical physics.
+
+0 @I0010@ INDI
+1 NAME Colonel Chang /Weisi/
+1 SEX M
+1 BIRT
+2 DATE 1950
+2 PLAC China
+1 OCCU Colonel - Military officer
+1 NOTE Strongly aligned with state security and national defense.
+2 CONT Physical traits: Authoritative presence, physically imposing. Mental traits: Strategic, authoritative, disciplined.
+2 CONT Role: Provides military insights and ensures security in the investigation of the "Frontiers of Science".
+2 CONT Main decisive actions: Convinces Wang Miao to infiltrate the "Frontiers of Science".
+1 QUOT "We must ensure the security of our nation above all."
+1 EVEN
+2 TYPE Meeting about Frontiers of Science
+2 DATE 2000
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Acquaintance
+2 NOTE Acquainted with Wang Miao through the investigation.
+1 ASSO @I0008@
+2 RELA Colleague
+2 NOTE Works together with Shi Qiang to ensure the security of scientific endeavors.
+
+0 @I0011@ INDI
+1 NAME Dong /Yang/
+1 SEX F
+1 BIRT
+2 DATE 1975
+2 PLAC China
+1 DEAT
+2 DATE 1999
+2 PLAC China
+1 OCCU Physicist
+1 NOTE Scientific skepticism.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, inquisitive.
+2 CONT Role: Physicist with a skeptical approach, involved in mysterious events.
+2 CONT Main decisive actions: Engages in scientific inquiry and faces mysterious death.
+1 QUOT "Science is about exploring the unknown, not just confirming what we already know."
+1 EVEN
+2 TYPE Mysterious death
+2 DATE 1999
+2 PLAC China
+1 EVEN
+2 TYPE Suicide
+2 DATE 1999
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Investigated
+2 NOTE Dong Yang was investigated by Miao Wang regarding her mysterious death.
+1 ASSO @I0008@
+2 RELA Investigated
+2 NOTE Dong Yang was investigated by Qiang Shi regarding her mysterious death.
+1 ASSO @I0009@
+2 RELA Friend
+2 NOTE Dong Yang and Yi Ding are friends through their mutual interest in theoretical physics.
+
+
+0 @I0012@ INDI
+1 NAME Wenxue /Ye/
+1 SEX F
+1 BIRT
+2 DATE 1950
+2 PLAC China
+1 DEAT
+2 DATE 1969
+2 PLAC Beijing, China
+1 OCCU Red Guard, Wenjie Ye's sister
+1 NOTE Ever since her little sister had made a clean break with her reactionary academic authority family, Wenjie had heard no news about her.
+2 CONT Physical traits: Young, fervent revolutionary. Mental traits: Ideologically driven, estranged from family.
+2 CONT Role: Represents the ideological divide within families during the Cultural Revolution.
+1 ASSO @I0001@
+2 RELA Parent
+2 NOTE Wenxue Ye is the child of Zhetai Ye.
+1 ASSO @I0002@
+2 RELA Parent
+2 NOTE Wenxue Ye is the child of Lin Shao.
+1 FAMC @F0001@
+
+
+0 @I0014@ INDI
+1 NAME Lihua /Cheng/
+1 SEX F
+1 BIRT
+2 DATE 1940
+2 PLAC China
+1 OCCU Military representative from Intermediate People’s Court
+1 QUOT "What young person hasn’t made some mistakes? I made mistakes myself."
+2 CONT Physical traits: Authoritative, military appearance. Mental traits: Disciplinarian, fair-minded, strategic.
+2 CONT Role: Oversees political and disciplinary actions at Red Coast Base.
+1 ASSO @I0003@
+2 RELA Interrogated
+2 NOTE Lihua Cheng attempts to coerce Ye Wenjie into signing false documents.
+
+0 @I0015@ INDI
+1 NAME Yufei /Shen/
+1 SEX F
+1 BIRT
+2 DATE 1965
+2 PLAC China
+1 OCCU Scientist, member of the Frontiers of Science
+1 NOTE Mysterious and intelligent member of the Frontiers of Science.
+2 CONT Physical traits: N/A. Mental traits: Subtle, probing, intelligent.
+2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Advises Wang Miao to stop his nanomaterial research project.
+2 CONT Engages in high-level discussions and decisions within the Frontiers of Science.
+1 QUOT "Three days from now—that’s the fourteenth—between one and five in the morning, the entire universe will flicker for you."
+1 ASSO @I0007@
+2 RELA Acquaintance
+2 NOTE Shen Yufei and Wang Miao interact as part of the Frontiers of Science.
+1 ASSO @I0016@
+2 RELA Colleague
+2 NOTE Shen Yufei and Pan Han are colleagues within the Frontiers of Science.
+
+0 @I0016@ INDI
+1 NAME Han /Pan/
+1 SEX M
+1 BIRT
+2 DATE 1965
+2 PLAC China
+1 OCCU Biologist, member of the Frontiers of Science
+1 NOTE Mysterious and somewhat enigmatic figure within the Frontiers of Science.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, secretive, and persuasive.
+2 CONT Role: Key member of the Frontiers of Science, involved in the overarching intrigue of the story.
+2 CONT Main decisive actions: Engages in significant scientific and philosophical discussions.
+2 CONT Warns Shen Yufei and Wang Miao about the consequences of their actions.
+1 QUOT "The universe is a dark forest."
+1 ASSO @I0007@
+2 RELA Colleague
+2 NOTE Pan Han and Wang Miao are colleagues through their involvement with the Frontiers of Science.
+1 ASSO @I0015@
+2 RELA Colleague
+2 NOTE Pan Han interacts with Shen Yufei within the Frontiers of Science.
+
+0 @I0017@ INDI
+1 NAME Yao /Li/
+1 SEX F
+1 BIRT
+2 DATE 1975
+2 PLAC China
+1 OCCU Doctor
+1 NOTE Wang Miao's wife, a caring and concerned partner.
+2 CONT Physical traits: N/A. Mental traits: Caring, supportive, worried about Wang's strange behavior.
+2 CONT Role: Supportive partner, concerned about Wang's well-being.
+2 CONT Main decisive actions: Tries to comfort and understand Wang during his distressing experiences with the countdown.
+1 ASSO @I0007@
+2 RELA Spouse
+2 NOTE Married to Wang Miao, providing emotional support during his troubling experiences.
+1 ASSO @I0018@
+2 RELA Parent
+2 NOTE Mother of Dou Dou Wang, involved in the family dynamic.
+
+0 @I0018@ INDI
+1 NAME Dou Dou /Wang/
+1 SEX M
+1 BIRT
+2 DATE 1995
+2 PLAC China
+1 NOTE Wang Miao's young son, curious and playful.
+2 CONT Physical traits: N/A. Mental traits: Curious, playful.
+2 CONT Role: Adds to the family dynamic and is present during Wang's experiences with the countdown.
+2 CONT Main decisive actions: Participates in taking photos at Wang's request, which helps in the investigation of the mysterious countdown.
+1 ASSO @I0007@
+2 RELA Parent
+2 NOTE Wang Miao's son, involved in the camera photo experiments.
+1 ASSO @I0017@
+2 RELA Parent
+2 NOTE Son of Yao Li, adding to the family support during Wang's troubling times.
+
+0 @I0019@ INDI
+1 NAME Wen /King of Zhou/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE King Wen of Zhou is a fictional character in the Three Body game. He carries a sandglass to measure time and is knowledgeable about the chaotic and stable eras in the game's world.
+2 CONT Physical traits: Wears long robes and animal hides. Mental traits: Intelligent, determined.
+2 CONT Role: Guides Wang Miao in understanding the game's mechanics and the chaotic nature of its world.
+2 CONT Main decisive actions: Explains the concept of chaotic and stable eras to Wang Miao, helps him navigate the harsh conditions of the game world.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE King Wen of Zhou interacts with Wang Miao in the Three Body game, helping him understand the survival strategies and the nature of the game's world.
+1 ASSO @I0020@
+2 RELA Leader
+2 NOTE King Wen of Zhou is the leader of Follower in the Three Body game.
+1 ASSO @I0021@
+2 RELA Colleague
+2 NOTE King Wen of Zhou interacts with King Zhou in the Three Body game, providing insights into the survival mechanisms during chaotic and stable eras.
+
+0 @I0020@ INDI
+1 NAME Follower /Follower of King Wen/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Follower is a fictional character in the Three Body game. He assists King Wen of Zhou and often complains about the harsh conditions of the chaotic eras.
+2 CONT Physical traits: Wears long robes and animal hides. Mental traits: Loyal, pragmatic.
+2 CONT Role: Assists King Wen of Zhou and Wang Miao in the game, provides insights into the game's survival mechanics.
+2 CONT Main decisive actions: Helps gather firewood, suggests burning dehydrated bodies, ultimately undergoes dehydration to survive.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE Follower interacts with Wang Miao in the Three Body game, providing practical advice and assistance in navigating the game's challenges.
+1 ASSO @I0019@
+2 RELA Subordinate
+2 NOTE Follower is a subordinate to King Wen of Zhou in the Three Body game.
+
+0 @I0021@ INDI
+1 NAME Zhou /King/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC Unknown
+1 OCCU In-game character
+1 NOTE King Zhou is a fictional character in the Three Body game. He is the ruler during the chaotic times and interacts with King Wen of Zhou and Wang Miao.
+2 CONT Physical traits: Regal, imposing. Mental traits: Authoritative, strategic.
+2 CONT Role: Provides a broader perspective on the world's survival mechanisms in the game.
+2 CONT Main decisive actions: Commands the rehydration process, interacts with Fu Xi about the sun god.
+1 QUOT "Re-hy-drate…"
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE King Zhou interacts with Wang Miao in the Three Body game, providing insights into the survival strategies during chaotic and stable eras.
+1 ASSO @I0019@
+2 RELA Colleague
+2 NOTE King Zhou and King Wen of Zhou interact in the Three Body game, discussing strategies for surviving chaotic eras.
+1 ASSO @I0022@
+2 RELA Advisor
+2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
+
+0 @I0022@ INDI
+1 NAME Xi /Fu/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Fu Xi is a fictional character in the Three Body game. He provides mystical and philosophical insights into the game's world.
+2 CONT Physical traits: Mysterious, pale-faced. Mental traits: Mystical, philosophical.
+2 CONT Role: Offers insights into the sun god's behavior and the chaotic nature of the game world.
+2 CONT Main decisive actions: Suggests the pendulums to hypnotize the sun god, participates in philosophical discussions.
+1 QUOT "The sun is a temperamental god. When the god is awake, his moods are unpredictable, and thus we have a Chaotic Era. But when he’s asleep, his breathing evens out, and thus we have a Stable Era."
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE Fu Xi interacts with Wang Miao in the Three Body game, offering philosophical and mystical perspectives on the game's world.
+1 ASSO @I0021@
+2 RELA Advisor
+2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
+
+0 @F0001@ FAM
+1 HUSB @I0001@
+1 WIFE @I0002@
+1 CHIL @I0003@
+1 CHIL @I0012@
+
+0 @F0002@ FAM
+1 HUSB @I0007@
+1 WIFE @I0017@
+1 CHIL @I0018@
+
+0 TRLR
