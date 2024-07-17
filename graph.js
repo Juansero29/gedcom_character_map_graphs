@@ -1,12 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('gedcomFile').addEventListener('change', handleFile, false);
 
+    let allNodes = [];
+    let allLinks = [];
+    let simulation;
+
     function handleFile(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
             const gedcomData = e.target.result;
             const parsedData = parseGedcom(gedcomData);
+            allNodes = parsedData.nodes;
+            allLinks = parsedData.links;
             createGraph(parsedData);
         };
         reader.readAsText(file);
@@ -41,6 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (currentField) {
                         currentField[currentField.length - 1] += value;
                     }
+                } else if (tag === 'CONT') {
+                    if (currentField) {
+                        currentField.push(value);
+                    }
                 } else {
                     if (currentIndividual) {
                         if (level === '1') {
@@ -51,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 currentField = currentIndividual.notes;
                                 currentIndividual.notes.push(value);
                             } else if (tag === 'ASSO') {
-                                currentIndividual.associations.push({ person: value, relation: null });
-                                currentField = null;
+                                currentIndividual.associations.push({ person: value, relation: null, notes: [] });
+                                currentField = 'asso';
                             } else if (tag === 'EVEN') {
                                 currentIndividual.events.push({ value: value, type: null, date: null, place: null });
                                 currentField = null;
@@ -78,6 +88,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                 }
                                 if (tag === 'EMAIL') {
                                     currentIndividual.email = value;
+                                }
+                            }
+                            if (currentField === 'asso') {
+                                if (tag === 'RELA') {
+                                    currentIndividual.associations[currentIndividual.associations.length - 1].relation = value;
+                                }
+                                if (tag === 'NOTE') {
+                                    currentField = currentIndividual.associations[currentIndividual.associations.length - 1].notes;
+                                    currentIndividual.associations[currentIndividual.associations.length - 1].notes.push(value);
                                 }
                             }
                             if (tag === 'DATE') {
@@ -131,7 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     source: node.id,
                     target: assoc.person,
                     relation: assoc.relation,
-                    type: 'association'
+                    type: 'association',
+                    notes: assoc.notes // Include notes in the link data
                 });
             });
         });
@@ -184,6 +204,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const width = +svg.attr("width");
         const height = +svg.attr("height");
 
+        // Clear previous graph
+        svg.selectAll("*").remove();
+
         const zoom = d3.zoom()
             .scaleExtent([0.1, 4])
             .on("zoom", (event) => {
@@ -194,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const container = svg.append("g");
 
-        const simulation = d3.forceSimulation(data.nodes)
+        simulation = d3.forceSimulation(data.nodes)
             .force("link", d3.forceLink(data.links).id(d => d.id).distance(150)) // Increased distance between nodes
             .force("charge", d3.forceManyBody().strength(-200))
             .force("center", d3.forceCenter(width / 2, height / 2));
@@ -218,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         node.append("circle")
             .attr("r", 10)
-            .attr("fill", "lightblue"); // Use a uniform color for all nodes
+            .attr("fill", d => d.sex === 'M' ? 'blue' : 'pink'); // Use blue for males and pink for females
 
         // Add a cross mark for deceased individuals
         node.append("text")
@@ -272,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.html(`
                 <strong>Relationships:</strong><br>
                 ${d.source.name} to ${d.target.name}: ${d.relation}<br>
-                ${d.target.name} to ${d.source.name}: ${reverseRelation ? reverseRelation.relation : 'N/A'}
+                ${d.target.name} to ${d.source.name}: ${reverseRelation ? reverseRelation.relation : 'N/A'}<br>
+                ${d.notes.length ? `<strong>Notes:</strong> <ul>${d.notes.map(note => `<li>${note}</li>`).join('')}</ul>` : ''}
             `);
         }).on("mousemove", (event) => {
             tooltip.style("top", (event.pageY + 10) + "px").style("left", (event.pageX + 10) + "px");
@@ -367,5 +391,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 .on("drag", dragged)
                 .on("end", dragended);
         }
+    }
+
+    window.searchGraph = function() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const filteredNodes = allNodes.filter(node => 
+            node.name.toLowerCase().includes(query) ||
+            (node.nickname && node.nickname.toLowerCase().includes(query)) ||
+            node.name.split(' ').some(part => part.toLowerCase().includes(query))
+        );
+
+        const neighbors = new Set();
+        allLinks.forEach(link => {
+            if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node => node.id === link.target.id)) {
+                neighbors.add(link.source.id);
+                neighbors.add(link.target.id);
+            }
+        });
+
+        const displayNodes = allNodes.filter(node => neighbors.has(node.id));
+        const displayLinks = allLinks.filter(link => neighbors.has(link.source.id) && neighbors.has(link.target.id));
+
+        createGraph({ nodes: displayNodes, links: displayLinks });
     }
 });
