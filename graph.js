@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = parts.slice(2).join(' ');
 
             if (level === '0' && tag.startsWith('@I')) {
-                currentIndividual = { id: tag, notes: [], events: [], associations: [] };
+                currentIndividual = { id: tag, notes: [], events: [], associations: [], quotes: [] };
                 individuals[tag] = currentIndividual;
                 currentFamily = null;
                 currentNote = null;
@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else if (tag === 'EVEN') {
                                 currentIndividual.events.push({ value: value, type: null, date: null, place: null });
                                 currentField = 'event';
+                            } else if (tag === 'QUOT') {
+                                currentField = currentIndividual.quotes;
+                                currentIndividual.quotes.push(value);
                             } else if (tag === 'SEX') {
                                 currentIndividual.sex = value;
                                 currentField = null;
@@ -125,6 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                     currentIndividual.events[currentIndividual.events.length - 1].type = value;
                                 }
                             }
+                            if (currentField === 'quotes') {
+                                if (tag === 'CONC') {
+                                    currentIndividual.quotes[currentIndividual.quotes.length - 1] += value;
+                                }
+                                if (tag === 'CONT') {
+                                    currentIndividual.quotes.push(value);
+                                }
+                            }
                             if (tag === 'DATE') {
                                 const dateValue = value.toLowerCase() === 'unknown' ? null : value;
                                 if (currentIndividual.birth && !currentIndividual.birth.date) currentIndividual.birth.date = dateValue;
@@ -139,11 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                             if (tag === 'RELA' && currentIndividual.associations.length > 0) {
                                 currentIndividual.associations[currentIndividual.associations.length - 1].relation = value;
-                                currentField = null;
                             }
                             if (tag === 'TYPE' && currentIndividual.events.length > 0) {
                                 currentIndividual.events[currentIndividual.events.length - 1].type = value;
-                                currentField = null;
                             }
                         }
                     } else if (currentFamily) {
@@ -151,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (tag === 'HUSB') currentFamily.husband = value;
                             if (tag === 'WIFE') currentFamily.wife = value;
                             if (tag === 'CHIL') currentFamily.children.push(value);
-                            currentField = null;
                         }
                     } else if (currentNote) {
                         if (level === '1' && tag === 'NOTE') {
@@ -164,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Replace note references with actual note content
         Object.values(individuals).forEach(individual => {
+            if(individual.notes.length > 0) return;
             individual.notes = individual.notes.map(noteId => notes[noteId] ? notes[noteId].text.join('') : '');
         });
 
@@ -304,9 +313,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             details += `
                 <strong>Notes:</strong><br>
-                <ul>${d.notes.length ? d.notes.map(note => note ? `<li>${note}</li>` : '').join('') : '<li>no notes</li>'}</ul>
+                <ul>${d.notes.length ? d.notes.map(note => note ? `<li>${note}</li>` : '').join('') : ''}</ul>
                 <strong>Events:</strong><br>
                 <ul>${d.events.length ? d.events.map(event => `<li>${event.type || 'unknown type'}: ${event.value ? event.value + ' - ' : ''}${event.date || 'unknown date'}${event.place ? ' at ' + event.place : ''}</li>`).join('') : '<li>no events</li>'}</ul>
+                <strong>Quotes:</strong><br>
+                <ul>${d.quotes.length ? d.quotes.map(quote => `<li>${quote}</li>`).join('') : '<li>no quotes</li>'}</ul>
             `;
             tooltip.html(details);
         }).on("mousemove", (event) => {

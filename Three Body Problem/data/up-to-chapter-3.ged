@@ -1,0 +1,178 @@
+0 HEAD
+1 SOUR The Three-Body Problem
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+
+0 @I0001@ INDI
+1 NAME Zhetai /Ye/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE 1967
+2 PLAC Beijing, China
+1 OCCU Physicist, professor at Tsinghua University
+1 NOTE Traditional scientist, viewed as reactionary during the Cultural Revolution.
+2 CONT Physical traits: Elderly, scholarly appearance. Mental traits: Rational, committed to scientific principles.
+2 CONT Role: Victim of the Cultural Revolution.
+2 CONT Political views: Supports scientific rationalism.
+2 CONT Main decisive actions: Defends scientific principles against political persecution.
+2 CONT Quotes: "Theory is the foundation of application. Isn’t discovering fundamental laws the biggest contribution to our time?"
+
+0 @I0002@ INDI
+1 NAME Lin /Shao/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Physicist, Ye Zhetai’s wife
+1 NOTE Physicist, influenced by political winds.
+2 CONT Physical traits: Traditional Chinese woman, wore qipao. Mental traits: Smart, adaptable, politically aware.
+2 CONT Role: Participates in the Cultural Revolution struggle sessions.
+2 CONT Political views: Initially influenced by scientific rationalism, later adapts to political climate.
+2 CONT Main decisive actions: Publicly denounces her husband during struggle sessions.
+
+0 @I0003@ INDI
+1 NAME Wenjie /Ye/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Astrophysicist, daughter of Ye Zhetai
+1 NOTE Astrophysicist, traumatized by her father’s death.
+2 CONT Physical traits: Young, quiet. Mental traits: Intelligent, reserved, deeply affected by trauma.
+2 CONT Role: Main protagonist, driven by past trauma and scientific curiosity.
+2 CONT Political views: Disillusioned with the Cultural Revolution.
+2 CONT Main decisive actions: Observes father’s death, influenced by "Silent Spring".
+2 CONT Quotes: "I want to go in." (Deciding to join the Red Coast project to escape her past).
+1 ASSO @I0005@
+2 RELA Acquaintance
+2 NOTE Bai Mulin influences Ye Wenjie with "Silent Spring", later betrays her by framing her.
+1 ASSO @I0006@
+2 RELA Mentor
+2 NOTE Yang Weining is a former student of Ye Zhetai, recruits Ye Wenjie to the Red Coast project.
+1 ASSO @I0007@
+2 RELA Superior
+2 NOTE Zhicheng Lei authorizes Ye Wenjie's recruitment to Red Coast Base.
+1 ASSO @I0008@
+2 RELA Court Representative
+2 NOTE Lihua Cheng attempts to coerce Ye Wenjie into signing false documents.
+1 ASSO @I0009@
+2 RELA Security
+2 NOTE The UNKNOWN guard is responsible for observing Ye Wenjie upon her arrival at the base.
+
+0 @I0004@ INDI
+1 NAME Wenxue /Ye/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE 1969
+2 PLAC China
+1 OCCU Red Guard, Ye Wenjie’s sister
+1 NOTE Radical Red Guard, instrumental in her father's persecution.
+2 CONT Physical traits: Young, fervent.
+2 CONT Mental traits: Idealistic, radical.
+2 CONT Role: Participant in the Cultural Revolution.
+2 CONT Political views: Strongly supports the Cultural Revolution.
+2 CONT Main decisive actions: Publicly denounces her father, provides evidence leading to his persecution.
+
+0 @I0005@ INDI
+1 NAME Mulin /Bai/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE 1991
+2 PLAC Ottawa, Canada
+1 OCCU Reporter for the Great Production News
+1 NOTE Sensitive, poetic writer, initially idealistic but later self-serving.
+2 CONT Physical traits: Slender, delicate, wears glasses.
+2 CONT Mental traits: Sensitive, intelligent, ultimately self-preserving.
+2 CONT Role: Influences Ye Wenjie with "Silent Spring", later betrays her.
+2 CONT Political views: Initially critical of environmental destruction, later conforms to political pressures.
+2 CONT Main decisive actions: Gives Ye Wenjie "Silent Spring", writes a letter criticizing deforestation, later betrays Ye Wenjie.
+2 CONT Quotes: "The book attracted the attention of the higher-ups."
+
+0 @I0006@ INDI
+1 NAME Weining /Yang/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base, once a student of Ye Zhetai
+1 NOTE Talented engineer, practical, politically aware.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, cautious.
+2 CONT Role: Mentor to Ye Wenjie at Red Coast Base.
+2 CONT Political views: Pragmatic, avoids ideological pitfalls.
+2 CONT Main decisive actions: Recruits Ye Wenjie to the Red Coast project.
+2 CONT Quotes: "You should be cautious. Think through what this decision means."
+1 ASSO @I0003@
+2 RELA Mentor
+2 NOTE Yang Weining is a former student of Ye Zhetai, recruits Ye Wenjie to the Red Coast project.
+
+0 @I0007@ INDI
+1 NAME Zhicheng /Lei/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Political commissar at Red Coast Base
+1 NOTE Stern, authoritative figure at Red Coast Base.
+2 CONT Physical traits: Stern expression.
+2 CONT Mental traits: Authoritative, strict.
+2 CONT Role: Oversees political aspects at Red Coast Base.
+2 CONT Political views: Strongly supports the Communist Party.
+2 CONT Main decisive actions: Authorizes Ye Wenjie's recruitment to Red Coast Base.
+2 CONT Quotes: "This is a defense research facility. The research conducted here needs your specialized scientific knowledge."
+1 ASSO @I0003@
+2 RELA Superior
+2 NOTE Zhicheng Lei authorizes Ye Wenjie's recruitment to Red Coast Base.
+
+0 @I0008@ INDI
+1 NAME Lihua /Cheng/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Military representative from the Intermediate People’s Court
+1 NOTE Gentle demeanor, but capable of manipulation.
+2 CONT Physical traits: Middle-aged, wears military coat, thick-rimmed glasses.
+2 CONT Mental traits: Kind appearance, manipulative.
+2 CONT Role: Attempts to coerce Ye Wenjie into signing false documents.
+2 CONT Political views: Supports the Communist Party, willing to manipulate for political gain.
+2 CONT Main decisive actions: Tries to manipulate Ye Wenjie to sign a document incriminating others.
+1 ASSO @I0003@
+2 RELA Court Representative
+2 NOTE Lihua Cheng attempts to coerce Ye Wenjie into signing false documents.
+
+0 @I0009@ INDI
+1 NAME UNKNOWN /Guard/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Guard at the Red Coast Base
+1 NOTE Unnamed character responsible for security.
+2 CONT Physical traits: Armed with a handgun.
+2 CONT Mental traits: N/A
+2 CONT Role: Security at Red Coast Base.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Observes Ye Wenjie upon her arrival at the base.
+1 ASSO @I0003@
+2 RELA Security
+2 NOTE The UNKNOWN guard is responsible for observing Ye Wenjie upon her arrival at the base.
+
+0 @F0001@ FAM
+1 HUSB @I0001@
+1 WIFE @I0002@
+1 CHIL @I0003@
+1 CHIL @I0004@
+
+0 @F0002@ FAM
+1 HUSB @I0006@
+1 WIFE @I0003@

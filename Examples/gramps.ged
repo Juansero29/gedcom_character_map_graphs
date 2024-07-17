@@ -1,0 +1,422 @@
+0 HEAD
+1 SOUR Gramps
+2 VERS 5.2.2
+2 NAME Gramps
+1 DATE 17 JUL 2024
+2 TIME 15:09:46
+1 SUBM @SUBM@
+1 FILE /Users/juansero29/Downloads/gramps.ged
+1 COPR Copyright (c) 2024 .
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG English
+0 @SUBM@ SUBM
+1 NAME
+0 @I0001@ INDI
+1 NAME Zhetai /YE/
+2 TYPE birth
+2 GIVN Zhetai
+2 SURN YE
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE 1967
+2 PLAC Beijing, China
+1 OCCU Physicist, professor at Tsinghua University
+1 EVEN
+2 TYPE Death during struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 FAMS @F0001@
+1 NOTE @N0000@
+1 NOTE @N0001@
+1 NOTE @N0002@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0002@ INDI
+1 NAME Lin /SHAO/
+2 TYPE birth
+2 GIVN Lin
+2 SURN SHAO
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Physicist
+1 EVEN
+2 TYPE Participation in struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 FAMS @F0001@
+1 NOTE @N0003@
+1 NOTE @N0004@
+1 NOTE @N0005@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0003@ INDI
+1 NAME Wenjie /YE/
+2 TYPE birth
+2 GIVN Wenjie
+2 SURN YE
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Astrophysicist
+1 EVEN
+2 TYPE Witnessed father's death
+2 DATE 1967
+2 PLAC Beijing, China
+1 FAMC @F0001@
+2 PEDI birth
+1 ASSO @I0004@
+2 RELA Colleague
+1 ASSO @I0006@
+2 RELA Acquaintance
+1 ASSO @I0014@
+2 RELA InterrogatedBy
+1 NOTE @N0006@
+1 NOTE @N0007@
+1 NOTE @N0008@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0004@ INDI
+1 NAME Zhicheng /LEI/
+2 TYPE birth
+2 GIVN Zhicheng
+2 SURN LEI
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Political commissar at Red Coast Base
+1 EVEN
+2 TYPE Supervision at Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I0003@
+2 RELA Supervisor
+1 NOTE @N0009@
+1 NOTE @N0010@
+1 NOTE @N0011@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0005@ INDI
+1 NAME Weining /YANG/
+2 TYPE birth
+2 GIVN Weining
+2 SURN YANG
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base
+1 EVEN
+2 TYPE Work at Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I0003@
+2 RELA Partner
+1 ASSO @I0001@
+2 RELA FormerStudent
+1 NOTE @N0012@
+1 NOTE @N0013@
+1 NOTE @N0014@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0006@ INDI
+1 NAME Mulin /BAI/
+2 TYPE birth
+2 GIVN Mulin
+2 SURN BAI
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Reporter for Great Production News
+1 EVEN
+2 TYPE Visit to Red Coast Base
+2 DATE unknown
+2 PLAC Red Coast Base, China
+1 ASSO @I0003@
+2 RELA Acquaintance
+1 ASSO @I0005@
+2 RELA Acquaintance
+1 NOTE @N0015@
+1 NOTE @N0016@
+1 NOTE @N0017@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0007@ INDI
+1 NAME Miao /WANG/
+2 TYPE birth
+2 GIVN Miao
+2 SURN WANG
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Nanomaterials researcher
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I0008@
+2 RELA Friend
+1 ASSO @I0009@
+2 RELA Colleague
+1 ASSO @I0011@
+2 RELA Investigated
+1 ASSO @I0010@
+2 RELA Acquaintance
+1 NOTE @N0018@
+1 NOTE @N0019@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0008@ INDI
+1 NAME Qiang /SHI/
+2 TYPE birth
+2 GIVN Qiang
+2 SURN SHI
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Police detective
+1 EVEN
+2 TYPE Investigation of Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Friend
+1 ASSO @I0011@
+2 RELA Investigated
+1 NOTE @N0020@
+1 NOTE @N0021@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0009@ INDI
+1 NAME Yi /DING/
+2 TYPE birth
+2 GIVN Yi
+2 SURN DING
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Theoretical physicist
+1 EVEN
+2 TYPE Involvement in Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Colleague
+1 ASSO @I0011@
+2 RELA Friend
+1 NOTE @N0022@
+1 NOTE @N0023@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0010@ INDI
+1 NAME Unknown /CHANG/
+2 TYPE birth
+2 GIVN Unknown
+2 SURN CHANG
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Military officer
+1 EVEN
+2 TYPE Meeting about Frontiers of Science
+2 DATE unknown
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Acquaintance
+1 ASSO @I0008@
+2 RELA Colleague
+1 NOTE @N0024@
+1 NOTE @N0025@
+1 NOTE @N0026@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0011@ INDI
+1 NAME Dong /YANG/
+2 TYPE birth
+2 GIVN Dong
+2 SURN YANG
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE unknown
+2 PLAC China
+1 OCCU Physicist
+1 EVEN
+2 TYPE Mysterious death
+2 DATE unknown
+2 PLAC China
+1 EVEN
+2 TYPE Suicide
+2 DATE unknown
+2 PLAC China
+1 ASSO @I0007@
+2 RELA Investigated
+1 ASSO @I0008@
+2 RELA Investigated
+1 ASSO @I0009@
+2 RELA Friend
+1 NOTE @N0027@
+1 NOTE @N0028@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0012@ INDI
+1 NAME Wenxue /YE/
+2 TYPE birth
+2 GIVN Wenxue
+2 SURN YE
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 DEAT
+2 DATE 1969
+2 PLAC Beijing, China
+1 OCCU Red Guard, Ye Wenjie's sister
+1 FAMC @F0001@
+2 PEDI birth
+1 NOTE @N0029@
+1 NOTE @N0030@
+1 NOTE @N0031@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0013@ INDI
+1 NAME Weining /YANG/
+2 TYPE birth
+2 GIVN Weining
+2 SURN YANG
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Chief engineer at Red Coast Base, once a student of Zhetai Ye
+1 ASSO @I0003@
+2 RELA Colleague
+1 NOTE @N0032@
+1 NOTE @N0033@
+1 NOTE @N0034@
+1 NOTE @N0035@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @I0014@ INDI
+1 NAME Lihua /CHENG/
+2 TYPE birth
+2 GIVN Lihua
+2 SURN CHENG
+1 SEX F
+1 BIRT
+2 DATE unknown
+2 PLAC China
+1 OCCU Military representative from Intermediate People’s Court
+1 ASSO @I0003@
+2 RELA Interrogated
+1 NOTE @N0036@
+1 NOTE @N0037@
+1 NOTE @N0038@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @F0001@ FAM
+1 HUSB @I0001@
+1 WIFE @I0002@
+1 CHIL @I0003@
+1 CHIL @I0012@
+1 CHAN
+2 DATE 17 JUL 2024
+3 TIME 15:09:25
+0 @N0000@ NOTE Traditional scientist, viewed as reactionary during the Cultural Re
+1 CONC volution.
+0 @N0001@ NOTE "Theory is the foundation of application. Isn’t discovering fundame
+1 CONC ntal laws the biggest contribution to our time?"
+0 @N0002@ NOTE Physical traits: Elderly, scholarly appearance. Mental traits: Rati
+1 CONC onal, committed to scientific principles.
+0 @N0003@ NOTE Supports the Cultural Revolution, denounces her husband.
+0 @N0004@ NOTE "With the help of the revolutionary youths, I want to stand on th
+1 CONC e side of the revolution, the side of the people!"
+0 @N0005@ NOTE Physical traits: Dressed in an ill-fitting green outfit mimicking t
+1 CONC he Red Guards. Mental traits: Fearful, desperate to align with the polit
+1 CONC ical climate.
+0 @N0006@ NOTE Disillusioned with humanity and the political climate.
+0 @N0007@ NOTE "It was impossible to expect a moral awakening from humankind itsel
+1 CONC f, just like it was impossible to expect humans to lift off the earth b
+1 CONC y pulling up on their own hair."
+0 @N0008@ NOTE Physical traits: Young, intelligent appearance. Mental traits: Disi
+1 CONC llusioned, determined, brilliant.
+0 @N0009@ NOTE Firm believer in the Party and its directives.
+0 @N0010@ NOTE "Given the nature of this work, we can’t have someone who doesn’t w
+1 CONC ant to be here."
+0 @N0011@ NOTE Physical traits: Authoritative appearance. Mental traits: Strict, a
+1 CONC dheres to Party lines.
+0 @N0012@ NOTE Loyal to scientific inquiry.
+0 @N0013@ NOTE "I want to devote myself to the times, to make some real-world cont
+1 CONC ributions."
+0 @N0014@ NOTE Physical traits: Young, determined. Mental traits: Loyal, dedicated
+1 CONC .
+0 @N0015@ NOTE Supportive of the Party's initiatives.
+0 @N0016@ NOTE "I can tell how you’re feeling. The two of us are the only ones wh
+1 CONC o feel this way."
+0 @N0017@ NOTE Physical traits: Typical reporter's appearance. Mental traits: Curi
+1 CONC ous, observant.
+0 @N0018@ NOTE Neutral political views; focused on scientific advancement.
+0 @N0019@ NOTE "It's impossible to lift off the earth by pulling up on one's own h
+1 CONC air."
+0 @N0020@ NOTE Practical and pragmatic political views.
+0 @N0021@ NOTE "Sometimes, being tough is the only way to get things done."
+0 @N0022@ NOTE Intellectual curiosity and skepticism.
+0 @N0023@ NOTE "Science is about exploring the unknown, not just confirming what w
+1 CONC e already know."
+0 @N0024@ NOTE Strongly aligned with state security and national defense.
+0 @N0025@ NOTE Physical traits: Authoritative presence, physically imposing. Menta
+1 CONC l traits: Strategic, authoritative, disciplined.
+0 @N0026@ NOTE Role: Provides military insights and ensures security.
+0 @N0027@ NOTE Scientific skepticism.
+0 @N0028@ NOTE "Science is about exploring the unknown, not just confirming what w
+1 CONC e already know."
+0 @N0029@ NOTE Ever since her little sister had made a clean break with her reacti
+1 CONC onary academic authority family, Wenjie had heard no news about her.
+0 @N0030@ NOTE Physical traits: Young, fervent revolutionary. Mental traits: Ideol
+1 CONC ogically driven, estranged from family.
+0 @N0031@ NOTE Role: Represents the ideological divide within families during th
+1 CONC e Cultural Revolution.
+0 @N0032@ NOTE "I want to devote myself to the times, to make some real-world cont
+1 CONC ributions."
+0 @N0033@ NOTE Physical traits: Intellectual, determined appearance. Mental traits
+1 CONC : Idealistic, loyal, dedicated.
+0 @N0034@ NOTE Role: Key supporter of Wenjie Ye at Red Coast Base.
+0 @N0035@ NOTE Important interaction: Collaborates with Wenjie Ye on her scientifi
+1 CONC c endeavors.
+0 @N0036@ NOTE "What young person hasn’t made some mistakes? I made mistakes mysel
+1 CONC f."
+0 @N0037@ NOTE Physical traits: Authoritative, military appearance. Mental traits
+1 CONC : Disciplinarian, fair-minded, strategic.
+0 @N0038@ NOTE Role: Oversees political and disciplinary actions at Red Coast Base
+1 CONC .
+0 TRLR

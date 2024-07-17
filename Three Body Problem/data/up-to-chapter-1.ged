@@ -1,0 +1,114 @@
+0 HEAD
+1 SOUR The Three-Body Problem
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+0 @I0001@ INDI
+1 NAME Zhetai /Ye/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE 1967
+2 PLAC Beijing, China
+1 OCCU Physicist, professor at Tsinghua University
+1 NOTE Traditional scientist, viewed as reactionary during the Cultural Revolution.
+2 CONT Physical traits: Elderly, scholarly appearance. Mental traits: Rational, committed to scientific principles.
+1 QUOT "Theory is the foundation of application. Isn’t discovering fundamental laws the biggest contribution to our time?"
+1 EVEN
+2 TYPE Death during struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0002@
+2 RELA Wife
+1 ASSO @I0003@
+2 RELA Child
+1 ASSO @I0004@
+2 RELA Child
+
+0 @I0002@ INDI
+1 NAME Lin /Shao/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Physicist
+1 NOTE Supports the Cultural Revolution, denounces her husband.
+2 CONT Physical traits: Dressed in an ill-fitting green outfit mimicking the Red Guards. Mental traits: Fearful, desperate to align with the political climate.
+1 QUOT "With the help of the revolutionary youths, I want to stand on the side of the revolution, the side of the people!"
+1 EVEN
+2 TYPE Participation in struggle session
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0001@
+2 RELA Husband
+1 ASSO @I0003@
+2 RELA Child
+1 ASSO @I0004@
+2 RELA Child
+
+0 @I0003@ INDI
+1 NAME Wenjie /Ye/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Astrophysicist
+1 NOTE Disillusioned with humanity and the political climate.
+2 CONT Physical traits: Young, intelligent appearance. Mental traits: Disillusioned, determined, brilliant.
+1 QUOT "It was impossible to expect a moral awakening from humankind itself, just like it was impossible to expect humans to lift off the earth by pulling up on their own hair."
+1 EVEN
+2 TYPE Witnessed father's death
+2 DATE 1967
+2 PLAC Beijing, China
+1 ASSO @I0001@
+2 RELA Parent
+1 ASSO @I0002@
+2 RELA Parent
+1 ASSO @I0004@
+2 RELA Sibling
+1 ASSO @I0005@
+2 RELA Advisor
+
+0 @I0004@ INDI
+1 NAME Wenxue /Ye/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE 1969
+2 PLAC Beijing, China
+1 OCCU Red Guard, Ye Wenjie's sister
+1 NOTE Ever since her little sister had made a clean break with her reactionary academic authority family, Wenjie had heard no news about her.
+2 CONT Physical traits: Young, fervent revolutionary. Mental traits: Ideologically driven, estranged from family.
+1 ROLE Represents the ideological divide within families during the Cultural Revolution.
+1 ASSO @I0001@
+2 RELA Parent
+1 ASSO @I0002@
+2 RELA Parent
+1 ASSO @I0003@
+2 RELA Sibling
+
+0 @I0005@ INDI
+1 NAME Ruan /Wen/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 DEAT
+2 DATE Unknown
+2 PLAC Beijing, China
+1 OCCU Professor, advisor to Ye Wenjie
+1 NOTE Intellectual with a Western education. Suffered during the Cultural Revolution.
+2 CONT Physical traits: Refined appearance. Mental traits: Wise, cultured, supportive.
+1 ASSO @I0003@
+2 RELA Advisor
+
+0 @F0001@ FAM
+1 HUSB @I0001@
+1 WIFE @I0002@
+1 CHIL @I0003@
+1 CHIL @I0004@
+0 TRLR
