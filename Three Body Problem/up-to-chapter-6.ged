@@ -174,10 +174,36 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 CONT Role: Scientist introduced in "The Frontiers of Science", now involved in investigating the mysterious suicides.
 2 CONT Political views: Neutral, focused on scientific advancement.
 2 CONT Main decisive actions: Agrees to infiltrate the "Frontiers of Science" to gather information.
+2 CONT Experiencing unexplained countdown in photos taken with his camera, leading to psychological distress.
 1 EVEN
 2 TYPE Involvement in Frontiers of Science
 2 DATE Unknown
 2 PLAC China
+1 EVEN
+2 TYPE Discovers Countdown
+2 DATE Unknown
+2 PLAC China
+2 NOTE Wang Miao discovers a mysterious countdown in the photos he takes, which leads to significant psychological distress.
+1 EVEN
+2 TYPE Consults Shen Yufei
+2 DATE Unknown
+2 PLAC China
+2 NOTE Wang seeks advice from Shen Yufei regarding the countdown. She cryptically advises him to stop his nanomaterial project.
+1 EVEN
+2 TYPE Halts Nanomaterial Project
+2 DATE Unknown
+2 PLAC China
+2 NOTE Wang halts his nanomaterial project, which temporarily stops the countdown in his photos.
+1 EVEN
+2 TYPE Confronted by Shi Qiang
+2 DATE Unknown
+2 PLAC China
+2 NOTE Shi Qiang confronts Wang about the strange occurrences and his findings.
+1 EVEN
+2 TYPE Encounters Pan Han
+2 DATE Unknown
+2 PLAC China
+2 NOTE Wang encounters Pan Han, who warns about the consequences of their actions.
 1 ASSO @I0010@
 2 RELA Acquaintance
 2 NOTE Acquainted with Colonel Chang Weisi through the investigation.
@@ -198,35 +224,55 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 1 ASSO @I0016@
 2 RELA Colleague
 2 NOTE Pan Han and Wang Miao are colleagues through their involvement with the Frontiers of Science.
+1 ASSO @I0017@
+2 RELA Spouse
+2 NOTE Married to Yao Li, providing emotional support during his troubling experiences.
+1 ASSO @I0018@
+2 RELA Parent
+2 NOTE Wang Miao's son, involved in the camera photo experiments.
 1 QUOT "It's impossible to lift off the earth by pulling up on one's own hair."
 1 QUOT "The countdown continued. 1175:10:02, 1175:10:01, 1175:10:00, 1175:09:59 ..."
+1 NOTE Wang Miao begins experiencing strange phenomena with his camera. Each photograph he takes contains a countdown that continues to decrease over time.
+2 CONT He tries multiple cameras and even has his wife and son take photos, but only the photos he personally takes contain the countdown.
+2 CONT This causes him significant psychological distress as he struggles to understand the source of the phenomenon.
+2 CONT He consults Shen Yufei, who cryptically advises him to stop his nanomaterial research project.
+2 CONT Eventually, he halts the project, and the countdown temporarily stops, but the mystery remains unresolved.
 
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
 1 SEX M
 1 BIRT
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
 1 OCCU Police detective
 1 NOTE Practical and pragmatic political views.
 2 CONT Physical traits: Stocky, imposing presence. Mental traits: Direct, pragmatic.
-2 CONT Role: Involved in investigating mysterious deaths and events.
+2 CONT Role: Police officer involved in investigating the mysterious suicides.
 2 CONT Political views: N/A
-2 CONT Main decisive actions: Investigates the strange occurrences related to scientists.
-2 CONT Quotes: "Sometimes, being tough is the only way to get things done."
+2 CONT Main decisive actions: Convinces Wang Miao to assist in the investigation.
 1 EVEN
 2 TYPE Investigation of Frontiers of Science
-2 DATE unknown
+2 DATE Unknown
 2 PLAC China
+1 EVEN
+2 TYPE Confronts Wang Miao
+2 DATE Unknown
+2 PLAC China
+2 NOTE Shi Qiang confronts Wang Miao about the strange occurrences and his findings.
 1 ASSO @I0007@
 2 RELA Friend
 2 NOTE Qiang Shi and Wang Miao are friends through their professional interactions, but their relationship is strained.
-2 NOTE Wang Miao often feels frustrated with Shi Qiang's blunt and rough mannerisms.
-2 NOTE Despite their differences, Wang relies on Shi Qiang's practical insights during the investigation.
+2 NOTE Shi Qiang often uses his blunt and rough mannerisms to push Wang Miao into action.
+2 NOTE Despite their differences, Shi Qiang values Wang Miao's scientific insights for the investigation.
 1 ASSO @I0011@
 2 RELA Investigated
-2 NOTE Qiang Shi investigated Dong Yang in connection with the mysterious events.
+2 NOTE Investigated Dong Yang in connection with the mysterious events.
+1 ASSO @I0010@
+2 RELA Colleague
+2 NOTE Works together with Colonel Chang Weisi to ensure the security of scientific endeavors.
+1 QUOT "Sometimes, being tough is the only way to get things done."
+
 
 0 @I0009@ INDI
 1 NAME Yi /Ding/
@@ -373,7 +419,8 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 CONT Physical traits: N/A. Mental traits: Subtle, probing, intelligent.
 2 CONT Role: Key figure in the Frontiers of Science, interacts with Wang Miao and Pan Han.
 2 CONT Political views: N/A
-2 CONT Main decisive actions: Involved in high-level discussions and decisions within the Frontiers of Science.
+2 CONT Main decisive actions: Advises Wang Miao to stop his nanomaterial research project.
+2 CONT Engages in high-level discussions and decisions within the Frontiers of Science.
 1 QUOT "Three days from now—that’s the fourteenth—between one and five in the morning, the entire universe will flicker for you."
 1 ASSO @I0007@
 2 RELA Acquaintance
@@ -395,6 +442,7 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 2 CONT Role: Key member of the Frontiers of Science, involved in the overarching intrigue of the story.
 2 CONT Political views: Believes in de-urbanization and advocates for an agricultural society.
 2 CONT Main decisive actions: Engages in significant scientific and philosophical discussions.
+2 CONT Warns Shen Yufei and Wang Miao about the consequences of their actions.
 1 QUOT "The universe is a dark forest."
 1 ASSO @I0007@
 2 RELA Colleague
@@ -402,6 +450,45 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 1 ASSO @I0015@
 2 RELA Colleague
 2 NOTE Pan Han interacts with Shen Yufei within the Frontiers of Science.
+
+
+0 @I0017@ INDI
+1 NAME Yao /Li/
+1 SEX F
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 OCCU Doctor
+1 NOTE Wang Miao's wife, a caring and concerned partner.
+2 CONT Physical traits: N/A. Mental traits: Caring, supportive, worried about Wang's strange behavior.
+2 CONT Role: Supportive partner, concerned about Wang's well-being.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Tries to comfort and understand Wang during his distressing experiences with the countdown.
+1 ASSO @I0007@
+2 RELA Spouse
+2 NOTE Married to Wang Miao, providing emotional support during his troubling experiences.
+1 ASSO @I0018@
+2 RELA Parent
+2 NOTE Mother of Dou Dou Wang, involved in the family dynamic.
+
+
+0 @I0018@ INDI
+1 NAME Dou Dou /Wang/
+1 SEX M
+1 BIRT
+2 DATE Unknown
+2 PLAC China
+1 NOTE Wang Miao's young son, curious and playful.
+2 CONT Physical traits: N/A. Mental traits: Curious, playful.
+2 CONT Role: Adds to the family dynamic and is present during Wang's experiences with the countdown.
+2 CONT Political views: N/A
+2 CONT Main decisive actions: Participates in taking photos at Wang's request, which helps in the investigation of the mysterious countdown.
+1 ASSO @I0007@
+2 RELA Parent
+2 NOTE Wang Miao's son, involved in the camera photo experiments.
+1 ASSO @I0017@
+2 RELA Parent
+2 NOTE Son of Yao Li, adding to the family support during Wang's troubling times.
 
 
 
@@ -416,5 +503,11 @@ Here is the updated GEDCOM file with the 2 NOTE tags for ASSO tags included:
 1 WIFE @I0004@
 1 CHIL @I0003@
 1 CHIL @I0012@
+
+0 @F0003@ FAM
+1 HUSB @I0007@
+1 WIFE @I0017@
+1 CHIL @I0018@
+
 
 0 TRLR
