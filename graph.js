@@ -31,7 +31,7 @@ function parseGedcom(data) {
                 if (tag === 'NAME') currentIndividual.name = formatName(value);
                 if (tag === 'SEX') currentIndividual.sex = value;
                 if (tag === 'BIRT') currentIndividual.birth = { date: null, place: null };
-                if (tag === 'DEAT') currentIndividual.death = { date: null, place: null };
+                if (tag === 'DEAT') currentIndividual.death = { date: null, place: null, status: true };
                 if (tag === 'OCCU') currentIndividual.occupation = value;
                 if (tag === 'NOTE') currentIndividual.notes.push(value);
                 if (tag === 'ASSO') {
@@ -119,11 +119,11 @@ function createGraph(data) {
 
     node.append("circle")
         .attr("r", 10)
-        .attr("fill", d => d.death && d.death.date ? "red" : "lightblue"); // Mark deceased individuals with a different color
+        .attr("fill", d => d.death && d.death.status ? "red" : "lightblue"); // Mark deceased individuals with a different color
 
     node.append("title")
         .html(d => {
-            let details = `${d.name}<br>${d.occupation || ''}<br>Born: ${d.birth ? `${d.birth.date} at ${d.birth.place}` : 'unknown'}<br>Died: ${d.death && d.death.date ? `${d.death.date} at ${d.death.place}` : 'unknown'}<br><br>Notes:<br>${d.notes.join('<br>')}<br><br>Events:<br>`;
+            let details = `${d.name}<br>${d.occupation || ''}<br>Born: ${d.birth ? `${d.birth.date} at ${d.birth.place}` : 'unknown'}<br>Died: ${d.death && d.death.status ? `${d.death.date} at ${d.death.place}` : 'unknown'}<br><br>Notes:<br>${d.notes.join('<br>')}<br><br>Events:<br>`;
             d.events.forEach(event => {
                 details += `${event.type}: ${event.date} at ${event.place}<br>`;
             });
@@ -145,7 +145,7 @@ function createGraph(data) {
             Sex: ${d.sex}<br>
             Occupation: ${d.occupation}<br>
             Birth: ${d.birth ? `${d.birth.date} at ${d.birth.place}` : 'unknown'}<br>
-            Death: ${d.death && d.death.date ? `${d.death.date} at ${d.death.place}` : 'unknown'}<br>
+            Death: ${d.death && d.death.status ? `${d.death.date} at ${d.death.place}` : 'unknown'}<br>
             Notes: <br>${d.notes.join('<br>')}<br>
             Events: <br>${d.events.map(e => `${e.type}: ${e.date} at ${e.place}`).join('<br>')}
         `);
@@ -189,7 +189,7 @@ function createGraph(data) {
 function formatName(name) {
     const parts = name.split('/');
     if (parts.length === 3) {
-        return `${parts[0]}<strong>${parts[1].toUpperCase()}</strong>${parts[2]}`;
+        return `${parts[0]} ${parts[1].toUpperCase()} ${parts[2]}`;
     }
     return name;
 }
