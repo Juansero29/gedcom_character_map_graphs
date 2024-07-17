@@ -74,6 +74,11 @@
 2 TYPE Witnessed father's death
 2 DATE 1967
 2 PLAC Beijing, China
+1 EVEN
+2 TYPE Discussion about cosmic microwave background
+2 DATE 2000
+2 PLAC Beijing, China
+2 NOTE Discusses cosmic microwave background with Wang Miao and provides him contact details of her former student.
 1 ASSO @I0001@
 2 RELA Parent
 1 ASSO @I0002@
@@ -86,6 +91,9 @@
 2 RELA Acquaintance
 1 ASSO @I0014@
 2 RELA InterrogatedBy
+1 ASSO @I0007@
+2 RELA Visitor
+2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
 1 FAMC @F0001@
 
 0 @I0004@ INDI
@@ -213,6 +221,11 @@
 2 DATE 2000
 2 PLAC China
 2 NOTE Wang Miao starts playing the Three Body game, where he interacts with fictional characters such as King Wen of Zhou and Follower. The game presents a chaotic world where the sun's movements are unpredictable, and people must survive extreme conditions by dehydrating and rehydrating.
+1 EVEN
+2 TYPE Visits Ye Wenjie
+2 DATE 2000
+2 PLAC Beijing, China
+2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
 1 ASSO @I0009@
 2 RELA Colleague
 2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
@@ -234,6 +247,9 @@
 1 ASSO @I0022@
 2 RELA InGameCharacter
 2 NOTE Wang Miao interacts with Fu Xi in the Three Body game. Fu Xi offers mystical and philosophical insights into the game world.
+1 ASSO @I0003@
+2 RELA Visitor
+2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
@@ -288,6 +304,10 @@
 1 ASSO @I0007@
 2 RELA Colleague
 2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
+2 NOTE Emotional support: Ding Yi understands the psychological stress Wang is experiencing and believes visiting Ye Wenjie might provide Wang with emotional grounding.
+2 NOTE Scientific insight: Ye Wenjie, an accomplished astrophysicist, might offer Wang valuable scientific insights related to the cosmic microwave background and other topics.
+2 NOTE Personal connection: Ding Yi feels a sense of responsibility toward Ye Wenjie, knowing she could use some help and companionship.
+2 NOTE Legacy and continuity: By connecting Wang with Ye Wenjie, Ding Yi is subtly trying to bridge the gap between the older and younger generations of scientists.
 1 ASSO @I0011@
 2 RELA Friend
 2 NOTE Yi Ding and Dong Yang are friends through their mutual interest in theoretical physics.
@@ -347,7 +367,8 @@
 1 ASSO @I0009@
 2 RELA Friend
 2 NOTE Dong Yang and Yi Ding are friends through their mutual interest in theoretical physics.
-
+1 NOTE Daughter of Ye Wenjie and an unknown male. Involved in complex scientific research leading to a tragic end.
+1 FAMC @F0003@
 
 0 @I0012@ INDI
 1 NAME Wenxue /Ye/
@@ -541,6 +562,15 @@
 2 RELA Advisor
 2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
+0 @I0023@ INDI
+1 NAME Unknown /Male/
+1 SEX M
+1 BIRT
+2 DATE unknown
+2 PLAC unknown
+1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
+
+
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@
@@ -551,5 +581,12 @@
 1 HUSB @I0007@
 1 WIFE @I0017@
 1 CHIL @I0018@
+
+0 @F0003@ FAM
+1 HUSB @I0023@
+1 WIFE @I0003@
+1 CHIL @I0011@
+
+
 
 0 TRLR
