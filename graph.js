@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentIndividual = null;
         let currentFamily = null;
         let currentField = null;
+        let lastTag = null;
 
         lines.forEach(line => {
             const parts = line.trim().split(' ');
@@ -37,11 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 individuals[tag] = currentIndividual;
                 currentFamily = null;
                 currentField = null;
+                lastTag = null;
             } else if (level === '0' && tag.startsWith('@F')) {
                 currentFamily = { id: tag, husband: null, wife: null, children: [] };
                 families[tag] = currentFamily;
                 currentIndividual = null;
                 currentField = null;
+                lastTag = null;
             } else if (currentIndividual || currentFamily) {
                 if (tag === 'CONC') {
                     if (currentField) {
@@ -58,14 +61,18 @@ document.addEventListener('DOMContentLoaded', function() {
                                 currentIndividual.name = formatName(value);
                                 currentField = 'name';
                             } else if (tag === 'NOTE') {
-                                currentField = currentIndividual.notes;
-                                currentIndividual.notes.push(value);
+                                if (value) {
+                                    currentField = currentIndividual.notes;
+                                    currentIndividual.notes.push(value);
+                                } else {
+                                    currentField = currentIndividual.notes;
+                                }
                             } else if (tag === 'ASSO') {
                                 currentIndividual.associations.push({ person: value, relation: null, notes: [] });
                                 currentField = 'asso';
                             } else if (tag === 'EVEN') {
                                 currentIndividual.events.push({ value: value, type: null, date: null, place: null });
-                                currentField = null;
+                                currentField = 'event';
                             } else if (tag === 'SEX') {
                                 currentIndividual.sex = value;
                                 currentField = null;
@@ -81,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             } else {
                                 currentField = null;
                             }
+                            lastTag = tag;
                         } else if (level === '2') {
                             if (currentField === 'name') {
                                 if (tag === 'NICK') {
@@ -99,22 +107,27 @@ document.addEventListener('DOMContentLoaded', function() {
                                     currentIndividual.associations[currentIndividual.associations.length - 1].notes.push(value);
                                 }
                             }
+                            if (currentField === 'event') {
+                                if (tag === 'DATE') {
+                                    currentIndividual.events[currentIndividual.events.length - 1].date = value;
+                                }
+                                if (tag === 'PLAC') {
+                                    currentIndividual.events[currentIndividual.events.length - 1].place = value;
+                                }
+                                if (tag === 'TYPE') {
+                                    currentIndividual.events[currentIndividual.events.length - 1].type = value;
+                                }
+                            }
                             if (tag === 'DATE') {
                                 const dateValue = value.toLowerCase() === 'unknown' ? null : value;
                                 if (currentIndividual.birth && !currentIndividual.birth.date) currentIndividual.birth.date = dateValue;
                                 if (currentIndividual.death && !currentIndividual.death.date) currentIndividual.death.date = dateValue;
-                                if (currentIndividual.events.length > 0) {
-                                    currentIndividual.events[currentIndividual.events.length - 1].date = dateValue;
-                                }
                                 currentField = null;
                             }
                             if (tag === 'PLAC') {
                                 const placeValue = value.toLowerCase() === 'unknown' ? null : value;
                                 if (currentIndividual.birth && !currentIndividual.birth.place) currentIndividual.birth.place = placeValue;
                                 if (currentIndividual.death && !currentIndividual.death.place) currentIndividual.death.place = placeValue;
-                                if (currentIndividual.events.length > 0) {
-                                    currentIndividual.events[currentIndividual.events.length - 1].place = placeValue;
-                                }
                                 currentField = null;
                             }
                             if (tag === 'RELA' && currentIndividual.associations.length > 0) {
@@ -274,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             details += `
                 <strong>Notes:</strong><br>
-                <ul>${d.notes.length ? d.notes.map(note => `<li>${note}</li>`).join('') : '<li>no notes</li>'}</ul>
+                <ul>${d.notes.length ? d.notes.map(note => note ? `<li>${note}</li>` : '').join('') : '<li>no notes</li>'}</ul>
                 <strong>Events:</strong><br>
                 <ul>${d.events.length ? d.events.map(event => `<li>${event.type || 'unknown type'}: ${event.value ? event.value + ' - ' : ''}${event.date || 'unknown date'}${event.place ? ' at ' + event.place : ''}</li>`).join('') : '<li>no events</li>'}</ul>
             `;
