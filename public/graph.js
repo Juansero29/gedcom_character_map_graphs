@@ -472,4 +472,52 @@ document.addEventListener('DOMContentLoaded', function() {
     
         createGraph({ nodes: displayNodes, links: displayLinks });
     }
+
+    async function fetchFiles() {
+        try {
+            const response = await fetch('http://localhost:3000/ged');
+            const files = await response.json();
+            displayFiles(files);
+        } catch (error) {
+            console.error('Error fetching files:', error);
+        }
+    }
+
+    function displayFiles(files) {
+        const treeView = document.getElementById('treeView');
+        treeView.innerHTML = '<ul>' + files.map(file => `<li><a href="#" onclick="loadFile('${file}')">${file}</a></li>`).join('') + '</ul>';
+    }
+
+    function toggleTree() {
+        const treeView = document.getElementById('treeView');
+        const toggleButton = document.getElementById('toggleTreeView');
+        if (treeView.style.display === 'none') {
+            treeView.style.display = 'block';
+            toggleButton.textContent = 'Hide Files';
+        } else {
+            treeView.style.display = 'none';
+            toggleButton.textContent = 'Show Files';
+        }
+    }
+
+    async function loadFile(fileName) {
+        try {
+            const response = await fetch(`http://localhost:3000/ged/${fileName}`);
+            const gedcomData = await response.text();
+            const parsedData = parseGedcom(gedcomData);
+            allNodes = parsedData.nodes;
+            allLinks = parsedData.links;
+            createGraph(parsedData);
+        } catch (error) {
+            console.error('Error loading file:', error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchFiles();
+    });
 });
+
+// Make parseGedcom and createGraph functions globally available if needed
+window.parseGedcom = parseGedcom;
+window.createGraph = createGraph;
