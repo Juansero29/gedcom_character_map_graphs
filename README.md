@@ -1,5 +1,13 @@
 # GEDCOM CHARACTER MAP GRAPHS
 
+- [GEDCOM CHARACTER MAP GRAPHS](#gedcom-character-map-graphs)
+  - [Main Features](#main-features)
+  - [Features I Want To Implement](#features-i-want-to-implement)
+  - [Good to know](#good-to-know)
+  - [How to contribute](#how-to-contribute)
+  - [How To Launch Locally](#how-to-launch-locally)
+  - [How To Launch Online](#how-to-launch-online)
+
 This tool to helps me to keep up with the book `Three Body Problem` characters and main events chapter by chapter. But the tools is not only limited to this specific book.
 
 This tool is able to read `.ged` files - which are generally used for genealogy, family trees, etc - and map out in a nice graph each person inside the file, along with all of its details, name, events, notes and quotes. The goal is to be able to easily craft Character Maps for literary works that have complex plots with character-webbing, and be able to keep up with the progress of each chapter accordingly.
@@ -46,4 +54,4 @@ Have fun!
 
 ## How To Launch Online
 
-1. Go to
+1. Go to [https://juansero29.github.io/gedcom_character_map_graphs/](https://juansero29.github.io/gedcom_character_map_graphs/)
