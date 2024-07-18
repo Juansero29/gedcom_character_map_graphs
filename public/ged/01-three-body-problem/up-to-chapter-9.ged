@@ -79,6 +79,11 @@
 2 DATE 2000
 2 PLAC Beijing, China
 2 NOTE Discusses cosmic microwave background with Wang Miao and provides him contact details of her former student.
+1 EVEN
+2 TYPE Provides contact details for Sha Ruishan
+2 DATE 2000
+2 PLAC Beijing, China
+2 NOTE Provides Wang Miao with the contact details for Sha Ruishan for further investigation into the cosmic microwave background.
 1 ASSO @I0001@
 2 RELA Parent
 1 ASSO @I0002@
@@ -94,6 +99,9 @@
 1 ASSO @I0007@
 2 RELA Visitor
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 ASSO @I0024@
+2 RELA FormerStudent
+2 NOTE Sha Ruishan is Ye Wenjie's former student at Tsinghua University.
 1 FAMC @F0001@
 
 0 @I0004@ INDI
@@ -226,6 +234,11 @@
 2 DATE 2000
 2 PLAC Beijing, China
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 EVEN
+2 TYPE Observes cosmic microwave background
+2 DATE 2000
+2 PLAC Miyun County, China
+2 NOTE Wang Miao observes the cosmic microwave background at the Miyun Radio Astronomy Observatory with Sha Ruishan.
 1 ASSO @I0009@
 2 RELA Colleague
 2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
@@ -250,6 +263,9 @@
 1 ASSO @I0003@
 2 RELA Visitor
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 ASSO @I0024@
+2 RELA Colleague
+2 NOTE Wang Miao collaborates with Sha Ruishan to observe the cosmic microwave background.
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
@@ -569,6 +585,39 @@
 2 DATE unknown
 2 PLAC unknown
 1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
+
+0 @I0024@ INDI
+1 NAME Ruishan /Sha/
+1 SEX M
+1 BIRT
+2 DATE 1965
+2 PLAC China
+1 OCCU Astrophysicist
+1 NOTE Ye Wenjie's former student, works at the Miyun Radio Astronomy Observatory.
+2 CONT Physical traits: N/A. Mental traits: Intelligent, dedicated.
+2 CONT Role: Astrophysicist responsible for creating a detailed map of the cosmic microwave background using data from multiple satellites.
+2 CONT Main decisive actions: Assists Wang Miao in observing the cosmic microwave background and confirms the universe flickering phenomenon.
+1 ASSO @I0003@
+2 RELA Teacher
+2 NOTE Ye Wenjie is Ruishan Sha's former teacher at Tsinghua University.
+1 ASSO @I0007@
+2 RELA Colleague
+2 NOTE Wang Miao collaborates with Sha Ruishan to observe the cosmic microwave background.
+
+0 @I0025@ INDI
+1 NAME /3K Glasses Staffer/
+1 SEX M
+1 BIRT
+2 DATE 1970
+2 PLAC China
+1 OCCU Planetarium staffer
+1 NOTE Provides Wang Miao with 3K glasses to observe cosmic microwave background.
+2 CONT Physical traits: Sleepy-eyed, cooperative. Mental traits: Helpful, dutiful.
+2 CONT Role: Provides necessary equipment for Wang Miao to observe the cosmic microwave background.
+2 CONT Main decisive actions: Hands Wang Miao a suitcase with 3K glasses and instructions for use.
+1 ASSO @I0007@
+2 RELA Acquaintance
+2 NOTE Provides Wang Miao with 3K glasses to observe the cosmic microwave background.
 
 
 0 @F0001@ FAM
