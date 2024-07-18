@@ -97,7 +97,36 @@
 
         function displayFiles(files) {
             const treeView = document.getElementById('treeView');
-            treeView.innerHTML = '<ul>' + files.map(file => `<li><a href="#" onclick="loadFile('${file}')">${file}</a></li>`).join('') + '</ul>';
+            const fileTree = buildFileTree(files);
+            treeView.innerHTML = buildTreeHtml(fileTree);
+        }
+
+        function buildFileTree(files) {
+            const tree = {};
+            files.forEach(file => {
+                const parts = file.split('/');
+                let current = tree;
+                parts.forEach((part, index) => {
+                    if (!current[part]) {
+                        current[part] = (index === parts.length - 1) ? null : {};
+                    }
+                    current = current[part];
+                });
+            });
+            return tree;
+        }
+
+        function buildTreeHtml(tree, path = '') {
+            let html = '<ul>';
+            for (const key in tree) {
+                if (tree[key] === null) {
+                    html += `<li><a href="#" onclick="loadFile('${path + key}')">${key}</a></li>`;
+                } else {
+                    html += `<li>${key}${buildTreeHtml(tree[key], path + key + '/')}</li>`;
+                }
+            }
+            html += '</ul>';
+            return html;
         }
 
         function toggleTree() {
