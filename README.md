@@ -3,6 +3,8 @@
 - [Access Graph Tool](https://juansero29.github.io/gedcom_character_map_graphs/public/index.html)
 - [GitHub Source Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
 
+Table Of Contents:
+
 - [GEDCOM CHARACTER MAP GRAPHS](#gedcom-character-map-graphs)
   - [Main Features](#main-features)
   - [Features I Want To Implement](#features-i-want-to-implement)
