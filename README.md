@@ -3,7 +3,9 @@
 - [Access Graph Tool](https://juansero29.github.io/gedcom_character_map_graphs/public/index.html)
 - [GitHub Source Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
 
-![Demo of the tool](https://github.com/user-attachments/assets/df6daf0d-0720-40f4-8c45-5bc8da0d60ae))
+Demo of the tool:
+
+https://github.com/user-attachments/assets/df6daf0d-0720-40f4-8c45-5bc8da0d60ae
 
 Table Of Contents:
 
