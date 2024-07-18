@@ -38,3 +38,8 @@ The `index.html` file proposes a website in which one selects a `*.ged` file, an
 1. The idea is to have nice and free character map graphs that are easily navigatable, accessible for everyone, and that facilitate in a lot of was understanding books that have lots of characters and events per characters. Could you imagine this for the whole cast of Game Of Thrones characters? Well, you get the idea. You could start a new PR with the Game Of Thrones cast chapter by chapter if you're unemployed ;)
 
 Have fun!
+
+## How To Launch Locally
+
+1. Execute `node server.js` on the root folder
+1. Go to [http://localhost:3000/](http://localhost:3000/)

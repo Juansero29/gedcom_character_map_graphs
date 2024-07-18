@@ -566,8 +566,8 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.onload = function (e) {
       const gedcomData = e.target.result;
       const parsedData = parseGedcom(gedcomData);
-      allNodes = parsedData.nodes;
-      allLinks = parsedData.links;
+      window.allNodes = parsedData.nodes;
+      window.allLinks = parsedData.links;
       createGraph(parsedData);
     };
     reader.readAsText(file);
@@ -575,7 +575,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.searchGraph = function () {
     const query = document.getElementById("searchBox").value.toLowerCase();
-    const filteredNodes = allNodes.filter(
+    const filteredNodes = window.allNodes.filter(
       (node) =>
         node.name.toLowerCase().includes(query) ||
         (node.nickname && node.nickname.toLowerCase().includes(query)) ||
@@ -583,7 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     const neighbors = new Set();
-    allLinks.forEach((link) => {
+    window.allLinks.forEach((link) => {
       if (
         filteredNodes.find((node) => node.id === link.source.id) ||
         filteredNodes.find((node) => node.id === link.target.id)
@@ -593,8 +593,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    const displayNodes = allNodes.filter((node) => neighbors.has(node.id));
-    const displayLinks = allLinks.filter(
+    const displayNodes = window.allNodes.filter((node) => neighbors.has(node.id));
+    const displayLinks = window.allLinks.filter(
       (link) => neighbors.has(link.source.id) && neighbors.has(link.target.id)
     );
 
@@ -641,8 +641,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch(`http://localhost:3000/ged/${fileName}`);
       const gedcomData = await response.text();
       const parsedData = parseGedcom(gedcomData);
-      allNodes = parsedData.nodes;
-      allLinks = parsedData.links;
+      window.allNodes = parsedData.nodes;
+      window.allLinks = parsedData.links;
       createGraph(parsedData);
     } catch (error) {
       console.error("Error loading file:", error);
