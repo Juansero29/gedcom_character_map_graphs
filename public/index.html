@@ -1,208 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GEDCOM Graph</title>
-    <link
-      rel="stylesheet"
-      href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"
-    />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <style>
-      body {
-        margin: 0;
-        font-family: "Helvetica", "Arial", sans-serif;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Ensure the body takes up the full height of the viewport */
-      }
-      #controls {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-      }
-      #treeView {
-        position: absolute;
-        top: 40px; /* Adjust to be below the button */
-        left: 8px;
-        width: 250px;
-        height: 90vh;
-        overflow-y: auto;
-        background: #fff;
-        border: 1px solid #ccc;
-        z-index: 10;
-        padding: 10px;
-        display: none; /* Initially hidden */
-      }
-      #toggleTreeView {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        z-index: 10;
-        padding: 10px;
-        cursor: pointer;
-        background-color: #6200ea;
-        color: white;
-        border-radius: 4px;
-        font-family: "Helvetica", "Arial", sans-serif;
-        font-size: 16px;
-        transition: background-color 0.3s;
-      }
-      #toggleTreeView:hover {
-        background-color: #3700b3;
-      }
-      #gedcomFileLabel {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-family: "Helvetica", "Arial", sans-serif;
-        background-color: #6200ea;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      #gedcomFileLabel:hover {
-        background-color: #3700b3;
-      }
-      #gedcomFile {
-        display: none;
-      }
-      #searchBox {
-        padding: 10px;
-        font-size: 16px;
-        margin-left: 20px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-      }
-      svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        background-color: #f9f9f9; /* Optional: background color for the SVG */
-      }
-      .node text {
-        font: 12px sans-serif;
-      }
-      ul {
-        list-style-type: none;
-        padding-left: 20px;
-      }
-      ul ul {
-        padding-left: 20px;
-      }
-      li {
-        padding: 4px 0;
-      }
-      a {
-        text-decoration: none;
-        color: #6200ea;
-        transition: color 0.3s;
-      }
-      a:hover {
-        color: #3700b3;
-      }
+        body {
+            margin: 0;
+            font-family: "Helvetica", "Arial", sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        #treeView {
+            position: absolute;
+            top: 40px;
+            left: 8px;
+            width: 250px;
+            height: 90vh;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            z-index: 10;
+            padding: 10px;
+            display: none;
+        }
+        #toggleTreeView {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            z-index: 10;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #6200ea;
+            color: white;
+            border-radius: 4px;
+            font-family: "Helvetica", "Arial", sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        #toggleTreeView:hover {
+            background-color: #3700b3;
+        }
+        #gedcomFileLabel, #readMeButton {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: "Helvetica", "Arial", sans-serif;
+            background-color: #6200ea;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+        #gedcomFileLabel:hover, #readMeButton:hover {
+            background-color: #3700b3;
+        }
+        #gedcomFile {
+            display: none;
+        }
+        #searchBox {
+            padding: 10px;
+            font-size: 16px;
+            margin-left: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: #f9f9f9;
+        }
+        .node text {
+            font: 12px sans-serif;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul ul {
+            padding-left: 20px;
+        }
+        li {
+            padding: 4px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #6200ea;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #3700b3;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div id="treeView"></div>
-    <div id="toggleTreeView" onclick="toggleTree()">Show Files</div>
+    <div id="toggleTreeView" onclick="toggleTree()">Show Graphs</div>
     <div id="controls">
-      <label for="gedcomFile" id="gedcomFileLabel">Choose Custom .GED</label>
-      <input type="file" id="gedcomFile" />
-      <input
-        type="text"
-        id="searchBox"
-        placeholder="Search..."
-        oninput="searchGraph()"
-      />
+        <a id="readMeButton" href="https://juansero29.github.io/gedcom_character_map_graphs/README.md" target="_blank">
+            <i class="fab fa-github"></i> READ ME
+        </a>
+        <label for="gedcomFile" id="gedcomFileLabel">Choose Custom .GED</label>
+        <input type="file" id="gedcomFile" />
+        <input type="text" id="searchBox" placeholder="Search..." oninput="searchGraph()" />
     </div>
     <svg viewBox="-200 -200 800 800"></svg>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="graph.js"></script>
     <script>
-      async function fetchFiles() {
-        try {
-          const response = await fetch("http://localhost:3000/ged");
-          const files = await response.json();
-          displayFiles(files);
-        } catch (error) {
-          console.error("Error fetching files:", error);
-        }
-      }
-
-      function displayFiles(files) {
-        const treeView = document.getElementById("treeView");
-        const fileTree = buildFileTree(files);
-        const rootContent = fileTree["ged"]; // Directly access the contents of the 'ged' folder
-        treeView.innerHTML = buildTreeHtml(rootContent); // Display the content of the 'ged' folder
-      }
-
-      function buildFileTree(files) {
-        const tree = { ged: {} }; // Ensure the root is 'ged'
-        files.forEach((file) => {
-          const parts = file.split("/");
-          let current = tree["ged"]; // Start building the tree from 'ged'
-          parts.forEach((part, index) => {
-            if (!current[part]) {
-              current[part] = index === parts.length - 1 ? null : {};
+        async function fetchFiles() {
+            try {
+                const response = await fetch("http://localhost:3000/ged");
+                const files = await response.json();
+                displayFiles(files);
+            } catch (error) {
+                console.error("Error fetching files:", error);
             }
-            current = current[part];
-          });
+        }
+
+        function displayFiles(files) {
+            const treeView = document.getElementById("treeView");
+            const fileTree = buildFileTree(files);
+            const rootContent = fileTree["ged"];
+            treeView.innerHTML = buildTreeHtml(rootContent);
+        }
+
+        function buildFileTree(files) {
+            const tree = { ged: {} };
+            files.forEach((file) => {
+                const parts = file.split("/");
+                let current = tree["ged"];
+                parts.forEach((part, index) => {
+                    if (!current[part]) {
+                        current[part] = index === parts.length - 1 ? null : {};
+                    }
+                    current = current[part];
+                });
+            });
+            return tree;
+        }
+
+        function buildTreeHtml(tree, path = "") {
+            let html = "<ul>";
+            for (const key in tree) {
+                if (tree[key] === null) {
+                    html += `<li><a href="#" onclick="loadFile('${path + key}')">${key}</a></li>`;
+                } else {
+                    html += `<li>${key}${buildTreeHtml(tree[key], path + key + "/")}</li>`;
+                }
+            }
+            html += "</ul>";
+            return html;
+        }
+
+        function toggleTree() {
+            const treeView = document.getElementById("treeView");
+            const toggleButton = document.getElementById("toggleTreeView");
+            if (treeView.style.display === "none") {
+                treeView.style.display = "block";
+                toggleButton.textContent = "Hide";
+            } else {
+                treeView.style.display = "none";
+                toggleButton.textContent = "Show Graphs";
+            }
+        }
+
+        async function loadFile(fileName) {
+            try {
+                const response = await fetch(`http://localhost:3000/ged/${fileName}`);
+                const gedcomData = await response.text();
+                const parsedData = window.parseGedcom(gedcomData);
+                window.allNodes = parsedData.nodes;
+                window.allLinks = parsedData.links;
+                window.createGraph(parsedData);
+            } catch (error) {
+                console.error("Error loading file:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchFiles();
         });
-        return tree;
-      }
 
-      function buildTreeHtml(tree, path = "") {
-        let html = "<ul>";
-        for (const key in tree) {
-          if (tree[key] === null) {
-            html += `<li><a href="#" onclick="loadFile('${
-              path + key
-            }')">${key}</a></li>`;
-          } else {
-            html += `<li>${key}${buildTreeHtml(
-              tree[key],
-              path + key + "/"
-            )}</li>`;
-          }
+        window.searchGraph = function() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const filteredNodes = window.allNodes.filter(node =>
+                node.name.toLowerCase().includes(query) ||
+                (node.nickname && node.nickname.toLowerCase().includes(query)) ||
+                node.name.split(' ').some(part => part.toLowerCase().includes(query))
+            );
+
+            const neighbors = new Set();
+            window.allLinks.forEach(link => {
+                if (filteredNodes.find(node => node.id === link.source.id) || filteredNodes.find(node => node.id === link.target.id)) {
+                    neighbors.add(link.source.id);
+                    neighbors.add(link.target.id);
+                }
+            });
+
+            const displayNodes = window.allNodes.filter(node => neighbors.has(node.id));
+            const displayLinks = window.allLinks.filter(link => neighbors.has(link.source.id) && neighbors.has(link.target.id));
+
+            window.createGraph({ nodes: displayNodes, links: displayLinks });
         }
-        html += "</ul>";
-        return html;
-      }
-
-      function toggleTree() {
-        const treeView = document.getElementById("treeView");
-        const toggleButton = document.getElementById("toggleTreeView");
-        if (treeView.style.display === "none") {
-          treeView.style.display = "block";
-          toggleButton.textContent = "Hide Files";
-        } else {
-          treeView.style.display = "none";
-          toggleButton.textContent = "Show Files";
-        }
-      }
-
-      async function loadFile(fileName) {
-        try {
-          const response = await fetch(`http://localhost:3000/ged/${fileName}`);
-          const gedcomData = await response.text();
-          const parsedData = window.parseGedcom(gedcomData); // Ensure global scope
-          window.allNodes = parsedData.nodes; // Ensure global scope
-          window.allLinks = parsedData.links; // Ensure global scope
-          window.createGraph(parsedData); // Ensure global scope
-        } catch (error) {
-          console.error("Error loading file:", error);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        fetchFiles();
-      });
     </script>
-  </body>
+</body>
 </html>

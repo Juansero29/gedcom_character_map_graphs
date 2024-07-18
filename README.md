@@ -1,12 +1,14 @@
 # GEDCOM CHARACTER MAP GRAPHS
 
+[Access Graph Tool](https://juansero29.github.io/gedcom_character_map_graphs/public/index.html)
+[GitHub Source Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
+
 - [GEDCOM CHARACTER MAP GRAPHS](#gedcom-character-map-graphs)
   - [Main Features](#main-features)
   - [Features I Want To Implement](#features-i-want-to-implement)
   - [Good to know](#good-to-know)
   - [How to contribute](#how-to-contribute)
   - [How To Launch Locally](#how-to-launch-locally)
-  - [How To Launch Online](#how-to-launch-online)
 
 This tool to helps me to keep up with the book `Three Body Problem` characters and main events chapter by chapter. But the tools is not only limited to this specific book.
 
@@ -15,6 +17,8 @@ This tool is able to read `.ged` files - which are generally used for genealogy,
 The GEDCOM files used in this tool are supposed to be kept simple and strictly referring to the GEDCOM standard (without the extra complex notations of Gramps or other genealogy software).
 
 The `index.html` file proposes a website in which one selects a `*.ged` file, and then the script `graph.js` will process it into a graph using `d3js` that can be searched and dragged around, among other features.
+
+[Source GitHub Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
 
 ## Main Features
 
@@ -51,7 +55,3 @@ Have fun!
 
 1. Execute `node server.js` on the root folder
 1. Go to [http://localhost:3000/](http://localhost:3000/)
-
-## How To Launch Online
-
-1. Go to [https://juansero29.github.io/gedcom_character_map_graphs/](https://juansero29.github.io/gedcom_character_map_graphs/)
