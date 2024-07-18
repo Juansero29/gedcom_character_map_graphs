@@ -56,8 +56,8 @@
 2 RELA Child
 1 ASSO @I0012@
 2 RELA Child
-
 0 @I0003@ INDI
+
 1 NAME Wenjie /Ye/
 1 SEX F
 1 BIRT
@@ -79,6 +79,16 @@
 2 DATE 2000
 2 PLAC Beijing, China
 2 NOTE Discusses cosmic microwave background with Wang Miao and provides him contact details of her former student.
+1 EVEN
+2 TYPE Conversation with Wang Miao
+2 DATE 2000
+2 PLAC Beijing, China
+2 NOTE Ye Wenjie shares her experiences during the Cultural Revolution and her time at Red Coast Base with Wang Miao.
+1 EVEN
+2 TYPE Work at Red Coast Base
+2 DATE 1970
+2 PLAC Red Coast Base, China
+2 NOTE Ye Wenjie starts working at the Transmission Department, later transferred to the Monitoring Department.
 1 ASSO @I0001@
 2 RELA Parent
 1 ASSO @I0002@
@@ -94,6 +104,12 @@
 1 ASSO @I0007@
 2 RELA Visitor
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 ASSO @I0004@
+2 RELA Supervisor
+2 NOTE Yang Weining explains the true nature of the Red Coast Project to Ye Wenjie.
+1 ASSO @I0008@
+2 RELA Supervisor
+2 NOTE Lei Zhicheng provides support and places trust in Ye Wenjie, gradually reveals parts of the Red Coast Project to her.
 1 FAMC @F0001@
 
 0 @I0004@ INDI
@@ -110,15 +126,24 @@
 2 CONT Physical traits: Stern expression. Mental traits: Authoritative, strict.
 2 CONT Role: Oversees political aspects at Red Coast Base.
 2 CONT Political views: Strongly supports the Communist Party.
-2 CONT Main decisive actions: Authorizes Ye Wenjie's recruitment to Red Coast Base.
+2 CONT Main decisive actions: Authorizes Ye Wenjie's recruitment to Red Coast Base, supports her despite initial suspicions.
 1 QUOT "Given the nature of this work, we can’t have someone who doesn’t want to be here."
 1 EVEN
 2 TYPE Supervision at Red Coast Base
 2 DATE 1970
 2 PLAC Red Coast Base, China
+1 EVEN
+2 TYPE Reveals aspects of Red Coast Project
+2 DATE 1970
+2 PLAC Red Coast Base, China
+2 NOTE Lei Zhicheng gradually reveals aspects of the Red Coast Project to Ye Wenjie and provides her with support.
 1 ASSO @I0003@
 2 RELA Supervisor
-2 NOTE Zhicheng Lei authorizes Ye Wenjie's recruitment to Red Coast Base.
+2 NOTE Lei Zhicheng supervises Ye Wenjie at Red Coast Base, gradually reveals parts of the Red Coast Project to her.
+1 ASSO @I0005@
+2 RELA Colleague
+2 NOTE Lei Zhicheng works alongside Yang Weining, dealing with the political and technical aspects of the Red Coast Project.
+
 
 0 @I0005@ INDI
 1 NAME Weining /Yang/
@@ -141,9 +166,20 @@
 2 TYPE Work at Red Coast Base
 2 DATE 1970
 2 PLAC Red Coast Base, China
+1 EVEN
+2 TYPE Explains Red Coast Project
+2 DATE 1970
+2 PLAC Red Coast Base, China
+2 NOTE Yang Weining explains the true nature of the Red Coast Project to Ye Wenjie.
 1 ASSO @I0001@
 2 RELA Former Student
 2 NOTE Yang Weining was once a student of Ye Zhetai.
+1 ASSO @I0003@
+2 RELA Colleague
+2 NOTE Ye Wenjie works under Yang Weining at Red Coast Base.
+1 ASSO @I0008@
+2 RELA Colleague
+2 NOTE Yang Weining works alongside Lei Zhicheng, dealing with the political and technical aspects of the Red Coast Project.
 
 0 @I0006@ INDI
 1 NAME Mulin /Bai/
@@ -226,6 +262,16 @@
 2 DATE 2000
 2 PLAC Beijing, China
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 EVEN
+2 TYPE Discussion with Shi Qiang
+2 DATE 2000
+2 PLAC China
+2 NOTE Wang Miao has a deep conversation with Shi Qiang, discussing the countdown and broader conspiracy against science.
+1 EVEN
+2 TYPE Observations in Three Body Game
+2 DATE 2000
+2 PLAC Three Body In-game World
+2 NOTE Wang Miao continues to play the Three Body game, interacting with Mozi and making astronomical observations.
 1 ASSO @I0009@
 2 RELA Colleague
 2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
@@ -247,9 +293,19 @@
 1 ASSO @I0022@
 2 RELA InGameCharacter
 2 NOTE Wang Miao interacts with Fu Xi in the Three Body game. Fu Xi offers mystical and philosophical insights into the game world.
+1 ASSO @I0023@
+2 RELA InGameCharacter
+2 NOTE Wang Miao interacts with Mozi in the Three Body game, who introduces him to a new model of the universe.
 1 ASSO @I0003@
 2 RELA Visitor
 2 NOTE Wang Miao visits Ye Wenjie to discuss her daughter Yang Dong and cosmic microwave background.
+1 ASSO @I0008@
+2 RELA Friend
+2 NOTE Shi Qiang provides Wang with emotional support and practical advice during his crisis.
+1 ASSO @I0010@
+2 RELA Colleague
+2 NOTE Interaction and information sharing related to broader military and scientific implications.
+
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
@@ -569,6 +625,22 @@
 2 DATE unknown
 2 PLAC unknown
 1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
+
+0 @I0024@ INDI
+1 NAME Mozi /Mozi/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Mozi is a fictional character in the Three Body game. He introduces Wang Miao to a new model of the universe and guides him through astronomical observations.
+2 CONT Physical traits: Slender, tall, dressed in a flowing black robe. Mental traits: Inventive, dedicated, knowledgeable.
+2 CONT Role: Guides Wang Miao in understanding a new model of the universe within the game. Helps Wang make astronomical observations.
+2 CONT Main decisive actions: Builds a complex model of the universe, predicts a four-year Stable Era, and explains the sun's behavior.
+1 QUOT "The universe is a machine."
+1 ASSO @I0007@
+2 RELA InGameCharacter
+2 NOTE Mozi interacts with Wang Miao in the Three Body game, introducing him to a new model of the universe and guiding his astronomical observations.
 
 
 0 @F0001@ FAM
