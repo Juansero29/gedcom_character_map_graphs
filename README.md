@@ -18,10 +18,6 @@ Table Of Contents:
 
 This tool to helps me to keep up with the book `Three Body Problem` characters and main events chapter by chapter. But the tools is not only limited to this specific book.
 
-
-
-
-
 This tool is able to read `.ged` files - which are generally used for genealogy, family trees, etc - and map out in a nice graph each person inside the file, along with all of its details, name, events, notes and quotes. The goal is to be able to easily craft Character Maps for literary works that have complex plots with character-webbing, and be able to keep up with the progress of each chapter accordingly.
 
 The GEDCOM files used in this tool are supposed to be kept simple and strictly referring to the GEDCOM standard (without the extra complex notations of Gramps or other genealogy software).
