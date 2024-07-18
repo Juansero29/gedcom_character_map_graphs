@@ -422,6 +422,16 @@ function createGraph(data) {
 }
 
 
+function formatName(name) {
+    const parts = name.split('/');
+    if (parts.length === 3) {
+        const firstName = parts[0].trim();
+        const surname = parts[1].toUpperCase();
+        const lastName = parts[2].trim();
+        return `${firstName} ${surname} ${lastName}`.trim();
+    }
+    return name.trim();
+}
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('gedcomFile').addEventListener('change', handleFile, false);
 
@@ -445,16 +455,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    function formatName(name) {
-        const parts = name.split('/');
-        if (parts.length === 3) {
-            const firstName = parts[0].trim();
-            const surname = parts[1].toUpperCase();
-            const lastName = parts[2].trim();
-            return `${firstName} ${surname} ${lastName}`.trim();
-        }
-        return name.trim();
-    }
 
  
     window.searchGraph = function() {
@@ -524,6 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Make parseGedcom and createGraph functions globally available if needed
+// Add these lines at the end of graph.js
 window.parseGedcom = parseGedcom;
 window.createGraph = createGraph;
+window.formatName = formatName;
