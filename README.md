@@ -43,3 +43,7 @@ Have fun!
 
 1. Execute `node server.js` on the root folder
 1. Go to [http://localhost:3000/](http://localhost:3000/)
+
+## How To Launch Online
+
+1. Go to
