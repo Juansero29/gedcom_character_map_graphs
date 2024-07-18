@@ -352,26 +352,7 @@ function createGraph(data) {
             .attr("transform", d => `translate(${d.x},${d.y})`);
     });
 
-    // Center the graph after nodes are initialized
-    simulation.on("end", () => {
-        centerGraph();
-    });
-
-    function centerGraph() {
-        const bounds = container.node().getBBox();
-        const fullWidth = bounds.width;
-        const fullHeight = bounds.height;
-        const midX = bounds.x + fullWidth / 2;
-        const midY = bounds.y + fullHeight / 2;
-
-        const offsetX = width / 2 - midX;
-        const offsetY = height / 2 - midY;
-
-        svg.transition().duration(750).call(
-            zoom.transform,
-            d3.zoomIdentity.translate(offsetX, offsetY).scale(1)
-        );
-    }
+    
 
     function focusNode(clickedNode) {
         const neighbors = new Set();
