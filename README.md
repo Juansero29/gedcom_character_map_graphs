@@ -1,7 +1,7 @@
 # GEDCOM CHARACTER MAP GRAPHS
 
-[Access Graph Tool](https://juansero29.github.io/gedcom_character_map_graphs/public/index.html)
-[GitHub Source Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
+- [Access Graph Tool](https://juansero29.github.io/gedcom_character_map_graphs/public/index.html)
+- [GitHub Source Repo](https://github.com/Juansero29/gedcom_character_map_graphs)
 
 - [GEDCOM CHARACTER MAP GRAPHS](#gedcom-character-map-graphs)
   - [Main Features](#main-features)
