@@ -581,8 +581,8 @@
 1 NAME Zhou /King/
 1 SEX M
 1 BIRT
-2 DATE Unknown
-2 PLAC Unknown
+2 DATE
+2 PLAC 
 1 OCCU In-game character
 1 NOTE King Zhou is a fictional character in the Three Body game. He is the ruler during the chaotic times and interacts with King Wen of Zhou and Wang Miao.
 2 CONT Physical traits: Regal, imposing. Mental traits: Authoritative, strategic.
@@ -622,8 +622,8 @@
 1 NAME Unknown /Male/
 1 SEX M
 1 BIRT
-2 DATE unknown
-2 PLAC unknown
+2 DATE
+2 PLAC 
 1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
 
 0 @I0024@ INDI

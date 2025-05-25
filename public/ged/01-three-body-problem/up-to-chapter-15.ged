@@ -56,8 +56,8 @@
 2 RELA Child
 1 ASSO @I0012@
 2 RELA Child
-0 @I0003@ INDI
 
+0 @I0003@ INDI
 1 NAME Wenjie /Ye/
 1 SEX F
 1 BIRT
@@ -89,6 +89,13 @@
 2 DATE 1970
 2 PLAC Red Coast Base, China
 2 NOTE Ye Wenjie starts working at the Transmission Department, later transferred to the Monitoring Department.
+1 NOTE Updates from Chapter 14:
+2 CONT - Ye reflects on the theory of "contact as symbol" and discusses sociological implications of extraterrestrial contact.
+2 CONT - She describes the decline and civilian repurposing of Red Coast Base.
+2 CONT - She was politically rehabilitated and returned to Tsinghua to teach astrophysics until retirement.
+2 CONT - Expresses conflicting feelings of insignificance and preciousness of life due to her experience at Red Coast.
+2 CONT - Married Yang Weining at the base; he died in an accident before the birth of their daughter, Yang Dong.
+2 CONT - Refuses to revisit Red Coast ruins due to old age and declining health.
 1 ASSO @I0001@
 2 RELA Parent
 1 ASSO @I0002@
@@ -119,8 +126,10 @@
 2 DATE 1920
 2 PLAC China
 1 DEAT
-2 DATE 1980
-2 PLAC China
+2 DATE 1980s
+2 PLAC Red Coast Base, China
+1 NOTE Update:
+2 CONT - Died in the same accident as Yang Weining at Red Coast Base.
 1 OCCU Political commissar at Red Coast Base
 1 NOTE Stern, authoritative figure at Red Coast Base.
 2 CONT Physical traits: Stern expression. Mental traits: Authoritative, strict.
@@ -152,8 +161,10 @@
 2 DATE 1935
 2 PLAC China
 1 DEAT
-2 DATE 1990
-2 PLAC China
+2 DATE 1980s
+2 PLAC Red Coast Base, China
+1 NOTE Death
+2 CONT - Died in an accident at Red Coast Base before the birth of his daughter Yang Dong.
 1 OCCU Chief engineer at Red Coast Base
 1 NOTE Talented engineer, practical, politically aware.
 2 CONT Physical traits: Intellectual, determined appearance. Mental traits: Idealistic, loyal, dedicated.
@@ -272,6 +283,22 @@
 2 DATE 2000
 2 PLAC Three Body In-game World
 2 NOTE Wang Miao continues to play the Three Body game, interacting with Mozi and making astronomical observations.
+1 EVEN
+2 TYPE Plays Three Body game
+2 DATE 2000
+2 PLAC China
+2 NOTE Logs in as "Copernicus", reveals the tri-solar structure of the in-game world, is nearly burned, escapes a tri-solar catastrophe. Successfully brings the civilization to its first leap, unlocking level two of the game.
+1 ASSO @I0024@
+2 RELA InGameCharacter
+
+1 ASSO @I0025@
+2 RELA InGameCharacter
+
+1 ASSO @I0026@
+2 RELA InGameCharacter
+
+1 ASSO @I0027@
+2 RELA InGameCharacter
 1 ASSO @I0009@
 2 RELA Colleague
 2 NOTE Ding Yi gave Wang Miao the address of Yang Dong's mother for investigation.
@@ -424,6 +451,9 @@
 2 RELA Friend
 2 NOTE Dong Yang and Yi Ding are friends through their mutual interest in theoretical physics.
 1 NOTE Daughter of Ye Wenjie and an unknown male. Involved in complex scientific research leading to a tragic end.
+1 ASSO @I0005@
+2 RELA Father
+2 NOTE Confirmed as daughter of Ye Wenjie and Yang Weining.
 1 FAMC @F0003@
 
 0 @I0012@ INDI
@@ -618,14 +648,6 @@
 2 RELA Advisor
 2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
-0 @I0023@ INDI
-1 NAME Unknown /Male/
-1 SEX M
-1 BIRT
-2 DATE
-2 PLAC
-1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
-
 0 @I0024@ INDI
 1 NAME Mozi /Mozi/
 1 SEX M
@@ -642,6 +664,57 @@
 2 RELA InGameCharacter
 2 NOTE Mozi interacts with Wang Miao in the Three Body game, introducing him to a new model of the universe and guiding his astronomical observations.
 
+0 @I0024@ INDI
+1 NAME Gregory /Pope/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Pope Gregory is a character in the third civilization Wang Miao enters. He presides over a council of classical and medieval figures and orders Wang's burning when he presents the tri-solar theory.
+2 CONT Role: Leader of the in-game medieval civilization in Civilization 183.
+2 CONT Traits: Authoritarian, traditionalist.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+
+0 @I0025@ INDI
+1 NAME Aristotle /
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Classical philosopher reimagined as a member of the in-game medieval scientific council.
+2 CONT Role: Skeptic of Copernicus's tri-solar theory.
+2 CONT Traits: Rationalist, yet resistant to new ideas.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+
+0 @I0026@ INDI
+1 NAME Galileo /
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Renaissance scientist in the Three Body Game. Initially supports Wang Miao's scientific approach but ultimately joins in his condemnation.
+2 CONT Role: Representative of empirical science in Civilization 183.
+2 CONT Traits: Arrogant, condescending, eventually reactionary.
+1 ASSO @I0007@
+2 RELA InGameCharacter
+
+0 @I0027@ INDI
+1 NAME Leonardo /da Vinci/
+1 SEX M
+1 BIRT
+2 DATE 2002
+2 PLAC Three Body In-game World
+1 OCCU In-game character
+1 NOTE Visionary polymath character. Shows some openness to Wang Miao’s theory and remains calculating while others act.
+2 CONT Role: Marginally supportive character during Wang Miao’s trial.
+2 CONT Traits: Curious, thoughtful, speculative.
+1 ASSO @I0007@
+2 RELA InGameCharacter
 
 0 @F0001@ FAM
 1 HUSB @I0001@
@@ -655,10 +728,9 @@
 1 CHIL @I0018@
 
 0 @F0003@ FAM
-1 HUSB @I0023@
+1 HUSB @I0005@
 1 WIFE @I0003@
 1 CHIL @I0011@
-
 
 
 0 TRLR

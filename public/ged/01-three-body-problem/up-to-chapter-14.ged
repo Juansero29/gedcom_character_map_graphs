@@ -89,6 +89,13 @@
 2 DATE 1970
 2 PLAC Red Coast Base, China
 2 NOTE Ye Wenjie starts working at the Transmission Department, later transferred to the Monitoring Department.
+1 NOTE Updates from Chapter 14:
+2 CONT - Ye reflects on the theory of "contact as symbol" and discusses sociological implications of extraterrestrial contact.
+2 CONT - She describes the decline and civilian repurposing of Red Coast Base.
+2 CONT - She was politically rehabilitated and returned to Tsinghua to teach astrophysics until retirement.
+2 CONT - Expresses conflicting feelings of insignificance and preciousness of life due to her experience at Red Coast.
+2 CONT - Married Yang Weining at the base; he died in an accident before the birth of their daughter, Yang Dong.
+2 CONT - Refuses to revisit Red Coast ruins due to old age and declining health.
 1 ASSO @I0001@
 2 RELA Parent
 1 ASSO @I0002@
@@ -119,8 +126,10 @@
 2 DATE 1920
 2 PLAC China
 1 DEAT
-2 DATE 1980
-2 PLAC China
+2 DATE 1980s
+2 PLAC Red Coast Base, China
+1 NOTE Update:
+2 CONT - Died in the same accident as Yang Weining at Red Coast Base.
 1 OCCU Political commissar at Red Coast Base
 1 NOTE Stern, authoritative figure at Red Coast Base.
 2 CONT Physical traits: Stern expression. Mental traits: Authoritative, strict.
@@ -152,8 +161,10 @@
 2 DATE 1935
 2 PLAC China
 1 DEAT
-2 DATE 1990
-2 PLAC China
+2 DATE 1980s
+2 PLAC Red Coast Base, China
+1 NOTE Death
+2 CONT - Died in an accident at Red Coast Base before the birth of his daughter Yang Dong.
 1 OCCU Chief engineer at Red Coast Base
 1 NOTE Talented engineer, practical, politically aware.
 2 CONT Physical traits: Intellectual, determined appearance. Mental traits: Idealistic, loyal, dedicated.
@@ -424,6 +435,9 @@
 2 RELA Friend
 2 NOTE Dong Yang and Yi Ding are friends through their mutual interest in theoretical physics.
 1 NOTE Daughter of Ye Wenjie and an unknown male. Involved in complex scientific research leading to a tragic end.
+1 ASSO @I0005@
+2 RELA Father
+2 NOTE Confirmed as daughter of Ye Wenjie and Yang Weining.
 1 FAMC @F0003@
 
 0 @I0012@ INDI
@@ -618,14 +632,6 @@
 2 RELA Advisor
 2 NOTE Fu Xi advises King Zhou on the behavior of the sun god and the survival strategies during chaotic eras.
 
-0 @I0023@ INDI
-1 NAME Unknown /Male/
-1 SEX M
-1 BIRT
-2 DATE
-2 PLAC
-1 NOTE Partner of Ye Wenjie and father of Yang Dong. Details not specified in the narrative.
-
 0 @I0024@ INDI
 1 NAME Mozi /Mozi/
 1 SEX M
@@ -655,10 +661,9 @@
 1 CHIL @I0018@
 
 0 @F0003@ FAM
-1 HUSB @I0023@
+1 HUSB @I0005@
 1 WIFE @I0003@
 1 CHIL @I0011@
-
 
 
 0 TRLR

@@ -468,47 +468,7 @@ function createGraph(data) {
     node.attr("transform", (d) => `translate(${d.x},${d.y})`);
   });
 
-  function focusNode(clickedNode) {
-    const neighbors = new Set();
-    data.links.forEach((link) => {
-      if (
-        link.source.id === clickedNode.id ||
-        link.target.id === clickedNode.id
-      ) {
-        neighbors.add(link.source.id);
-        neighbors.add(link.target.id);
-      }
-    });
-
-    node
-      .transition()
-      .duration(500)
-      .style("opacity", (d) =>
-        neighbors.has(d.id) || d.id === clickedNode.id ? 1 : 0
-      );
-
-    link
-      .transition()
-      .duration(500)
-      .style("opacity", (d) =>
-        d.source.id === clickedNode.id || d.target.id === clickedNode.id ? 1 : 0
-      );
-
-    // Add an 'X' button over the focused node
-    const closeButton = container
-      .append("text")
-      .attr("x", clickedNode.x + 15)
-      .attr("y", clickedNode.y - 15)
-      .attr("class", "close-button")
-      .text("X")
-      .style("font-size", "24px")
-      .style("cursor", "pointer")
-      .style("fill", "red")
-      .style("font-weight", "bold")
-      .on("click", () => {
-        removeFocus();
-      });
-  }
+  
 
   function removeFocus() {
     node.transition().duration(500).style("opacity", 1);
@@ -542,6 +502,45 @@ function createGraph(data) {
       .on("drag", dragged)
       .on("end", dragended);
   }
+}
+
+function focusNode(clickedNode) {
+    const neighbors = new Set();
+    allLinks.forEach(link => {
+        if (link.source.id === clickedNode.id || link.target.id === clickedNode.id) {
+            neighbors.add(link.source.id);
+            neighbors.add(link.target.id);
+        }
+    });
+
+    d3.selectAll(".node").transition()
+        .duration(500)
+        .style("opacity", d => (neighbors.has(d.id) || d.id === clickedNode.id ? 1 : 0.1));
+
+    d3.selectAll(".link").transition()
+        .duration(500)
+        .style("opacity", d => (d.source.id === clickedNode.id || d.target.id === clickedNode.id ? 1 : 0.1));
+
+    // Populate the modal with node details
+    const details = `
+        <h2>${clickedNode.name}</h2>
+        ${clickedNode.nickname ? `<p><strong>Nickname:</strong> ${clickedNode.nickname}</p>` : ''}
+        ${clickedNode.email ? `<p><strong>Email:</strong> ${clickedNode.email}</p>` : ''}
+        <p><strong>Sex:</strong> ${clickedNode.sex}</p>
+        <p><strong>Occupation:</strong> ${clickedNode.occupation || "unknown"}</p>
+        <p><strong>Birth:</strong> ${clickedNode.birth ? `${clickedNode.birth.date || "unknown date"} at ${clickedNode.birth.place || "unknown place"}` : "unknown"}</p>
+        ${clickedNode.death && clickedNode.death.status ? `<p><strong>Death:</strong> ${clickedNode.death.date || "unknown date"} at ${clickedNode.death.place || "unknown place"}</p>` : ''}
+        <strong>Notes:</strong><ul>${clickedNode.notes.map(n => `<li>${n}</li>`).join("")}</ul>
+        <strong>Events:</strong><ul>${clickedNode.events.map(e => `<li>${e.type || 'unknown'}: ${e.value ? e.value + ' - ' : ''}${e.date || 'unknown date'}${e.place ? ' at ' + e.place : ''}</li>`).join("")}</ul>
+        <strong>Quotes:</strong><ul>${clickedNode.quotes.map(q => `<li>${q}</li>`).join("")}</ul>
+    `;
+    document.getElementById("modalDetails").innerHTML = details;
+    document.getElementById("characterModal").style.display = "flex";
+
+    // Reset slider and background
+    const modal = document.getElementById("characterModal");
+    document.getElementById("transparencySlider").value = 100;
+    modal.style.backgroundColor = "rgba(255, 255, 255, 1)";
 }
 
 function formatName(name) {
@@ -649,9 +648,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+	document.getElementById("closeModal").onclick = function () {
+    document.getElementById("characterModal").style.display = "none";
+
+    d3.selectAll(".node").transition().duration(500).style("opacity", 1);
+    d3.selectAll(".link").transition().duration(500).style("opacity", 1);
+};
+	
+document.getElementById("transparencySlider").oninput = function () {
+    const value = this.value;
+    document.getElementById("characterModal").style.backgroundColor = `rgba(255, 255, 255, ${value / 100})`;
+};
+	
   document.addEventListener("DOMContentLoaded", () => {
     fetchFiles();
   });
+	
 });
 
 // Add these lines at the end of graph.js
