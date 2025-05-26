@@ -811,6 +811,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.searchGraph = function () {
     const query = document.getElementById("searchBox").value.toLowerCase();
+
     const filteredNodes = window.allNodes.filter(
       (node) =>
         node.name.toLowerCase().includes(query) ||
@@ -818,25 +819,44 @@ document.addEventListener("DOMContentLoaded", function () {
         node.name.split(" ").some((part) => part.toLowerCase().includes(query))
     );
 
+    const filteredNodeIds = new Set(filteredNodes.map((n) => n.id));
     const neighbors = new Set();
+
     window.allLinks.forEach((link) => {
-      if (
-        filteredNodes.find((node) => node.id === link.source.id) ||
-        filteredNodes.find((node) => node.id === link.target.id)
-      ) {
-        neighbors.add(link.source.id);
-        neighbors.add(link.target.id);
+      const sourceId =
+        typeof link.source === "object" ? link.source.id : link.source;
+      const targetId =
+        typeof link.target === "object" ? link.target.id : link.target;
+
+      if (filteredNodeIds.has(sourceId) || filteredNodeIds.has(targetId)) {
+        neighbors.add(sourceId);
+        neighbors.add(targetId);
       }
     });
 
     const displayNodes = window.allNodes.filter((node) =>
       neighbors.has(node.id)
     );
-    const displayLinks = window.allLinks.filter(
-      (link) => neighbors.has(link.source.id) && neighbors.has(link.target.id)
-    );
+    const displayLinks = window.allLinks.filter((link) => {
+      const sourceId =
+        typeof link.source === "object" ? link.source.id : link.source;
+      const targetId =
+        typeof link.target === "object" ? link.target.id : link.target;
+      return neighbors.has(sourceId) && neighbors.has(targetId);
+    });
 
-    createGraph({ nodes: displayNodes, links: displayLinks });
+    createGraph({
+      nodes: displayNodes.map((n) => ({ ...n })),
+      links: displayLinks.map((l) => ({ ...l })),
+    });
+
+    if (query === "") {
+      createGraph({
+        nodes: window.allNodes.map((n) => ({ ...n })),
+        links: window.allLinks.map((l) => ({ ...l })),
+      });
+      return;
+    }
   };
 
   async function fetchFiles() {
