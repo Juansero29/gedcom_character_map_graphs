@@ -1,6 +1,21 @@
 let allNodes = [];
 let allLinks = [];
 let simulation;
+let lastFocusedNode = null;
+let lastFocusedLink = null;
+
+// Create tooltip for links
+const linkTooltip = d3
+  .select("body")
+  .append("div")
+  .attr("class", "link-tooltip")
+  .style("position", "absolute")
+  .style("background", "white")
+  .style("border", "1px solid #ccc")
+  .style("padding", "10px")
+  .style("pointer-events", "none")
+  .style("display", "none")
+  .style("z-index", "9999");
 
 function parseGedcom(data) {
   const lines = data.split("\n");
@@ -284,7 +299,7 @@ function createGraph(data) {
     (l) => nodeIds.has(l.source) && nodeIds.has(l.target)
   );
 
-    // ✅ FIX: update global references
+  // ✅ FIX: update global references
   allNodes = data.nodes;
   allLinks = data.links;
 
@@ -406,6 +421,126 @@ function createGraph(data) {
 
     node.attr("transform", (d) => `translate(${d.x},${d.y})`);
   });
+
+  link
+    .on("mouseover", (event, d) => {
+      const source =
+        typeof d.source === "object"
+          ? d.source
+          : allNodes.find((n) => n.id === d.source);
+      const target =
+        typeof d.target === "object"
+          ? d.target
+          : allNodes.find((n) => n.id === d.target);
+      const relation = d.relation || "related to";
+
+      linkTooltip.style("display", "block").html(`
+          ${source.name} → ${target.name} : ${relation}<br>
+          ${target.name} → ${source.name} : ${relation}
+        `);
+    })
+    .on("mousemove", (event) => {
+      linkTooltip
+        .style("top", event.pageY + 10 + "px")
+        .style("left", event.pageX + 10 + "px");
+    })
+    .on("mouseout", () => {
+      linkTooltip.style("display", "none");
+    });
+}
+
+function enrichLinkTooltips() {
+  const tooltip = d3.select(".tooltip");
+
+  d3.selectAll(".link")
+    .on("mouseover", function (event, d) {
+      const sourceId = typeof d.source === "object" ? d.source.id : d.source;
+      const targetId = typeof d.target === "object" ? d.target.id : d.target;
+      const source = allNodes.find((n) => n.id === sourceId);
+      const target = allNodes.find((n) => n.id === targetId);
+
+      const sourceToTarget = d.relation
+        ? `${source.name} → ${target.name} : ${d.relation}`
+        : "";
+      const reverseLink = allLinks.find(
+        (l) =>
+          (typeof l.source === "object" ? l.source.id : l.source) ===
+            targetId &&
+          (typeof l.target === "object" ? l.target.id : l.target) === sourceId
+      );
+      const targetToSource = reverseLink?.relation
+        ? `${target.name} → ${source.name} : ${reverseLink.relation}`
+        : "";
+
+      let notes = "";
+      if (d.notes?.length) {
+        notes = `<br><ul>${d.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`;
+      }
+
+      tooltip
+        .style("display", "block")
+        .html(
+          `<strong>${sourceToTarget}</strong><br><strong>${targetToSource}</strong>${notes}`
+        );
+    })
+    .on("mousemove", function (event) {
+      tooltip
+        .style("top", event.pageY + 10 + "px")
+        .style("left", event.pageX + 10 + "px");
+    })
+    .on("mouseout", function () {
+      tooltip.style("display", "none");
+    })
+    .on("click", function (event, d) {
+      lastFocusedLink = d;
+      lastFocusedNode = null; // Clear any previous node
+
+      event.stopPropagation(); // prevent body click from firing
+      const sourceId = typeof d.source === "object" ? d.source.id : d.source;
+      const targetId = typeof d.target === "object" ? d.target.id : d.target;
+      const source = allNodes.find((n) => n.id === sourceId);
+      const target = allNodes.find((n) => n.id === targetId);
+
+      const reverseLink = allLinks.find(
+        (l) =>
+          (typeof l.source === "object" ? l.source.id : l.source) ===
+            targetId &&
+          (typeof l.target === "object" ? l.target.id : l.target) === sourceId
+      );
+
+      showModalContentForLink(
+        source,
+        target,
+        d.relation,
+        reverseLink?.relation,
+        d.notes || []
+      );
+
+      // Highlight source and target nodes
+      const idsToHighlight = new Set([sourceId, targetId]);
+      d3.selectAll(".node").each(function (n) {
+        const visible = idsToHighlight.has(n.id);
+        d3.select(this)
+          .transition()
+          .duration(300)
+          .style("opacity", visible ? 1 : 0.1);
+        d3.select(this)
+          .selectAll("circle, text")
+          .transition()
+          .duration(300)
+          .style("opacity", visible ? 1 : 0.1);
+      });
+
+      d3.selectAll(".link").each(function (l) {
+        const sid = typeof l.source === "object" ? l.source.id : l.source;
+        const tid = typeof l.target === "object" ? l.target.id : l.target;
+        const isVisible = idsToHighlight.has(sid) && idsToHighlight.has(tid);
+        d3.select(this)
+          .transition()
+          .duration(300)
+          .style("opacity", isVisible ? 1 : 0.1);
+      });
+    });
 }
 
 function drag(sim) {
@@ -428,6 +563,9 @@ function drag(sim) {
 }
 
 function focusNode(clickedNode) {
+  lastFocusedNode = clickedNode;
+  lastFocusedLink = null; // Clear any previous link
+
   const clickedId = clickedNode.id;
   console.log("🔍 Node clicked:", clickedId);
 
@@ -558,9 +696,72 @@ function closeModal() {
   svg.style.width = "100%";
   svg.style.height = "100%";
 
-  d3.selectAll(".node").transition().duration(300).style("opacity", 1);
+  // Only reset if something was focused
+  if (lastFocusedNode || lastFocusedLink) {
+    d3.selectAll(".node")
+      .transition()
+      .duration(300)
+      .style("opacity", 1);
 
-  d3.selectAll(".link").transition().duration(300).style("opacity", 1);
+    d3.selectAll(".node circle")
+      .transition()
+      .duration(300)
+      .attr("fill", (d) => (d.sex === "M" ? "blue" : "pink"))
+      .style("opacity", 1);
+
+    d3.selectAll(".node text")
+      .transition()
+      .duration(300)
+      .style("opacity", 1);
+
+    d3.selectAll(".link")
+      .transition()
+      .duration(300)
+      .style("opacity", 1);
+  }
+
+  lastFocusedNode = null;
+  lastFocusedLink = null;
+}
+
+
+
+function showModalContentForLink(
+  source,
+  target,
+  relationA,
+  relationB,
+  notes = []
+) {
+  const modal = document.getElementById("modalContainer");
+  const content = document.getElementById("modalContent");
+  modal.classList.remove("hidden");
+
+  modal.style.width = "100vw";
+  modal.style.height = "100vh";
+
+  const section = (person, relation) => `
+    <div style="flex: 1; padding: 1em; border-right: 1px solid #ccc;">
+      <h2>${person.name}</h2>
+      <p><strong>Sex:</strong> ${person.sex}</p>
+      <p><strong>Occupation:</strong> ${person.occupation || "Unknown"}</p>
+      <p><strong>Relation:</strong> ${relation || "Unknown"}</p>
+    </div>`;
+
+  content.innerHTML = `
+    <div style="display: flex; height: 90%;">
+      ${section(source, relationA)}
+      ${section(target, relationB)}
+    </div>
+    <div style="padding: 1em;">
+      <h3>Notes</h3>
+      <ul>${
+        (notes || []).map((n) => `<li>${n}</li>`).join("") ||
+        "<li>No notes.</li>"
+      }</ul>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  `;
 }
 
 function formatName(name) {
@@ -596,6 +797,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }));
 
       createGraph(parsedData);
+      enrichLinkTooltips();
     };
     reader.readAsText(file);
   }
