@@ -494,13 +494,10 @@ function enrichLinkTooltips() {
     .on("click", function (event, d) {
       lastFocusedLink = d;
       lastFocusedNode = null; // Clear any previous node
-
-      event.stopPropagation(); // prevent body click from firing
       const sourceId = typeof d.source === "object" ? d.source.id : d.source;
       const targetId = typeof d.target === "object" ? d.target.id : d.target;
       const source = allNodes.find((n) => n.id === sourceId);
       const target = allNodes.find((n) => n.id === targetId);
-
       const reverseLink = allLinks.find(
         (l) =>
           (typeof l.source === "object" ? l.source.id : l.source) ===
@@ -508,15 +505,25 @@ function enrichLinkTooltips() {
           (typeof l.target === "object" ? l.target.id : l.target) === sourceId
       );
 
-      showModalContentForLink(
+      // Relationship details
+      const relA = `${source.name} → ${target.name} : ${d.relation || "?"}`;
+      const relB = `${target.name} → ${source.name} : ${
+        reverseLink?.relation || "?"
+      }`;
+
+      const notes = d.notes?.length
+        ? `<ul>${d.notes.map((n) => `<li>${n}</li>`).join("")}</ul>`
+        : "";
+
+      showModalContent(
         source,
         target,
-        d.relation,
-        reverseLink?.relation,
-        d.notes || []
+        `${source.name} → ${target.name} : ${d.relation || "?"}<br>${
+          target.name
+        } → ${source.name} : ${reverseLink?.relation || "?"}${notes}`
       );
 
-      // Highlight source and target nodes
+      // Optional highlight logic
       const idsToHighlight = new Set([sourceId, targetId]);
       d3.selectAll(".node").each(function (n) {
         const visible = idsToHighlight.has(n.id);
@@ -531,16 +538,48 @@ function enrichLinkTooltips() {
           .style("opacity", visible ? 1 : 0.1);
       });
 
-      d3.selectAll(".link").each(function (l) {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        const isVisible = idsToHighlight.has(sid) && idsToHighlight.has(tid);
-        d3.select(this)
-          .transition()
-          .duration(300)
-          .style("opacity", isVisible ? 1 : 0.1);
-      });
+      event.stopPropagation();
     });
+}
+
+function renderPersonProfile(person) {
+  return `
+    <h2>${person.name}</h2>
+    ${
+      person.nickname
+        ? `<p><strong>Nickname:</strong> ${person.nickname}</p>`
+        : ""
+    }
+    ${person.email ? `<p><strong>Email:</strong> ${person.email}</p>` : ""}
+    <p><strong>Sex:</strong> ${person.sex}</p>
+    <p><strong>Occupation:</strong> ${person.occupation || "Unknown"}</p>
+    <p><strong>Birth:</strong> ${person.birth?.date || "?"} at ${
+    person.birth?.place || "?"
+  }</p>
+    ${
+      person.death?.status
+        ? `<p><strong>Death:</strong> ${person.death.date || "?"} at ${
+            person.death.place || "?"
+          }</p>`
+        : ""
+    }
+
+    <h3>Notes</h3>
+    <ul>${person.notes.map((note) => `<li>${note}</li>`).join("")}</ul>
+
+    <h3>Events</h3>
+    <ul>${person.events
+      .map(
+        (e) =>
+          `<li>${e.type || "Event"}: ${e.value || ""} - ${e.date || "?"}${
+            e.place ? " at " + e.place : ""
+          }</li>`
+      )
+      .join("")}</ul>
+
+    <h3>Quotes</h3>
+    <ul>${person.quotes.map((q) => `<li>${q}</li>`).join("")}</ul>
+  `;
 }
 
 function drag(sim) {
@@ -629,79 +668,55 @@ function focusNode(clickedNode) {
   showModalContent(clickedNode);
 }
 
-function showModalContent(node) {
+function showModalContent(nodeA, nodeB = null, relationInfo = null) {
   const modal = document.getElementById("modalContainer");
   const content = document.getElementById("modalContent");
-  const svg = document.querySelector("svg");
-  const isMobile = window.innerWidth < 768;
-
-  // Adjust layout for modal and graph
-  if (isMobile) {
-    modal.style.width = "100vw";
-    modal.style.height = "34vh";
-    svg.style.width = "100vw";
-    svg.style.height = "66vh";
-  } else {
-    modal.style.width = "50vw";
-    modal.style.height = "100vh";
-    svg.style.width = "50vw";
-    svg.style.height = "100vh";
-  }
-
   modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
 
-  content.innerHTML = `
-    <h2>${node.name}</h2>
-    ${node.nickname ? `<p><strong>Nickname:</strong> ${node.nickname}</p>` : ""}
-    ${node.email ? `<p><strong>Email:</strong> ${node.email}</p>` : ""}
-    <p><strong>Sex:</strong> ${node.sex}</p>
-    <p><strong>Occupation:</strong> ${
-      node.occupation || "unknown occupation"
-    }</p>
-    <p><strong>Birth:</strong> ${node.birth?.date || "unknown date"} at ${
-    node.birth?.place || "unknown place"
-  }</p>
-    ${
-      node.death?.status
-        ? `<p><strong>Death:</strong> ${node.death.date || "unknown date"} at ${
-            node.death.place || "unknown place"
-          }</p>`
-        : ""
-    }
-    
-    <h3>Notes</h3>
-    <ul>${node.notes.map((note) => `<li>${note}</li>`).join("")}</ul>
+  const isMobile = window.innerWidth < 768;
+  modal.style.width = "100vw";
+  modal.style.height = "100vh";
 
-    <h3>Events</h3>
-    <ul>${node.events
-      .map(
-        (e) =>
-          `<li>${e.type || "Event"}: ${e.value || ""} - ${e.date || "unknown"}${
-            e.place ? " at " + e.place : ""
-          }</li>`
-      )
-      .join("")}</ul>
+  const svg = document.querySelector("svg");
+  svg.style.width = isMobile ? "100vw" : "50vw";
+  svg.style.height = "100vh";
 
-    <h3>Quotes</h3>
-    <ul>${node.quotes.map((q) => `<li>${q}</li>`).join("")}</ul>
-
-    <button onclick="closeModal()">Close</button>
-  `;
+  if (nodeB) {
+    // Show two-person relationship view
+    content.classList.add("modal-flex");
+    content.innerHTML = `
+      <div class="profile-pane">
+        <div class="relation-header">
+          ${relationInfo}<br>
+        </div>
+        ${renderPersonProfile(nodeA)}
+      </div>
+      <div class="profile-pane">
+        ${renderPersonProfile(nodeB)}
+      </div>
+    `;
+  } else {
+    // Show single profile view
+    content.classList.remove("modal-flex");
+    content.innerHTML = `
+      <div class="profile-pane">
+        ${renderPersonProfile(nodeA)}
+      </div>
+    `;
+  }
 }
 
 function closeModal() {
   document.getElementById("modalContainer").classList.add("hidden");
-
+  document.body.style.overflow = "auto";
   const svg = document.querySelector("svg");
   svg.style.width = "100%";
   svg.style.height = "100%";
 
   // Only reset if something was focused
   if (lastFocusedNode || lastFocusedLink) {
-    d3.selectAll(".node")
-      .transition()
-      .duration(300)
-      .style("opacity", 1);
+    d3.selectAll(".node").transition().duration(300).style("opacity", 1);
 
     d3.selectAll(".node circle")
       .transition()
@@ -709,22 +724,14 @@ function closeModal() {
       .attr("fill", (d) => (d.sex === "M" ? "blue" : "pink"))
       .style("opacity", 1);
 
-    d3.selectAll(".node text")
-      .transition()
-      .duration(300)
-      .style("opacity", 1);
+    d3.selectAll(".node text").transition().duration(300).style("opacity", 1);
 
-    d3.selectAll(".link")
-      .transition()
-      .duration(300)
-      .style("opacity", 1);
+    d3.selectAll(".link").transition().duration(300).style("opacity", 1);
   }
 
   lastFocusedNode = null;
   lastFocusedLink = null;
 }
-
-
 
 function showModalContentForLink(
   source,

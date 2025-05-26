@@ -183,6 +183,44 @@
         border-radius: 4px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       }
+
+      #modalContainer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        background: white;
+        z-index: 9999;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .modal-flex {
+        display: flex;
+        flex-direction: row;
+        height: calc(100% - 40px); /* Leave space for close button */
+        width: 100%;
+      }
+
+      .profile-pane {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        border-right: 1px solid #ccc;
+      }
+
+      .profile-pane:last-child {
+        border-right: none;
+      }
+
+      .relation-header {
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
     </style>
   </head>
   <body>
@@ -213,6 +251,7 @@
       </div>
       <div id="modalContainer" class="hidden">
         <div id="modalContent"></div>
+        <button onclick="closeModal()">Close</button>
       </div>
     </div>
 
