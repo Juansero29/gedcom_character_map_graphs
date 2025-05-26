@@ -4,14 +4,20 @@ let simulation;
 
 function parseGedcom(data) {
   const lines = data.split("\n");
-  let individuals = {};
-  let families = {};
-  let notes = {};
+  const individuals = {};
+  const families = {};
+  const notes = {};
+
   let currentIndividual = null;
   let currentFamily = null;
   let currentNote = null;
   let currentField = null;
-  let lastTag = null;
+  let currentContext = null;
+  let currentEvent = null;
+
+  function formatName(name) {
+    return name.replace(/\//g, ""); // Simple fallback
+  }
 
   lines.forEach((line) => {
     const parts = line.trim().split(" ");
@@ -19,214 +25,189 @@ function parseGedcom(data) {
     const tag = parts[1];
     const value = parts.slice(2).join(" ");
 
-    if (level === "0" && tag.startsWith("@I")) {
-      currentIndividual = {
-        id: tag,
-        notes: [],
-        events: [],
-        associations: [],
-        quotes: [],
-        families: [],
-      };
-      individuals[tag] = currentIndividual;
-      currentFamily = null;
-      currentNote = null;
+    if (level === "0") {
       currentField = null;
-      lastTag = null;
-    } else if (level === "0" && tag.startsWith("@F")) {
-      currentFamily = { id: tag, husband: null, wife: null, children: [] };
-      families[tag] = currentFamily;
-      currentIndividual = null;
-      currentNote = null;
-      currentField = null;
-      lastTag = null;
-    } else if (level === "0" && tag.startsWith("@N")) {
-      currentNote = { id: tag, text: [] };
-      notes[tag] = currentNote;
-      currentIndividual = null;
-      currentFamily = null;
-      currentField = currentNote.text;
-      lastTag = null;
-    } else if (currentIndividual || currentFamily || currentNote) {
-      if (tag === "CONC") {
-        if (currentField) {
-          currentField[currentField.length - 1] += value;
-        }
-      } else if (tag === "CONT") {
-        if (currentField) {
-          currentField.push(value);
-        }
-      } else {
-        if (currentIndividual) {
-          if (level === "1") {
-            if (tag === "NAME") {
+      currentContext = null;
+      currentEvent = null;
+
+      if (tag.startsWith("@I")) {
+        currentIndividual = {
+          id: tag,
+          name: "",
+          sex: null,
+          birth: null,
+          death: null,
+          occupation: null,
+          notes: [],
+          quotes: [],
+          events: [],
+          associations: [],
+          familiesAsChild: [],
+          familiesAsSpouse: [],
+        };
+        individuals[tag] = currentIndividual;
+        currentFamily = null;
+        currentNote = null;
+      } else if (tag.startsWith("@F")) {
+        currentFamily = {
+          id: tag,
+          husband: null,
+          wife: null,
+          children: [],
+        };
+        families[tag] = currentFamily;
+        currentIndividual = null;
+        currentNote = null;
+      } else if (tag.startsWith("@N")) {
+        currentNote = { id: tag, text: [] };
+        notes[tag] = currentNote;
+        currentField = currentNote.text;
+        currentIndividual = null;
+        currentFamily = null;
+      }
+    } else {
+      if (tag === "CONC" && currentField) {
+        currentField[currentField.length - 1] += value;
+      } else if (tag === "CONT" && currentField) {
+        currentField.push(value);
+      } else if (currentIndividual) {
+        if (level === "1") {
+          currentEvent = null;
+          currentContext = null;
+
+          switch (tag) {
+            case "NAME":
               currentIndividual.name = formatName(value);
-              currentField = "name";
-            } else if (tag === "NOTE") {
-              currentField = currentIndividual.notes;
+              currentContext = "name";
+              currentField = null;
+              break;
+            case "NOTE":
               currentIndividual.notes.push(value);
-            } else if (tag === "ASSO") {
+              currentContext = "note";
+              currentField = currentIndividual.notes;
+              break;
+            case "QUOT":
+              currentIndividual.quotes.push(value);
+              currentContext = "quote";
+              currentField = currentIndividual.quotes;
+              break;
+            case "ASSO":
               currentIndividual.associations.push({
                 person: value,
                 relation: null,
                 notes: [],
               });
-              currentField = "asso";
-            } else if (tag === "EVEN") {
-              currentIndividual.events.push({
+              currentContext = "association";
+              break;
+            case "EVEN":
+              currentEvent = {
                 value: value,
                 type: null,
                 date: null,
                 place: null,
-              });
-              currentField = "event";
-            } else if (tag === "QUOT") {
-              currentField = currentIndividual.quotes;
-              currentIndividual.quotes.push(value);
-            } else if (tag === "SEX") {
+              };
+              currentIndividual.events.push(currentEvent);
+              currentContext = "event";
+              break;
+            case "SEX":
               currentIndividual.sex = value;
-              currentField = null;
-            } else if (tag === "BIRT") {
+              break;
+            case "BIRT":
               currentIndividual.birth = { date: null, place: null };
-              currentField = null;
-            } else if (tag === "DEAT") {
+              currentEvent = currentIndividual.birth;
+              currentContext = "birth";
+              break;
+            case "DEAT":
               currentIndividual.death = {
                 date: null,
                 place: null,
                 status: true,
               };
-              currentField = null;
-            } else if (tag === "OCCU") {
+              currentEvent = currentIndividual.death;
+              currentContext = "death";
+              break;
+            case "OCCU":
               currentIndividual.occupation = value;
-              currentField = null;
-            } else if (tag === "FAMC") {
-              currentIndividual.families.push(value);
-              currentField = null;
-            } else {
-              currentField = null;
-            }
-            lastTag = tag;
-          } else if (level === "2") {
-            if (currentField === "name") {
-              if (tag === "NICK") {
-                currentIndividual.nickname = value;
-              }
-              if (tag === "EMAIL") {
-                currentIndividual.email = value;
-              }
-            }
-            if (currentField === "asso") {
-              if (tag === "RELA") {
-                currentIndividual.associations[
-                  currentIndividual.associations.length - 1
-                ].relation = value;
-              }
-              if (tag === "NOTE") {
-                currentIndividual.associations[
-                  currentIndividual.associations.length - 1
-                ].notes.push(value);
-              }
-            }
-            if (currentField === "event") {
-              if (tag === "DATE") {
-                currentIndividual.events[
-                  currentIndividual.events.length - 1
-                ].date = value;
-              }
-              if (tag === "PLAC") {
-                currentIndividual.events[
-                  currentIndividual.events.length - 1
-                ].place = value;
-              }
-              if (tag === "TYPE") {
-                currentIndividual.events[
-                  currentIndividual.events.length - 1
-                ].type = value;
-              }
-            }
-            if (currentField === "quotes") {
+              break;
+            case "FAMC":
+              currentIndividual.familiesAsChild.push(value);
+              break;
+            case "FAMS":
+              currentIndividual.familiesAsSpouse.push(value);
+              break;
+          }
+        } else if (level === "2") {
+          switch (currentContext) {
+            case "name":
+              if (tag === "NICK") currentIndividual.nickname = value;
+              if (tag === "EMAIL") currentIndividual.email = value;
+              break;
+
+            case "quote":
               if (tag === "CONC") {
                 currentIndividual.quotes[currentIndividual.quotes.length - 1] +=
                   value;
-              }
-              if (tag === "CONT") {
+              } else if (tag === "CONT") {
                 currentIndividual.quotes.push(value);
               }
-            }
-            if (tag === "DATE") {
-              const dateValue =
-                value.toLowerCase() === "unknown" ? null : value;
-              if (currentIndividual.birth && !currentIndividual.birth.date)
-                currentIndividual.birth.date = dateValue;
-              if (currentIndividual.death && !currentIndividual.death.date)
-                currentIndividual.death.date = dateValue;
-              currentField = null;
-            }
-            if (tag === "PLAC") {
-              const placeValue =
-                value.toLowerCase() === "unknown" ? null : value;
-              if (currentIndividual.birth && !currentIndividual.birth.place)
-                currentIndividual.birth.place = placeValue;
-              if (currentIndividual.death && !currentIndividual.death.place)
-                currentIndividual.death.place = placeValue;
-              currentField = null;
-            }
-            if (tag === "RELA" && currentIndividual.associations.length > 0) {
-              currentIndividual.associations[
-                currentIndividual.associations.length - 1
-              ].relation = value;
-            }
-            if (tag === "TYPE" && currentIndividual.events.length > 0) {
-              currentIndividual.events[
-                currentIndividual.events.length - 1
-              ].type = value;
-            }
-          }
-        } else if (currentFamily) {
-          if (level === "1") {
-            if (tag === "HUSB") currentFamily.husband = value;
-            if (tag === "WIFE") currentFamily.wife = value;
-            if (tag === "CHIL") currentFamily.children.push(value);
-          }
-        } else if (currentNote) {
-          if (level === "1" && tag === "NOTE") {
-            currentNote.text.push(value);
+              break;
+
+            case "note":
+              currentField.push(value);
+              break;
+
+            case "association":
+              const assoc = currentIndividual.associations.at(-1);
+              if (assoc) {
+                if (tag === "RELA") assoc.relation = value;
+                if (tag === "NOTE") assoc.notes.push(value);
+              }
+              break;
+
+            case "event":
+            case "birth":
+            case "death":
+              if (currentEvent) {
+                if (tag === "DATE")
+                  currentEvent.date =
+                    value.toLowerCase() === "unknown" ? null : value;
+                if (tag === "PLAC")
+                  currentEvent.place =
+                    value.toLowerCase() === "unknown" ? null : value;
+                if (tag === "TYPE") currentEvent.type = value;
+              }
+              break;
           }
         }
+      } else if (currentFamily && level === "1") {
+        switch (tag) {
+          case "HUSB":
+            currentFamily.husband = value;
+            break;
+          case "WIFE":
+            currentFamily.wife = value;
+            break;
+          case "CHIL":
+            currentFamily.children.push(value);
+            break;
+        }
+      } else if (currentNote && level === "1" && tag === "NOTE") {
+        currentNote.text.push(value);
       }
     }
   });
 
-  // Replace note references with actual note content
+  // Résolution des références de notes
   Object.values(individuals).forEach((individual) => {
-    if (individual.notes.length > 0) return;
     individual.notes = individual.notes.map((noteId) =>
-      notes[noteId] ? notes[noteId].text.join("") : ""
+      notes[noteId] ? notes[noteId].text.join("\n") : noteId
     );
   });
 
-  console.log(individuals); // Log the individuals to see the parsed data
-  console.log(families); // Log the families to see the parsed data
-  console.log(notes); // Log the notes to see the parsed notes data
+  const nodes = Object.values(individuals);
+  const links = [];
 
-  let nodes = Object.values(individuals);
-  let links = [];
-
-  // Create sibling links
-  Object.values(families).forEach((fam) => {
-    const children = fam.children;
-    children.forEach((child, index) => {
-      for (let i = index + 1; i < children.length; i++) {
-        links.push({
-          source: child,
-          target: children[i],
-          relation: "Sibling",
-          type: "family",
-        });
-      }
-    });
-  });
-
+  // Associations
   nodes.forEach((node) => {
     node.associations.forEach((assoc) => {
       links.push({
@@ -234,38 +215,56 @@ function parseGedcom(data) {
         target: assoc.person,
         relation: assoc.relation,
         type: "association",
-        notes: assoc.notes, // Include notes in the link data
+        notes: assoc.notes,
       });
     });
   });
 
+  // Familles
   Object.values(families).forEach((fam) => {
-    if (fam.husband && fam.wife) {
+    const { husband, wife, children } = fam;
+
+    // Couple
+    if (husband && wife) {
       links.push({
-        source: fam.husband,
-        target: fam.wife,
+        source: husband,
+        target: wife,
         relation: "Spouse",
         type: "family",
       });
     }
-    fam.children.forEach((child) => {
-      if (fam.husband) {
+
+    // Parents → Enfants
+    children.forEach((child) => {
+      if (husband) {
         links.push({
-          source: fam.husband,
+          source: husband,
           target: child,
           relation: "Parent",
           type: "family",
         });
       }
-      if (fam.wife) {
+      if (wife) {
         links.push({
-          source: fam.wife,
+          source: wife,
           target: child,
           relation: "Parent",
           type: "family",
         });
       }
     });
+
+    // Frères et sœurs
+    for (let i = 0; i < children.length; i++) {
+      for (let j = i + 1; j < children.length; j++) {
+        links.push({
+          source: children[i],
+          target: children[j],
+          relation: "Sibling",
+          type: "family",
+        });
+      }
+    }
   });
 
   return { nodes, links };
@@ -273,23 +272,33 @@ function parseGedcom(data) {
 
 function createGraph(data) {
   const svg = d3.select("svg");
-  const width = +svg.attr("width");
-  const height = +svg.attr("height");
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
-  // Clear previous graph
+  // Clear SVG
   svg.selectAll("*").remove();
 
+  // Remove invalid links
+  const nodeIds = new Set(data.nodes.map((n) => n.id));
+  data.links = data.links.filter(
+    (l) => nodeIds.has(l.source) && nodeIds.has(l.target)
+  );
+
+    // ✅ FIX: update global references
+  allNodes = data.nodes;
+  allLinks = data.links;
+
+  // Setup zoom and pan
+  const container = svg.append("g");
   const zoom = d3
     .zoom()
     .scaleExtent([0.1, 4])
-    .on("zoom", (event) => {
-      container.attr("transform", event.transform);
+    .on("zoom", (e) => {
+      container.attr("transform", e.transform);
     });
-
   svg.call(zoom);
 
-  const container = svg.append("g");
-
+  // Simulation
   simulation = d3
     .forceSimulation(data.nodes)
     .force(
@@ -298,10 +307,11 @@ function createGraph(data) {
         .forceLink(data.links)
         .id((d) => d.id)
         .distance(150)
-    ) // Increased distance between nodes
+    )
     .force("charge", d3.forceManyBody().strength(-200))
     .force("center", d3.forceCenter(width / 2, height / 2));
 
+  // Draw links
   const link = container
     .append("g")
     .attr("class", "links")
@@ -311,8 +321,10 @@ function createGraph(data) {
     .append("line")
     .attr("class", "link")
     .attr("stroke", (d) => (d.type === "family" ? "red" : "#000"))
-    .attr("stroke-width", (d) => (d.type === "family" ? 2 : 0.5));
+    .attr("stroke-width", (d) => (d.type === "family" ? 2 : 0.5))
+    .attr("data-link-id", (d) => d.id); // NEW
 
+  // Draw nodes
   const node = container
     .append("g")
     .attr("class", "nodes")
@@ -326,9 +338,14 @@ function createGraph(data) {
   node
     .append("circle")
     .attr("r", 10)
-    .attr("fill", (d) => (d.sex === "M" ? "blue" : "pink")); // Use blue for males and pink for females
+    .attr("fill", (d) => (d.sex === "M" ? "blue" : "pink"));
 
-  // Add a cross mark for deceased individuals
+  node
+    .append("text")
+    .attr("x", 15)
+    .attr("y", 3)
+    .text((d) => d.name);
+
   node
     .append("text")
     .attr("x", -6)
@@ -336,6 +353,7 @@ function createGraph(data) {
     .attr("class", "cross")
     .text((d) => (d.death && d.death.status ? "✝" : ""));
 
+  // Tooltip
   const tooltip = d3
     .select("body")
     .append("div")
@@ -349,114 +367,35 @@ function createGraph(data) {
   node
     .on("mouseover", (event, d) => {
       tooltip.style("display", "block");
-      let details = `
-            <strong>Name:</strong> ${d.name}<br>
-            ${d.nickname ? `<strong>Nickname:</strong> ${d.nickname}<br>` : ""}
-            ${d.email ? `<strong>Email:</strong> ${d.email}<br>` : ""}
-            <strong>Sex:</strong> ${d.sex}<br>
-            <strong>Occupation:</strong> ${
-              d.occupation || "unknown occupation"
-            }<br>
-            <strong>Birth:</strong> ${
-              d.birth
-                ? `${d.birth.date || "unknown date"} at ${
-                    d.birth.place || "unknown place"
-                  }`
-                : "unknown birth"
-            }<br>`;
-
-      if (d.death && d.death.status) {
-        details += `<strong>Death:</strong> ${
-          d.death.date || "unknown date"
-        } at ${d.death.place || "unknown place"}<br>`;
-      }
-
-      details += `
-            <strong>Notes:</strong><br>
-            <ul>${
-              d.notes.length
-                ? d.notes
-                    .map((note) => (note ? `<li>${note}</li>` : ""))
-                    .join("")
-                : ""
-            }</ul>
-            <strong>Events:</strong><br>
-            <ul>${
-              d.events.length
-                ? d.events
-                    .map(
-                      (event) =>
-                        `<li>${event.type || "unknown type"}: ${
-                          event.value ? event.value + " - " : ""
-                        }${event.date || "unknown date"}${
-                          event.place ? " at " + event.place : ""
-                        }</li>`
-                    )
-                    .join("")
-                : "<li>no events</li>"
-            }</ul>
-            <strong>Quotes:</strong><br>
-            <ul>${
-              d.quotes.length
-                ? d.quotes.map((quote) => `<li>${quote}</li>`).join("")
-                : "<li>no quotes</li>"
-            }</ul>
-        `;
-      tooltip.html(details);
+      tooltip.html(`<strong>${d.name}</strong><br>${d.occupation || ""}`);
     })
     .on("mousemove", (event) => {
       tooltip
         .style("top", event.pageY + 10 + "px")
         .style("left", event.pageX + 10 + "px");
     })
-    .on("mouseout", () => {
-      tooltip.style("display", "none");
-    });
+    .on("mouseout", () => tooltip.style("display", "none"));
+
+  // Focus/Modal behavior
+  let pressTimer;
+  const longPressDuration = 500;
 
   node.on("click", (event, d) => {
+    showModalContent(d);
     focusNode(d);
   });
 
-  link
-    .on("mouseover", (event, d) => {
-      const reverseRelation = data.links.find(
-        (link) =>
-          link.source.id === d.target.id && link.target.id === d.source.id
-      );
-      tooltip.style("display", "block");
-      tooltip.html(`
-            <strong>Relationships:</strong><br>
-            ${d.source.name} to ${d.target.name}: ${d.relation}<br>
-            ${d.target.name} to ${d.source.name}: ${
-        reverseRelation ? reverseRelation.relation : "N/A"
-      }<br>
-            ${
-              d.notes && d.notes.length
-                ? `<strong>Notes:</strong> <ul>${d.notes
-                    .map((note) => `<li>${note}</li>`)
-                    .join("")}</ul>`
-                : ""
-            }
-        `);
+  node
+    .on("mousedown", (event, d) => {
+      pressTimer = setTimeout(() => focusNode(d), longPressDuration);
     })
-    .on("mousemove", (event) => {
-      tooltip
-        .style("top", event.pageY + 10 + "px")
-        .style("left", event.pageX + 10 + "px");
-    })
-    .on("mouseout", () => {
-      tooltip.style("display", "none");
-    });
-
-  link.on("mouseout", () => {
-    tooltip.style("display", "none");
-  });
+    .on("mouseup mouseleave", () => clearTimeout(pressTimer));
 
   node
-    .append("text")
-    .attr("x", 15)
-    .attr("y", 3)
-    .html((d) => d.name);
+    .on("touchstart", (event, d) => {
+      pressTimer = setTimeout(() => focusNode(d), longPressDuration);
+    })
+    .on("touchend", () => clearTimeout(pressTimer));
 
   simulation.on("tick", () => {
     link
@@ -467,80 +406,161 @@ function createGraph(data) {
 
     node.attr("transform", (d) => `translate(${d.x},${d.y})`);
   });
+}
 
-  
-
-  function removeFocus() {
-    node.transition().duration(500).style("opacity", 1);
-
-    link.transition().duration(500).style("opacity", 1);
-
-    d3.selectAll(".close-button").remove();
-  }
-
-  function drag(simulation) {
-    function dragstarted(event, d) {
-      if (!event.active) simulation.alphaTarget(0.3).restart();
+function drag(sim) {
+  return d3
+    .drag()
+    .on("start", (event, d) => {
+      if (!event.active) sim.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
-    }
-
-    function dragged(event, d) {
+    })
+    .on("drag", (event, d) => {
       d.fx = event.x;
       d.fy = event.y;
-    }
-
-    function dragended(event, d) {
-      if (!event.active) simulation.alphaTarget(0);
+    })
+    .on("end", (event, d) => {
+      if (!event.active) sim.alphaTarget(0);
       d.fx = null;
       d.fy = null;
-    }
-
-    return d3
-      .drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended);
-  }
+    });
 }
 
 function focusNode(clickedNode) {
-    const neighbors = new Set();
-    allLinks.forEach(link => {
-        if (link.source.id === clickedNode.id || link.target.id === clickedNode.id) {
-            neighbors.add(link.source.id);
-            neighbors.add(link.target.id);
-        }
+  const clickedId = clickedNode.id;
+  console.log("🔍 Node clicked:", clickedId);
+
+  const neighbors = new Set();
+  neighbors.add(clickedId);
+
+  console.log("🔗 allLinks length:", allLinks.length);
+
+  allLinks.forEach((link, i) => {
+    console.log(`➡️ Processing link ${i}:`, link);
+
+    const sourceId =
+      typeof link.source === "object" ? link.source.id : link.source;
+    const targetId =
+      typeof link.target === "object" ? link.target.id : link.target;
+
+    console.log(`    sourceId: ${sourceId}, targetId: ${targetId}`);
+
+    if (!sourceId || !targetId) {
+      console.warn(`⚠️ Skipped link ${i} due to missing ID`, link);
+      return;
+    }
+
+    if (sourceId === clickedId) {
+      console.log(`✅ Match (source → target): ${clickedId} → ${targetId}`);
+      neighbors.add(targetId);
+    }
+
+    if (targetId === clickedId) {
+      console.log(`✅ Match (target ← source): ${clickedId} ← ${sourceId}`);
+      neighbors.add(sourceId);
+    }
+  });
+
+  console.log("🧩 Final neighbor set:", Array.from(neighbors));
+
+  d3.selectAll(".node")
+    .transition()
+    .duration(300)
+    .style("opacity", (d) => {
+      const isNeighbor = neighbors.has(d.id);
+      console.log(`🌐 Node ${d.id} => ${isNeighbor ? "VISIBLE" : "HIDDEN"}`);
+      return isNeighbor ? 1 : 0.1;
     });
 
-    d3.selectAll(".node").transition()
-        .duration(500)
-        .style("opacity", d => (neighbors.has(d.id) || d.id === clickedNode.id ? 1 : 0.1));
+  d3.selectAll(".link")
+    .transition()
+    .duration(300)
+    .style("opacity", (l, i) => {
+      const sourceId = typeof l.source === "object" ? l.source.id : l.source;
+      const targetId = typeof l.target === "object" ? l.target.id : l.target;
+      const visible = neighbors.has(sourceId) && neighbors.has(targetId);
+      console.log(
+        `🪢 Link ${i}: ${sourceId} - ${targetId} => ${
+          visible ? "VISIBLE" : "HIDDEN"
+        }`
+      );
+      return visible ? 1 : 0.1;
+    });
 
-    d3.selectAll(".link").transition()
-        .duration(500)
-        .style("opacity", d => (d.source.id === clickedNode.id || d.target.id === clickedNode.id ? 1 : 0.1));
+  showModalContent(clickedNode);
+}
 
-    // Populate the modal with node details
-    const details = `
-        <h2>${clickedNode.name}</h2>
-        ${clickedNode.nickname ? `<p><strong>Nickname:</strong> ${clickedNode.nickname}</p>` : ''}
-        ${clickedNode.email ? `<p><strong>Email:</strong> ${clickedNode.email}</p>` : ''}
-        <p><strong>Sex:</strong> ${clickedNode.sex}</p>
-        <p><strong>Occupation:</strong> ${clickedNode.occupation || "unknown"}</p>
-        <p><strong>Birth:</strong> ${clickedNode.birth ? `${clickedNode.birth.date || "unknown date"} at ${clickedNode.birth.place || "unknown place"}` : "unknown"}</p>
-        ${clickedNode.death && clickedNode.death.status ? `<p><strong>Death:</strong> ${clickedNode.death.date || "unknown date"} at ${clickedNode.death.place || "unknown place"}</p>` : ''}
-        <strong>Notes:</strong><ul>${clickedNode.notes.map(n => `<li>${n}</li>`).join("")}</ul>
-        <strong>Events:</strong><ul>${clickedNode.events.map(e => `<li>${e.type || 'unknown'}: ${e.value ? e.value + ' - ' : ''}${e.date || 'unknown date'}${e.place ? ' at ' + e.place : ''}</li>`).join("")}</ul>
-        <strong>Quotes:</strong><ul>${clickedNode.quotes.map(q => `<li>${q}</li>`).join("")}</ul>
-    `;
-    document.getElementById("modalDetails").innerHTML = details;
-    document.getElementById("characterModal").style.display = "flex";
+function showModalContent(node) {
+  const modal = document.getElementById("modalContainer");
+  const content = document.getElementById("modalContent");
+  const svg = document.querySelector("svg");
+  const isMobile = window.innerWidth < 768;
 
-    // Reset slider and background
-    const modal = document.getElementById("characterModal");
-    document.getElementById("transparencySlider").value = 100;
-    modal.style.backgroundColor = "rgba(255, 255, 255, 1)";
+  // Adjust layout for modal and graph
+  if (isMobile) {
+    modal.style.width = "100vw";
+    modal.style.height = "34vh";
+    svg.style.width = "100vw";
+    svg.style.height = "66vh";
+  } else {
+    modal.style.width = "50vw";
+    modal.style.height = "100vh";
+    svg.style.width = "50vw";
+    svg.style.height = "100vh";
+  }
+
+  modal.classList.remove("hidden");
+
+  content.innerHTML = `
+    <h2>${node.name}</h2>
+    ${node.nickname ? `<p><strong>Nickname:</strong> ${node.nickname}</p>` : ""}
+    ${node.email ? `<p><strong>Email:</strong> ${node.email}</p>` : ""}
+    <p><strong>Sex:</strong> ${node.sex}</p>
+    <p><strong>Occupation:</strong> ${
+      node.occupation || "unknown occupation"
+    }</p>
+    <p><strong>Birth:</strong> ${node.birth?.date || "unknown date"} at ${
+    node.birth?.place || "unknown place"
+  }</p>
+    ${
+      node.death?.status
+        ? `<p><strong>Death:</strong> ${node.death.date || "unknown date"} at ${
+            node.death.place || "unknown place"
+          }</p>`
+        : ""
+    }
+    
+    <h3>Notes</h3>
+    <ul>${node.notes.map((note) => `<li>${note}</li>`).join("")}</ul>
+
+    <h3>Events</h3>
+    <ul>${node.events
+      .map(
+        (e) =>
+          `<li>${e.type || "Event"}: ${e.value || ""} - ${e.date || "unknown"}${
+            e.place ? " at " + e.place : ""
+          }</li>`
+      )
+      .join("")}</ul>
+
+    <h3>Quotes</h3>
+    <ul>${node.quotes.map((q) => `<li>${q}</li>`).join("")}</ul>
+
+    <button onclick="closeModal()">Close</button>
+  `;
+}
+
+function closeModal() {
+  document.getElementById("modalContainer").classList.add("hidden");
+
+  const svg = document.querySelector("svg");
+  svg.style.width = "100%";
+  svg.style.height = "100%";
+
+  d3.selectAll(".node").transition().duration(300).style("opacity", 1);
+
+  d3.selectAll(".link").transition().duration(300).style("opacity", 1);
 }
 
 function formatName(name) {
@@ -565,8 +585,16 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.onload = function (e) {
       const gedcomData = e.target.result;
       const parsedData = parseGedcom(gedcomData);
-      window.allNodes = parsedData.nodes;
-      window.allLinks = parsedData.links;
+
+      window.allNodes = parsedData.nodes.map((n) => ({ ...n }));
+      window.allLinks = parsedData.links.map((l) => ({
+        source: l.source,
+        target: l.target,
+        relation: l.relation,
+        type: l.type,
+        notes: l.notes,
+      }));
+
       createGraph(parsedData);
     };
     reader.readAsText(file);
@@ -592,7 +620,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    const displayNodes = window.allNodes.filter((node) => neighbors.has(node.id));
+    const displayNodes = window.allNodes.filter((node) =>
+      neighbors.has(node.id)
+    );
     const displayLinks = window.allLinks.filter(
       (link) => neighbors.has(link.source.id) && neighbors.has(link.target.id)
     );
@@ -640,30 +670,26 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch(`http://localhost:3000/ged/${fileName}`);
       const gedcomData = await response.text();
       const parsedData = parseGedcom(gedcomData);
-      window.allNodes = parsedData.nodes;
-      window.allLinks = parsedData.links;
+      window.allNodes = parsedData.nodes.map((n) => ({ ...n }));
+      window.allLinks = parsedData.links.map((l) => ({
+        source: l.source,
+        target: l.target,
+        relation: l.relation,
+        type: l.type,
+        notes: l.notes,
+      }));
       createGraph(parsedData);
     } catch (error) {
       console.error("Error loading file:", error);
     }
   }
 
-	document.getElementById("closeModal").onclick = function () {
-    document.getElementById("characterModal").style.display = "none";
-
-    d3.selectAll(".node").transition().duration(500).style("opacity", 1);
-    d3.selectAll(".link").transition().duration(500).style("opacity", 1);
-};
-	
-document.getElementById("transparencySlider").oninput = function () {
-    const value = this.value;
-    document.getElementById("characterModal").style.backgroundColor = `rgba(255, 255, 255, ${value / 100})`;
-};
-	
   document.addEventListener("DOMContentLoaded", () => {
     fetchFiles();
   });
-	
+
+  let pressTimer = null;
+  let longPressDuration = 500;
 });
 
 // Add these lines at the end of graph.js
