@@ -149,24 +149,81 @@
         color: #3700b3;
       }
 
-      @media (max-width: 768px) {
-        #mainLayout {
-          flex-direction: column;
-        }
+			
+			@media (max-width: 768px) {
+  #mainLayout {
+    flex-direction: column;
+  }
 
-        #graphContainer {
-          width: 100vw;
-          height: 66vh;
-        }
+  #graphContainer {
+    width: 100vw;
+    height: 60vh;
+    overflow-y: auto; /* scrollable graph */
+  }
 
-        #modalContainer {
-          width: 100vw;
-          height: 34vh;
-          border-left: none;
-          border-top: 2px solid #ccc;
-        }
-      }
+  #modalContainer {
+    width: 100vw;
+    height: 40vh;
+    border-left: none;
+    border-top: 2px solid #ccc;
+    overflow-y: auto;
+    position: relative;
+    padding-bottom: 40px; /* space for the X button */
+  }
 
+  #modalContainer .close-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #6200ea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    z-index: 10000;
+  }
+}
+
+@media (min-width: 769px) {
+  #mainLayout {
+    flex-direction: row;
+  }
+
+  #graphContainer {
+    width: 50vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #modalContainer {
+    width: 50vw;
+    height: 100vh;
+    border-left: 2px solid #ccc;
+    overflow-y: auto;
+    padding-bottom: 40px;
+    position: relative;
+  }
+
+  #modalContainer .close-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #6200ea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    z-index: 10000;
+  }
+}
+
+#modalContainer,
+#graphContainer {
+  transition: all 0.3s ease;
+}
+			
       .node.faded circle,
       .link.faded {
         opacity: 0.1;
@@ -249,10 +306,10 @@
       <div id="graphContainer">
         <svg viewBox="-200 -200 800 800"></svg>
       </div>
-      <div id="modalContainer" class="hidden">
-        <div id="modalContent"></div>
-        <button onclick="closeModal()">Close</button>
-      </div>
+			<div id="modalContainer" class="hidden">
+  <div id="modalContent"></div>
+  <button class="close-button" onclick="closeModal()">✕</button>
+</div>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>

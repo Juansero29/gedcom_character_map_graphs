@@ -678,9 +678,9 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
   modal.style.width = "100vw";
   modal.style.height = "100vh";
 
-  const svg = document.querySelector("svg");
-  svg.style.width = isMobile ? "100vw" : "50vw";
-  svg.style.height = "100vh";
+  // const svg = document.querySelector("svg");
+  // svg.style.width = isMobile ? "100vw" : "50vw";
+  // svg.style.height = "100vh";
 
   if (nodeB) {
     // Show two-person relationship view
@@ -711,8 +711,8 @@ function closeModal() {
   document.getElementById("modalContainer").classList.add("hidden");
   document.body.style.overflow = "auto";
   const svg = document.querySelector("svg");
-  svg.style.width = "100%";
-  svg.style.height = "100%";
+  // svg.style.width = "100%";
+  // svg.style.height = "100%";
 
   // Only reset if something was focused
   if (lastFocusedNode || lastFocusedLink) {
