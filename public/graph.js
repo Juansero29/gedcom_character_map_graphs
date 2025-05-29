@@ -675,12 +675,12 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
   document.body.style.overflow = "hidden";
 
   const isMobile = window.innerWidth < 768;
-  modal.style.width = "100vw";
-  modal.style.height = "100vh";
+	modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
 
-  const svg = document.querySelector("svg");
-  svg.style.width = isMobile ? "100vw" : "50vw";
-  svg.style.height = "100vh";
+  // const svg = document.querySelector("svg");
+  // svg.style.width = isMobile ? "100vw" : "50vw";
+  // svg.style.height = "100vh";
 
   if (nodeB) {
     // Show two-person relationship view
@@ -709,10 +709,12 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
 
 function closeModal() {
   document.getElementById("modalContainer").classList.add("hidden");
-  document.body.style.overflow = "auto";
+ 
+	document.body.style.overflow = "hidden";
+
   const svg = document.querySelector("svg");
-  svg.style.width = "100%";
-  svg.style.height = "100%";
+  // svg.style.width = "100%";
+  // svg.style.height = "100%";
 
   // Only reset if something was focused
   if (lastFocusedNode || lastFocusedLink) {
@@ -744,8 +746,9 @@ function showModalContentForLink(
   const content = document.getElementById("modalContent");
   modal.classList.remove("hidden");
 
-  modal.style.width = "100vw";
-  modal.style.height = "100vh";
+	
+	modal.classList.remove("hidden");
+document.body.style.overflow = "hidden";
 
   const section = (person, relation) => `
     <div style="flex: 1; padding: 1em; border-right: 1px solid #ccc;">
