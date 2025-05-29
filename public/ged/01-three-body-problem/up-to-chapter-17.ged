@@ -288,15 +288,49 @@
 2 DATE 2000
 2 PLAC China
 2 NOTE Logs in as "Copernicus", reveals the tri-solar structure of the in-game world, is nearly burned, escapes a tri-solar catastrophe. Successfully brings the civilization to its first leap, unlocking level two of the game.
+1 EVEN
+2 TYPE Participates in second level of Three Body game
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Interacts with Newton, Von Neumann, and Qin Shi Huang during the construction of the Qin I computer.
+1 EVEN
+2 TYPE Witnesses destruction of Civilization 184
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Experiences tri-solar syzygy and destruction of Qin-era civilization from within the game.
+
+1 ASSO @I0030@
+2 RELA In-game companion
+2 NOTE Wang meets Newton in front of the pyramid during the second level of the game.
+2 NOTE Newton introduces himself with pride and discusses the laws of motion and calculus.
+2 NOTE Wang observes Newton's philosophical stance and eventual cowardice during the collapse.
+2 NOTE Their interaction is polite but distant; Wang never challenges Newton directly.
+
+1 ASSO @I0031@
+2 RELA In-game collaborator
+2 NOTE Von Neumann explains to Wang the purpose of the Qin I computer and its logic gate architecture.
+2 NOTE Wang learns of the human-based computation system and observes its startup and failure.
+2 NOTE In the final moments, Von Neumann shares a last revelation about electronic logic components before drifting into space.
+2 NOTE Their relationship is marked by curiosity, respect, and a shared awe of technological ambition.
+
+1 ASSO @I0032@
+2 RELA In-game observer of ruler
+2 NOTE Wang sees Qin Shi Huang as a symbol of centralized, disciplined control over society and science.
+2 NOTE Their direct interaction is limited, but Wang observes the emperor’s decisions and speeches.
+2 NOTE Qin's authoritarianism shocks Wang, especially when he orders the execution of malfunctioning “components.”
+2 NOTE Wang remarks on the lightness of the emperor’s sword, noting the simulation's inability to simulate gravity shifts.
+
+1 ASSO @I0033@
+2 RELA Indirect witness of historical figure
+2 NOTE Wang briefly sees Leibniz fighting Newton and learns of their rivalry.
+2 NOTE Though Wang does not speak to Leibniz, he witnesses the broader historical metaphor of their duel.
+2 NOTE Leibniz’s early retreat contrasts with Wang’s own endurance in the face of the simulation’s collapse.
 1 ASSO @I0024@
 2 RELA InGameCharacter
-
 1 ASSO @I0025@
 2 RELA InGameCharacter
-
 1 ASSO @I0026@
 2 RELA InGameCharacter
-
 1 ASSO @I0027@
 2 RELA InGameCharacter
 1 ASSO @I0009@
@@ -332,7 +366,6 @@
 1 ASSO @I0010@
 2 RELA Colleague
 2 NOTE Interaction and information sharing related to broader military and scientific implications.
-
 
 0 @I0008@ INDI
 1 NAME Qiang /Shi/
@@ -788,6 +821,148 @@
 1 ASSO @I0016@
 2 RELA Superior
 2 NOTE Executed under Pan Han’s orders as part of a purge of non-Adventist ETO members.
+
+0 @I0030@ INDI
+1 NAME Isaac /Newton/
+1 SEX M
+1 OCCU Scientist, philosopher
+1 NOTE Appears in Three Body In-game World.
+2 CONT Claims to have invented calculus; rivals Leibniz; helps construct human-wave computer Qin I.
+2 CONT Symbol of classical physics and authority; ultimately flees following miscalculation.
+1 QUOT "Inventing the three laws of mechanics has already made me the greatest, God excepted."
+1 EVEN
+2 TYPE Appearance in Three Body game – Civilization 184
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Co-designs Qin I, debates scientific authority, flees during gravitational collapse event.
+1 ASSO @I0031@
+2 RELA Scientific collaborator and rival
+2 NOTE Newton and Von Neumann work together to construct the Qin I human-wave computer.
+2 NOTE They demonstrate logical gates to Emperor Qin Shi Huang using soldiers and flags.
+2 NOTE Newton is portrayed as proud and deferential to power, while Von Neumann is pragmatic and rational.
+2 NOTE Von Neumann expresses disgust at Newton's philosophy of human value based on hierarchy.
+1 ASSO @I0032@
+2 RELA Patron emperor
+2 NOTE Qin Shi Huang sponsors Newton's mission and provides the thirty million soldiers for computation.
+2 NOTE Newton flatters the emperor and leads the computation alongside Von Neumann.
+2 NOTE Their relationship ends with tension as the project fails and Qin Shi Huang demands executions.
+1 ASSO @I0033@
+2 RELA Rival claimant to calculus
+2 NOTE Newton swordfights Leibniz at the start of the game level, accusing him of stealing calculus.
+2 NOTE Leibniz flees, and Newton scorns his honor.
+2 NOTE This rivalry echoes real historical debates but is exaggerated for dramatic effect in-game.
+1 ASSO @I0007@
+2 RELA Game witness
+2 NOTE Newton meets Wang Miao during the second level of the Three Body game.
+2 NOTE He explains the principles of classical mechanics and his vision for mastering the suns.
+2 NOTE Wang observes Newton’s interactions and eventual retreat.
+
+
+0 @I0031@ INDI
+1 NAME John von /Neumann/
+1 SEX M
+1 OCCU Mathematician, computer scientist
+1 NOTE Appears in Three Body In-game World.
+2 CONT Designs and builds Qin I computer with logic gates formed by Qin soldiers.
+2 CONT Recognizes failure of gravitational modeling at end of Civilization 184.
+1 QUOT "A large number of men yoked by severe discipline can also produce great wisdom when bound together as one."
+1 EVEN
+2 TYPE Constructs Qin I computer
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Demonstrates logic gates using human labor and oversees Qin 1.0 operating system.
+1 EVEN
+2 TYPE Destruction of Civilization 184
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Witnesses gravitational collapse during tri-solar syzygy.
+
+1 ASSO @I0030@
+2 RELA Scientific collaborator
+2 NOTE Von Neumann and Newton work side by side to design the human-wave computer Qin I.
+2 NOTE Although colleagues, their philosophies differ: Newton believes in social hierarchy, Neumann in systemic design.
+2 NOTE Von Neumann is frustrated by Newton’s sycophancy and moral detachment.
+2 NOTE At the end, he accuses Newton of being “not even a zero” if the model fails.
+
+1 ASSO @I0032@
+2 RELA Imperial sponsor
+2 NOTE Von Neumann convinces Qin Shi Huang to authorize a computation army of 30 million men.
+2 NOTE He introduces logical gates using soldiers holding black and white flags.
+2 NOTE Qin Shi Huang demands executions for malfunctioning “components”, which disgusts Neumann.
+2 NOTE Despite their success, Neumann ultimately watches the emperor perish in the gravitational collapse.
+
+1 ASSO @I0007@
+2 RELA Player witness
+2 NOTE Von Neumann interacts directly with Wang Miao inside the Three Body game’s second level.
+2 NOTE He explains the gate logic system and the architecture of Qin I.
+2 NOTE In the final moments of the simulation, he has a revelation about electronic circuits and tries to tell the emperor.
+
+
+0 @I0032@ INDI
+1 NAME Qin Shi /Huang/
+1 SEX M
+1 OCCU Emperor
+1 NOTE Fictional representation in Three Body In-game World.
+2 CONT Orders formation of Qin I computer using thirty million soldiers; embodies authoritarian control.
+1 QUOT "Each individual’s behavior is so simple, yet together, they can produce such a complex, great whole!"
+1 EVEN
+2 TYPE Commands creation of Qin I
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Builds massive human-wave computer to forecast solar movement using thirty million Qin soldiers.
+1 EVEN
+2 TYPE Death during tri-solar syzygy
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Dies violently during gravitational collapse as Civilization 184 disintegrates.
+
+1 ASSO @I0031@
+2 RELA Chief engineer
+2 NOTE Von Neumann persuades Qin Shi Huang to support a computer built with logic gates made of soldiers.
+2 NOTE Qin is skeptical but impressed by Von Neumann's demonstrations.
+2 NOTE He authorizes full mobilization of his empire to build and maintain the Qin I system.
+2 NOTE After a gate failure, he orders the execution of the soldier-gates, which shocks Neumann.
+
+1 ASSO @I0030@
+2 RELA Scholar guest
+2 NOTE Newton serves the emperor, proposing the use of mechanics and calculus to solve the three-body problem.
+2 NOTE Qin tolerates Newton’s vanity due to his scientific importance.
+2 NOTE Newton flatters Qin excessively, praising his central role in unifying civilization and computation.
+2 NOTE When the project collapses, Qin blames the scientists and responds violently.
+
+1 ASSO @I0007@
+2 RELA Game observer
+2 NOTE Qin meets Wang Miao inside the Three Body game world as a passive observer.
+2 NOTE Wang watches the interactions between Qin, Newton, and Neumann during the computation process.
+2 NOTE Qin demonstrates authority and pride throughout, even in the face of catastrophic failure.
+
+0 @I0033@ INDI
+1 NAME Gottfried /Leibniz/
+1 SEX M
+1 OCCU Mathematician
+1 NOTE Brief appearance in Three Body In-game World.
+2 CONT Engages in a swordfight with Newton over the claim to calculus; retreats early in simulation.
+2 CONT Used as narrative symbol of scientific rivalry and academic pride.
+1 EVEN
+2 TYPE Appearance in Three Body game
+2 DATE Approx. 200X
+2 PLAC Three Body In-game World
+2 NOTE Fights Newton over the invention of calculus, then flees the scene.
+
+1 ASSO @I0030@
+2 RELA Scientific rival
+2 NOTE Leibniz and Newton are introduced mid-duel in the simulation, fighting with swords near the pyramid.
+2 NOTE Newton accuses Leibniz of falsely claiming the invention of calculus.
+2 NOTE The duel is cut short when Leibniz is injured and flees, highlighting their bitter rivalry.
+2 NOTE Their academic feud is dramatized and caricatured for narrative effect in the Three Body simulation.
+
+1 ASSO @I0031@
+2 RELA Colleague in failed expedition
+2 NOTE Von Neumann mentions that Leibniz was originally part of the expedition to the East to solve the three-body equations.
+2 NOTE He is described as fleeing from pirates near Madagascar during the journey.
+2 NOTE Although absent from most of the simulation, he remains a referenced figure among the group of European thinkers.
+
+
 
 0 @F0001@ FAM
 1 HUSB @I0001@
