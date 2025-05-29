@@ -295,9 +295,11 @@ function createGraph(data) {
 
   // Remove invalid links
   const nodeIds = new Set(data.nodes.map((n) => n.id));
-  data.links = data.links.filter(
-    (l) => nodeIds.has(l.source) && nodeIds.has(l.target)
-  );
+  data.links = data.links.filter((l) => {
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    return nodeIds.has(sid) && nodeIds.has(tid);
+  });
 
   // ✅ FIX: update global references
   allNodes = data.nodes;
@@ -538,6 +540,19 @@ function enrichLinkTooltips() {
           .style("opacity", visible ? 1 : 0.1);
       });
 
+      // ✅ Highlight only the clicked link
+      d3.selectAll(".link")
+        .transition()
+        .duration(300)
+        .style("opacity", (l) => {
+          const sid = typeof l.source === "object" ? l.source.id : l.source;
+          const tid = typeof l.target === "object" ? l.target.id : l.target;
+          const isCurrent =
+            (sid === sourceId && tid === targetId) ||
+            (sid === targetId && tid === sourceId);
+          return isCurrent ? 1 : 0.1;
+        });
+
       event.stopPropagation();
     });
 }
@@ -675,7 +690,7 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
   document.body.style.overflow = "hidden";
 
   const isMobile = window.innerWidth < 768;
-	modal.classList.remove("hidden");
+  modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 
   // const svg = document.querySelector("svg");
@@ -709,8 +724,8 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
 
 function closeModal() {
   document.getElementById("modalContainer").classList.add("hidden");
- 
-	document.body.style.overflow = "hidden";
+
+  document.body.style.overflow = "hidden";
 
   const svg = document.querySelector("svg");
   // svg.style.width = "100%";
@@ -746,9 +761,8 @@ function showModalContentForLink(
   const content = document.getElementById("modalContent");
   modal.classList.remove("hidden");
 
-	
-	modal.classList.remove("hidden");
-document.body.style.overflow = "hidden";
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
 
   const section = (person, relation) => `
     <div style="flex: 1; padding: 1em; border-right: 1px solid #ccc;">
