@@ -39,6 +39,10 @@ Copier et cocher au fil de l’eau :
 
 - **Anti-spoiler** : ne lire / n’encoder que jusqu’à la fin du chapitre demandé.
 - **Langue** : pour *Les Rois maudits* / consignes FR du prompt → NOTE, QUOT, EVEN, RELA, labels portrait **100 % français** (`Traits physiques :`, `Non précisé`, etc.).
+- **Sang / famille vs ASSO (exclusif)** :
+  - `FAM`/`FAMS`/`FAMC` = seuls liens de sang ou de mariage (époux, parent/enfant, fratrie).
+  - `ASSO` = uniquement non-famille (allié, ennemi, conseiller, parrain…).
+  - Jamais les deux pour le même lien ; pas d’`ASSO` « Cousin / Oncle / Descendante / Époux… ».
 - **Preuves livre** :
   - Relations : `2 QUOT` verbatim sous chaque `ASSO` (et `FAM` si applicable).
   - Apparition : `1 QUOT "…"` + `2 TYPE Première mention` pour **chaque** INDI (y compris ancêtres seulement ancrés par parenté/titre).

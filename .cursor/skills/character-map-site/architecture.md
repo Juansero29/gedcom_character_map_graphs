@@ -24,12 +24,13 @@ Famille : Parent / Spouse / Sibling (anglais dans le modèle ; affichés via `tr
 
 ## createGraph
 
-1. Filtre liens invalides ; déduplique familles en mode hierarchy.
-2. `layoutWidth = viewportWidth * horizontalSpread`.
-3. Forces D3 selon mode ; tick clamp X/Y ; paths pour liens + `link-hit`.
-4. Labels : groupe `node-label-group` + `rect.node-label-bg` opaque.
-5. `enrichLinkTooltips()` sur `.link-hit`.
-6. Fin de simulation → zoom fit (privilégie la hauteur pour la lisibilité).
+1. Filtre liens invalides ; déduplique familles en mode layered (`genealogy` / `chrono`).
+2. `genealogy` : `assignGenerations` (Parent / Spouse / Sibling, sans dates) → bandes Y ; `chrono` : années de naissance ; `force` : libre.
+3. `layoutWidth = viewportWidth * horizontalSpread`.
+4. Forces D3 selon mode ; tick clamp X/Y ; paths pour liens + `link-hit`.
+5. Labels : groupe `node-label-group` + `rect.node-label-bg` opaque.
+6. `enrichLinkTooltips()` sur `.link-hit`.
+7. Fin de simulation → zoom fit (privilégie la hauteur pour la lisibilité).
 
 ## État global utile
 

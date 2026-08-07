@@ -13,6 +13,15 @@ Chaque personnage ou figure significative du récit reçoit un bloc `@INDI@`. Ce
 
 Nom du personnage sous la forme : `Prénom /Nom/`
 
+Si le livre utilise un **surnom ou une autre appellation** (ex. Jeanne de Joinville → « lady Mortimer »), l’ajouter sous le nom :
+
+```gedcom
+1 NAME Jeanne de /Joinville/
+2 NICK lady Mortimer
+```
+
+Plusieurs `2 NICK` (ou un second `1 NAME`) sont possibles ; la fiche les affiche sous le nom.
+
 ### 2. `1 SEX`
 
 * `M` pour homme
@@ -72,7 +81,9 @@ Chaque action ou événement important vécu par le personnage doit être décri
 
 ## 🧩 `1 ASSO` : Liens entre personnages (non familiaux)
 
-Les relations significatives entre personnages (coéquipiers, rivaux, mentors…) doivent être encodées avec :
+**Règle d’exclusivité** : un lien est *soit* familial (`FAM` / traits rouges), *soit* association (`ASSO` / pointillés) — jamais les deux pour la même relation. Pas d’`ASSO` « Cousin », « Oncle », « Époux », « Descendante », etc. : la parenté passe uniquement par l’arbre `FAM`.
+
+Les relations significatives **non familiales** entre personnages (coéquipiers, rivaux, mentors, parrain…) doivent être encodées avec :
 
 ```gedcom
 1 ASSO @I0031@
@@ -144,6 +155,7 @@ Indique que l’individu est **enfant dans une famille**.
 
 ## ✅ Bonnes pratiques
 
+* Famille = `FAM` seulement ; `ASSO` = tout le reste (pas de double encodage).
 * Toujours inclure **au moins un `EVEN`** pour les personnages actifs.
 * Toujours décrire les `ASSO` avec **au moins deux `2 NOTE`** si possible.
 * Ajouter un `QUOT` quand une citation révèle le caractère ou l’idéologie.

@@ -33,13 +33,15 @@ Tu es le **développeur produit** de ce dépôt : architecture, graphe D3, UX. L
 ## Principes UX déjà en place
 
 - **Bibliothèque** collapsible : livres → snapshots chapitre.
-- **Layouts** : `hierarchy` (année de naissance → Y) vs `force` ; préférence `localStorage` `cm_layout`.
-- **Étalement horizontal** : slider `cm_h_spread` (canvas virtuel > viewport, pan/zoom).
+- **Paramètres** : popup bas de bibliothèque (sous README) — langue, layout `genealogy` / `chrono` / `force` (`cm_layout` ; ancien `hierarchy` → `chrono`), étalement `cm_h_spread`.
+- **Filtres** : popup topbar (`cm_graph_filters`) — recherche, profondeur de parenté, type de liens (`all` / `blood` / `other`), sexe, années de naissance, vivants/décédés, première mention livre. Clic nœud/lien prioritaire : reset filtres + profondeur 1 (voisins directs).
+- **Fiche** : bouton « noyau familial » → surbrillance parents / enfants / fratrie (sans conjoints ni ASSO) ; toggle pour revenir au voisinage selon la profondeur.
+- **Profondeur** : modes `upto` (≤ N) / `exact` (= N) / `all` (tous les liens de sang, tout degré) ; `cm_link_depth` + `cm_link_depth_mode`.
 - **Liens** : famille = trait rouge plein ; ASSO = pointillé gris + **hit-path** large invisible.
-- **Survol** : voisinage mis en avant + `raise()` ; **clic** : fiche + focus épinglé des liens directs (survivre au resize/rebuild).
-- **Fiche** : sections à icônes (notes structurées, events, premières mentions, citations).
+- **Survol** : voisinage (lignée ≤ profondeur) + `raise()` ; **clic** : fiche + focus épinglé de la lignée (survivre au resize/rebuild).
+- **Fiche** : section **Relations** (recherche par nom + sous-sections sang / ASSO, labels bi explicites).
 - **Légende** bas-droite, repliable (`cm_legend_collapsed`).
-- **Temps narratif** : si `chapter.narrative` dans le catalogue → slider + âges sur nœuds/fiche.
+- **Temps narratif** : si `chapter.narrative` dans le catalogue → slider + âges ; panneau repliable (`cm_narrative_collapsed`), comme la légende.
 
 ## Règles de modif
 
@@ -60,7 +62,7 @@ Tu es le **développeur produit** de ce dépôt : architecture, graphe D3, UX. L
 
 - Charger *Le Roi de fer* ch.1 : graphe, légende, slider narratif, âges.
 - Clic nœud → fiche + dim des non-voisins ; fermer → reset.
-- Survol ASSO pointillé cliquable ; layout Hiérarchie / Libre ; étalement.
+- Survol ASSO pointillé cliquable ; layout Généalogique / Chronologique / Libre ; étalement.
 - Changer langue : libellés UI + dates.
 
 ## Référence détaillée

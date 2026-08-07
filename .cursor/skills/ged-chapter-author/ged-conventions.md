@@ -5,6 +5,7 @@
 ```
 0 @I0001@ INDI
 1 NAME Prénom /Nom/
+2 NICK Surnom ou appellation du livre
 1 SEX M
 1 BIRT
 2 DATE 1268
@@ -61,9 +62,21 @@
 1 CHAR UTF-8
 ```
 
+## FAM vs ASSO (règle d’exclusivité)
+
+| Type | Tags | Exemples RELA / rôle |
+|------|------|----------------------|
+| Famille (trait rouge) | `FAM`, `FAMS`, `FAMC` | Époux, parent, enfant, frère/sœur |
+| Association (pointillé) | `ASSO` + `RELA` | Allié, ennemi, conseiller, parrain, rivale |
+
+Interdit : un `ASSO` qui redit un lien déjà porté par `FAM`, ou qui affirme une parenté de sang (`Cousin`, `Oncle`, `Descendante`…) alors que l’arbre `FAM` doit suffire.
+
+Toute parenté utile au graphe (même pour ancrer un titre : aïeul, petite-fille…) doit être en `FAM`/`FAMS`/`FAMC` complets, pas seulement en prose. La profondeur UI = bonds `family` (fils = 1, petit-fils = 2, etc.).
+
 ## Ce que le parser du site comprend (graph.js)
 
-- INDI : NAME, SEX, BIRT/DEAT, OCCU, NOTE(+CONT), QUOT(+TYPE/CONT), EVEN(+TYPE/DATE/PLAC/NOTE/QUOT), ASSO(+RELA/NOTE/QUOT), FAMC/FAMS
+- INDI : NAME(+NICK/_AKA), SEX, BIRT/DEAT, OCCU, NOTE(+CONT), QUOT(+TYPE/CONT), EVEN(+TYPE/DATE/PLAC/NOTE/QUOT), ASSO(+RELA/NOTE/QUOT), FAMC/FAMS
+- Tout surnom / appellation du livre distincte du `NAME` officiel → `2 NICK` (ex. Jeanne de Joinville → `lady Mortimer`). Plusieurs `NICK` ou `1 NAME` secondaires possibles.
 - QUOT avec `TYPE Première mention` → `person.firstMentions` (hors liste des citations dialogue)
 - ASSO.citations + FAM.citations → preuves dans la fiche de lien
 - Dates GED (`1268`, `ABT 1270`, `13 NOV 1312`, `MAR 1314`, `BET … AND …`) pour âges narratifs

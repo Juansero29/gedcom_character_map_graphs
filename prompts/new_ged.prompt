@@ -14,7 +14,14 @@ Use `Non précisé` instead of `N/A`. The entire .ged content for this book must
 
 For each individual, their id should be composed of 4 digit numbers. State their birth/death dates and places, gender in the appropriate GEDCOM tags. State in their NOTE tags, a description of the character, of their traits (physical and mental), role in the intrigue, occupation, main political views and main decisive actions as well as any quotes of important phrases they said in the chapter that made them stand out that give important cues of their personality and important actions in the plot. Be sure to include in the notes any important events in the character's story that lead to develop further the intrigue up to this point. Be sure of not reading any further in the book as to not spoil anything else.
 
-Also for each individual, be sure to establish association links with the tag ASSO between people that are not blood-related but still know each other or are related in any shape or form: they have talked. Describe the ASSO tag using the RELA tag to label their relationship and additional NOTE tags if necessary explaining the relationship or association between this people. The ASSO tags should be inside the INDI blocks, and not at the end of the file.
+CRITICAL — blood/family vs ASSO are mutually exclusive:
+- Consanguinity and legal family (époux/épouse, parent/enfant, frères/sœurs) MUST be modeled only with `FAM` / `FAMS` / `FAMC` (red links in the app). Never also as `ASSO`.
+- Encode the full useful tree even when the book only names a kinship in passing (aïeul, petite-fille…): every hop needs a `FAM` so the UI can highlight lineage by depth (child = 1, grandchild = 2, great-grandchild = 3).
+- `ASSO` is only for non-family ties (alliés, ennemis, conseillers, parrain/filleule, rivaux, etc.).
+- Do NOT create an `ASSO` labeled Parenté, Cousin, Oncle, Tante, Neveu, Nièce, Fils, Époux, Descendante, Petite-fille, etc. If the book stresses a kinship that is already in the tree, put plot context in `NOTE` on the people/FAM — not a second dashed link.
+- If a tie is both political and familial, keep only the non-family angle in `ASSO` (e.g. `Allié`, `Ennemie`) and let `FAM` carry the blood/marriage.
+
+Also for each individual, establish `ASSO` only between people who are not linked as family above but still know each other in the plot (talked, allied, opposed…). Describe with `RELA` + `NOTE`. ASSO tags must stay inside INDI blocks.
 
 CRITICAL — book evidence for every relationship:
 For EVERY ASSO (and for FAM blocks when the family bond is stated in the text), you MUST include at least one `2 QUOT` tag containing a verbatim quotation from the book (prologue/chapters read so far) that justifies why this relationship exists. Do not invent quotes. Prefer the most direct sentence(s). Keep explanatory context in `2 NOTE`, and put the raw book proof in `2 QUOT` only.
@@ -43,6 +50,14 @@ When finishing a chapter snapshot, also prepare (or update) narrative chronology
 }
 ```
 `start` / `end` = narrative clock for the span covered by this snapshot (not publication time). `spanLabel` = human duration of story-time between start and end. `moments` = key dated beats the scrubber can snap to. Do not invent dates that contradict the text; if only “mars 1314” / “un après-midi” is known, say so in `note` and use a conventional day only as a frieze anchor.
+
+CRITICAL — nicknames / alternate appellations:
+Whenever the book calls a character by a surname, title-nickname, or other label distinct from their official `1 NAME` (e.g. Jeanne de Joinville → lady Mortimer, Pierre de Gaveston → le Béarnais, Marguerite de Bourgogne → Marguerite la Putain), add it under the name:
+```
+1 NAME Jeanne de /Joinville/
+2 NICK lady Mortimer
+```
+Do not leave book nicknames only in NOTE prose — they must appear as `2 NICK` (or a secondary `1 NAME`) so the character sheet and search can show them.
 
 CRITICAL — first naming evidence on every individual:
 For EVERY INDI without exception, add one or more first-mention citations so the character sheet can show when they enter the textual world. Prefer:

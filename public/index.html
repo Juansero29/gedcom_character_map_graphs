@@ -60,11 +60,6 @@
         ></div>
 
         <footer class="library-footer">
-          <div class="lang-switch" role="group" aria-label="Language">
-            <button type="button" class="lang-btn" data-lang="en">EN</button>
-            <button type="button" class="lang-btn" data-lang="fr">FR</button>
-            <button type="button" class="lang-btn" data-lang="es">ES</button>
-          </div>
           <label for="gedcomFile" class="btn btn-primary">
             <i class="fa-solid fa-upload"></i>
             <span data-i18n="openCustom">Open custom .GED</span>
@@ -79,6 +74,105 @@
             <i class="fab fa-github"></i>
             <span data-i18n="sourceReadme">Source & README</span>
           </a>
+          <div class="settings-anchor">
+            <button
+              type="button"
+              id="settingsToggle"
+              class="btn btn-ghost settings-toggle"
+              aria-expanded="false"
+              aria-controls="settingsPopover"
+              data-i18n-title="settingsHint"
+              title="Settings"
+            >
+              <i class="fa-solid fa-gear" aria-hidden="true"></i>
+              <span data-i18n="settingsTitle">Settings</span>
+            </button>
+            <div
+              id="settingsPopover"
+              class="settings-popover is-hidden"
+              role="dialog"
+              aria-labelledby="settingsPopoverTitle"
+            >
+              <header class="filters-popover-head">
+                <h2 id="settingsPopoverTitle" data-i18n="settingsTitle">Settings</h2>
+                <button
+                  type="button"
+                  id="settingsClose"
+                  class="filters-close"
+                  data-i18n-aria="settingsClose"
+                  aria-label="Close settings"
+                >
+                  <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+              </header>
+
+              <fieldset class="filters-fieldset">
+                <legend data-i18n="settingsLanguage">Language</legend>
+                <div class="lang-switch" role="group" aria-label="Language">
+                  <button type="button" class="lang-btn" data-lang="en">EN</button>
+                  <button type="button" class="lang-btn" data-lang="fr">FR</button>
+                  <button type="button" class="lang-btn" data-lang="es">ES</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="filters-fieldset">
+                <legend data-i18n="settingsLayout">Layout</legend>
+                <div class="layout-switch" role="group" aria-label="Layout">
+                  <button
+                    type="button"
+                    class="layout-btn"
+                    data-layout="genealogy"
+                    data-i18n-title="layoutGenealogyHint"
+                    title="Generation by generation"
+                  >
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span data-i18n="layoutGenealogy">Genealogy</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="layout-btn"
+                    data-layout="chrono"
+                    data-i18n-title="layoutChronoHint"
+                    title="Chronological by birth"
+                  >
+                    <i class="fa-solid fa-timeline"></i>
+                    <span data-i18n="layoutChrono">Chronological</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="layout-btn"
+                    data-layout="force"
+                    data-i18n-title="layoutForceHint"
+                    title="Free force layout"
+                  >
+                    <i class="fa-solid fa-circle-nodes"></i>
+                    <span data-i18n="layoutForce">Free</span>
+                  </button>
+                </div>
+              </fieldset>
+
+              <label
+                class="filters-field"
+                data-i18n-title="horizontalSpreadHint"
+                title="Horizontal spread"
+              >
+                <span class="filters-label">
+                  <span data-i18n="horizontalSpread">Spread</span>
+                  <span id="spreadValue" class="filters-inline-value">2.0×</span>
+                </span>
+                <input
+                  type="range"
+                  id="spreadSlider"
+                  min="100"
+                  max="350"
+                  step="10"
+                  value="200"
+                  aria-valuemin="100"
+                  aria-valuemax="350"
+                />
+              </label>
+            </div>
+          </div>
         </footer>
       </aside>
 
@@ -97,54 +191,199 @@
         <div id="mainLayout">
           <div id="graphContainer">
             <div class="stage-topbar">
-              <div class="layout-switch" role="group" aria-label="Layout">
+              <div class="filters-anchor">
                 <button
                   type="button"
-                  class="layout-btn"
-                  data-layout="hierarchy"
-                  data-i18n-title="layoutHierarchyHint"
-                  title="Hierarchy by birth"
+                  id="filtersToggle"
+                  class="filters-toggle"
+                  aria-expanded="false"
+                  aria-controls="filtersPopover"
+                  data-i18n-title="filtersHint"
+                  title="Filters"
                 >
-                  <i class="fa-solid fa-timeline"></i>
-                  <span data-i18n="layoutHierarchy">Hierarchy</span>
+                  <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                  <span data-i18n="filtersTitle">Filters</span>
+                  <span id="filtersBadge" class="filters-badge is-hidden">0</span>
                 </button>
-                <button
-                  type="button"
-                  class="layout-btn"
-                  data-layout="force"
-                  data-i18n-title="layoutForceHint"
-                  title="Free force layout"
+                <div
+                  id="filtersPopover"
+                  class="filters-popover is-hidden"
+                  role="dialog"
+                  aria-labelledby="filtersPopoverTitle"
                 >
-                  <i class="fa-solid fa-circle-nodes"></i>
-                  <span data-i18n="layoutForce">Free</span>
-                </button>
+                  <header class="filters-popover-head">
+                    <h2 id="filtersPopoverTitle" data-i18n="filtersTitle">Filters</h2>
+                    <button
+                      type="button"
+                      id="filtersClose"
+                      class="filters-close"
+                      data-i18n-aria="filtersClose"
+                      aria-label="Close filters"
+                    >
+                      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                  </header>
+
+                  <label class="filters-field">
+                    <span class="filters-label" data-i18n="searchCharacters">Search characters…</span>
+                    <input
+                      type="search"
+                      id="searchBox"
+                      data-i18n-placeholder="searchCharacters"
+                      placeholder="Search characters…"
+                      autocomplete="off"
+                    />
+                  </label>
+
+                  <div
+                    class="filters-field"
+                    data-i18n-title="linkDepthHint"
+                    title="Link depth"
+                  >
+                    <span class="filters-label">
+                      <span data-i18n="linkDepth">Depth</span>
+                      <span id="linkDepthValue" class="filters-inline-value">0 / 0</span>
+                    </span>
+                    <div
+                      class="filters-chips filters-chips--depth"
+                      role="radiogroup"
+                      data-i18n-aria="linkDepthMode"
+                      aria-label="Depth mode"
+                    >
+                      <label class="filters-chip">
+                        <input
+                          type="radio"
+                          name="linkDepthMode"
+                          value="upto"
+                          checked
+                        />
+                        <span data-i18n="linkDepthModeUpto">Up to</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="linkDepthMode" value="exact" />
+                        <span data-i18n="linkDepthModeExact">Only</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="linkDepthMode" value="all" />
+                        <span data-i18n="linkDepthModeAll">All blood</span>
+                      </label>
+                    </div>
+                    <input
+                      type="range"
+                      id="linkDepthSlider"
+                      min="0"
+                      max="1"
+                      step="1"
+                      value="1"
+                      aria-valuemin="0"
+                      aria-valuemax="1"
+                    />
+                  </div>
+
+                  <fieldset class="filters-fieldset">
+                    <legend data-i18n="filterLinkKind">Links</legend>
+                    <div
+                      class="filters-chips"
+                      role="radiogroup"
+                      data-i18n-aria="filterLinkKind"
+                      aria-label="Link kind"
+                    >
+                      <label class="filters-chip">
+                        <input
+                          type="radio"
+                          name="filterLinkKind"
+                          value="all"
+                          checked
+                        />
+                        <span data-i18n="filterLinkKindAll">All links</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterLinkKind" value="blood" />
+                        <span data-i18n="filterLinkKindBlood">Blood only</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterLinkKind" value="other" />
+                        <span data-i18n="filterLinkKindOther">Other only</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="filters-fieldset">
+                    <legend data-i18n="filterSex">Sex</legend>
+                    <div class="filters-chips" role="radiogroup" aria-label="Sex">
+                      <label class="filters-chip">
+                        <input type="radio" name="filterSex" value="all" checked />
+                        <span data-i18n="filterSexAll">All</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterSex" value="M" />
+                        <span data-i18n="filterSexMale">Men</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterSex" value="F" />
+                        <span data-i18n="filterSexFemale">Women</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="filters-fieldset">
+                    <legend data-i18n="filterBirth">Birth year</legend>
+                    <div class="filters-year-row">
+                      <label class="filters-field filters-field--half">
+                        <span class="filters-label" data-i18n="filterBirthAfter">Born after</span>
+                        <input
+                          type="number"
+                          id="filterBirthAfter"
+                          inputmode="numeric"
+                          placeholder="e.g. 1250"
+                          min="1"
+                          max="9999"
+                        />
+                      </label>
+                      <label class="filters-field filters-field--half">
+                        <span class="filters-label" data-i18n="filterBirthBefore">Born before</span>
+                        <input
+                          type="number"
+                          id="filterBirthBefore"
+                          inputmode="numeric"
+                          placeholder="e.g. 1320"
+                          min="1"
+                          max="9999"
+                        />
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="filters-fieldset">
+                    <legend data-i18n="filterVitality">Living status</legend>
+                    <div class="filters-chips" role="radiogroup">
+                      <label class="filters-chip">
+                        <input type="radio" name="filterVitality" value="all" checked />
+                        <span data-i18n="filterVitalityAll">All</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterVitality" value="living" />
+                        <span data-i18n="filterVitalityLiving">Living</span>
+                      </label>
+                      <label class="filters-chip">
+                        <input type="radio" name="filterVitality" value="deceased" />
+                        <span data-i18n="filterVitalityDeceased">Deceased</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <label class="filters-check">
+                    <input type="checkbox" id="filterBookEvidence" />
+                    <span data-i18n="filterBookEvidence">Only with first mention in the book</span>
+                  </label>
+
+                  <footer class="filters-popover-foot">
+                    <button type="button" id="filtersReset" class="btn filters-reset" data-i18n="filtersReset">
+                      Reset filters
+                    </button>
+                  </footer>
+                </div>
               </div>
-              <label
-                class="spread-control"
-                data-i18n-title="horizontalSpreadHint"
-                title="Horizontal spread"
-              >
-                <i class="fa-solid fa-left-right" aria-hidden="true"></i>
-                <span class="spread-label" data-i18n="horizontalSpread">Spread</span>
-                <input
-                  type="range"
-                  id="spreadSlider"
-                  min="100"
-                  max="350"
-                  step="10"
-                  value="200"
-                  aria-valuemin="100"
-                  aria-valuemax="350"
-                />
-                <span id="spreadValue" class="spread-value">2.0×</span>
-              </label>
-              <input
-                type="search"
-                id="searchBox"
-                data-i18n-placeholder="searchCharacters"
-                placeholder="Search characters…"
-                oninput="searchGraph()"
-              />
             </div>
             <div id="emptyState" class="empty-state">
               <div class="mark" aria-hidden="true"></div>
@@ -160,31 +399,46 @@
               class="narrative-panel is-hidden"
               aria-label="Narrative chronology"
             >
-              <header class="narrative-head">
-                <div>
-                  <div class="narrative-kicker" data-i18n="narrativeTitle">
-                    Narrative time
+              <button
+                type="button"
+                id="narrativeToggle"
+                class="narrative-toggle"
+                aria-expanded="true"
+                aria-controls="narrativeBody"
+                data-i18n-title="narrativeToggleHint"
+                title="Show or hide narrative time"
+              >
+                <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                <span data-i18n="narrativeTitle">Narrative time</span>
+                <span id="narrativeWhenCollapsed" class="narrative-toggle-when"></span>
+              </button>
+              <div id="narrativeBody" class="narrative-body">
+                <header class="narrative-head">
+                  <div>
+                    <div class="narrative-kicker" data-i18n="narrativeTitle">
+                      Narrative time
+                    </div>
+                    <div id="narrativeWhen" class="narrative-when"></div>
                   </div>
-                  <div id="narrativeWhen" class="narrative-when"></div>
-                </div>
-                <div id="narrativeSpan" class="narrative-span"></div>
-              </header>
-              <p id="narrativeMeta" class="narrative-meta"></p>
-              <label class="narrative-slider-wrap">
-                <span class="narrative-slider-label" data-i18n="narrativeScrub">
-                  Scrub the chapter
-                </span>
-                <input
-                  type="range"
-                  id="narrativeSlider"
-                  min="0"
-                  max="1000"
-                  value="0"
-                  step="1"
-                />
-              </label>
-              <div id="narrativeMoment" class="narrative-moment"></div>
-              <div id="narrativeTicks" class="narrative-ticks" aria-hidden="true"></div>
+                  <div id="narrativeSpan" class="narrative-span"></div>
+                </header>
+                <p id="narrativeMeta" class="narrative-meta"></p>
+                <label class="narrative-slider-wrap">
+                  <span class="narrative-slider-label" data-i18n="narrativeScrub">
+                    Scrub the chapter
+                  </span>
+                  <input
+                    type="range"
+                    id="narrativeSlider"
+                    min="0"
+                    max="1000"
+                    value="0"
+                    step="1"
+                  />
+                </label>
+                <div id="narrativeMoment" class="narrative-moment"></div>
+                <div id="narrativeTicks" class="narrative-ticks" aria-hidden="true"></div>
+              </div>
             </section>
             <aside id="graphLegend" class="graph-legend" aria-live="polite">
               <button
