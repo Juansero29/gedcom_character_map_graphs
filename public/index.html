@@ -3,295 +3,241 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GEDCOM Graph</title>
+    <title>Character Maps — GEDCOM Graphs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;600;700&display=swap"
       rel="stylesheet"
-      href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-		<style>
-  body {
-    margin: 0;
-    font-family: "Helvetica", "Arial", sans-serif;
-    overflow: hidden;
-    height: 100vh;
-  }
-
-  #controls {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-  }
-
-  #treeView {
-    position: absolute;
-    top: 40px;
-    left: 8px;
-    width: 250px;
-    height: 90vh;
-    overflow-y: auto;
-    background: #fff;
-    border: 1px solid #ccc;
-    z-index: 10;
-    padding: 10px;
-    display: none;
-  }
-
-  #toggleTreeView {
-    display: none;
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 10;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #6200ea;
-    color: white;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-
-  #toggleTreeView:hover {
-    background-color: #3700b3;
-  }
-
-  #gedcomFileLabel,
-  #readMeButton {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #6200ea;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 10px;
-  }
-
-  #gedcomFileLabel:hover,
-  #readMeButton:hover {
-    background-color: #3700b3;
-  }
-
-  #gedcomFile {
-    display: none;
-  }
-
-  #searchBox {
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 20px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-
-  #mainLayout {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  #graphContainer {
-    flex: 1;
-    overflow: hidden;
-    height: 100vh;
-  }
-
-  #modalContainer {
-    width: 50vw;
-    height: 100vh;
-    overflow-y: auto;
-    background: white;
-    border-left: 2px solid #ccc;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
-    transition: all 0.3s ease;
-		padding-bottom: 60px;
-  }
-
-  #modalContent {
-    font-family: "Helvetica", "Arial", sans-serif;
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-color: #f9f9f9;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  ul {
-    list-style-type: none;
-    padding-left: 20px;
-  }
-
-  li {
-    padding: 4px 0;
-  }
-
-  a {
-    text-decoration: none;
-    color: #6200ea;
-    transition: color 0.3s;
-  }
-
-  a:hover {
-    color: #3700b3;
-  }
-
-  .node.faded circle,
-  .link.faded {
-    opacity: 0.1;
-  }
-
-  .node circle,
-  .link {
-    transition: opacity 0.3s;
-  }
-
-  .link-tooltip {
-    font-family: sans-serif;
-    font-size: 14px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .modal-flex {
-    display: flex;
-    flex-direction: row;
-    height: calc(100% - 40px); /* Leave space for close button */
-    width: 100%;
-  }
-
-  .profile-pane {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    border-right: 1px solid #ccc;
-  }
-
-  .profile-pane:last-child {
-    border-right: none;
-  }
-
-  .relation-header {
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-	
-	#modalContainer button {
-		  position: sticky;
-		  bottom: 10px;
-		  float: right;
-		  margin: 18px;
-		  background-color: #6200ea;
-		  color: white;
-		  padding: 15px;
-		  border: none;
-		  border-radius: 4px;
-		  cursor: pointer;
-		}
-
-  /* 🔁 Responsive layout for mobile */
-  @media (max-width: 768px) {
-    #mainLayout {
-      flex-direction: column;
-    }
-
-    #graphContainer {
-      width: 100vw;
-      height: 66vh;
-    }
-
-    #modalContainer {
-      width: 100vw;
-      height: 34vh;
-      border-left: none;
-      border-top: 2px solid #ccc;
-      padding: 20px;
-      overflow-y: auto;
-      box-sizing: border-box;
-      padding-bottom: 60px; /* for close button */
-    }
-
-    .modal-flex {
-      flex-direction: column;
-      height: auto;
-    }
-
-    .profile-pane {
-      border-right: none;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .profile-pane:last-child {
-      border-bottom: none;
-    }
-
-		#modalContainer button {
-		  position: sticky;
-		  bottom: 10px;
-		  float: right;
-		  margin: 18px;
-		  background-color: #6200ea;
-		  color: white;
-		  padding: 15px;
-		  border: none;
-		  border-radius: 4px;
-		  cursor: pointer;
-		}
-  }
-</style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="treeView"></div>
-    <div id="toggleTreeView" onclick="toggleTree()">Show Files</div>
+    <div class="app-shell" id="appShell">
+      <aside class="library" id="library">
+        <header class="library-brand">
+          <div class="library-brand-top">
+            <span class="eyebrow" data-i18n="eyebrow">Literary graphs</span>
+            <button
+              type="button"
+              class="icon-btn"
+              id="collapseLibrary"
+              data-i18n-title="hideLibrary"
+              data-i18n-aria="hideLibrary"
+              title="Hide library"
+              aria-label="Hide library"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+          </div>
+          <h1 data-i18n="brandTitle">Character Maps</h1>
+          <p data-i18n="brandSubtitle">
+            Explore casts, bloodlines, and alliances chapter by chapter.
+          </p>
+        </header>
 
-    <div id="controls">
-      <a
-        id="readMeButton"
-        href="https://github.com/Juansero29/gedcom_character_map_graphs"
-        target="_blank"
-      >
-        <i class="fab fa-github"></i> READ ME
-      </a>
-      <label for="gedcomFile" id="gedcomFileLabel">Choose Custom .GED</label>
-      <input type="file" id="gedcomFile" />
-      <input
-        type="text"
-        id="searchBox"
-        placeholder="Search..."
-        oninput="searchGraph()"
-      />
-    </div>
+        <div class="library-toolbar">
+          <input
+            id="librarySearch"
+            class="library-search"
+            type="search"
+            data-i18n-placeholder="filterBooks"
+            placeholder="Filter books…"
+            autocomplete="off"
+          />
+        </div>
 
-    <div id="mainLayout">
-      <div id="graphContainer">
-        <svg viewBox="-200 -200 800 800"></svg>
-      </div>
-			<div id="modalContainer" class="hidden">
-  <div id="modalContent"></div>
-  <button class="close-button" onclick="closeModal()">CLOSE</button>
-</div>
+        <div id="libraryStatus" class="library-status" hidden></div>
+        <div
+          id="bookList"
+          class="library-scroll"
+          data-i18n-aria="booksAria"
+          aria-label="Available books"
+        ></div>
+
+        <footer class="library-footer">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+            <button type="button" class="lang-btn" data-lang="fr">FR</button>
+            <button type="button" class="lang-btn" data-lang="es">ES</button>
+          </div>
+          <label for="gedcomFile" class="btn btn-primary">
+            <i class="fa-solid fa-upload"></i>
+            <span data-i18n="openCustom">Open custom .GED</span>
+          </label>
+          <input type="file" id="gedcomFile" accept=".ged,.GED" />
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/Juansero29/gedcom_character_map_graphs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-github"></i>
+            <span data-i18n="sourceReadme">Source & README</span>
+          </a>
+        </footer>
+      </aside>
+
+      <main class="stage">
+        <button
+          type="button"
+          class="btn btn-primary sidebar-toggle"
+          id="sidebarToggle"
+          data-i18n-aria="showLibrary"
+          aria-label="Show library"
+        >
+          <i class="fa-solid fa-books"></i>
+          <span data-i18n="library">Library</span>
+        </button>
+
+        <div id="mainLayout">
+          <div id="graphContainer">
+            <div class="stage-topbar">
+              <div class="layout-switch" role="group" aria-label="Layout">
+                <button
+                  type="button"
+                  class="layout-btn"
+                  data-layout="hierarchy"
+                  data-i18n-title="layoutHierarchyHint"
+                  title="Hierarchy by birth"
+                >
+                  <i class="fa-solid fa-timeline"></i>
+                  <span data-i18n="layoutHierarchy">Hierarchy</span>
+                </button>
+                <button
+                  type="button"
+                  class="layout-btn"
+                  data-layout="force"
+                  data-i18n-title="layoutForceHint"
+                  title="Free force layout"
+                >
+                  <i class="fa-solid fa-circle-nodes"></i>
+                  <span data-i18n="layoutForce">Free</span>
+                </button>
+              </div>
+              <label
+                class="spread-control"
+                data-i18n-title="horizontalSpreadHint"
+                title="Horizontal spread"
+              >
+                <i class="fa-solid fa-left-right" aria-hidden="true"></i>
+                <span class="spread-label" data-i18n="horizontalSpread">Spread</span>
+                <input
+                  type="range"
+                  id="spreadSlider"
+                  min="100"
+                  max="350"
+                  step="10"
+                  value="200"
+                  aria-valuemin="100"
+                  aria-valuemax="350"
+                />
+                <span id="spreadValue" class="spread-value">2.0×</span>
+              </label>
+              <input
+                type="search"
+                id="searchBox"
+                data-i18n-placeholder="searchCharacters"
+                placeholder="Search characters…"
+                oninput="searchGraph()"
+              />
+            </div>
+            <div id="emptyState" class="empty-state">
+              <div class="mark" aria-hidden="true"></div>
+              <h2 data-i18n="emptyTitle">Pick a book to begin</h2>
+              <p data-i18n="emptyBody">
+                Choose a title in the library, then open a chapter snapshot to
+                map its characters.
+              </p>
+            </div>
+            <div id="nowPlaying" class="now-playing" aria-live="polite"></div>
+            <section
+              id="narrativePanel"
+              class="narrative-panel is-hidden"
+              aria-label="Narrative chronology"
+            >
+              <header class="narrative-head">
+                <div>
+                  <div class="narrative-kicker" data-i18n="narrativeTitle">
+                    Narrative time
+                  </div>
+                  <div id="narrativeWhen" class="narrative-when"></div>
+                </div>
+                <div id="narrativeSpan" class="narrative-span"></div>
+              </header>
+              <p id="narrativeMeta" class="narrative-meta"></p>
+              <label class="narrative-slider-wrap">
+                <span class="narrative-slider-label" data-i18n="narrativeScrub">
+                  Scrub the chapter
+                </span>
+                <input
+                  type="range"
+                  id="narrativeSlider"
+                  min="0"
+                  max="1000"
+                  value="0"
+                  step="1"
+                />
+              </label>
+              <div id="narrativeMoment" class="narrative-moment"></div>
+              <div id="narrativeTicks" class="narrative-ticks" aria-hidden="true"></div>
+            </section>
+            <aside id="graphLegend" class="graph-legend" aria-live="polite">
+              <button
+                type="button"
+                id="legendToggle"
+                class="legend-toggle"
+                aria-expanded="true"
+                aria-controls="legendPanel"
+                data-i18n-title="legendToggleHint"
+                title="Show or hide legend"
+              >
+                <i class="fa-solid fa-map" aria-hidden="true"></i>
+                <span data-i18n="legendTitle">Legend</span>
+              </button>
+              <div id="legendPanel" class="legend-panel">
+                <ul class="legend-list">
+                  <li>
+                    <span class="legend-swatch legend-dot legend-dot--m" aria-hidden="true"></span>
+                    <span data-i18n="legendMale">Man</span>
+                  </li>
+                  <li>
+                    <span class="legend-swatch legend-dot legend-dot--f" aria-hidden="true"></span>
+                    <span data-i18n="legendFemale">Woman</span>
+                  </li>
+                  <li>
+                    <span class="legend-swatch legend-line legend-line--family" aria-hidden="true"></span>
+                    <span data-i18n="legendFamily">Blood / family link</span>
+                  </li>
+                  <li>
+                    <span class="legend-swatch legend-line legend-line--assoc" aria-hidden="true"></span>
+                    <span data-i18n="legendAssociation">Other association</span>
+                  </li>
+                  <li>
+                    <span class="legend-swatch legend-cross" aria-hidden="true">✝</span>
+                    <span data-i18n="legendDeceased">Deceased</span>
+                  </li>
+                </ul>
+              </div>
+            </aside>
+            <svg></svg>
+          </div>
+          <div id="modalContainer" class="hidden">
+            <div id="modalContent"></div>
+            <button class="close-button" onclick="closeModal()" data-i18n="close">
+              Close
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="i18n.js"></script>
     <script src="graph.js"></script>
   </body>
 </html>

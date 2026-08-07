@@ -1,0 +1,207 @@
+{
+  "books": [
+    {
+      "id": "les-rois-maudits/le-roi-de-fer",
+      "title": "Le Roi de fer",
+      "series": "Les Rois maudits",
+      "author": "Maurice Druon",
+      "blurb": "Philippe le Bel, Isabelle d’Angleterre et la malédiction des Templiers.",
+      "chapters": [
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-1.ged",
+          "label": "Prologue & chapitre 1",
+          "title": "La reine sans amour",
+          "narrative": {
+            "start": "1314-03-15T14:00:00",
+            "end": "1314-03-15T18:00:00",
+            "spanLabel": "Un après-midi (quelques heures)",
+            "location": "Château de Westminster, Angleterre",
+            "note": "Le récit situe l'action « un après-midi de mars 1314 » ; le jour exact n'est pas précisé (le 15 sert de jalon pour la frise).",
+            "sourceQuote": "longue entrevue, un après-midi de mars 1314, au château de Westminster",
+            "moments": [
+              {
+                "at": "1314-03-15T14:00:00",
+                "label": "Isabelle à Westminster",
+                "summary": "La reine écoute un poème d'amour ; jour de mars avare en lumière."
+              },
+              {
+                "at": "1314-03-15T14:30:00",
+                "label": "Premier mot du prince",
+                "summary": "Lady Mortimer amène le petit Édouard, qui dit « Veux ! »."
+              },
+              {
+                "at": "1314-03-15T15:00:00",
+                "label": "Arrivée de Robert d'Artois",
+                "summary": "Monseigneur le comte Robert d'Artois est annoncé auprès de la reine."
+              },
+              {
+                "at": "1314-03-15T15:40:00",
+                "label": "Révélation de la tour de Nesle",
+                "summary": "Robert accuse Marguerite, Blanche et Jeanne d'adultère aux nuits d'absence de Louis."
+              },
+              {
+                "at": "1314-03-15T16:30:00",
+                "label": "Le plan se forme",
+                "summary": "Madame de Comminges, aumônières-pièges, lettres à Valois et pour Jacques de Molay."
+              },
+              {
+                "at": "1314-03-15T18:00:00",
+                "label": "Fin de l'entrevue",
+                "summary": "Isabelle refuse l'adultère mais scelle l'alliance politique avec Robert."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "01-three-body-problem",
+      "title": "The Three-Body Problem",
+      "series": "Remembrance of Earth’s Past",
+      "author": "Liu Cixin",
+      "blurb": "Character map built chapter by chapter through the first novel.",
+      "chapters": [
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-1.ged",
+          "label": "Chapter 1",
+          "title": "The Madness Years"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-2.ged",
+          "label": "Chapter 2",
+          "title": "Silent Spring"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-3.ged",
+          "label": "Chapter 3",
+          "title": "Red Coast I"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-4.ged",
+          "label": "Chapter 4",
+          "title": "The Frontiers of Science"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-5.ged",
+          "label": "Chapter 5",
+          "title": "A Game of Pool"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-6.ged",
+          "label": "Chapter 6",
+          "title": "The Shooter and the Farmer"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-7.ged",
+          "label": "Chapter 7",
+          "title": "Three Body: King Wen of Zhou and the Long Night"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-8.ged",
+          "label": "Chapter 8",
+          "title": "Ye Wenjie"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-9.ged",
+          "label": "Chapter 9",
+          "title": "The Universe Flickers"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-10.ged",
+          "label": "Chapter 10",
+          "title": "Da Shi"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-11.ged",
+          "label": "Chapter 11",
+          "title": "Three Body: Mozi and Fiery Flames"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-12.ged",
+          "label": "Chapter 12",
+          "title": "Red Coast II"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-13.ged",
+          "label": "Chapter 13",
+          "title": "Red Coast III"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-14.ged",
+          "label": "Chapter 14",
+          "title": "Red Coast IV"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-15.ged",
+          "label": "Chapter 15",
+          "title": "Three Body: Copernicus, Universal Football, and Tri-Solar Day"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-16.ged",
+          "label": "Chapter 16",
+          "title": "The Three-Body Problem"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-17.ged",
+          "label": "Chapter 17",
+          "title": "Three Body: Newton, Von Neumann, the First Emperor, and Tri-Solar Syzygy"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-18.ged",
+          "label": "Chapter 18",
+          "title": "Meet-up"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-19.ged",
+          "label": "Chapter 19",
+          "title": "Three Body: Einstein, the Pendulum Monument, and the Great Rip"
+        },
+        {
+          "file": "/ged/01-three-body-problem/up-to-chapter-20.ged",
+          "label": "Chapter 20",
+          "title": "Three Body: Expedition"
+        }
+      ]
+    },
+    {
+      "id": "a-song-of-ice-and-fire-game-of-thrones",
+      "title": "A Song of Ice and Fire",
+      "series": "Game of Thrones",
+      "author": "George R. R. Martin",
+      "blurb": "A wide cast map of Westeros and beyond.",
+      "chapters": [
+        {
+          "file": "/ged/a-song-of-ice-and-fire-game-of-thrones/ASOIAF.ged",
+          "label": "Full map",
+          "title": "ASOIAF cast"
+        }
+      ]
+    },
+    {
+      "id": "greek-mythology",
+      "title": "Greek Mythology",
+      "author": "Classical tradition",
+      "blurb": "Gods, heroes, and their tangled bloodlines.",
+      "chapters": [
+        {
+          "file": "/ged/greek-mythology/greek-myth.ged",
+          "label": "Full map",
+          "title": "Olympians & heroes"
+        }
+      ]
+    },
+    {
+      "id": "the-simpsons",
+      "title": "The Simpsons",
+      "author": "Matt Groening",
+      "blurb": "Springfield’s sprawling family and neighbors.",
+      "chapters": [
+        {
+          "file": "/ged/the-simpsons/the-simpsons.ged",
+          "label": "Full map",
+          "title": "The Simpsons"
+        }
+      ]
+    }
+  ]
+}

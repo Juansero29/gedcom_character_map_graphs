@@ -7,7 +7,6 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.static('public'));
 
 // Recursive function to get .ged files
 function getGedFiles(dir, fileList = []) {
@@ -25,6 +24,7 @@ function getGedFiles(dir, fileList = []) {
 }
 
 // Endpoint to list .ged files in the /ged directory
+// Registered before static so /ged is not captured by public/ged/
 app.get('/ged', (req, res) => {
     const gedDir = path.join(__dirname, 'public', 'ged');
     try {
@@ -36,10 +36,21 @@ app.get('/ged', (req, res) => {
 });
 
 // Endpoint to serve individual .ged files
+// UI calls /ged${fileName} where fileName already starts with /ged/...
 app.get('/ged/*', (req, res) => {
-    const filePath = path.join(__dirname, 'public', req.params[0]);
+    const rel = req.params[0];
+    const candidates = [
+        path.join(__dirname, 'public', rel),
+        path.join(__dirname, 'public', 'ged', rel),
+    ];
+    const filePath = candidates.find((p) => fs.existsSync(p));
+    if (!filePath) {
+        return res.status(404).send('File not found');
+    }
     res.sendFile(filePath);
 });
+
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

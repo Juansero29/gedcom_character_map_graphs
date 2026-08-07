@@ -1,0 +1,1090 @@
+0 HEAD
+1 SOUR Le Roi de fer
+1 GEDC
+2 VERS 5.5
+1 CHAR UTF-8
+
+0 @I0001@ INDI
+1 NAME Philippe IV /le Bel/
+1 SEX M
+1 BIRT
+2 DATE 1268
+2 PLAC Fontainebleau, France
+1 OCCU Roi de France
+1 QUOT "Au début du quatorzième siècle, Philippe IV, roi d'une beauté légendaire, régnait sur la France en maître absolu."
+2 TYPE Première mention
+1 QUOT "L'indépendance des Templiers inquiétait Philippe le Bel, en même temps que leurs biens immenses excitaient sa convoitise."
+2 TYPE Première mention
+1 NOTE Roi d'une beauté légendaire, maître absolu de la France au début du XIVe siècle. Calme et cruel, il place la raison d'État au-dessus de tout.
+2 CONT Traits physiques : Beauté légendaire. Traits mentaux : Calme, cruel, inflexible, calculateur.
+2 CONT Rôle : Souverain autour duquel gravitent alliances, procès des Templiers et scandales de cour.
+2 CONT Opinions politiques : Autorité royale absolue ; idée nationale ; soumission des barons, de l'Église et de la papauté (Avignon).
+2 CONT Actions décisives principales : Taxe l'Église, spolie les Juifs, frappe les Lombards, altère la monnaie ; monte le procès colossal contre le Temple.
+1 EVEN
+2 TYPE Procès contre l'Ordre du Temple
+2 DATE BET 1307 AND 1314
+2 PLAC France
+2 NOTE Procès de près de quinze mille inculpés, durant sept ans ; le récit commence au terme de cette septième année.
+1 EVEN
+2 TYPE Installation forcée de la papauté en Avignon
+2 PLAC Avignon, France
+2 NOTE A vaincu jusqu'à la Papauté en l'installant de force en Avignon.
+1 ASSO @I0015@
+2 RELA Conseiller
+2 NOTE Enguerrand de Marigny figure parmi les hommes « sortis de rien » qui, selon Robert d'Artois, ont frappé le Temple.
+2 NOTE Mahaut d'Artois aurait soudoyé Marigny pour favoriser les mariages bourguignons.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny ! En frappant le Temple"
+1 ASSO @I0016@
+2 RELA Conseiller
+2 NOTE Guillaume de Nogaret est associé, avec Marigny, à la destruction du Temple.
+2 NOTE Robert d'Artois affirme que Mahaut a aussi « soufflé malice » à l'oreille de Nogaret.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny ! En frappant le Temple"
+1 ASSO @I0017@
+2 RELA Adversaire
+2 NOTE Philippe le Bel a monté contre Jacques de Molay et les Templiers le plus vaste procès de l'Histoire.
+2 NOTE L'indépendance et les richesses du Temple inquiétaient et excitaient sa convoitise.
+2 QUOT "Un seul pouvoir avait osé lui tenir tête : l'Ordre souverain des chevaliers du Temple."
+1 ASSO @I0013@
+2 RELA Parenté / alliée politique
+2 NOTE Mahaut d'Artois a obtenu de lui le comté d'Artois et marié ses filles et sa cousine aux trois fils royaux.
+2 NOTE Robert d'Artois accuse ces alliances d'avoir été obtenues par ruse et corruption auprès des conseillers du roi.
+2 QUOT "elle est parvenue à marier vos trois frères à ses deux catins de filles et son autre catin de cousine."
+1 ASSO @I0009@
+2 RELA Parenté
+2 NOTE Robert d'Artois, cousin d'Isabelle, a perdu son procès d'héritage devant le roi et n'est plus bien en cour.
+2 NOTE Philippe croit si fort à la vertu des femmes que Robert n'ose pas encore lui dénoncer les adultères des brus.
+2 QUOT "Il croit tant à la vertu des femmes qu'il faudrait lui montrer vos belles-sœurs vautrées avec leurs galants pour qu'il consentît à m'entendre. Et je ne suis pas si bien en cour, depuis que j'ai perdu mon procès…"
+1 FAMS @F0001@
+
+0 @I0002@ INDI
+1 NAME Jeanne de /Champagne/
+1 SEX F
+1 BIRT
+2 DATE ABT 1270
+2 PLAC Champagne, France
+1 DEAT
+2 DATE APR 1305
+2 PLAC France
+1 OCCU Reine de France et de Navarre
+1 QUOT "Trois fils majeurs assuraient sa descendance. Sa fille était mariée au roi Edouard II d'Angleterre."
+2 TYPE Première mention
+1 NOTE Épouse défunte de Philippe le Bel, mère de Louis, Philippe, Charles et Isabelle. Mentionnée par le réseau dynastique du prologue et du chapitre.
+2 CONT Traits physiques : non précisés (absente du récit vivant). Traits mentaux : non précisés.
+2 CONT Rôle : Lien dynastique entre la couronne de France et la Navarre-Champagne.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Mariage de 1284 qui unit Navarre et France à la lignée capétienne.
+1 FAMS @F0001@
+
+0 @I0003@ INDI
+1 NAME Louis /de Navarre/
+1 SEX M
+1 BIRT
+2 DATE OCT 1289
+2 PLAC France
+1 OCCU Roi de Navarre ; fils aîné de Philippe le Bel ; futur héritier de France
+1 QUOT "ces mêmes nuits où votre frère Louis de Navarre est absent. Et la lumière y brille assez tard."
+2 TYPE Première mention
+1 NOTE Aîné des trois fils de Philippe le Bel. Époux de Marguerite de Bourgogne ; souvent absent, ce qui laisse la tour de Nesle libre pour les rendez-vous suspects.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (n'apparaît pas en personne dans le chapitre).
+2 CONT Rôle : Héritier ; mari trompé selon Robert d'Artois (« vos trois frères sont cocus »).
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Absences nocturnes de Paris / Navarre qui coïncident avec les lumières de la tour de Nesle.
+1 EVEN
+2 TYPE Soupçon d'adultère de son épouse
+2 DATE MAR 1314
+2 PLAC Hôtel de Nesle, Paris, France
+2 NOTE Robert d'Artois rapporte à Isabelle que Marguerite reçoit des amants quand Louis est absent.
+1 ASSO @I0010@
+2 RELA Épouse
+2 NOTE Marié à Marguerite de Bourgogne, reine de Navarre et future reine de France.
+2 NOTE Robert affirme que Marguerite pille sa cassette et aménage la tour de Nesle pour des « oraisons » nocturnes.
+2 QUOT "ces mêmes nuits où votre frère Louis de Navarre est absent"
+1 ASSO @I0014@
+2 RELA Oncle / influence
+2 NOTE Charles de Valois a grande influence sur Louis ; Isabelle doit lui écrire pour placer madame de Comminges auprès de Marguerite.
+2 NOTE Valois servirait d'intermédiaire sans connaître le fond du complot.
+2 QUOT "Il a grande influence sur votre frère Louis, et fera promptement entrer madame de Comminges à l'hôtel de Nesle."
+1 FAMS @F0003@
+1 FAMC @F0001@
+
+0 @I0004@ INDI
+1 NAME Philippe /de Poitiers/
+1 SEX M
+1 BIRT
+2 DATE 1291
+2 PLAC France
+1 OCCU Comte de Poitiers ; second fils de Philippe le Bel
+1 QUOT "si nous unissions ma chère petite Jeanne à Philippe, et puis ma douce Blanchette à votre beau Charles."
+2 TYPE Première mention
+1 NOTE Deuxième fils du roi, marié à Jeanne de Bourgogne. Désigné parmi les trois frères ridiculisés par les soupçons d'adultère.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Prince royal ; époux de Jeanne, jugée plus « matoise » que ses cousines.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Non encore présent sur scène ; enjeu dynastique des mariages bourguignons.
+1 ASSO @I0011@
+2 RELA Épouse
+2 NOTE Marié à Jeanne de Bourgogne, fille de Mahaut.
+2 NOTE Robert d'Artois la croit aussi coupable que Marguerite et Blanche, quoique plus habile.
+2 QUOT "Parce qu'à force de ruser ... elle est parvenue à marier vos trois frères à ses deux catins de filles et son autre catin de cousine."
+1 FAMS @F0004@
+1 FAMC @F0001@
+
+0 @I0005@ INDI
+1 NAME Charles /de la Marche/
+1 SEX M
+1 BIRT
+2 DATE 1294
+2 PLAC France
+1 OCCU Fils cadet de Philippe le Bel
+1 QUOT "si nous unissions ma chère petite Jeanne à Philippe, et puis ma douce Blanchette à votre beau Charles."
+2 TYPE Première mention
+1 NOTE Troisième fils du roi, marié à Blanche de Bourgogne. Robert d'Artois assure qu'il est trompé « assurément ».
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Prince royal ; cible du scandale annoncé.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Non encore sur scène.
+1 ASSO @I0012@
+2 RELA Épouse
+2 NOTE Marié à Blanche de Bourgogne, fille de Mahaut.
+2 NOTE Blanche rejoindrait Marguerite (et parfois Jeanne) à la tour de Nesle.
+2 QUOT "et puis ma douce Blanchette à votre beau Charles"
+1 FAMS @F0005@
+1 FAMC @F0001@
+
+0 @I0006@ INDI
+1 NAME Isabelle /de France/
+1 SEX F
+1 BIRT
+2 DATE 1292
+2 PLAC France
+1 OCCU Reine d'Angleterre ; fille de Philippe le Bel
+1 QUOT "Assise dans un haut siège de chêne au dossier surmonté des trois lions d'Angleterre, la reine Isabelle, le menton sur la paume, contemplait vaguement les lueurs du foyer."
+2 TYPE Première mention
+1 NOTE « La reine sans amour », vingt-deux ans, reine d'Angleterre mal-aimée d'Édouard II. Belle, autoritaire, lucide ; refuse de céder à Robert d'Artois tout en s'alliant à lui pour châtier ses belles-sœurs.
+2 CONT Traits physiques : Cheveux d'or en tresses relevées comme des anses d'amphore ; beaux yeux bleus ; visage de jeunesse royale.
+2 CONT Traits mentaux : Orgueil royal, clarté de jugement, cœur dur selon certains, soif d'amour et de reconnaissance.
+2 CONT Rôle : Protagoniste du chapitre 1 ; pivot du complot contre Marguerite, Jeanne et Blanche ; destin lié à la future guerre de Cent Ans.
+2 CONT Opinions politiques : Honneur de la famille capétienne ; refus d'intervenir dans le gouvernement du royaume de France (Temple) ; éducation franco-anglaise de son fils.
+2 CONT Actions décisives principales : Accueille Robert à Westminster (mars 1314) ; décide lettres à Valois et au roi pour madame de Comminges et la clémence envers Molay ; commande trois aumônières-pièges ; refuse l'adultère.
+1 QUOT "D'amour ne dois plus dire bien / Car je n'en ai ni peu ni rien…"
+1 QUOT "Si ce que vous m'annoncez est sûr, je ne le tolérerai pas. Je ne tolérerai pas semblable honte."
+1 QUOT "Je ne vais point faire ce que je reproche à mes belles-sœurs."
+1 QUOT "Ce que décide le roi mon père est bien décidé."
+1 QUOT "Une reine est la plus misérable des sujettes du royaume, si son mari ne l'aime point."
+1 EVEN
+2 TYPE Entrevue secrète avec Robert d'Artois
+2 DATE MAR 1314
+2 PLAC Château de Westminster, Angleterre
+2 NOTE Longue entrevue où elle reçoit les preuves naissantes de l'adultère des brus et forme un plan (espionne, cadeaux-pièges, lettre de clémence).
+1 EVEN
+2 TYPE Premier mot de son fils : « Veux ! »
+2 DATE MAR 1314
+2 PLAC Westminster, Angleterre
+2 NOTE Se réjouit que le premier mot du petit Édouard soit parole de roi.
+1 ASSO @I0009@
+2 RELA Cousin / allié
+2 NOTE Robert d'Artois vient de France lui confirmer les adultères et lui offrir son appui — et son désir.
+2 NOTE Elle le refuse charnellement mais s'allie politiquement : lettres, aumônières, attente d'un messager pour rentrer en France.
+2 QUOT "Mon cousin Monseigneur d'Artois m'a fait annoncer sa venue."
+1 ASSO @I0007@
+2 RELA Époux
+2 NOTE Mariée depuis six ans à Édouard II ; humiliée par ses mœurs et sa familiarité avec les maçons.
+2 NOTE Elle a contribué à faire abattre Gaveston ; depuis, le roi la néglige et favorise les Despenser.
+2 QUOT "Depuis six ans que je suis mariée, reprit-elle, je vis dans les truelles et le mortier."
+1 ASSO @I0008@
+2 RELA Fils
+2 NOTE Veille jalousement à son éducation : mots de roi et de reine, Pater, Ave, prière à Saint Louis, mémoire du grand-père Philippe.
+2 NOTE Confie l'enfant à lady Mortimer pour qu'il se sache de France autant que d'Angleterre.
+2 QUOT "Alors, messire mon fils, vous avez dit : « Je veux », dit Isabelle ... J'aime que cela ait été votre premier mot : c'est parole de roi."
+1 ASSO @I0010@
+2 RELA Belle-sœur / ennemie
+2 NOTE N'a jamais aimé Marguerite « dès le début » ; apprend qu'on l'appelle déjà « Marguerite la Putain ».
+2 NOTE Prépare de faux cadeaux d'amitié pour la faire se trahir.
+2 QUOT "Si ce que vous m'annoncez est sûr, je ne le tolérerai pas. Je ne tolérerai pas semblable honte"
+1 ASSO @I0011@
+2 RELA Belle-sœur / ennemie
+2 NOTE Soupçonne Jeanne avec les autres ; Robert la dit plus rusée.
+2 NOTE Les trois brus la haïraient par jalousie de sa vraie royauté.
+2 QUOT "Jeanne et Blanche ?… — Blanche, j'en suis assuré. Jeanne…"
+1 ASSO @I0012@
+2 RELA Belle-sœur / ennemie
+2 NOTE Blanche est « assurément » coupable selon Robert.
+2 NOTE Isabelle veut les voir « fort châtiées » faute de s'autoriser elle-même à fauter.
+2 QUOT "Jeanne et Blanche ?… — Blanche, j'en suis assuré."
+1 ASSO @I0014@
+2 RELA Oncle
+2 NOTE Doit écrire à Charles de Valois pour placer madame de Comminges et, à sa demande, pour plaider la clémence envers Molay.
+2 NOTE Ne l'avertit pas du fond du scandale : Valois « ne sait rien taire ».
+2 QUOT "Avez-vous prévenu mon oncle Valois ?"
+1 ASSO @I0017@
+2 RELA Parrain
+2 NOTE Jacques de Molay l'a tenue sur les fonts du baptême.
+2 NOTE Accepte d'écrire au roi pour la clémence, plus par habileté de Robert et pitié de reine que par conviction politique.
+2 QUOT "Rappelez-vous qu'il vous a tenue sur les fonts du baptême…"
+1 ASSO @I0021@
+2 RELA Dame de confiance
+2 NOTE A choisi Jeanne de Joinville (lady Mortimer) pour gouverner son fils, en souvenir de Joinville et de Saint Louis.
+2 NOTE Lady Mortimer lui annonce le premier mot de l'enfant et lui amène le petit prince.
+2 QUOT "Vous savez, ma mie, continua-t-elle, quelles raisons m'ont fait vous choisir pour gouverner mon fils."
+1 ASSO @I0018@
+2 RELA Rival passé (favori du roi)
+2 NOTE Gaveston gouvernait Édouard et recevait les joyaux de la cassette de mariage d'Isabelle.
+2 NOTE Elle s'était réjouie de sa décapitation ; elle le regrette presque face aux bas plaisirs actuels du roi.
+2 QUOT "Je croyais, reprit Isabelle, avoir connu le pire avec le chevalier de Gaveston."
+1 ASSO @I0019@
+2 RELA Favoris du roi (ennemis de fait)
+2 NOTE Les barons Despenser ont la faveur d'Édouard : le père gouverne le fils.
+2 NOTE Isabelle les désigne comme organisateurs et partageurs des plaisirs royaux.
+2 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils"
+1 ASSO @I0020@
+2 RELA Favori du roi
+2 NOTE Hugh le Jeune « sert de femme » à son époux, selon ses paroles amères.
+2 NOTE Symbole de l'humiliation conjugale de la reine.
+2 QUOT "le père gouvernant le fils, qui sert de femme à mon époux."
+1 FAMS @F0002@
+1 FAMC @F0001@
+
+0 @I0007@ INDI
+1 NAME Edouard II /Plantagenêt/
+1 SEX M
+1 BIRT
+2 DATE 1284
+2 PLAC Caernarfon, Pays de Galles
+1 OCCU Roi d'Angleterre
+1 QUOT "Trois fils majeurs assuraient sa descendance. Sa fille était mariée au roi Edouard II d'Angleterre."
+2 TYPE Première mention
+1 NOTE Mari d'Isabelle, d'une trentaine d'années ; bel homme aux cheveux ondulés, vu parmi les maçons de Westminster, souillé de plâtre, familier jusqu'à la bassesse.
+2 CONT Traits physiques : Assez bel homme, cheveux ondulés, larges épaules, hanches souples.
+2 CONT Traits mentaux : Négligent du devoir royal, amateur de familiarités douteuses, rancunier envers Isabelle après Gaveston.
+2 CONT Rôle : Roi indigne aux yeux d'Isabelle ; contraste avec l'autorité de Philippe le Bel.
+2 CONT Opinions politiques : Laisse gouverner qui organise ses plaisirs (Despenser) ; mœurs connues de toute l'Europe.
+2 CONT Actions décisives principales : Reconstruit sans fin Westminster ; fréquentait Gaveston ; court désormais bouges, truands, débardeurs ; néglige la reine.
+1 EVEN
+2 TYPE Travaux de maçonnerie à Westminster
+2 DATE MAR 1314
+2 PLAC Westminster, Angleterre
+2 NOTE Reconnu par Robert d'Artois parmi les ouvriers hissants une clef de voûte ; tient un jeune ouvrier par le cou.
+1 ASSO @I0006@
+2 RELA Épouse
+2 NOTE Marié à Isabelle depuis six ans ; ne l'approche plus guère.
+2 NOTE Ses mœurs et ses favoris sont le cœur de la misère conjugale de la reine.
+2 QUOT "Quant à moi, Edouard ne m'approche plus, et s'il lui arrive de s'aventurer dans ma couche, j'en éprouve une telle honte que j'en reste toute froide."
+1 ASSO @I0018@
+2 RELA Favori défunt
+2 NOTE Donnait à Gaveston les joyaux de la cassette de mariage d'Isabelle ; le Béarnais gouvernait le roi et le royaume.
+2 NOTE Après l'exécution de Gaveston, Édouard semble se venger en s'abaissant davantage.
+2 QUOT "Ce Béarnais insolent et vantard gouvernait si bien mon époux qu'il s'était mis à gouverner le royaume."
+1 ASSO @I0019@
+2 RELA Conseiller / favori
+2 NOTE Les Despenser ont sa faveur ; le père gouverne.
+2 NOTE Isabelle les accuse de commander le royaume pourvu qu'on partage ses plaisirs.
+2 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils"
+1 ASSO @I0020@
+2 RELA Favori
+2 NOTE Hugh le Jeune est présenté comme l'amant du roi.
+2 NOTE Vue depuis la fenêtre de la reine, la familiarité du roi avec les hommes du peuple confirme le soupçon.
+2 QUOT "le père gouvernant le fils, qui sert de femme à mon époux."
+1 FAMS @F0002@
+
+0 @I0008@ INDI
+1 NAME Edouard /d'Angleterre/
+1 SEX M
+1 BIRT
+2 DATE 13 NOV 1312
+2 PLAC Windsor, Angleterre
+1 OCCU Prince ; fils d'Édouard II et d'Isabelle
+1 QUOT "— Ah ! Messire Edouard,"
+2 TYPE Première mention
+1 QUOT "— Alors, messire mon fils, vous avez dit : « Je veux », dit Isabelle en se penchant pour lui caresser la joue."
+2 TYPE Première mention
+1 NOTE Enfant de quinze mois, rond, rose et gras, robe grenat brodée d'or. Dit « Veux ! » comme premier mot ; joue à cheval sur la botte de Robert d'Artois.
+2 CONT Traits physiques : Bébé gras et rose ; marche encore titubante.
+2 CONT Traits mentaux : Déjà affirmé (« Veux ! ») ; ravi des jeux du géant d'Artois.
+2 CONT Rôle : Garant de la descendance ; futur enjeu franco-anglais pressenti par le narrateur.
+2 CONT Opinions politiques : non précisées (nourrisson).
+2 CONT Actions décisives principales : Premier mot royal ; objet de l'éducation « de France autant que d'Angleterre ».
+1 QUOT "Veux !"
+1 EVEN
+2 TYPE Premier mot
+2 DATE MAR 1314
+2 PLAC Westminster, Angleterre
+2 NOTE Dit « Veux ! » parce qu'on lui refusait un morceau de galette.
+1 ASSO @I0009@
+2 RELA Parenté / protecteur potentiel
+2 NOTE Robert d'Artois le fait chevaucher sa botte rouge et l'appelle « messire Edouard ».
+2 NOTE Isabelle lie l'amitié future du cousin à sa loyauté envers eux.
+2 QUOT "Ah ! Messire Edouard, dit d'Artois, oserai-je plus tard ... vous rappeler que je vous ai fait ainsi chevaucher ma botte ?"
+1 FAMC @F0002@
+
+0 @I0009@ INDI
+1 NAME Robert III /d'Artois/
+1 SEX M
+1 BIRT
+2 DATE 1287
+2 PLAC France
+1 OCCU Comte de Beaumont-le-Roger ; seigneur de Conches ; cousin d'Isabelle
+1 QUOT "annonçant Monseigneur le comte Robert d'Artois. La reine s'adossa, bien droite, à son siège et croisa les mains sur la poitrine, dans une attitude d'idole."
+2 TYPE Première mention
+1 NOTE Géant de six pieds, vingt-sept ans, cuisses de chêne, poings de masses d'armes, bottes rouges boueuses, manteau vaste. Rieur, grossier, comédien de sa force ; haine tenace contre Mahaut et les Brus de Bourgogne ; désire Isabelle.
+2 CONT Traits physiques : Colosse ; menton rond, nez court, mâchoire large, estomac fort ; âge masqué par le muscle.
+2 CONT Traits mentaux : Vengeur franc, persuasif par l'excès, habile « sous ses airs de loup-garou », loyal allié d'Isabelle et de Valois.
+2 CONT Rôle : Messager et machinateur du chapitre 1 ; catalyseur du scandale de la tour de Nesle et de l'alliance anglo-artoisienne.
+2 CONT Opinions politiques : Contre Mahaut, Marigny, Nogaret ; pour la chevalerie et les hauts barons ; vengeance privée élevée en affaire d'État.
+2 CONT Actions décisives principales : Traverse la Manche malgré la tempête ; révèle les adultères ; propose espionne (Comminges) et aumônières-pièges ; demande lettre de clémence pour Molay ; tente de séduire Isabelle.
+1 QUOT "Vos trois frères sont cocus, Madame, cocus comme des manants !"
+1 QUOT "Mais bien sûr, Madame, j'agis par vengeance !"
+1 QUOT "Prenez un homme, Isabelle, et que cet homme soit moi."
+1 QUOT "Un espion dans les murs vaut mieux qu'une armée dehors."
+1 EVEN
+2 TYPE Traversée de la Manche et entrevue à Westminster
+2 DATE MAR 1314
+2 PLAC Westminster, Angleterre
+2 NOTE Arrive de France pour renseigner Isabelle ; forme avec elle le plan contre les brus.
+1 EVEN
+2 TYPE Perte du procès de l'Artois
+2 DATE 1309
+2 PLAC France
+2 NOTE Le comté d'Artois a été donné à sa tante Mahaut ; il n'a reçu que Conches et Beaumont.
+1 ASSO @I0006@
+2 RELA Cousine / alliée désirée
+2 NOTE Allié d'Isabelle depuis les fêtes de l'été précédent où il fut armé chevalier avec ses frères.
+2 NOTE Lui avoue désir et dévouement ; elle le refuse mais accepte son plan politique.
+2 QUOT "Et si ce n'était pour l'amour de vous, Madame ma cousine, et pour les choses d'urgence que j'ai à vous dire…"
+1 ASSO @I0013@
+2 RELA Tante / ennemie
+2 NOTE Mahaut lui a « volé » l'héritage d'Artois et marié ses filles aux fils de France.
+2 NOTE Il la maudit violemment et veut se venger sur les filles de ce que la mère lui a fait.
+2 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne…"
+1 ASSO @I0010@
+2 RELA Cible de vengeance
+2 NOTE Accumule indices : joyaux disparus, fermail échangé contre un poignard de Damas, tour de Nesle éclairée, hommes sur la berge.
+2 NOTE Veut la faire surprendre grâce aux aumônières et à une dame de parage dévouée.
+2 QUOT "Marguerite de Bourgogne ... est en bon chemin d'être appelée par son peuple Marguerite la Putain."
+1 ASSO @I0014@
+2 RELA Protecteur / ami
+2 NOTE Charles de Valois est son « plus fidèle protecteur et meilleur ami ».
+2 NOTE Ne lui révèle pas encore le scandale pour qu'il ne clabaude pas ; lui doit une dette (lettre pour Molay).
+2 QUOT "Monseigneur de Valois est mon plus fidèle protecteur et mon meilleur ami"
+1 ASSO @I0015@
+2 RELA Adversaire politique
+2 NOTE Accuse Marigny d'avoir frappé le Temple pour abaisser la chevalerie.
+2 NOTE Dit que Mahaut a corrompu Marigny pour ses mariages.
+2 QUOT "Et j'envoie mille merveilles à Marigny…"
+1 ASSO @I0016@
+2 RELA Adversaire politique
+2 NOTE Même accusation envers Nogaret.
+2 NOTE Associe Nogaret et Marigny au « grand méfait » contre Molay.
+2 QUOT "Et je souffle malice dans l'oreille de Nogaret"
+1 ASSO @I0008@
+2 RELA Parenté du prince
+2 NOTE Joue avec le petit Édouard et se place en loyal ami futur.
+2 NOTE Scène de la botte rouge qui humanise le géant.
+2 QUOT "Ah ! Messire Edouard, dit d'Artois, oserai-je plus tard ... vous rappeler que je vous ai fait ainsi chevaucher ma botte ?"
+1 FAMC @F0006@
+
+0 @I0010@ INDI
+1 NAME Marguerite /de Bourgogne/
+1 SEX F
+1 BIRT
+2 DATE ABT 1293
+2 PLAC Bourgogne, France
+1 OCCU Reine de Navarre ; future reine de France ; épouse de Louis
+1 QUOT "vous pourrez lui enseigner que Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France, est en bon chemin d'être appelée par son peuple Marguerite la Putain."
+2 TYPE Première mention
+1 NOTE Petite-fille de Saint Louis. Présentée par Robert comme « Marguerite la Putain » : cassette pillée, tour de Nesle pour « oraisons », amants la nuit.
+2 CONT Traits physiques : non précisés. Traits mentaux : Selon Robert : fausse, tournée vers le plaisir, sans sens du devoir ; habiles à brouiller la piste.
+2 CONT Rôle : Principale accusée du scandale naissant ; objet de la haine d'Isabelle et de la vengeance d'Artois.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : (Rapportées) détournement de joyaux ; aménagement de la vieille tour de l'hôtel de Nesle ; nuits éclairées en l'absence de Louis.
+1 EVEN
+2 TYPE Soupçons d'adultère à la tour de Nesle
+2 DATE MAR 1314
+2 PLAC Hôtel de Nesle, Paris, France
+2 NOTE Lumières tardives, movement sur la berge, hommes non vêtus en moines.
+1 ASSO @I0003@
+2 RELA Époux
+2 NOTE Épouse de Louis de Navarre.
+2 NOTE Ses absences permettent les rendez-vous de la tour.
+2 QUOT "ces mêmes nuits où votre frère Louis de Navarre est absent"
+1 ASSO @I0011@
+2 RELA Cousine / complice présumée
+2 NOTE Jeanne la rejoindrait parfois à la tour ; les trois se couvriraient mutuellement.
+2 NOTE « Trois catins acoquinées, c'est un château fort. »
+2 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+1 ASSO @I0012@
+2 RELA Cousine / complice présumée
+2 NOTE Blanche y vient aussi selon Robert.
+2 NOTE Ensemble elles brouillent les voies comme des cerfs de Conches.
+2 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+1 ASSO @I0006@
+2 RELA Belle-sœur / ennemie
+2 NOTE Jalousie réciproque avec Isabelle ; haïrait la vraie reine.
+2 NOTE Isabelle prépare des cadeaux trompeurs pour la confondre.
+2 QUOT "Elles vous haïssent. ... elles vous jalousent."
+1 FAMS @F0003@
+1 FAMC @F0007@
+
+0 @I0011@ INDI
+1 NAME Jeanne /de Bourgogne/
+1 SEX F
+1 BIRT
+2 DATE ABT 1293
+2 PLAC Bourgogne, France
+1 OCCU Épouse de Philippe de Poitiers ; fille de Mahaut d'Artois
+1 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+2 TYPE Première mention
+1 QUOT "— Jeanne et Blanche ?… — Blanche, j'en suis assuré. Jeanne…"
+2 TYPE Première mention
+1 NOTE Belle-sœur d'Isabelle. Robert la dit plus « matoise » mais la croit « aussi fieffée garce ».
+2 CONT Traits physiques : non précisés. Traits mentaux : Rusée, selon Robert.
+2 CONT Rôle : Troisième brus accusée ; fille de Mahaut au centre des alliances.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : (Rapportées) participation intermittente aux nuits de la tour de Nesle.
+1 ASSO @I0004@
+2 RELA Époux
+2 NOTE Mariée à Philippe de Poitiers.
+2 NOTE Mariage négocié par Mahaut auprès de Philippe le Bel.
+2 QUOT "donnez donc Jeanne à Philippe"
+1 ASSO @I0013@
+2 RELA Mère
+2 NOTE Fille de Mahaut d'Artois.
+2 NOTE Instrument des ambitions territoriales (Comté-Franche / Bourgogne) de sa mère.
+2 QUOT "ma tante Mahaut de Bourgogne … marier vos trois frères à ses deux catins de filles"
+1 FAMS @F0004@
+1 FAMC @F0008@
+
+0 @I0012@ INDI
+1 NAME Blanche /de Bourgogne/
+1 SEX F
+1 BIRT
+2 DATE ABT 1296
+2 PLAC Bourgogne, France
+1 OCCU Épouse de Charles de France ; fille de Mahaut d'Artois
+1 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+2 TYPE Première mention
+1 QUOT "— Jeanne et Blanche ?… — Blanche, j'en suis assuré. Jeanne…"
+2 TYPE Première mention
+1 NOTE Cousine/sœur des autres brus dans le trio suspect. Robert en est « assuré » quant à sa culpabilité.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Brus accusée ; fille de Mahaut.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : (Rapportées) rejoint Marguerite à la tour de Nesle.
+1 ASSO @I0005@
+2 RELA Époux
+2 NOTE Mariée à Charles, troisième fils de Philippe le Bel.
+2 NOTE Mariage obtenu par les intrigues de Mahaut.
+2 QUOT "et puis ma douce Blanchette à votre beau Charles"
+1 ASSO @I0013@
+2 RELA Mère
+2 NOTE Fille de Mahaut d'Artois.
+2 NOTE Cible directe de la vengeance de Robert contre « les filles de Bourgogne ».
+2 QUOT "ma douce Blanchette à votre beau Charles"
+1 FAMS @F0005@
+1 FAMC @F0008@
+
+0 @I0013@ INDI
+1 NAME Mahaut /d'Artois/
+1 SEX F
+1 BIRT
+2 DATE Inconnu
+2 PLAC Artois, France
+1 OCCU Comtesse de Bourgogne puis d'Artois
+1 QUOT "pour le donner à ma tante Mahaut de Bourgogne… la chienne, la gueuse, qu'elle crève !"
+2 TYPE Première mention
+1 NOTE Tante de Robert d'Artois ; mère de Jeanne et Blanche. Absente mais omniprésente dans la diatribe de Robert : intrigante qui a volé l'Artois et placé ses « catins » sur les trônes futurs.
+2 CONT Traits physiques : non précisés. Traits mentaux : Selon Robert : ruse, corruption, ambition dynastique.
+2 CONT Rôle : Origine politique des mariages bourguignons et de la haine de Robert.
+2 CONT Opinions politiques : Alliée de fait de Philippe le Bel via mariages ; pousse Philippe de Poitiers vers des perspectives germaniques (selon le pastiche de Robert).
+2 CONT Actions décisives principales : (Rapportées) obtention de l'Artois (1309) ; mariage de ses filles et de sa cousine Marguerite aux trois fils du roi ; corruption de conseillers.
+1 QUOT "Mon cher seigneur… si nous unissions ma chère petite Jeanne…" (pastiche parodié par Robert)
+1 ASSO @I0009@
+2 RELA Neveu / ennemi
+2 NOTE A obtenu l'Artois au détriment de Robert, réduit à Conches et Beaumont.
+2 NOTE Sa politique matrimoniale est la cause déclarée de la vengeance de Robert.
+2 QUOT "On m'a volé l'héritage de mon comté d'Artois ... pour le donner à ma tante Mahaut de Bourgogne…"
+1 ASSO @I0001@
+2 RELA Souverain / allié
+2 NOTE A convaincu Philippe le Bel d'accepter les trois mariages.
+2 NOTE Robert la montre soudoyant Nogaret et Marigny.
+2 QUOT "elle est parvenue à marier vos trois frères à ses deux catins de filles et son autre catin de cousine."
+1 FAMS @F0008@
+
+0 @I0014@ INDI
+1 NAME Charles /de Valois/
+1 SEX M
+1 BIRT
+2 DATE 12 MAR 1270
+2 PLAC France
+1 OCCU Comte de Valois ; frère de Philippe le Bel ; oncle d'Isabelle
+1 QUOT "Avez-vous prévenu mon oncle Valois ? — Je m'en suis bien gardé, répondit d'Artois. Monseigneur de Valois est mon plus fidèle protecteur et mon meilleur ami ; mais il ne sait rien taire."
+2 TYPE Première mention
+1 NOTE Oncle d'Isabelle, protecteur de Robert d'Artois. Influence sur Louis ; indiscret. Envoie via Robert un message pour obtenir d'Isabelle une lettre de clémence envers Jacques de Molay.
+2 CONT Traits physiques : non précisés. Traits mentaux : Fidèle ami, mais « ne sait rien taire ».
+2 CONT Rôle : Intermédiaire utile (lettre Comminges, lettre Molay) qu'il ne faut pas mettre dans le secret du scandale.
+2 CONT Opinions politiques : Favorable à la clémence envers le Temple / Molay ; proche de la haute aristocratie.
+2 CONT Actions décisives principales : Demande une lettre d'Isabelle au roi pour Molay ; doit servir, sans le savoir, au placement de madame de Comminges.
+1 ASSO @I0006@
+2 RELA Nièce
+2 NOTE Isabelle doit lui écrire selon le plan de Robert.
+2 NOTE Lien de famille et d'influence à la cour de France.
+2 QUOT "J'ai aussi un message de votre oncle Valois."
+1 ASSO @I0009@
+2 RELA Protégé / ami
+2 NOTE Robert lui doit une « grande dette » et le dit son meilleur ami.
+2 NOTE Robert s'est gardé de lui parler des adultères pour ne pas donner l'éveil trop tôt.
+2 QUOT "Monseigneur de Valois est mon plus fidèle protecteur et mon meilleur ami"
+1 ASSO @I0017@
+2 RELA Intercesseur
+2 NOTE Demande la clémence pour Molay via Isabelle.
+2 NOTE Instrument politique dans l'affaire du Temple au moment du jugement imminent.
+2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+1 FAMC @F0009@
+
+0 @I0015@ INDI
+1 NAME Enguerrand /de Marigny/
+1 SEX M
+1 BIRT
+2 DATE ABT 1265
+2 PLAC Lyons-la-Forêt, France
+1 OCCU Coadjuteur au gouvernement ; intendant des finances ; conseiller de Philippe le Bel
+1 QUOT "et j'envoie mille merveilles à Marigny… et j'en marie une, et j'en marie deux, et j'en marie trois."
+2 TYPE Première mention
+1 NOTE Homme « sorti de rien » selon Robert d'Artois ; pilier du pouvoir royal avec Nogaret. Accusé d'avoir frappé le Temple pour abaisser chevalerie et hauts barons ; d'avoir été soudoyé par Mahaut.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (hors scène).
+2 CONT Rôle : Omniprésence politique dans les accusations de Robert.
+2 CONT Opinions politiques : Servant de la raison d'État de Philippe le Bel.
+2 CONT Actions décisives principales : (Rapportées) rôle central dans le procès du Temple et dans les faveurs accordées à Mahaut.
+1 ASSO @I0001@
+2 RELA Roi / maître
+2 NOTE Conseiller tout-puissant dans la dernière partie du règne.
+2 NOTE Cible de la rancœur aristocratique incarnée par Robert.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny ! En frappant le Temple"
+1 ASSO @I0016@
+2 RELA Collègue
+2 NOTE Associé à Nogaret dans la conduite du procès des Templiers.
+2 NOTE Duo de légistes/administrateurs haïs des grands.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny !"
+1 ASSO @I0013@
+2 RELA Alliée accusée de corruption
+2 NOTE Robert affirme que Mahaut lui envoyait « mille merveilles ».
+2 NOTE Lien supposé entre mariages bourguignons et faveur ministérielle.
+2 QUOT "Et j'envoie mille merveilles à Marigny…"
+0 @I0016@ INDI
+1 NAME Guillaume /de Nogaret/
+1 SEX M
+1 BIRT
+2 DATE ABT 1265
+2 PLAC Saint-Félix-de-Caraman, France
+1 OCCU Garde des Sceaux ; légiste de Philippe le Bel
+1 QUOT "souffle malice dans l'oreille de Nogaret, et j'envoie mille merveilles à Marigny…"
+2 TYPE Première mention
+1 NOTE Autre homme « sorti de rien » ; instruit le procès des Templiers. Mahaut aurait « soufflé malice » à son oreille.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (hors scène).
+2 CONT Rôle : Architecte juridique de la destruction du Temple, dans le discours de Robert.
+2 CONT Opinions politiques : Légiste au service de la couronne contre papauté et Temple.
+2 CONT Actions décisives principales : (Rapportées) frappe contre Molay et l'Ordre avec Marigny.
+1 ASSO @I0001@
+2 RELA Roi / maître
+2 NOTE Garde des Sceaux et bras juridique du roi.
+2 NOTE Incarne, pour Robert, l'abaissement des barons.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny ! En frappant le Temple"
+1 ASSO @I0015@
+2 RELA Collègue
+2 NOTE Toujours nommé avec Marigny dans la diatribe de Westminster.
+2 NOTE Duo responsable du « grand méfait » imminent contre Molay.
+2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny !"
+1 ASSO @I0017@
+2 RELA Accusateur / bourreau politique
+2 NOTE Robert impute à Nogaret (et Marigny) la mort annoncée de Molay.
+2 NOTE Symbole de la haine entre légistes royaux et grand-maître templier.
+2 QUOT "c'est grand méfait qu'on va encore commettre là, et qu'on doit une fois de plus à Nogaret et à Marigny !"
+0 @I0017@ INDI
+1 NAME Jacques /de Molay/
+1 SEX M
+1 BIRT
+2 DATE ABT 1244
+2 PLAC Molay, Haute-Saône, France
+1 OCCU Grand-maître de l'Ordre du Temple ; parrain d'Isabelle
+1 QUOT "votre parrain, le grand-maître Jacques de Molay, ne soit mis à mort. Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+2 TYPE Première mention
+1 NOTE Vieil homme, « noble et grand », prisonnier depuis des années. Jugement imminent ; Valois et Robert veulent qu'Isabelle écrive pour la clémence.
+2 CONT Traits physiques : Vieil homme. Traits mentaux : Noblesse passée ; fautes déjà expiées, selon Robert.
+2 CONT Rôle : Figure centrale du prologue (procès du Temple) ; enjeu moral du chapitre 1.
+2 CONT Opinions politiques : Chef de l'Ordre souverain qui a osé tenir tête à Philippe le Bel.
+2 CONT Actions décisives principales : A tenu Isabelle sur les fonts baptismaux ; attend son jugement.
+1 EVEN
+2 TYPE Arrestation et long procès
+2 DATE OCT 1307
+2 PLAC France
+2 NOTE Arrêté avec l'Ordre ; le procès dure sept ans jusqu'au seuil du récit.
+1 ASSO @I0001@
+2 RELA Adversaire royal
+2 NOTE Cible du procès monté par Philippe le Bel.
+2 NOTE Son sort dépend encore d'une éventuelle clémence royale.
+2 QUOT "Il monta contre eux le plus vaste procès dont l'Histoire ait gardé le souvenir"
+1 ASSO @I0006@
+2 RELA Filleule
+2 NOTE Parrain d'Isabelle.
+2 NOTE Robert invoque ce lien pour obtenir la lettre de la reine.
+2 QUOT "Rappelez-vous qu'il vous a tenue sur les fonts du baptême…"
+1 ASSO @I0014@
+2 RELA Intercesseur
+2 NOTE Charles de Valois sollicite Isabelle en sa faveur.
+2 NOTE La haute aristocratie tente in extremis de le sauver.
+2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+0 @I0018@ INDI
+1 NAME Pierre /de Gaveston/
+1 SEX M
+1 BIRT
+2 DATE ABT 1284
+2 PLAC Béarn
+1 DEAT
+2 DATE JUN 1312
+2 PLAC Angleterre
+1 OCCU Chevalier ; comte de Cornouailles ; favori d'Édouard II
+1 QUOT "Je croyais, reprit Isabelle, avoir connu le pire avec le chevalier de Gaveston. Ce Béarnais insolent et vantard gouvernait si bien mon époux qu'il s'était mis à gouverner le royaume."
+2 TYPE Première mention
+1 NOTE Béarnais « insolent et vantard » qui gouvernait Édouard et le royaume. Décapité par une coalition baronniale ; corps chez les dominicains à Oxford. Isabelle l'avait haï puis le regrette presque.
+2 CONT Traits physiques : non précisés. Traits mentaux : Insolent, vantard, influent.
+2 CONT Rôle : Passé humiliant du couple royal anglais ; précédent des Despenser.
+2 CONT Opinions politiques : Favori tout-puissant jusqu'à sa chute.
+2 CONT Actions décisives principales : Recevait les joyaux de la cassette de mariage d'Isabelle ; régent/influence jusqu'à l'exécution.
+1 EVEN
+2 TYPE Exécution
+2 DATE JUN 1312
+2 PLAC Angleterre
+2 NOTE Tête tranchée ; Isabelle s'en était réjouie avec les barons.
+1 ASSO @I0007@
+2 RELA Favori
+2 NOTE Gouvernait le roi au point de gouverner le royaume.
+2 NOTE Sa mort n'a pas rendu Édouard à Isabelle ; elle l'a aigri.
+2 QUOT "Ce Béarnais insolent et vantard gouvernait si bien mon époux qu'il s'était mis à gouverner le royaume."
+1 ASSO @I0006@
+2 RELA Reine spoliée
+2 NOTE Prenait les joyaux de la cassette de mariage de la reine.
+2 NOTE Isabelle compare cette spoliation à celle des brus qui donnent des bijoux à leurs amants.
+2 QUOT "Edouard lui donnait tous les joyaux de ma cassette de mariage."
+0 @I0019@ INDI
+1 NAME Hugh /Despenser/ le Vieux
+1 SEX M
+1 BIRT
+2 DATE 1267
+2 PLAC Angleterre
+1 OCCU Baron ; principal conseiller d'Édouard II
+1 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils, qui sert de femme à mon époux."
+2 TYPE Première mention
+1 NOTE Père Despenser ; « gouverne le fils » qui a la faveur charnelle du roi. Nouveau pôle de pouvoir après Gaveston.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Favori politique actuel du roi d'Angleterre.
+2 CONT Opinions politiques : Faction dominante à la cour anglaise selon Isabelle.
+2 CONT Actions décisives principales : (Rapportées) organise et partage les plaisirs du roi tout en gouvernant.
+1 ASSO @I0007@
+2 RELA Roi / client
+2 NOTE A la faveur d'Édouard depuis la chute de Gaveston.
+2 NOTE Isabelle les voit commander le royaume.
+2 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils"
+1 ASSO @I0020@
+2 RELA Fils
+2 NOTE Père de Hugh le Jeune.
+2 NOTE Duo père-fils au centre de la faveur royale.
+2 QUOT "le père gouvernant le fils, qui sert de femme à mon époux."
+1 ASSO @I0006@
+2 RELA Reine lésée
+2 NOTE Isabelle les désigne comme successeurs haïs de Gaveston.
+2 NOTE Leur présence aggrave son isolement conjugal.
+2 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils"
+1 FAMS @F0010@
+
+0 @I0020@ INDI
+1 NAME Hugh /Despenser/ le Jeune
+1 SEX M
+1 BIRT
+2 DATE ABT 1290
+2 PLAC Angleterre
+1 OCCU Chambellan ; favori d'Édouard II
+1 QUOT "Pour l'heure, ce sont les barons Despenser qui ont sa faveur, le père gouvernant le fils, qui sert de femme à mon époux."
+2 TYPE Première mention
+1 NOTE Fils Despenser ; Isabelle dit crûment qu'il « sert de femme » à son époux.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Favori intime du roi ; humiliation publique de la reine.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Occupe la place laissée par Gaveston dans l'intimité royale.
+1 ASSO @I0007@
+2 RELA Favori / amant
+2 NOTE Relation dénoncée par Isabelle devant Robert.
+2 NOTE Explique le refus du roi d'approcher la reine.
+2 QUOT "le père gouvernant le fils, qui sert de femme à mon époux."
+1 ASSO @I0019@
+2 RELA Père
+2 NOTE Gouverné politiquement par son père selon Isabelle.
+2 NOTE Complète le système Despenser à la cour.
+2 QUOT "le père gouvernant le fils, qui sert de femme à mon époux."
+1 FAMC @F0010@
+
+0 @I0021@ INDI
+1 NAME Jeanne de /Joinville/
+1 SEX F
+1 BIRT
+2 DATE 1286
+2 PLAC France
+1 OCCU Dame de parage ; épouse de Roger Mortimer ; gouvernante du prince Édouard
+1 QUOT "Elle s'appelait de naissance Jeanne de Joinville et était l'épouse de sir Roger Mortimer, l'un des premiers barons d'Angleterre."
+2 TYPE Première mention
+1 NOTE Petite-nièce de Jean de Joinville. Épouse de sir Roger Mortimer, un des premiers barons d'Angleterre. Choisie par Isabelle pour enseigner au prince qu'il est de France autant que d'Angleterre.
+2 CONT Traits physiques : Visage animé d'un grand air de joie. Traits mentaux : Dévouée, empressée.
+2 CONT Rôle : Intermédiaire domestique ; annonce le premier mot du prince ; retire l'enfant pour l'entrevue secrète.
+2 CONT Opinions politiques : Loyale à Isabelle et à la mémoire de Saint Louis / Joinville.
+2 CONT Actions décisives principales : Amène le petit Édouard ; s'incline devant la mission éducative fixée par la reine.
+1 QUOT "Madame, Madame ! il a parlé."
+1 ASSO @I0006@
+2 RELA Reine / maîtresse
+2 NOTE Sert Isabelle à Westminster.
+2 NOTE Choisie pour sa lignée croisée avec Saint Louis.
+2 QUOT "Vous savez, ma mie, continua-t-elle, quelles raisons m'ont fait vous choisir pour gouverner mon fils."
+1 ASSO @I0008@
+2 RELA Pupille
+2 NOTE Gouverne l'enfant au quotidien.
+2 NOTE Lui refusait la galette quand il dit « Veux ! ».
+2 QUOT "Madame, Madame ! s'écria-t-elle, il a parlé."
+1 ASSO @I0022@
+2 RELA Époux
+2 NOTE Mariée à Roger Mortimer, baron d'Angleterre.
+2 NOTE Ce mariage ancre la dame française dans la haute noblesse anglaise.
+2 QUOT "Elle s'appelait de naissance Jeanne de Joinville et était l'épouse de sir Roger Mortimer, l'un des premiers barons d'Angleterre."
+1 ASSO @I0023@
+2 RELA Ancêtre de référence
+2 NOTE Isabelle rappelle que Joinville fut à la croisade avec Saint Louis, aïeul d'Isabelle.
+2 NOTE Lien symbolique France–éducation du prince.
+2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+1 FAMS @F0011@
+
+0 @I0022@ INDI
+1 NAME Roger /Mortimer/
+1 SEX M
+1 BIRT
+2 DATE 1287
+2 PLAC Angleterre
+1 OCCU Baron de Wigmore ; un des premiers barons d'Angleterre
+1 QUOT "Elle s'appelait de naissance Jeanne de Joinville et était l'épouse de sir Roger Mortimer, l'un des premiers barons d'Angleterre."
+2 TYPE Première mention
+1 NOTE Époux de Jeanne de Joinville. Mentionné comme ancrage aristocratique de la gouvernante du prince ; n'apparaît pas en scène.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Statut social de lady Mortimer.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Non encore sur scène.
+1 ASSO @I0021@
+2 RELA Épouse
+2 NOTE Marié à Jeanne de Joinville.
+2 NOTE Lien qui place une Française liée à Joinville au cœur de la nursery royale anglaise.
+2 QUOT "Elle s'appelait de naissance Jeanne de Joinville et était l'épouse de sir Roger Mortimer, l'un des premiers barons d'Angleterre."
+1 FAMS @F0011@
+
+0 @I0023@ INDI
+1 NAME Louis IX /Saint Louis/
+1 SEX M
+1 BIRT
+2 DATE 1215
+2 PLAC Poissy, France
+1 DEAT
+2 DATE 25 AUG 1270
+2 PLAC Tunis
+1 OCCU Roi de France ; saint ; aïeul d'Isabelle
+1 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+2 TYPE Première mention
+1 NOTE Ancêtre tutélaire. Isabelle veut que son fils connaisse la prière à Monseigneur Saint Louis ; Robert descend d'un frère de Saint Louis ; Marguerite est petite-fille de Saint Louis ; Joinville fut son compagnon de croisade.
+2 CONT Traits physiques : non précisés. Traits mentaux : Modèle de sainteté royale.
+2 CONT Rôle : Référence morale et dynastique du chapitre.
+2 CONT Opinions politiques : Idéal de royauté chrétienne opposé aux bassesses présentes.
+2 CONT Actions décisives principales : Croisade avec Joinville ; lignée dont se réclament Capétiens et Bourguignons.
+1 ASSO @I0006@
+2 RELA Descendante
+2 NOTE Aïeul d'Isabelle.
+2 NOTE Elle place sa prière dans le cœur du petit Édouard avant même la raison.
+2 QUOT "Commencez à dire devant lui le Pater et l'Ave, et aussi la prière à Monseigneur Saint Louis."
+1 ASSO @I0010@
+2 RELA Petite-fille
+2 NOTE Marguerite de Bourgogne est dite petite-fille de Saint Louis.
+2 NOTE Ce lien sacralise d'autant plus le scandale à venir.
+2 QUOT "Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France"
+1 ASSO @I0026@
+2 RELA Compagnon de croisade
+2 NOTE Jean de Joinville l'accompagna.
+2 NOTE Mémoire transmise via lady Mortimer à la nursery d'Isabelle.
+2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+0 @I0024@ INDI
+1 NAME /Albizzi/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Italie (marchand)
+1 OCCU Marchand
+1 QUOT "Ma mie, dit la reine, veuillez quérir cette aumônière que le marchand Albizzi m'a mandée ce matin."
+2 TYPE Première mention
+1 NOTE Marchand qui a mandé le matin même à Isabelle une aumônière brodée d'or et d'argent, ornée de cabochons. Doit en fabriquer deux autres pour le piège de Robert.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Fournisseur involontaire des cadeaux-pièges destinés aux brus.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Livraison de l'aumônière ; commande de deux répliques à presser pour le lendemain.
+1 ASSO @I0006@
+2 RELA Cliente
+2 NOTE Fournit l'aumônière admirée par Robert (« Merveille ! »).
+2 NOTE Doit livrer deux autres pièces semblables avant le départ de Robert.
+2 QUOT "veuillez quérir cette aumônière que le marchand Albizzi m'a mandée ce matin."
+1 ASSO @I0009@
+2 RELA Intermédiaire du piège
+2 NOTE Robert voit dans l'aumônière l'objet parfait qu'un jouvenceau accrocherait à sa ceinture.
+2 NOTE Les trois sacs doivent partir pour la France par ses mains, en secret.
+2 QUOT "Vous allez commander au marchand Albizzi, deux autres aumônières semblables"
+0 @I0025@ INDI
+1 NAME Madame de /Comminges/
+1 SEX F
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Dame de parage ; veuve
+1 QUOT "J'ai pensé à madame de Comminges qui vient d'être veuve et à qui l'on doit des égards."
+2 TYPE Première mention
+1 NOTE Veuve à qui l'on doit des égards. Robert propose de la faire nommer auprès de Marguerite, via Valois et Louis, comme espionne dans l'hôtel de Nesle.
+2 CONT Traits physiques : non précisés. Traits mentaux : Jugée « tout à [leur] discrétion ».
+2 CONT Rôle : Espionne projetée, pas encore en place à la fin du chapitre 1.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Nomination à venir par lettre d'Isabelle à Valois.
+1 ASSO @I0009@
+2 RELA Agent pressenti
+2 NOTE Choisie par Robert pour renseigner fidèlement sur Marguerite.
+2 NOTE « Un espion dans les murs vaut mieux qu'une armée dehors. »
+2 QUOT "J'ai pensé à madame de Comminges qui vient d'être veuve et à qui l'on doit des égards."
+1 ASSO @I0006@
+2 RELA Protectrice pressentie
+2 NOTE Isabelle accepte d'écrire la lettre qui doit la faire entrer à l'hôtel de Nesle.
+2 NOTE Doit être portée en France par Robert avec les aumônières.
+2 QUOT "Je ferai cette lettre et vous l'emporterez, dit Isabelle."
+1 ASSO @I0014@
+2 RELA Intermédiaire
+2 NOTE Valois, influent sur Louis, doit obtenir son entrée en charge.
+2 NOTE Elle ignore encore le complot au moment du chapitre.
+2 QUOT "Faites-lui tenir une lettre lui exprimant votre souhait. Il a grande influence sur votre frère Louis, et fera promptement entrer madame de Comminges à l'hôtel de Nesle."
+0 @I0026@ INDI
+1 NAME Jean /de Joinville/
+1 SEX M
+1 BIRT
+2 DATE 1224
+2 PLAC Champagne, France
+1 OCCU Sénéchal de Champagne ; chroniqueur ; compagnon de Saint Louis
+1 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+2 TYPE Première mention
+1 NOTE « Messire Joinville le grand », aïeul / grand-oncle de lady Mortimer. Référence d'honneur croisé que cite Isabelle pour justifier le choix de la gouvernante.
+2 CONT Traits physiques : non précisés. Traits mentaux : Loyauté croisée, mémoire de Saint Louis.
+2 CONT Rôle : Légitimation dynastique et morale de l'éducation du prince.
+2 CONT Opinions politiques : Compagnon de la royauté sainte.
+2 CONT Actions décisives principales : Croisade auprès de Saint Louis (passé).
+1 ASSO @I0021@
+2 RELA Petite-nièce
+2 NOTE Jeanne de Joinville descend de sa lignée.
+2 NOTE Isabelle s'appuie sur ce sang pour former le petit Édouard.
+2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+1 ASSO @I0023@
+2 RELA Compagnon de croisade
+2 NOTE Fut à la croisade avec Saint Louis.
+2 NOTE Mémoire vivante dans le discours éducatif d'Isabelle.
+2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+0 @I0027@ INDI
+1 NAME Othon IV /de Bourgogne/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Bourgogne, France
+1 DEAT
+2 DATE 1303
+2 PLAC Bourgogne, France
+1 OCCU Comte palatin de Bourgogne
+1 QUOT "Mahaut, comtesse de Bourgogne et d'Artois, au roi Philippe le Bel."
+2 TYPE Première mention
+1 QUOT "ainsi votre second fils devient comte palatin de Bourgogne et vous pouvez le pousser vers la couronne d'Allemagne."
+2 TYPE Première mention
+1 NOTE Époux défunt de Mahaut ; père de Jeanne et Blanche de Bourgogne.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Lien paternel des deux brus filles de Mahaut.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Mariage avec Mahaut (1291) ; mort en 1303.
+1 FAMS @F0008@
+
+0 @I0028@ INDI
+1 NAME Agnès /de France/
+1 SEX F
+1 BIRT
+2 DATE ABT 1268
+2 PLAC France
+1 OCCU Duchesse de Bourgogne ; fille de Saint Louis
+1 QUOT "Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France, est en bon chemin d'être appelée par son peuple Marguerite la Putain."
+2 TYPE Première mention
+1 NOTE Mère de Marguerite de Bourgogne ; fille de Saint Louis. Explique le statut de « petite-fille de Saint Louis » de Marguerite.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Lien dynastique saint-louisien des ducs de Bourgogne.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Mariage avec Robert II de Bourgogne ; maternité de Marguerite.
+1 FAMS @F0007@
+1 FAMC @F0012@
+
+0 @I0029@ INDI
+1 NAME Robert II /de Bourgogne/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Bourgogne, France
+1 OCCU Duc de Bourgogne
+1 QUOT "Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France, est en bon chemin d'être appelée par son peuple Marguerite la Putain."
+2 TYPE Première mention
+1 QUOT "Mahaut, comtesse de Bourgogne et d'Artois, au roi Philippe le Bel."
+2 TYPE Première mention
+1 NOTE Père de Marguerite de Bourgogne ; époux d'Agnès de France.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Branche ducale dont sort la reine de Navarre accusée.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Père de Marguerite.
+1 FAMS @F0007@
+
+0 @I0030@ INDI
+1 NAME Philippe /d'Artois/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Artois, France
+1 DEAT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Père de Robert III d'Artois
+1 QUOT "Et puis, si l'on m'accorde l'Artois qu'avait mon défunt père, alors ma Comté-Franche de Bourgogne ira à l'une de ses oiselles"
+2 TYPE Première mention
+1 NOTE Fils de Robert II d'Artois ; frère de Mahaut ; père de Robert III. Explique le lien de neveu entre Robert et Mahaut et la revendication de l'héritage.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Maillon généalogique de la vengeance d'Artois.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Transmission de la prétention à l'Artois.
+1 FAMS @F0006@
+1 FAMC @F0013@
+
+0 @I0031@ INDI
+1 NAME Robert II /d'Artois/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Artois, France
+1 DEAT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Comte d'Artois
+1 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne… la chienne, la gueuse, qu'elle crève !"
+2 TYPE Première mention
+1 NOTE Grand-père de Robert III ; père de Mahaut et de Philippe d'Artois. L'héritage contesté vient de lui.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Source du litige Artois.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Lignée comtale d'Artois.
+1 FAMS @F0013@
+
+0 @I0032@ INDI
+1 NAME Philippe III /le Hardi/
+1 SEX M
+1 BIRT
+2 DATE 3 APR 1245
+2 PLAC France
+1 DEAT
+2 DATE 5 OCT 1285
+2 PLAC Perpignan, France
+1 OCCU Roi de France
+1 QUOT "Pour cela, votre oncle Valois va pouvoir nous servir. Faites-lui tenir une lettre lui exprimant votre souhait."
+2 TYPE Première mention
+1 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+2 TYPE Première mention
+1 NOTE Père de Philippe le Bel et de Charles de Valois ; fils de Saint Louis.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Lien entre Saint Louis et la génération du récit.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Père des deux frères Philippe IV et Charles de Valois.
+1 FAMS @F0009@
+1 FAMC @F0012@
+
+0 @F0001@ FAM
+1 HUSB @I0001@
+1 WIFE @I0002@
+1 CHIL @I0003@
+1 CHIL @I0004@
+1 CHIL @I0005@
+1 CHIL @I0006@
+1 NOTE Famille capétienne de Philippe le Bel : trois fils majeurs et Isabelle, reine d'Angleterre.
+
+1 QUOT "Trois fils majeurs assuraient sa descendance. Sa fille était mariée au roi Edouard II d'Angleterre."
+0 @F0002@ FAM
+1 HUSB @I0007@
+1 WIFE @I0006@
+1 CHIL @I0008@
+1 NOTE Couple royal anglais ; le fils d'Isabelle et d'Édouard II dit son premier mot à Westminster en mars 1314.
+
+1 QUOT "Sa fille était mariée au roi Edouard II d'Angleterre."
+0 @F0003@ FAM
+1 HUSB @I0003@
+1 WIFE @I0010@
+1 NOTE Mariage de Louis de Navarre et Marguerite de Bourgogne ; cœur des soupçons d'adultère.
+
+1 QUOT "Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France"
+0 @F0004@ FAM
+1 HUSB @I0004@
+1 WIFE @I0011@
+1 NOTE Mariage de Philippe de Poitiers et Jeanne de Bourgogne, fille de Mahaut.
+
+1 QUOT "donnez donc Jeanne à Philippe"
+0 @F0005@ FAM
+1 HUSB @I0005@
+1 WIFE @I0012@
+1 NOTE Mariage de Charles de France et Blanche de Bourgogne, fille de Mahaut.
+
+1 QUOT "et puis ma douce Blanchette à votre beau Charles"
+0 @F0006@ FAM
+1 HUSB @I0030@
+1 CHIL @I0009@
+1 NOTE Philippe d'Artois, père de Robert III ; explique la revendication contre Mahaut.
+
+0 @F0007@ FAM
+1 HUSB @I0029@
+1 WIFE @I0028@
+1 CHIL @I0010@
+1 NOTE Ducs de Bourgogne : parents de Marguerite, petite-fille de Saint Louis.
+
+0 @F0008@ FAM
+1 HUSB @I0027@
+1 WIFE @I0013@
+1 CHIL @I0011@
+1 CHIL @I0012@
+1 NOTE Mahaut d'Artois et Othon IV : parents de Jeanne et Blanche, brus du roi.
+
+0 @F0009@ FAM
+1 HUSB @I0032@
+1 CHIL @I0001@
+1 CHIL @I0014@
+1 NOTE Philippe III le Hardi : père de Philippe le Bel et de Charles de Valois.
+
+0 @F0010@ FAM
+1 HUSB @I0019@
+1 CHIL @I0020@
+1 NOTE Maison Despenser : père et fils favoris d'Édouard II.
+
+0 @F0011@ FAM
+1 HUSB @I0022@
+1 WIFE @I0021@
+1 NOTE Roger Mortimer et Jeanne de Joinville, gouvernante du prince Édouard.
+
+1 QUOT "Elle s'appelait de naissance Jeanne de Joinville et était l'épouse de sir Roger Mortimer, l'un des premiers barons d'Angleterre."
+0 @F0012@ FAM
+1 HUSB @I0023@
+1 CHIL @I0032@
+1 CHIL @I0028@
+1 NOTE Saint Louis : aïeul de Philippe III et d'Agnès de France (donc de Marguerite).
+
+0 @F0013@ FAM
+1 HUSB @I0031@
+1 CHIL @I0013@
+1 CHIL @I0030@
+1 NOTE Robert II d'Artois : père de Mahaut et de Philippe d'Artois (père de Robert III).
+
+0 TRLR

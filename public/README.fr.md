@@ -79,8 +79,10 @@ Les relations significatives entre personnages (coéquipiers, rivaux, mentors…
 2 RELA In-game companion
 2 NOTE Wang meets Von Neumann inside the game.
 2 NOTE They discuss the logic behind the Qin I computer together.
-2 NOTE Von Neumann shares a final revelation before collapse.
+2 QUOT "Verbatim book sentence that proves this relationship."
 ```
+
+Chaque `ASSO` doit inclure au moins une preuve textuelle via `2 QUOT` (citation verbatim du livre). Les `2 NOTE` expliquent le lien ; le `2 QUOT` montre d’où il sort dans le texte.
 
 ### 🔍 Ces liens sont **affichés en noir** sur le graphe.
 

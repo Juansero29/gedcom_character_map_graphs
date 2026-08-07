@@ -1,14 +1,60 @@
-I need you to read until chapter 8 of the book “Three Body Problem” that I gave you in .txt file. The chapter is called “Ye Wenjie". 
+I need you to read until the end of chapter 1 of the book “Le Roi de fer” that I gave you in .book / .txt file. Chapter 1 is called “La reine sans amour”. Include the PROLOGUE and that chapter only.
 
 After you have read carefully until there, and not any further, please make me a detailed GED text file with all the characters mentioned until now.
 
-For each individual, their id should be composed of 4 digit numbers, State their birth/death dates and places, gender in the appropriate GEDCOM tags. State in their NOTE tags, a description of the character, of their traits (physical and mental), role in the intrigue, occupation, main political views and main decisive actions as well as any quotes of important phrases they said in the chapter that made them stand out that give important cues of their personality and important actions in the plot. Be sure to include in the notes any important events in the character's story that lead to develop further the intrigue up to this point. Be sure of not reading any further in the book as to not spoil anything else.
+Write all NOTE, QUOT, EVEN descriptions, RELA labels and relationship NOTES in French. Use `1 SOUR Le Roi de fer` in the HEAD.
+
+For structured NOTE / CONT portrait lines, use French labels only (never English):
+- `Traits physiques :`
+- `Traits mentaux :`
+- `Rôle :`
+- `Opinions politiques :`
+- `Actions décisives principales :`
+Use `Non précisé` instead of `N/A`. The entire .ged content for this book must be 100% French.
+
+For each individual, their id should be composed of 4 digit numbers. State their birth/death dates and places, gender in the appropriate GEDCOM tags. State in their NOTE tags, a description of the character, of their traits (physical and mental), role in the intrigue, occupation, main political views and main decisive actions as well as any quotes of important phrases they said in the chapter that made them stand out that give important cues of their personality and important actions in the plot. Be sure to include in the notes any important events in the character's story that lead to develop further the intrigue up to this point. Be sure of not reading any further in the book as to not spoil anything else.
 
 Also for each individual, be sure to establish association links with the tag ASSO between people that are not blood-related but still know each other or are related in any shape or form: they have talked. Describe the ASSO tag using the RELA tag to label their relationship and additional NOTE tags if necessary explaining the relationship or association between this people. The ASSO tags should be inside the INDI blocks, and not at the end of the file.
 
+CRITICAL — book evidence for every relationship:
+For EVERY ASSO (and for FAM blocks when the family bond is stated in the text), you MUST include at least one `2 QUOT` tag containing a verbatim quotation from the book (prologue/chapters read so far) that justifies why this relationship exists. Do not invent quotes. Prefer the most direct sentence(s). Keep explanatory context in `2 NOTE`, and put the raw book proof in `2 QUOT` only.
+Example:
+```
+1 ASSO @I0023@
+2 RELA Compagnon de croisade
+2 NOTE Isabelle cite Joinville comme compagnon de croisade de Saint Louis pour légitimer l'éducation du prince.
+2 NOTE Ce souvenir dynastique justifie le choix de lady Mortimer comme gouvernante.
+2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+```
+
+CRITICAL — chapter narrative timeline (for the catalog / UI):
+When finishing a chapter snapshot, also prepare (or update) narrative chronology metadata for that chapter so the app can show story-time, ages, and a scrubber. Prefer adding a `narrative` object on the chapter entry in `public/ged/catalog.json`:
+```
+"narrative": {
+  "start": "1314-03-15T14:00:00",
+  "end": "1314-03-15T18:00:00",
+  "spanLabel": "Un après-midi (quelques heures)",
+  "location": "Château de Westminster, Angleterre",
+  "note": "Optional caveat when the exact day/hour is inferred.",
+  "sourceQuote": "Verbatim book phrase that anchors the dating.",
+  "moments": [
+    { "at": "1314-03-15T14:00:00", "label": "…", "summary": "…" }
+  ]
+}
+```
+`start` / `end` = narrative clock for the span covered by this snapshot (not publication time). `spanLabel` = human duration of story-time between start and end. `moments` = key dated beats the scrubber can snap to. Do not invent dates that contradict the text; if only “mars 1314” / “un après-midi” is known, say so in `note` and use a conventional day only as a frieze anchor.
+
+CRITICAL — first naming evidence on every individual:
+For EVERY INDI without exception, add one or more first-mention citations so the character sheet can show when they enter the textual world. Prefer:
+```
+1 QUOT "Verbatim sentence where the character is first named or clearly identified."
+2 TYPE Première mention
+```
+If useful, add a second `1 QUOT` + `2 TYPE Première mention` for another early distinctive naming (e.g. nickname after the proper name). Do not invent quotes. Dialogue quotes that reveal personality stay as plain `1 QUOT` without this TYPE. If a genealogical figure is never called by name, still add the closest verbatim sentence that proves their place in the cast (title, kinship, inheritance, « petite-fille de… », « défunt père », « oncle », etc.) — never leave an INDI without at least one Première mention.
+
 Update any of the existing info as needed if any new info or developments have been stated for existing relationships or existing characters via NOTE tags.
 
-For people that are blood-related, be sure to create families with the tag FAM, and links along with HUSB, WIFE, CHILD tags  within the family for blood-related characters (same family). Please add NOTE fields to the ASSO and RELA fields stating what exactly in the plot made this characters know each other: how they meet and what were their important interactions and events that contributed to the intrigue, even if this relationship are merely friendships or acquaintances. 
+For people that are blood-related, be sure to create families with the tag FAM, and links along with HUSB, WIFE, CHILD tags within the family for blood-related characters (same family). Please add NOTE fields to the ASSO and RELA fields stating what exactly in the plot made this characters know each other: how they meet and what were their important interactions and events that contributed to the intrigue, even if this relationship are merely friendships or acquaintances.
 
 For each family, their id should also be composed of 4 digit numbers.
 
@@ -18,7 +64,6 @@ Be sure that Quotes of characters are correctly placed inside QUOT tags and not 
 
 DO NOT read further into future chapters as to not be spoiled. Be sure that each individual character appears only once in the file and is not repeated.
 
-Here is the up-to-date .ged file that had been updated up to the events in the previous chapter as well as the book in .txt format. Be sure to include all of the info in this previous take and update it or correct it if necessary.Please also fix and correct any incongruences or missing information that may be of interest:
-
+Here is the up-to-date .ged file that had been updated up to the events in the previous chapter as well as the book in .txt/.book format. Be sure to include all of the info in this previous take and update it or correct it if necessary. Please also fix and correct any incongruences or missing information that may be of interest:
 
 
