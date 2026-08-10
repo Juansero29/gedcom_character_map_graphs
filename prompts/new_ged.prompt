@@ -1,3 +1,9 @@
+Tu es l’auteur GED de ce dépôt. Lis et suis d’abord le skill `.cursor/skills/ged-chapter-author/` (SKILL.md, ged-conventions.md, qa-checklist.md).
+
+Pour un **chapitre suivant** d’un livre déjà commencé, utilise plutôt `prompts/next_ged_chapter.prompt`.
+
+---
+
 I need you to read until the end of chapter 1 of the book “Le Roi de fer” that I gave you in .book / .txt file. Chapter 1 is called “La reine sans amour”. Include the PROLOGUE and that chapter only.
 
 After you have read carefully until there, and not any further, please make me a detailed GED text file with all the characters mentioned until now.
@@ -17,21 +23,35 @@ For each individual, their id should be composed of 4 digit numbers. State their
 CRITICAL — blood/family vs ASSO are mutually exclusive:
 - Consanguinity and legal family (époux/épouse, parent/enfant, frères/sœurs) MUST be modeled only with `FAM` / `FAMS` / `FAMC` (red links in the app). Never also as `ASSO`.
 - Encode the full useful tree even when the book only names a kinship in passing (aïeul, petite-fille…): every hop needs a `FAM` so the UI can highlight lineage by depth (child = 1, grandchild = 2, great-grandchild = 3).
-- `ASSO` is only for non-family ties (alliés, ennemis, conseillers, parrain/filleule, rivaux, etc.).
+- `ASSO` is only for non-family ties (alliés, ennemis, conseillers, parrain/filleule, rivaux, amant, gouvernante, etc.).
 - Do NOT create an `ASSO` labeled Parenté, Cousin, Oncle, Tante, Neveu, Nièce, Fils, Époux, Descendante, Petite-fille, etc. If the book stresses a kinship that is already in the tree, put plot context in `NOTE` on the people/FAM — not a second dashed link.
 - If a tie is both political and familial, keep only the non-family angle in `ASSO` (e.g. `Allié`, `Ennemie`) and let `FAM` carry the blood/marriage.
 
 Also for each individual, establish `ASSO` only between people who are not linked as family above but still know each other in the plot (talked, allied, opposed…). Describe with `RELA` + `NOTE`. ASSO tags must stay inside INDI blocks.
 
+CRITICAL — RELA direction: `1 ASSO @B@` + `2 RELA X` on person A means the UI shows « A est X de B ». Always put in RELA the role of the person who owns the ASSO (A), never the role of the target (B). Example: Jeanne gouvernante du prince → on Jeanne `ASSO` prince + `RELA Gouvernante` (not `Pupille`); on the prince `ASSO` Jeanne + `RELA Pupille` if you need the reverse. Gender-agree French labels. Prefer both directions when the text supports them.
+
 CRITICAL — book evidence for every relationship:
-For EVERY ASSO (and for FAM blocks when the family bond is stated in the text), you MUST include at least one `2 QUOT` tag containing a verbatim quotation from the book (prologue/chapters read so far) that justifies why this relationship exists. Do not invent quotes. Prefer the most direct sentence(s). Keep explanatory context in `2 NOTE`, and put the raw book proof in `2 QUOT` only.
-Example:
+For EVERY ASSO (and for FAM blocks when the family bond is stated in the text), you MUST include at least one verbatim `QUOT` from the book (prologue/chapters read so far) that justifies why this relationship exists. Do not invent quotes. Prefer the most direct sentence(s). Keep explanatory context in `NOTE`, and put the raw book proof in `QUOT` only.
+For FAM: put the couple/marriage proof as `1 QUOT` on the FAM block (shown on the Spouse link only). Put parent↔child proof as `2 QUOT` / `2 NOTE` under the relevant `1 CHIL @I…@` (NOT the marriage sentence — that would wrongly appear on the child). Sibling links do not reuse couple quotes.
+Example ASSO:
 ```
 1 ASSO @I0023@
 2 RELA Compagnon de croisade
 2 NOTE Isabelle cite Joinville comme compagnon de croisade de Saint Louis pour légitimer l'éducation du prince.
 2 NOTE Ce souvenir dynastique justifie le choix de lady Mortimer comme gouvernante.
 2 QUOT "Vous êtes petite-nièce de messire Joinville le grand, qui fut à la croisade auprès de mon aïeul Monseigneur Saint Louis."
+```
+Example FAM with child evidence:
+```
+0 @F0002@ FAM
+1 HUSB @I0007@
+1 WIFE @I0006@
+1 CHIL @I0008@
+2 NOTE Enfant du couple ; premier mot à Westminster.
+2 QUOT "— Alors, messire mon fils, vous avez dit : « Je veux », dit Isabelle…"
+1 NOTE Couple royal anglais.
+1 QUOT "… Edouard II, le mari d'Isabelle…"
 ```
 
 CRITICAL — chapter narrative timeline (for the catalog / UI):
@@ -67,6 +87,9 @@ For EVERY INDI without exception, add one or more first-mention citations so the
 ```
 If useful, add a second `1 QUOT` + `2 TYPE Première mention` for another early distinctive naming (e.g. nickname after the proper name). Do not invent quotes. Dialogue quotes that reveal personality stay as plain `1 QUOT` without this TYPE. If a genealogical figure is never called by name, still add the closest verbatim sentence that proves their place in the cast (title, kinship, inheritance, « petite-fille de… », « défunt père », « oncle », etc.) — never leave an INDI without at least one Première mention.
 
+CRITICAL — salient traits in the portrait:
+If the book clearly establishes a major trait (cruelty, ambition, sexuality/mœurs, etc.), state it in the INDI `NOTE` / `Traits mentaux` / actions — not only via ASSO labels — so it shows on the character sheet.
+
 Update any of the existing info as needed if any new info or developments have been stated for existing relationships or existing characters via NOTE tags.
 
 For people that are blood-related, be sure to create families with the tag FAM, and links along with HUSB, WIFE, CHILD tags within the family for blood-related characters (same family). Please add NOTE fields to the ASSO and RELA fields stating what exactly in the plot made this characters know each other: how they meet and what were their important interactions and events that contributed to the intrigue, even if this relationship are merely friendships or acquaintances.
@@ -75,10 +98,11 @@ For each family, their id should also be composed of 4 digit numbers.
 
 Be sure to keep the 2 NOTE tags for ASSO tags since they describe important information between relationships of the characters, if there are any missing please add them with accurate NOTE information that describe the relation directly from the book text up until now.
 
-Be sure that Quotes of characters are correctly placed inside QUOT tags and not in NOTE tags
+Be sure that Quotes of characters are correctly placed inside QUOT tags and not in NOTE tags.
+
+Before finishing, run the QA in `.cursor/skills/ged-chapter-author/qa-checklist.md` (especially re-read every « A est X de B »).
 
 DO NOT read further into future chapters as to not be spoiled. Be sure that each individual character appears only once in the file and is not repeated.
 
 Here is the up-to-date .ged file that had been updated up to the events in the previous chapter as well as the book in .txt/.book format. Be sure to include all of the info in this previous take and update it or correct it if necessary. Please also fix and correct any incongruences or missing information that may be of interest:
-
 

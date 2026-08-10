@@ -22,32 +22,581 @@
               {
                 "at": "1314-03-15T14:00:00",
                 "label": "Isabelle à Westminster",
-                "summary": "La reine écoute un poème d'amour ; jour de mars avare en lumière."
+                "summary": "À Westminster, un après-midi de mars avare en lumière, une dame française de sa suite (non nommée dans le récit) lui lit un poème du duc Guillaume d’Aquitaine (« D’amour ne dois plus dire bien… »). Isabelle s’y reconnaît, puis interrompt la lecture en attendant Robert d’Artois.",
+                "characters": [
+                  "@I0006@"
+                ]
               },
               {
                 "at": "1314-03-15T14:30:00",
                 "label": "Premier mot du prince",
-                "summary": "Lady Mortimer amène le petit Édouard, qui dit « Veux ! »."
+                "summary": "Lady Mortimer amène le petit Édouard, qui dit « Veux ! ».",
+                "characters": [
+                  "@I0006@",
+                  "@I0008@",
+                  "@I0021@"
+                ]
               },
               {
                 "at": "1314-03-15T15:00:00",
                 "label": "Arrivée de Robert d'Artois",
-                "summary": "Monseigneur le comte Robert d'Artois est annoncé auprès de la reine."
+                "summary": "Monseigneur le comte Robert d'Artois est annoncé auprès de la reine.",
+                "characters": [
+                  "@I0006@",
+                  "@I0009@"
+                ]
               },
               {
                 "at": "1314-03-15T15:40:00",
                 "label": "Révélation de la tour de Nesle",
-                "summary": "Robert accuse Marguerite, Blanche et Jeanne d'adultère aux nuits d'absence de Louis."
+                "summary": "Robert accuse Marguerite, Blanche et Jeanne d'adultère aux nuits d'absence de Louis.",
+                "characters": [
+                  "@I0006@",
+                  "@I0009@",
+                  "@I0010@",
+                  "@I0011@",
+                  "@I0012@",
+                  "@I0003@"
+                ]
               },
               {
                 "at": "1314-03-15T16:30:00",
-                "label": "Le plan se forme",
-                "summary": "Madame de Comminges, aumônières-pièges, lettres à Valois et pour Jacques de Molay."
+                "label": "Le plan contre les brus",
+                "summary": "But : prouver l’adultère de Marguerite, Jeanne et Blanche pour les faire châtier.\n1) Isabelle écrit à son oncle Charles de Valois pour faire placer madame de Comminges comme dame de parage / espionne auprès de Marguerite à l’hôtel de Nesle — Valois sert d’intermédiaire sans connaître le complot.\n2) Elle fait quérir puis commander au marchand Albizzi trois aumônières luxueuses identiques ; Robert les rapportera en cadeaux secrets « d’amitié » aux brus : si l’une apparaît accrochée à la ceinture d’un amant, la faute est prouvée.",
+                "characters": [
+                  "@I0006@",
+                  "@I0009@",
+                  "@I0025@",
+                  "@I0014@",
+                  "@I0024@",
+                  "@I0010@",
+                  "@I0011@",
+                  "@I0012@"
+                ]
               },
               {
                 "at": "1314-03-15T18:00:00",
                 "label": "Fin de l'entrevue",
-                "summary": "Isabelle refuse l'adultère mais scelle l'alliance politique avec Robert."
+                "summary": "Isabelle refuse l’adultère avec Robert mais scelle l’alliance : elle lui confie aussi une lettre au roi demandant la clémence pour son parrain Jacques de Molay (requête de Valois).",
+                "characters": [
+                  "@I0006@",
+                  "@I0009@",
+                  "@I0017@",
+                  "@I0014@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-2.ged",
+          "label": "Jusqu’au chapitre 2",
+          "title": "Les prisonniers du Temple",
+          "narrative": {
+            "start": "1314-03-18T06:00:00",
+            "end": "1314-03-18T10:00:00",
+            "spanLabel": "La matinée du 18 mars 1314",
+            "location": "Hôtel du Temple → Notre-Dame de Paris",
+            "note": "Le texte date explicitement la conduite au « lundi après la Saint-Grégoire » (18 mars 1314). Fin du chapitre : le cortège atteint le pont Notre-Dame ; le jugement a été annoncé comme « chose jugée », on mène Molay à Notre-Dame pour en entendre la lecture.",
+            "sourceQuote": "Quel jour nous trouvons-nous ? — Le lundi après la Saint-Grégoire. Ce qui correspondait au 18 mars, le 18 mars 1314.",
+            "moments": [
+              {
+                "at": "1314-03-18T06:00:00",
+                "label": "Haine des trois noms",
+                "summary": "Molay se réveille enchaîné dans la tour du Temple. Il remâche ses tortures et maudit en lui-même ses trois ennemis : le pape Clément V, Guillaume de Nogaret et le roi Philippe. « Ils en crèveront… » La haine est la seule force qui le soutienne encore.",
+                "characters": [
+                  "@I0017@",
+                  "@I0016@",
+                  "@I0001@",
+                  "@I0037@"
+                ]
+              },
+              {
+                "at": "1314-03-18T07:30:00",
+                "label": "Alain de Pareilles",
+                "summary": "Des archers viennent le chercher. Dans la cour, le capitaine Alain de Pareilles attend avec chariot et hommes d’armes. Molay apprend que « c’est chose jugée » : on le mène à Notre-Dame pour entendre la lecture du jugement.",
+                "characters": [
+                  "@I0017@",
+                  "@I0034@"
+                ]
+              },
+              {
+                "at": "1314-03-18T08:00:00",
+                "label": "Les quatre dignitaires",
+                "summary": "Charnay (précepteur de Normandie), le visiteur général et le commandeur d’Aquitaine rejoignent Molay ; accolades, deniers pour les fers. Quatre vieux dignitaires vont être exposés ensemble.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0036@"
+                ]
+              },
+              {
+                "at": "1314-03-18T08:30:00",
+                "label": "Le chariot s’ébranle",
+                "summary": "Départ vers Notre-Dame sous escorte. Clameurs « À mort ! », puis silence et compassion d’une partie de la foule parisienne.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0036@",
+                  "@I0034@"
+                ]
+              },
+              {
+                "at": "1314-03-18T09:30:00",
+                "label": "Pont Notre-Dame",
+                "summary": "Molay cherche un secours improbable parmi d’anciens frères ; il accepte l’idée de mourir mais refuse de mourir déshonoré. Il serre la main de Charnay. Le cortège atteint le pont Notre-Dame.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0034@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-3.ged",
+          "label": "Jusqu’au chapitre 3",
+          "title": "Les brus du roi",
+          "narrative": {
+            "start": "1314-03-18T08:00:00",
+            "end": "1314-03-18T11:00:00",
+            "spanLabel": "La même matinée (Cité et Palais)",
+            "location": "Île de la Cité → Galerie mercière → vers l’hôtel de Nesle",
+            "note": "Même jour que le jugement annoncé des Templiers (18 mars 1314). Le bourdon de Notre-Dame rythme la promenade du roi ; la fin du chapitre laisse la Cité dans un silence inhabituel.",
+            "sourceQuote": "Ainsi, en cet avant-printemps 1314, le jour même où l’on allait juger les Templiers…",
+            "moments": [
+              {
+                "at": "1314-03-18T08:00:00",
+                "label": "Oublies et chaperon blanc",
+                "summary": "Philippe le Bel marche incognito dans les rues marchandes de la Cité, chaperon blanc, goûte une oublie, prend le pouls de son peuple.",
+                "characters": [
+                  "@I0001@"
+                ]
+              },
+              {
+                "at": "1314-03-18T08:20:00",
+                "label": "Guccio Baglioni",
+                "summary": "Le neveu du banquier Tolomei, menant trois lévriers, bouscule et injure le roi sans le reconnaître, puis lance son nom en défi devant la foule.",
+                "characters": [
+                  "@I0001@",
+                  "@I0045@",
+                  "@I0044@"
+                ]
+              },
+              {
+                "at": "1314-03-18T08:45:00",
+                "label": "Le chariot entrevu",
+                "summary": "Au son du bourdon, la foule crie après les Templiers. Le roi entraperçoit le chariot des quatre dignitaires ; Molay droit « comme un martyr, mais non un vaincu ». Philippe regagne le Palais, sûr que l’œuvre de sept ans s’achève.",
+                "characters": [
+                  "@I0001@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0036@"
+                ]
+              },
+              {
+                "at": "1314-03-18T09:30:00",
+                "label": "Galerie mercière",
+                "summary": "Sous les statues des rois (et celle de Marigny), Philippe surprend Jeanne, Blanche et Philippe d’Aunay. Blanche donne le change ; le roi annonce Louis et Charles libres le soir, Poitiers de retour sous peu.",
+                "characters": [
+                  "@I0001@",
+                  "@I0011@",
+                  "@I0012@",
+                  "@I0041@",
+                  "@I0015@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:15:00",
+                "label": "Les amants dévoilés",
+                "summary": "Le récit établit les adultères : Philippe d’Aunay amant de Marguerite depuis quatre ans ; Gautier d’Aunay amant de Blanche ; Jeanne, épouse constante, entremetteuse. Ce soir, « point de tour de Nesle ».",
+                "characters": [
+                  "@I0041@",
+                  "@I0042@",
+                  "@I0010@",
+                  "@I0012@",
+                  "@I0011@",
+                  "@I0003@",
+                  "@I0005@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:45:00",
+                "label": "Regard de chasseur",
+                "summary": "Jeanne envoie Philippe d’Aunay à l’hôtel de Nesle avec une ceinture-prétexte. Robert d’Artois, bottes rouges, l’a observé depuis l’escalier et le suit du regard. Dehors, le bourdon s’est tu.",
+                "characters": [
+                  "@I0041@",
+                  "@I0011@",
+                  "@I0012@",
+                  "@I0009@",
+                  "@I0010@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-4.ged",
+          "label": "Jusqu’au chapitre 4",
+          "title": "Notre-Dame était blanche",
+          "narrative": {
+            "start": "1314-03-18T10:00:00",
+            "end": "1314-03-18T11:30:00",
+            "spanLabel": "Le jugement au parvis (même matinée)",
+            "location": "Parvis de Notre-Dame de Paris",
+            "note": "Suite immédiate du silence qui surprend Robert à la sortie de la Galerie mercière. Même jour que les chapitres 2–3 (18 mars 1314).",
+            "sourceQuote": "un pâle soleil éclairait les pierres blanches de Notre-Dame de Paris",
+            "moments": [
+              {
+                "at": "1314-03-18T10:00:00",
+                "label": "Parvis en armes",
+                "summary": "Archers en cordon, foule aux fenêtres. Les quatre dignitaires font face au Tribunal ; Jean de Marigny (Sens) et le prévôt Ployebouche incarnent Église et roi.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0036@",
+                  "@I0034@",
+                  "@I0040@",
+                  "@I0047@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:20:00",
+                "label": "Lecture du légat",
+                "summary": "Arnaud d’Auch lit les attendus avec emphase : faux témoignages, aveux sous la question. Molay murmure « Mensonge… » ; le peuple s’impatiente.",
+                "characters": [
+                  "@I0048@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0036@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:40:00",
+                "label": "Condamnation au mur",
+                "summary": "Sentence : mur et silence (prison perpétuelle). La foule, qui attendait la mort, y voit une clémence. Le légat et Marigny échangent un sourire ; le visiteur croit à une grâce.",
+                "characters": [
+                  "@I0048@",
+                  "@I0040@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0035@",
+                  "@I0001@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:50:00",
+                "label": "« Je proteste ! »",
+                "summary": "Molay crie contre la sentence inique, retire ses aveux, affirme l’innocence de l’Ordre. Charnay le rejoint. Marigny les accuse ; l’écho de la cathédrale redouble chaque mot.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0040@"
+                ]
+              },
+              {
+                "at": "1314-03-18T11:10:00",
+                "label": "Émeute et relaps",
+                "summary": "Le peuple prend parti pour les Templiers. Marigny déclare Molay et Charnay relaps et les remet à la justice du roi. Le Tribunal se réfugie dans Notre-Dame ; Ployebouche fait remmener les prisonniers au Temple et court aviser le roi.",
+                "characters": [
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0040@",
+                  "@I0047@",
+                  "@I0034@",
+                  "@I0001@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-5.ged",
+          "label": "Jusqu’au chapitre 5",
+          "title": "Marguerite de Bourgogne, reine de Navarre",
+          "narrative": {
+            "start": "1314-03-18T10:30:00",
+            "end": "1314-03-18T11:45:00",
+            "spanLabel": "Même matinée (hôtel de Nesle)",
+            "location": "Hôtel et tour de Nesle, Paris",
+            "note": "Parallèle au tumulte de Notre-Dame : pendant que le jugement bascule, Philippe d’Aunay est chez Marguerite. La nouvelle du rejet de la sentence arrive en fin de scène.",
+            "sourceQuote": "Pendant ce temps, Philippe d’Aunay était arrivé à l’hôtel de Nesle.",
+            "moments": [
+              {
+                "at": "1314-03-18T10:30:00",
+                "label": "Antichambre",
+                "summary": "Philippe d’Aunay piétine aux appartements de la reine de Navarre : quatre ans d’amour exaspéré, jalousie, souvenir de la Tour aménagée pour leurs nuits.",
+                "characters": [
+                  "@I0041@",
+                  "@I0010@"
+                ]
+              },
+              {
+                "at": "1314-03-18T10:50:00",
+                "label": "Sous l’œil de Comminges",
+                "summary": "Marguerite le reçoit en robe de fourrure, pieds nus ; madame de Comminges brode derrière la courtine. Philippe remet la ceinture de Jeanne ; Marguerite chuchote « Je t’aime » puis écrit « Prudence ».",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0025@",
+                  "@I0011@"
+                ]
+              },
+              {
+                "at": "1314-03-18T11:05:00",
+                "label": "Aumônière et fille",
+                "summary": "Querelle de jalousie autour d’une aumônière mystérieuse. Comminges ramène la petite Jeanne (trois ans) ; Philippe se demande si elle est de lui. Marguerite lit que la veuve n’est pas dupe.",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0025@",
+                  "@I0051@",
+                  "@I0049@"
+                ]
+              },
+              {
+                "at": "1314-03-18T11:25:00",
+                "label": "Conseil et espoir",
+                "summary": "On cherche Louis : les Templiers ont rejeté la sentence, le roi convoque Conseil. Marguerite et Philippe retrouvent leur complicité — peut-être une nuit libre. Elle brûle le billet « Prudence ».",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0003@",
+                  "@I0001@",
+                  "@I0017@"
+                ]
+              },
+              {
+                "at": "1314-03-18T11:40:00",
+                "label": "Filets tendus",
+                "summary": "À la sortie, Philippe croise Robert d’Artois, qui cherche Louis pour Valois. Le géant le soupçonne d’être l’amant ; Comminges et un guetteur de nuit doivent confirmer. « Les filets étaient tendus. »",
+                "characters": [
+                  "@I0041@",
+                  "@I0009@",
+                  "@I0025@",
+                  "@I0014@",
+                  "@I0003@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-6.ged",
+          "label": "Jusqu’au chapitre 6",
+          "title": "Le conseil du roi",
+          "narrative": {
+            "start": "1314-03-18T11:30:00",
+            "end": "1314-03-18T13:00:00",
+            "spanLabel": "Le Conseil étroit (même jour)",
+            "location": "Palais de la Cité, Paris",
+            "note": "Suite immédiate du rapport de Ployebouche. Horaires du Conseil inférés dans la continuité du même jour.",
+            "sourceQuote": "Jacques de Molay et Geoffroy de Charnay seront brûlés ce soir dans l’île aux Juifs, face au jardin du Palais.",
+            "moments": [
+              {
+                "at": "1314-03-18T11:30:00",
+                "label": "Lévriers de Tolomei",
+                "summary": "Ployebouche trouve le roi de bonne humeur : Spinello Tolomei offre les trois lévriers de Guccio. Philippe nomme le plus grand « Lombard » et charge Bouville d’assembler le Conseil étroit.",
+                "characters": [
+                  "@I0001@",
+                  "@I0047@",
+                  "@I0044@",
+                  "@I0045@",
+                  "@I0052@"
+                ]
+              },
+              {
+                "at": "1314-03-18T12:00:00",
+                "label": "Marigny rapporte",
+                "summary": "Conseil restreint : Marigny annonce que Molay et Charnay sont aux mains du roi sans recours au pape. Valois irrupte, raille « Le Portier » et dénonce l’échec du tribunal.",
+                "characters": [
+                  "@I0001@",
+                  "@I0015@",
+                  "@I0014@",
+                  "@I0016@",
+                  "@I0003@",
+                  "@I0052@",
+                  "@I0040@"
+                ]
+              },
+              {
+                "at": "1314-03-18T12:20:00",
+                "label": "Valois contre Nogaret",
+                "summary": "Dispute féodaux vs « novelletés ». Nogaret fulmine contre la clémence ; Valois rappelle le soufflet à Boniface. Lombard aboie ; Louis Hutin rit — « Louis… taisez-vous ». ",
+                "characters": [
+                  "@I0001@",
+                  "@I0014@",
+                  "@I0015@",
+                  "@I0016@",
+                  "@I0003@",
+                  "@I0038@"
+                ]
+              },
+              {
+                "at": "1314-03-18T12:40:00",
+                "label": "Avis du Conseil",
+                "summary": "Valois s’en lave les mains ; Louis propose le pape (rejeté) ; Bouville « réfléchit » ; Nogaret exige le feu sans délai ; Marigny : l’agitation tombera quand les causes auront « cessé d’exister ».",
+                "characters": [
+                  "@I0001@",
+                  "@I0014@",
+                  "@I0003@",
+                  "@I0052@",
+                  "@I0016@",
+                  "@I0015@"
+                ]
+              },
+              {
+                "at": "1314-03-18T12:55:00",
+                "label": "« Seront brûlés ce soir »",
+                "summary": "Philippe le Bel tranche : Molay et Charnay brûlés le soir à l’île aux Juifs ; Nogaret rédige l’arrêt ; les seigneurs (et Charles) devront assister. Valois à Louis : « la fin de la chevalerie ».",
+                "characters": [
+                  "@I0001@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0016@",
+                  "@I0014@",
+                  "@I0003@",
+                  "@I0005@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-7.ged",
+          "label": "Jusqu’au chapitre 7",
+          "title": "La tour des amours",
+          "narrative": {
+            "start": "1314-03-18T19:00:00",
+            "end": "1314-03-18T21:00:00",
+            "spanLabel": "La nuit du 18 mars (Tour de Nesle)",
+            "location": "Tour de Nesle & île aux Juifs, Paris",
+            "note": "Soirée suivant le Conseil. Horaires nocturnes inférés ; le récit ouvre sur la nuit tombée.",
+            "sourceQuote": "On liait les Templiers sur le bûcher auquel, dans un instant, on mettrait le feu.",
+            "moments": [
+              {
+                "at": "1314-03-18T19:00:00",
+                "label": "Barque vers Nesle",
+                "summary": "Philippe et Gautier d’Aunay quittent la rive du Louvre. Le vieux batelier geint, parle des Templiers à griller ; Philippe se méfie. Prévenus par Jeanne, ils vont au rendez-vous de Marguerite et Blanche.",
+                "characters": [
+                  "@I0041@",
+                  "@I0042@",
+                  "@I0059@",
+                  "@I0011@",
+                  "@I0010@",
+                  "@I0012@"
+                ]
+              },
+              {
+                "at": "1314-03-18T19:30:00",
+                "label": "Aumônières",
+                "summary": "Dans la chambre à jasmin, Marguerite donne à Philippe l’aumônière qui l’avait irrité ; Blanche en offre une à Gautier. Gautier, marié à une Montmorency, s’interroge encore sur les motifs de Blanche.",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0012@",
+                  "@I0042@",
+                  "@I0060@"
+                ]
+              },
+              {
+                "at": "1314-03-18T20:15:00",
+                "label": "Amenée au bûcher",
+                "summary": "Depuis la meurtrière, Marguerite et Philippe voient l’île aux Juifs : torches, foule, barque d’armes. Deux silhouettes grises descendent ; on les lie au bûcher. Dans la tour de l’Eau, le roi et son Conseil prennent place.",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0001@",
+                  "@I0003@"
+                ]
+              },
+              {
+                "at": "1314-03-18T20:45:00",
+                "label": "« Ils vont brûler… et nous »",
+                "summary": "Marguerite rit de Louis dans la loggia, se dévêt face à la nuit, s’offre à Philippe. Au fond, Blanche et Gautier restent enlacés. Sur le mur, leurs ombres montent jusqu’aux voûtes.",
+                "characters": [
+                  "@I0010@",
+                  "@I0041@",
+                  "@I0012@",
+                  "@I0042@",
+                  "@I0003@"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "file": "/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-8.ged",
+          "label": "Jusqu’au chapitre 8",
+          "title": "« Je cite au tribunal de Dieu… »",
+          "narrative": {
+            "start": "1314-03-18T20:30:00",
+            "end": "1314-03-18T22:00:00",
+            "spanLabel": "Le bûcher de l’île aux Juifs",
+            "location": "Île aux Juifs & tour de l’Eau, Paris",
+            "note": "Suite immédiate de la nuit du 18 mars. Horaires du supplice inférés dans la continuité du soir.",
+            "sourceQuote": "Pape Clément !… Chevalier Guillaume !… Roi Philippe !… Avant un an, je vous cite à paraître au tribunal de Dieu pour y recevoir votre juste châtiment !",
+            "moments": [
+              {
+                "at": "1314-03-18T20:30:00",
+                "label": "Signal du roi",
+                "summary": "Molay et Charnay liés sous la mitre d’hérétique. Le moine les adjure en vain. Philippe le Bel croise le regard du grand-maître, fait un geste ; Alain de Pareilles le répète ; le bourreau enfonce le brandon.",
+                "characters": [
+                  "@I0001@",
+                  "@I0017@",
+                  "@I0033@",
+                  "@I0034@",
+                  "@I0061@",
+                  "@I0062@"
+                ]
+              },
+              {
+                "at": "1314-03-18T20:50:00",
+                "label": "Charnay en cendre",
+                "summary": "Valois tousse dans la fumée ; Nogaret savoure ; Marigny se force à l’impassibilité ; Bouville prie. Charnay est atteint le premier, hurle, s’effondre. Molay lui parle ; on n’entend que « frère ».",
+                "characters": [
+                  "@I0033@",
+                  "@I0017@",
+                  "@I0014@",
+                  "@I0016@",
+                  "@I0015@",
+                  "@I0052@"
+                ]
+              },
+              {
+                "at": "1314-03-18T21:10:00",
+                "label": "La malédiction",
+                "summary": "Molay crie la honte, cite Clément, Nogaret et Philippe au tribunal de Dieu avant un an, maudit leurs races jusqu’à la treizième génération. Il s’effondre ; sa main noire reste levée dans la cendre.",
+                "characters": [
+                  "@I0017@",
+                  "@I0001@",
+                  "@I0016@",
+                  "@I0037@",
+                  "@I0003@",
+                  "@I0005@"
+                ]
+              },
+              {
+                "at": "1314-03-18T21:30:00",
+                "label": "« Arracher la langue »",
+                "summary": "La foule murmure que la malédiction vise le roi, le pape et Nogaret. Valois demande si le roi est content ; Philippe répond que son erreur fut de ne pas leur faire arracher la langue. Louis trouve que « cela pue » ; Charles doute d’oublier, même auprès de Blanche.",
+                "characters": [
+                  "@I0001@",
+                  "@I0014@",
+                  "@I0016@",
+                  "@I0015@",
+                  "@I0052@",
+                  "@I0003@",
+                  "@I0005@"
+                ]
               }
             ]
           }

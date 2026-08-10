@@ -1,0 +1,54 @@
+Tu es l’auteur GED de ce dépôt. Lis et suis le skill `.cursor/skills/ged-chapter-author/` (SKILL.md, ged-conventions.md, qa-checklist.md) avant d’écrire.
+
+## Mission
+
+Continuer *Les Rois maudits — Le Roi de fer* jusqu’à la fin du **chapitre {{N}}** (« {{TITLE}} »).
+
+- Texte : `public/ged/les-rois-maudits/le-roi-de-fer/le-roi-de-fer-up-to-chapter-1.book` (ou le `.book` à jour s’il couvre plus loin)
+- Snapshot de départ (ne pas l’écraser) : `public/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-{{N-1}}.ged`
+- Sortie : `public/ged/les-rois-maudits/le-roi-de-fer/up-to-chapter-{{N}}.ged`
+- Mettre à jour `public/ged/catalog.json` (nouveau `chapters[]` + `narrative`)
+
+## Périmètre de lecture (anti-spoiler)
+
+Lis depuis le début du livre **jusqu’à la fin du chapitre {{N}} inclus**, et **pas une ligne plus loin**.
+
+Inclure le prologue et tous les chapitres 1…{{N}}.
+
+## Règles de contenu (résumé — le skill fait foi)
+
+1. **100 % français** pour NOTE, QUOT, EVEN, RELA, labels portrait (`Traits physiques :`, etc. ; `Non précisé`).
+2. **Porter** tout le `.ged` précédent ; enrichir / corriger ; nouveaux persos = nouveaux `@I####@`.
+3. **FAM vs ASSO exclusifs** : sang/mariage = FAM seulement ; ASSO = non-famille. Jamais ASSO « Cousin / Oncle / Époux… ».
+4. **RELA** : sur A, `ASSO @B@` + `RELA X` ⇒ « A est X de B ». X = rôle de A (pas de B). Accorder le genre. Bidirectionnel si le texte le permet.
+5. **Preuves** :
+   - chaque ASSO : `2 QUOT` verbatim + `2 NOTE`
+   - FAM couple : `1 QUOT` (mariage/ménage)
+   - chaque `CHIL` : `2 QUOT` parent↔enfant (**pas** la phrase du mariage)
+6. **Première mention** sur chaque INDI : `1 QUOT` + `2 TYPE Première mention`.
+7. **NICK** pour tout surnom du livre.
+8. Portrait : traits saillants du texte (y compris mœurs si établies) dans NOTE/CONT.
+9. `1 SOUR Le Roi de fer` dans le HEAD.
+10. Finir par la QA de `qa-checklist.md` (relire toutes les phrases « A est X de B »).
+
+## Narrative catalogue
+
+Ajouter/mettre à jour l’objet `narrative` du chapitre (horloge narrative, `spanLabel`, `moments` ancrés dans le texte ; pas de dates inventées qui contredisent le livre).
+
+## Livrable
+
+- Fichier `.ged` complet jusqu’au ch. {{N}}
+- Entrée catalogue
+- Court résumé : nouveaux personnages, relations ajoutées/corrigées, ambiguïtés éventuelles du texte
+
+---
+
+Remplis avant envoi :
+
+| Variable | Valeur |
+|----------|--------|
+| {{N}} | 2 |
+| {{N-1}} | 1 |
+| {{TITLE}} | *(titre du chapitre 2 dans le livre)* |
+
+Puis colle ci-dessous le `.ged` up-to-chapter-{{N-1}} si besoin, ou indique à l’agent de le lire depuis le disque.

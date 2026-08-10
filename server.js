@@ -52,6 +52,17 @@ app.get('/ged/*', (req, res) => {
 
 app.use(express.static('public'));
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    const os = require("os");
+    const nets = os.networkInterfaces();
+    const lan = [];
+    for (const list of Object.values(nets)) {
+        for (const net of list || []) {
+            if (net.family === "IPv4" && !net.internal) lan.push(net.address);
+        }
+    }
+    console.log(`Server running on http://localhost:${PORT}`);
+    lan.forEach((ip) => {
+        console.log(`LAN (phone/other devices): http://${ip}:${PORT}`);
+    });
 });

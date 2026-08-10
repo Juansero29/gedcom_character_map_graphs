@@ -43,8 +43,13 @@
 1 ASSO @I0017@
 2 RELA Adversaire
 2 NOTE Philippe le Bel a monté contre Jacques de Molay et les Templiers le plus vaste procès de l'Histoire.
-2 NOTE L'indépendance et les richesses du Temple inquiétaient et excitaient sa convoitise.
-2 QUOT "Un seul pouvoir avait osé lui tenir tête : l'Ordre souverain des chevaliers du Temple."
+2 NOTE La veille du vendredi 13 octobre 1307, il embrassait encore Molay et l'appelait son frère.
+2 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+1 ASSO @I0037@
+2 RELA Maître
+2 NOTE Le pape Clément V dépend de lui et a cédé, selon le récit, contre son gré.
+2 NOTE Molay range Philippe avec Clément et Nogaret parmi ses trois ennemis mortels.
+2 QUOT "On disait que le pape Clément V lui-même n'avait cédé que contre son gré, parce qu'il était dans la dépendance du roi"
 1 ASSO @I0013@
 2 RELA Allié politique
 2 NOTE Mahaut d'Artois a obtenu de lui le comté d'Artois et marié ses filles et sa cousine aux trois fils royaux.
@@ -482,6 +487,7 @@
 2 NOTE Demande la clémence pour Molay via Isabelle.
 2 NOTE Instrument politique dans l'affaire du Temple au moment du jugement imminent.
 2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+1 FAMS @F0014@
 1 FAMC @F0009@
 
 0 @I0015@ INDI
@@ -513,6 +519,7 @@
 2 NOTE Robert affirme que Mahaut lui envoyait « mille merveilles ».
 2 NOTE Lien supposé entre mariages bourguignons et faveur ministérielle.
 2 QUOT "Et j'envoie mille merveilles à Marigny…"
+1 FAMC @F0015@
 0 @I0016@ INDI
 1 NAME Guillaume /de Nogaret/
 1 SEX M
@@ -522,11 +529,11 @@
 1 OCCU Garde des Sceaux ; légiste de Philippe le Bel
 1 QUOT "souffle malice dans l'oreille de Nogaret, et j'envoie mille merveilles à Marigny…"
 2 TYPE Première mention
-1 NOTE Autre homme « sorti de rien » ; instruit le procès des Templiers. Mahaut aurait « soufflé malice » à son oreille.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (hors scène).
-2 CONT Rôle : Architecte juridique de la destruction du Temple, dans le discours de Robert.
-2 CONT Opinions politiques : Légiste au service de la couronne contre papauté et Temple.
-2 CONT Actions décisives principales : (Rapportées) frappe contre Molay et l'Ordre avec Marigny.
+1 NOTE Garde des Sceaux qui a dirigé les tortures de Molay (brodequins, étirement) et s'est saisi du grand-maître le vendredi 13 octobre 1307. Voix froide, insistante ; cruauté « procédurière » (deniers pour ôter les fers).
+2 CONT Traits physiques : non précisés. Traits mentaux : Froideur, obstination à obtenir l'aveu, cruauté administrative.
+2 CONT Rôle : Bourreau politique du Temple ; hantise de Molay dans sa geôle.
+2 CONT Opinions politiques : Légiste au service de la destruction de l'Ordre.
+2 CONT Actions décisives principales : A torturé Molay jusqu'à l'aveu ; a arrêté le grand-maître à la maison mère ; a calculé l'indemnité d'entretien pour affamer les prisonniers.
 1 ASSO @I0001@
 2 RELA Conseiller
 2 NOTE Garde des Sceaux et bras juridique du roi.
@@ -535,13 +542,14 @@
 1 ASSO @I0015@
 2 RELA Collègue
 2 NOTE Toujours nommé avec Marigny dans la diatribe de Westminster.
-2 NOTE Duo responsable du « grand méfait » imminent contre Molay.
+2 NOTE Duo responsable du « grand méfait » contre Molay.
 2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny !"
 1 ASSO @I0017@
-2 RELA Accusateur / bourreau politique
-2 NOTE Robert impute à Nogaret (et Marigny) la mort annoncée de Molay.
-2 NOTE Symbole de la haine entre légistes royaux et grand-maître templier.
-2 QUOT "c'est grand méfait qu'on va encore commettre là, et qu'on doit une fois de plus à Nogaret et à Marigny !"
+2 RELA Accusateur / tortionnaire
+2 NOTE A conduit les séances de torture jusqu'à l'aveu forcé de Molay.
+2 NOTE Sa voix revient au grand-maître comme un cauchemar.
+2 QUOT "Et toujours la voix sinistre de Guillaume de Nogaret : « Mais avouez donc, messire…»"
+
 0 @I0017@ INDI
 1 NAME Jacques /de Molay/
 1 SEX M
@@ -551,21 +559,28 @@
 1 OCCU Grand-maître de l'Ordre du Temple ; parrain d'Isabelle
 1 QUOT "votre parrain, le grand-maître Jacques de Molay, ne soit mis à mort. Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
 2 TYPE Première mention
-1 NOTE Vieil homme, « noble et grand », prisonnier depuis des années. Jugement imminent ; Valois et Robert veulent qu'Isabelle écrive pour la clémence.
-2 CONT Traits physiques : Vieil homme. Traits mentaux : Noblesse passée ; fautes déjà expiées, selon Robert.
-2 CONT Rôle : Figure centrale du prologue (procès du Temple) ; enjeu moral du chapitre 1.
-2 CONT Opinions politiques : Chef de l'Ordre souverain qui a osé tenir tête à Philippe le Bel.
-2 CONT Actions décisives principales : A tenu Isabelle sur les fonts baptismaux ; attend son jugement.
+1 QUOT "Jacques de Molay ! Jacques de Molay ! Je suis Jacques de Molay !"
+1 NOTE Prisonnier dans une salle basse de la tour du Temple qu'il avait fait rénover. Vieillard édenté, barbe d'ancêtre, pouce écrasé, jambes brisées aux brodequins ; le lundi après la Saint-Grégoire (18 mars 1314), conduit à Notre-Dame pour entendre son jugement.
+2 CONT Traits physiques : Apparence de centenaire ; barbe d'ancêtre, bouche édentée, long nez amaigri ; manteau de l'Ordre devenu guenille grisâtre ; fers aux pieds.
+2 CONT Traits mentaux : Angoisse à chaque réveil ; colères à demi démentes ; refuse de mourir déshonoré ; haine obsessionnelle de Clément, Guillaume et Philippe.
+2 CONT Rôle : Grand-maître captif mené au jugement ; cœur du chapitre « Les prisonniers du Temple ».
+2 CONT Opinions politiques : Se tient encore pour chef de l'Ordre ; se croit trahi par Philippe après avoir accepté l'enquête de 1307.
+2 CONT Actions décisives principales : A crié son nom pour ne pas perdre l'esprit ; a avoué sous la torture ; monte dans le chariot vers Notre-Dame en serrant la main de Geoffroy de Charnay.
 1 EVEN
-2 TYPE Arrestation et long procès
-2 DATE OCT 1307
-2 PLAC France
-2 NOTE Arrêté avec l'Ordre ; le procès dure sept ans jusqu'au seuil du récit.
+2 TYPE Arrestation des Templiers
+2 DATE 13 OCT 1307
+2 PLAC Hôtel du Temple, Paris
+2 NOTE Vendredi 13 : Nogaret vient se saisir de Molay et des cent quarante chevaliers de la maison mère, au lendemain des obsèques de l'impératrice de Constantinople.
+1 EVEN
+2 TYPE Conduite au jugement
+2 DATE 18 MAR 1314
+2 PLAC Du Temple à Notre-Dame de Paris
+2 NOTE Alain de Pareilles escorte Molay et trois dignitaires dans un chariot ouvert sous les clameurs puis le silence de la foule.
 1 ASSO @I0001@
 2 RELA Adversaire royal
-2 NOTE Cible du procès monté par Philippe le Bel.
-2 NOTE Son sort dépend encore d'une éventuelle clémence royale.
-2 QUOT "Il monta contre eux le plus vaste procès dont l'Histoire ait gardé le souvenir"
+2 NOTE Philippe l'a d'abord embrassé et appelé son frère, puis a fait arrêter tout l'Ordre.
+2 NOTE Molay répète ses trois ennemis : Clément, Guillaume, Philippe.
+2 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
 1 ASSO @I0006@
 2 RELA Parrain
 2 NOTE Parrain d'Isabelle.
@@ -576,6 +591,37 @@
 2 NOTE Charles de Valois sollicite Isabelle en sa faveur.
 2 NOTE La haute aristocratie tente in extremis de le sauver.
 2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+1 ASSO @I0016@
+2 RELA Victime de torture
+2 NOTE Nogaret l'a soumis aux brodequins et à l'étirement jusqu'à l'aveu forcé.
+2 NOTE La voix froide du garde des Sceaux hante encore sa cellule.
+2 QUOT "Et toujours la voix sinistre de Guillaume de Nogaret : « Mais avouez donc, messire…»"
+1 ASSO @I0033@
+2 RELA Ami / mentor
+2 NOTE Amitié de longue date ; Molay a fait toute la carrière de Charnay, de dix ans son cadet.
+2 NOTE Il le voit comme son successeur et lui serre la main dans le chariot.
+2 QUOT "Une longue amitié unissait les deux hommes ; Jacques de Molay avait fait toute la carrière de Charnay, de dix ans son cadet et dans lequel il voyait son successeur."
+1 ASSO @I0034@
+2 RELA Captif
+2 NOTE Alain de Pareilles le mène à Notre-Dame pour la lecture du jugement.
+2 NOTE Molay pâlit en le voyant : l'appareil d'archers et le chariot annoncent autre chose qu'un simple interrogatoire.
+2 QUOT "— Alors, c'est chose jugée ? demanda Molay au capitaine des archers. — Ce l'est, messire, répondit celui-ci."
+1 ASSO @I0035@
+2 RELA Compagnon de captivité
+2 NOTE Le visiteur général sort de la tour avec les autres dignitaires.
+2 NOTE Molay lui donne l'accolade avant le départ.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+1 ASSO @I0036@
+2 RELA Compagnon de captivité
+2 NOTE Le commandeur d'Aquitaine, héros de Saint-Jean-d'Acre, est hébété et montre ses plaies.
+2 NOTE Il faut le hisser dans le chariot.
+2 QUOT "Le commandeur d'Aquitaine, l'homme qui avait repoussé les Turcs à Saint-Jean-d'Acre, semblait frappé d'hébétude."
+1 ASSO @I0037@
+2 RELA Ennemi / maudit
+2 NOTE Molay veut la mort atroce du pape Clément avec celles de Nogaret et du roi.
+2 NOTE Il croit Clément complice malgré sa dépendance envers Philippe.
+2 QUOT "Qui crèverait ? Clément, Guillaume, Philippe… Le pape, le garde des Sceaux, le roi."
+
 0 @I0018@ INDI
 1 NAME Pierre /de Gaveston/
 2 NICK le Béarnais
@@ -920,6 +966,206 @@
 1 FAMS @F0009@
 1 FAMC @F0012@
 
+
+0 @I0033@ INDI
+1 NAME Geoffroy /de Charnay/
+2 NICK Précepteur de Normandie
+1 SEX M
+1 BIRT
+2 DATE ABT 1254
+2 PLAC France
+1 OCCU Précepteur de Normandie de l'Ordre du Temple
+1 QUOT "Ce fut le précepteur de Normandie, Geoffroy de Charnay, qui, le premier, s'empêtrant dans ses fers, se précipita vers le grand-maître et l'étreignit."
+2 TYPE Première mention
+1 NOTE Dignitaire templier, de dix ans le cadet de Molay ; ami intime et successeur pressenti. Paie de ses derniers deniers pour faire ôter les fers du grand-maître ; lui serre la main dans le chariot vers Notre-Dame.
+2 CONT Traits physiques : Enchaîné, décharné comme les autres captifs. Traits mentaux : Fidèle, courageux, dernier « homme fort » auprès de Molay.
+2 CONT Rôle : Bras et cœur du grand-maître parmi les quatre prisonniers.
+2 CONT Opinions politiques : Reste uni à Molay et à l'Ordre.
+2 CONT Actions décisives principales : Embrasse Molay ; paie les deniers des fers ; scrute la foule avec lui ; lui tient la main.
+1 ASSO @I0017@
+2 RELA Ami / successeur pressenti
+2 NOTE Molay a fait sa carrière et le voit comme son successeur.
+2 NOTE Il reste le dernier appui fort du grand-maître dans le chariot.
+2 QUOT "Une longue amitié unissait les deux hommes ; Jacques de Molay avait fait toute la carrière de Charnay, de dix ans son cadet et dans lequel il voyait son successeur."
+1 ASSO @I0035@
+2 RELA Compagnon de captivité
+2 NOTE Sort de la tour avec le visiteur et le commandeur.
+2 NOTE Les quatre dignitaires partagent le même chariot.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+1 ASSO @I0036@
+2 RELA Compagnon de captivité
+2 NOTE Compagnon des mêmes fers et du même départ vers Notre-Dame.
+2 NOTE Voit le commandeur hébété et blessé.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+
+0 @I0034@ INDI
+1 NAME Alain /de Pareilles/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Capitaine des archers du roi
+1 QUOT "Au milieu de la cour, messire Alain de Pareilles, capitaine des archers du roi, l'homme qui assistait à toutes les exécutions, qui accompagnait tous les condamnés vers les jugements et les supplices, marchait à pas lents, le visage fermé par un grand air d'ennui."
+2 TYPE Première mention
+1 NOTE Homme aux cheveux couleur d'acier, cotte de mailles, casque au creux du bras ; air d'ennui permanent. Conduit Molay et les dignitaires à Notre-Dame le 18 mars 1314.
+2 CONT Traits physiques : Cheveux couleur d'acier en mèches courtes ; front carré ; cotte de mailles.
+2 CONT Traits mentaux : Visage fermé, ennui professionnel devant les supplices.
+2 CONT Rôle : Bras armé du roi pour les conduites au jugement.
+2 CONT Opinions politiques : Exécute les ordres royaux sans commentaire.
+2 CONT Actions décisives principales : Confirme que « c'est chose jugée » ; coiffe son casque et mène le cortège.
+1 ASSO @I0001@
+2 RELA Capitaine
+2 NOTE Sert le roi comme capitaine des archers.
+2 NOTE Domine le tumulte parisien lors du départ du Temple.
+2 QUOT "messire Alain de Pareilles, capitaine des archers du roi"
+1 ASSO @I0017@
+2 RELA Conducteur vers le jugement
+2 NOTE Escorte Molay du Temple à Notre-Dame.
+2 NOTE Son apparition avec chariot et cent archers annonce le jugement.
+2 QUOT "J'ai ordre de vous conduire à Notre-Dame pour en entendre lecture."
+
+0 @I0035@ INDI
+1 NAME Visiteur /général/
+2 NICK Frère visiteur
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Visiteur général de l'Ordre du Temple
+1 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+2 TYPE Première mention
+1 NOTE Dignitaire templier anonyme dans le récit ; espère naïvement une grâce du pape ; marmonne sans cesse entre ses dents cassées pendant le trajet.
+2 CONT Traits physiques : Dents cassées ; vieillard décharné. Traits mentaux : Espoir illusoire, prière continue, hébétude.
+2 CONT Rôle : L'un des quatre prisonniers menés à Notre-Dame.
+2 CONT Opinions politiques : Espère encore la clémence de Clément V.
+2 CONT Actions décisives principales : Suggère que le déferrement est « peut-être bon signe » ; parle seul dans le chariot.
+1 ASSO @I0017@
+2 RELA Compagnon de captivité
+2 NOTE Sort de la tour avec Molay pour le jugement.
+2 NOTE Reçoit l'accolade du grand-maître.
+2 QUOT "Courage, mes frères, répéta-t-il en donnant ensuite l'accolade aux deux autres dignitaires."
+1 ASSO @I0037@
+2 RELA Suppliant
+2 NOTE Croit que le pape a peut-être décidé leur grâce.
+2 NOTE Son espoir contraste avec le réalisme de Molay.
+2 QUOT "Si l'on nous déferge, c'est peut-être bon signe, dit le visiteur général. Peut-être le pape a-t-il décidé notre grâce."
+
+0 @I0036@ INDI
+1 NAME Commandeur /d'Aquitaine/
+2 NICK Héros de Saint-Jean-d'Acre
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Commandeur d'Aquitaine de l'Ordre du Temple
+1 QUOT "Le commandeur d'Aquitaine, l'homme qui avait repoussé les Turcs à Saint-Jean-d'Acre, semblait frappé d'hébétude."
+2 TYPE Première mention
+1 NOTE Ancien héros d'Acre, désormais hébété et brisé par la captivité ; montre ses plaies sous sa manche ; répète qu'il « fait bon se promener matin ».
+2 CONT Traits physiques : Bras meurtri ; corps décharné ; fers. Traits mentaux : Hébétude, gémissements, propos décousus.
+2 CONT Rôle : L'un des quatre prisonniers du chariot.
+2 CONT Opinions politiques : non précisées (esprit brisé).
+2 CONT Actions décisives principales : Montre ce qu'on lui a fait ; doit être hissé dans le chariot.
+1 ASSO @I0017@
+2 RELA Compagnon de captivité
+2 NOTE Reçoit l'accolade de Molay avant le départ.
+2 NOTE Partage le chariot vers Notre-Dame.
+2 QUOT "Courage, mes frères, répéta-t-il en donnant ensuite l'accolade aux deux autres dignitaires."
+
+0 @I0037@ INDI
+1 NAME Clément /V/
+2 NICK Pape Clément
+1 SEX M
+1 BIRT
+2 DATE ABT 1264
+2 PLAC France
+1 OCCU Pape (Avignon)
+1 QUOT "On disait que le pape Clément V lui-même n'avait cédé que contre son gré, parce qu'il était dans la dépendance du roi, et qu'il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+2 TYPE Première mention
+1 NOTE Pape dépendant de Philippe le Bel ; Molay le maudit avec Nogaret et le roi. Espoir illusoire du visiteur général ; crainte d'un sort à la Boniface.
+2 CONT Traits physiques : non précisés. Traits mentaux : Craintif, dépendant du roi selon le récit populaire.
+2 CONT Rôle : Troisième ennemi nommé par Molay ; horizon politique du procès.
+2 CONT Opinions politiques : A cédé au roi de France contre le Temple.
+2 CONT Actions décisives principales : (Rapportées) a laissé condamner malgré lui ; objet de la haine de Molay.
+1 ASSO @I0001@
+2 RELA Pape dépendant
+2 NOTE Dans la dépendance du roi de France.
+2 NOTE A cédé « contre son gré » selon le sentiment parisien.
+2 QUOT "parce qu'il était dans la dépendance du roi"
+1 ASSO @I0017@
+2 RELA Ennemi maudit
+2 NOTE Molay veut sa mort dans d'atroces souffrances.
+2 NOTE Rangé avec Guillaume et Philippe parmi les trois noms abhorrés.
+2 QUOT "Qui crèverait ? Clément, Guillaume, Philippe…"
+1 ASSO @I0038@
+2 RELA Successeur inquiet
+2 NOTE Craint le sort de Boniface, giflé sur son trône.
+2 NOTE Cette peur explique, dit-on, sa docilité envers Philippe.
+2 QUOT "il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+
+0 @I0038@ INDI
+1 NAME Boniface /VIII/
+2 NICK Pape Boniface
+1 SEX M
+1 BIRT
+2 DATE ABT 1230
+2 PLAC Italie
+1 DEAT
+2 DATE 11 OCT 1303
+2 PLAC Rome
+1 OCCU Pape (prédécesseur de Clément V)
+1 QUOT "il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+2 TYPE Première mention
+1 NOTE Prédécesseur de Clément V ; giflé sur son trône — précédent qui terrifie Clément et sert d'avertissement dans le récit du procès.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Fantôme politique derrière la peur de Clément.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : (Rappelées) humiliation pontificale antérieure.
+1 ASSO @I0037@
+2 RELA Prédécesseur menaçant
+2 NOTE Son sort explique la docilité de Clément envers Philippe.
+2 NOTE Mentionné comme avertissement, non comme acteur présent.
+2 QUOT "le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+
+0 @I0039@ INDI
+1 NAME Impératrice /de Constantinople/
+1 SEX F
+1 BIRT
+2 DATE Inconnu
+2 PLAC Inconnu
+1 DEAT
+2 DATE ABT OCT 1307
+2 PLAC France
+1 OCCU Impératrice de Constantinople ; belle-sœur de Philippe le Bel
+1 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+2 TYPE Première mention
+1 NOTE Belle-sœur de Philippe le Bel (épouse de Charles de Valois dans le récit). Ses obsèques, la veille du vendredi 13 octobre 1307, sont le dernier moment de fausse fraternité entre le roi et Molay.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Ancrage chronologique de la trahison du 13 octobre 1307.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Ses funérailles placent Molay au premier rang auprès du roi.
+1 FAMS @F0014@
+
+0 @I0040@ INDI
+1 NAME Frère /de Marigny/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Prélat ; frère d'Enguerrand de Marigny
+1 QUOT "il avait fallu y nommer de nouveaux prélats, comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+2 TYPE Première mention
+1 NOTE Frère d'Enguerrand de Marigny, nommé à une commission ecclésiastique pour forcer les condamnations des Templiers après le refus d'autres prélats.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Instrument du pouvoir dans les commissions du procès.
+2 CONT Opinions politiques : Aligné sur la volonté royale / marignienne.
+2 CONT Actions décisives principales : (Rapportée) siéger pour condamner quand d'autres commissions refusaient.
+1 ASSO @I0017@
+2 RELA Condamateur ecclésiastique
+2 NOTE Nommé pour accomplir les condamnations refusées ailleurs.
+2 NOTE Symbole de la mainmise des Marigny sur le procès.
+2 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+1 FAMC @F0015@
+
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@
@@ -1032,5 +1278,22 @@
 2 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne…"
 1 NOTE Robert II d'Artois : père de Mahaut et de Philippe d'Artois (père de Robert III).
 1 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne…"
+
+
+0 @F0014@ FAM
+1 HUSB @I0014@
+1 WIFE @I0039@
+1 NOTE Charles de Valois et l'impératrice de Constantinople, belle-sœur de Philippe le Bel ; ses obsèques précèdent l'arrestation des Templiers.
+1 QUOT "en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+
+0 @F0015@ FAM
+1 CHIL @I0015@
+2 NOTE Premier ministre ; son frère est nommé prélat pour condamner les Templiers.
+2 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+1 CHIL @I0040@
+2 NOTE Frère d'Enguerrand ; prélat de circonstance dans le procès du Temple.
+2 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+1 NOTE Fratrie Marigny : Enguerrand et son frère prélat.
+1 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
 
 0 TRLR

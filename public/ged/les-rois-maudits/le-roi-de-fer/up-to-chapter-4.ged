@@ -16,11 +16,12 @@
 2 TYPE Première mention
 1 QUOT "L'indépendance des Templiers inquiétait Philippe le Bel, en même temps que leurs biens immenses excitaient sa convoitise."
 2 TYPE Première mention
-1 NOTE Roi d'une beauté légendaire, maître absolu de la France au début du XIVe siècle. Calme et cruel, il place la raison d'État au-dessus de tout.
-2 CONT Traits physiques : Beauté légendaire. Traits mentaux : Calme, cruel, inflexible, calculateur.
-2 CONT Rôle : Souverain autour duquel gravitent alliances, procès des Templiers et scandales de cour.
-2 CONT Opinions politiques : Autorité royale absolue ; idée nationale ; soumission des barons, de l'Église et de la papauté (Avignon).
-2 CONT Actions décisives principales : Taxe l'Église, spolie les Juifs, frappe les Lombards, altère la monnaie ; monte le procès colossal contre le Temple.
+1 NOTE Roi d'une beauté légendaire, maître absolu de la France. Calme et cruel, il place la raison d'État au-dessus de tout ; le 18 mars 1314, il marche incognito dans sa ville pendant qu'on mène les Templiers à Notre-Dame.
+2 CONT Traits physiques : Très haute taille ; yeux immenses, pâles, entre gris et bleu glace ; cheveux blond roux en rouleaux ; visage d'une rare beauté ; chaperon blanc et tunique demi-longue en ville.
+2 CONT Traits mentaux : Avare de paroles et d'argent ; pudique ; observateur glacial ; croit se rendre avenant alors qu'un mur de glace le sépare d'autrui ; on le dit chaste depuis neuf ans de veuvage.
+2 CONT Rôle : Souverain qui prend le pouls du peuple et parachève l'œuvre de sept ans contre le Temple.
+2 CONT Opinions politiques : Autorité royale absolue ; l'affaire du Temple doit grandir le pouvoir ; contenter aussi Isabelle par une apparente clémence.
+2 CONT Actions décisives principales : Taxe l'Église, spolie les Juifs, frappe les Lombards, altère la monnaie ; monte le procès du Temple ; calibre la condamnation des dignitaires au mur (prison perpétuelle) pour que le peuple l'accepte comme clémence ; ce matin-là laisse Louis et Charles libres le soir.
 1 EVEN
 2 TYPE Procès contre l'Ordre du Temple
 2 DATE BET 1307 AND 1314
@@ -43,13 +44,45 @@
 1 ASSO @I0017@
 2 RELA Adversaire
 2 NOTE Philippe le Bel a monté contre Jacques de Molay et les Templiers le plus vaste procès de l'Histoire.
-2 NOTE L'indépendance et les richesses du Temple inquiétaient et excitaient sa convoitise.
-2 QUOT "Un seul pouvoir avait osé lui tenir tête : l'Ordre souverain des chevaliers du Temple."
+2 NOTE La veille du vendredi 13 octobre 1307, il embrassait encore Molay et l'appelait son frère.
+2 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+1 ASSO @I0037@
+2 RELA Maître
+2 NOTE Le pape Clément V dépend de lui et a cédé, selon le récit, contre son gré.
+2 NOTE Molay range Philippe avec Clément et Nogaret parmi ses trois ennemis mortels.
+2 QUOT "On disait que le pape Clément V lui-même n'avait cédé que contre son gré, parce qu'il était dans la dépendance du roi"
 1 ASSO @I0013@
 2 RELA Allié politique
 2 NOTE Mahaut d'Artois a obtenu de lui le comté d'Artois et marié ses filles et sa cousine aux trois fils royaux.
 2 NOTE Robert d'Artois accuse ces alliances d'avoir été obtenues par ruse et corruption auprès des conseillers du roi.
 2 QUOT "elle est parvenue à marier vos trois frères à ses deux catins de filles et son autre catin de cousine."
+1 EVEN
+2 TYPE Promenade incognito dans la Cité
+2 DATE 18 MAR 1314
+2 PLAC Île de la Cité, Paris, France
+2 NOTE En chaperon blanc, il goûte une oublie, croise Guccio Baglioni et ses lévriers, entend le peuple sur les Templiers, entrevoit le chariot des quatre dignitaires, puis regagne le Palais par la Galerie mercière.
+1 EVEN
+2 TYPE Entrevue avec Jeanne et Blanche dans la Galerie mercière
+2 DATE 18 MAR 1314
+2 PLAC Galerie mercière, Palais de la Cité, Paris, France
+2 NOTE Surprend ses belles-filles avec Philippe d'Aunay ; annonce que Louis et Charles seront libres le soir, et que Philippe de Poitiers rentrera sous une semaine.
+1 EVEN
+2 TYPE Sentence des dignitaires du Temple au mur
+2 DATE 18 MAR 1314
+2 PLAC Notre-Dame de Paris, France
+2 NOTE Absent du parvis ; le récit dit qu'il a « bien ajusté son coup » : après l'énumération des crimes, la prison perpétuelle passe pour une clémence. Le prévôt Ployebouche court ensuite l'aviser après la protestation de Molay.
+1 QUOT "Bonjour, mes filles"
+1 QUOT "Même ma fille Isabelle sera satisfaite. J'aurai fait droit à sa prière, et de la sorte contenté tout le monde. Mais il était temps d'en finir"
+1 ASSO @I0045@
+2 RELA Souverain
+2 NOTE Guccio Baglioni, neveu du banquier Tolomei, le heurte avec ses lévriers et l'injurie avant de reconnaître le roi.
+2 NOTE Le roi se borne à demander à qui sont les chiens, puis poursuit sa route.
+2 QUOT "Regardez-le ! Il a manqué jeter le roi par terre, et de surcroît il l'a injurié."
+1 ASSO @I0041@
+2 RELA Souverain
+2 NOTE Il confond souvent Philippe d'Aunay avec son frère Gautier ; l'écuyer rougit sous son regard.
+2 NOTE Dans la Galerie mercière, il surgit derrière une colonne alors que le groupe discutait à mi-voix.
+2 QUOT "C'est cela ; je vous confonds toujours"
 1 FAMS @F0001@
 1 FAMC @F0009@
 
@@ -81,11 +114,11 @@
 1 OCCU Roi de Navarre ; fils aîné de Philippe le Bel ; futur héritier de France
 1 QUOT "ces mêmes nuits où votre frère Louis de Navarre est absent. Et la lumière y brille assez tard."
 2 TYPE Première mention
-1 NOTE Aîné des trois fils de Philippe le Bel. Époux de Marguerite de Bourgogne ; souvent absent, ce qui laisse la tour de Nesle libre pour les rendez-vous suspects.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (n'apparaît pas en personne dans le chapitre).
-2 CONT Rôle : Héritier ; mari trompé selon Robert d'Artois (« vos trois frères sont cocus »).
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : Absences nocturnes de Paris / Navarre qui coïncident avec les lumières de la tour de Nesle.
+1 NOTE Aîné des trois fils de Philippe le Bel. Époux de Marguerite ; le chapitre 3 confirme qu'il « porte les cornes » par la grâce de Philippe d'Aunay, écuyer de Valois. Réside à l'hôtel de Nesle avec la reine de Navarre.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Non précisé (absent de la Galerie mercière ce matin-là).
+2 CONT Rôle : Héritier ; mari trompé ; le roi annonce qu'il pourra tenir compagnie à Marguerite le soir même.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Absences qui ont laissé libre la tour de Nesle ; ce soir-là, rappelé auprès de son épouse faute de Conseil.
 1 EVEN
 2 TYPE Soupçon d'adultère de son épouse
 2 DATE MAR 1314
@@ -96,6 +129,11 @@
 2 NOTE Charles de Valois a grande influence sur Louis ; Isabelle doit lui écrire pour placer madame de Comminges auprès de Marguerite.
 2 NOTE Valois servirait d'intermédiaire sans connaître le fond du complot.
 2 QUOT "Il a grande influence sur votre frère Louis, et fera promptement entrer madame de Comminges à l'hôtel de Nesle."
+1 ASSO @I0041@
+2 RELA Époux trompé
+2 NOTE Depuis quatre ans, Philippe d'Aunay est l'amant de Marguerite ; Louis porte les cornes « par la grâce » de cet écuyer de la maison de Valois.
+2 NOTE Le roi annonce que Louis pourra ce soir tenir compagnie à son épouse — ce qui prive les amants de la tour de Nesle.
+2 QUOT "deux fils de France, l'aîné, Louis, et le puîné, Charles, portaient les cornes par la grâce de deux écuyers"
 1 FAMS @F0003@
 1 FAMC @F0001@
 
@@ -108,11 +146,16 @@
 1 OCCU Comte de Poitiers ; second fils de Philippe le Bel
 1 QUOT "si nous unissions ma chère petite Jeanne à Philippe, et puis ma douce Blanchette à votre beau Charles."
 2 TYPE Première mention
-1 NOTE Deuxième fils du roi, marié à Jeanne de Bourgogne. Désigné parmi les trois frères ridiculisés par les soupçons d'adultère.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
-2 CONT Rôle : Prince royal ; époux de Jeanne, jugée plus « matoise » que ses cousines.
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : Non encore présent sur scène ; enjeu dynastique des mariages bourguignons.
+1 NOTE Deuxième fils du roi, marié à Jeanne de Bourgogne. Absent à Dole et Salins pour les affaires du comté ; son écuyer Gautier d'Aunay est l'amant de Blanche, non de Jeanne.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Non précisé.
+2 CONT Rôle : Prince royal ; époux constant de Jeanne ; maître de maison de Gautier d'Aunay.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : En mission à Dole et Salins ; le roi ne croit pas qu'il demeure absent plus d'une semaine.
+1 ASSO @I0042@
+2 RELA Maître
+2 NOTE Gautier d'Aunay « est à Monseigneur de Poitiers » comme écuyer.
+2 NOTE Poitiers ignore, dans ce chapitre, l'adultère de Blanche avec son propre écuyer.
+2 QUOT "Oui, Sire, un frère qui est à Monseigneur de Poitiers"
 1 FAMS @F0004@
 1 FAMC @F0001@
 
@@ -125,11 +168,16 @@
 1 OCCU Fils cadet de Philippe le Bel
 1 QUOT "si nous unissions ma chère petite Jeanne à Philippe, et puis ma douce Blanchette à votre beau Charles."
 2 TYPE Première mention
-1 NOTE Troisième fils du roi, marié à Blanche de Bourgogne. Robert d'Artois assure qu'il est trompé « assurément ».
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
-2 CONT Rôle : Prince royal ; cible du scandale annoncé.
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : Non encore sur scène.
+1 NOTE Troisième fils du roi, marié à Blanche. Le chapitre 3 confirme qu'il porte les cornes par la grâce de Gautier d'Aunay, écuyer de Poitiers.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Non précisé (absent de la Galerie ce matin-là).
+2 CONT Rôle : Prince royal ; mari trompé ; le roi annonce qu'il pourra tenir compagnie à Blanche le soir.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Retenu aux Conseils les nuits précédentes ; libre ce soir-là.
+1 ASSO @I0042@
+2 RELA Époux trompé
+2 NOTE Blanche est la maîtresse de Gautier d'Aunay.
+2 NOTE Avec Louis, il « porte les cornes » le jour même où l'on juge les Templiers.
+2 QUOT "deux fils de France, l'aîné, Louis, et le puîné, Charles, portaient les cornes par la grâce de deux écuyers"
 1 FAMS @F0005@
 1 FAMC @F0001@
 
@@ -301,7 +349,7 @@
 2 CONT Traits mentaux : Vengeur franc, persuasif par l'excès, habile « sous ses airs de loup-garou », loyal allié d'Isabelle et de Valois.
 2 CONT Rôle : Messager et machinateur du chapitre 1 ; catalyseur du scandale de la tour de Nesle et de l'alliance anglo-artoisienne.
 2 CONT Opinions politiques : Contre Mahaut, Marigny, Nogaret ; pour la chevalerie et les hauts barons ; vengeance privée élevée en affaire d'État.
-2 CONT Actions décisives principales : Traverse la Manche malgré la tempête ; révèle les adultères ; propose espionne (Comminges) et aumônières-pièges ; demande lettre de clémence pour Molay ; tente de séduire Isabelle.
+2 CONT Actions décisives principales : Traverse la Manche malgré la tempête ; révèle les adultères ; propose espionne (Comminges) et aumônières-pièges ; demande lettre de clémence pour Molay ; tente de séduire Isabelle ; de retour à Paris, épie Philippe d'Aunay dans la Galerie mercière.
 1 QUOT "Vos trois frères sont cocus, Madame, cocus comme des manants !"
 1 QUOT "Mais bien sûr, Madame, j'agis par vengeance !"
 1 QUOT "Prenez un homme, Isabelle, et que cet homme soit moi."
@@ -351,6 +399,16 @@
 2 NOTE Fait chevaucher le petit Édouard sur sa botte rouge ; s'offre comme ami futur du prince.
 2 NOTE Isabelle lie cette familiarité à la loyauté qu'elle attend de lui.
 2 QUOT "Ah ! Messire Edouard, dit d'Artois, oserai-je plus tard ... vous rappeler que je vous ai fait ainsi chevaucher ma botte ?"
+1 EVEN
+2 TYPE Retour d'Angleterre et surveillance à la Galerie mercière
+2 DATE 18 MAR 1314
+2 PLAC Palais de la Cité, Paris, France
+2 NOTE Revenu depuis quelques jours d'Angleterre ; en bottes rouges, il observe Jeanne, Blanche et Philippe d'Aunay depuis le grand escalier, puis suit l'écuyer du regard et descend à son tour.
+1 ASSO @I0041@
+2 RELA Surveillant
+2 NOTE Il fixe Philippe d'Aunay d'un « regard de chasseur » tandis que celui-ci part vers l'hôtel de Nesle.
+2 NOTE Personne dans le petit groupe ne l'a remarqué à mi-marches.
+2 QUOT "Le seigneur aux bottes rouges le suivit du regard, un regard de chasseur. Ce seigneur était Robert d'Artois, revenu depuis quelques jours d'Angleterre."
 1 FAMC @F0006@
 
 0 @I0010@ INDI
@@ -363,31 +421,36 @@
 1 OCCU Reine de Navarre ; future reine de France ; épouse de Louis
 1 QUOT "vous pourrez lui enseigner que Marguerite de Bourgogne, petite-fille de Saint Louis, reine de Navarre et future reine de France, est en bon chemin d'être appelée par son peuple Marguerite la Putain."
 2 TYPE Première mention
-1 NOTE Petite-fille de Saint Louis. Présentée par Robert comme « Marguerite la Putain » : cassette pillée, tour de Nesle pour « oraisons », amants la nuit.
-2 CONT Traits physiques : non précisés. Traits mentaux : Selon Robert : fausse, tournée vers le plaisir, sans sens du devoir ; habiles à brouiller la piste.
-2 CONT Rôle : Principale accusée du scandale naissant ; objet de la haine d'Isabelle et de la vengeance d'Artois.
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : (Rapportées) détournement de joyaux ; aménagement de la vieille tour de l'hôtel de Nesle ; nuits éclairées en l'absence de Louis.
+1 NOTE Petite-fille de Saint Louis. Reine de Navarre à l'hôtel de Nesle. Depuis quatre ans, amante de Philippe d'Aunay, qu'elle traite parfois en valet ; absente de la Galerie mercière ce matin-là (œil noir, enfermée).
+2 CONT Traits physiques : Non précisé dans ce chapitre. Traits mentaux : Capricieuse envers son amant ; jalouse et amère envers le roi (« aussi méchant que vous êtes beau ») ; joue un jeu opaque selon Philippe d'Aunay.
+2 CONT Rôle : Principale adultère du trio des brus ; objet de la jalousie de son amant et de la surveillance d'Artois.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Adultère avec Philippe d'Aunay ; nuits à la tour de Nesle ; ce soir-là privée de rendez-vous faute de Conseil annulé.
 1 EVEN
 2 TYPE Soupçons d'adultère à la tour de Nesle
 2 DATE MAR 1314
 2 PLAC Hôtel de Nesle, Paris, France
 2 NOTE Lumières tardives, mouvement sur la berge, hommes non vêtus en moines.
 1 ASSO @I0011@
-2 RELA Complice présumée
-2 NOTE Jeanne la rejoindrait parfois à la tour ; les trois se couvriraient mutuellement.
-2 NOTE « Trois catins acoquinées, c'est un château fort. »
-2 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+2 RELA Protégée
+2 NOTE Robert la disait complice des nuits de Nesle ; le chapitre 3 précise que Jeanne favorise l'intrigue sans être maîtresse de personne.
+2 NOTE Jeanne combine rendez-vous et envoie une ceinture-prétexte via Philippe d'Aunay.
+2 QUOT "favorisait pourtant, moitié par faiblesse, moitié par amusement, l'intrigue des deux autres brus royales, combinait les rendez-vous, facilitait les rencontres."
 1 ASSO @I0012@
-2 RELA Complice présumée
-2 NOTE Blanche y vient aussi selon Robert.
-2 NOTE Ensemble elles brouillent les voies comme des cerfs de Conches.
-2 QUOT "Sa cousine Blanche, parfois sa cousine Jeanne, l'y viennent rejoindre."
+2 RELA Complice
+2 NOTE Blanche, maîtresse de Gautier d'Aunay, partage avec elle le secret des amours et la tour de Nesle.
+2 NOTE Les deux adultères se couvrent sous la garde de Jeanne.
+2 QUOT "l'intrigue des deux autres brus royales"
 1 ASSO @I0006@
 2 RELA Ennemie / rivale
 2 NOTE Jalousie réciproque avec Isabelle ; haïrait la vraie reine.
 2 NOTE Isabelle prépare des cadeaux trompeurs pour la confondre.
 2 QUOT "Elles vous haïssent. ... elles vous jalousent."
+1 ASSO @I0041@
+2 RELA Maîtresse
+2 NOTE Depuis quatre ans l'amante de Philippe d'Aunay, écuyer de Valois.
+2 NOTE Elle l'appelle à son lit selon son caprice, l'éloigne, feint parfois de ne pas le reconnaître.
+2 QUOT "Philippe d'Aunay, écuyer de Monseigneur de Valois, était depuis quatre ans l'amant de Marguerite de Bourgogne"
 1 FAMS @F0003@
 1 FAMC @F0007@
 
@@ -402,11 +465,29 @@
 2 TYPE Première mention
 1 QUOT "— Jeanne et Blanche ?… — Blanche, j'en suis assuré. Jeanne…"
 2 TYPE Première mention
-1 NOTE Belle-sœur d'Isabelle. Robert la dit plus « matoise » mais la croit « aussi fieffée garce ».
-2 CONT Traits physiques : non précisés. Traits mentaux : Rusée, selon Robert.
-2 CONT Rôle : Troisième brus accusée ; fille de Mahaut au centre des alliances.
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : (Rapportées) participation intermittente aux nuits de la tour de Nesle.
+1 NOTE Comtesse de Poitiers, fille de Mahaut. Le chapitre 3 la montre grande, élancée, œil de lévrier : épouse constante de Philippe de Poitiers, pas encore maîtresse de personne, mais entremetteuse des amours de Marguerite et Blanche.
+2 CONT Traits physiques : À peine vingt et un ans ; grande, élancée ; cheveux blond cendré ; long œil oblique de lévrier ; robe de velours gris clair, surcot bordé d'hermine.
+2 CONT Traits mentaux : Peureuse devant le roi ; hauteur envers Philippe d'Aunay ; lasse de passer pour prude ; trouble plaisir à vivre les amours d'autrui ; fidèle à son mari.
+2 CONT Rôle : Entremetteuse bénévole ; garde du secret des deux autres brus.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Présente Philippe d'Aunay au roi ; réprimande la jalousie de l'écuyer ; achète une ceinture pour Marguerite « une dernière fois ».
+1 QUOT "Messire Philippe d'Aunay, écuyer de notre oncle Valois"
+1 QUOT "Un jour cela finira mal, et vraiment c'est me compromettre à plaisir, pour rien."
+1 ASSO @I0041@
+2 RELA Entremetteuse
+2 NOTE Elle combine les rendez-vous de Marguerite et Philippe d'Aunay ; menace de le faire envoyer en Valois.
+2 NOTE Elle lui fournit le prétexte d'une ceinture à porter à l'hôtel de Nesle.
+2 QUOT "épouse constante mais entremetteuse bénévole, qui prenait un trouble plaisir à vivre les amours d'autrui"
+1 ASSO @I0001@
+2 RELA Belle-fille
+2 NOTE Elle croit défaillir de peur quand le roi surgit dans la Galerie.
+2 NOTE Elle se tait et rougit, laissant Blanche parler.
+2 QUOT "J'ai cru défaillir de peur, dit Jeanne."
+1 ASSO @I0010@
+2 RELA Entremetteuse
+2 NOTE Elle favorise l'intrigue de Marguerite et Philippe d'Aunay sans être elle-même maîtresse de personne.
+2 NOTE Elle envoie l'écuyer à l'hôtel de Nesle avec une ceinture-prétexte.
+2 QUOT "Allons, je vais être bonne. Je vais acheter pour Marguerite quelque pièce de parure que vous irez lui porter de ma part. Mais c'est la dernière fois."
 1 FAMS @F0004@
 1 FAMC @F0008@
 
@@ -421,11 +502,34 @@
 2 TYPE Première mention
 1 QUOT "— Jeanne et Blanche ?… — Blanche, j'en suis assuré. Jeanne…"
 2 TYPE Première mention
-1 NOTE Cousine/sœur des autres brus dans le trio suspect. Robert en est « assuré » quant à sa culpabilité.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
-2 CONT Rôle : Brus accusée ; fille de Mahaut.
-2 CONT Opinions politiques : non précisées.
-2 CONT Actions décisives principales : (Rapportées) rejoint Marguerite à la tour de Nesle.
+1 NOTE Épouse de Charles de France, sœur de Jeanne. Dix-huit ans, extravagante et candide en apparence ; maîtresse de Gautier d'Aunay. Seule à oser plaisanter le roi face à face.
+2 CONT Traits physiques : Plus petite, ronde, rose ; fossettes ; blondeur chaude ; yeux marron clair brillants ; petites dents transparentes ; robe brodée de perles et d'or.
+2 CONT Traits mentaux : Spontanée, audacieuse, habile à dissimuler ; donne le change au roi en avouant « dire du mal » de lui pour les nuits sans maris.
+2 CONT Rôle : Adultère confirmée ; complice de l'intrigue avec Marguerite.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Sauve le groupe par sa présence d'esprit devant Philippe le Bel ; renonce ce soir à la tour de Nesle.
+1 QUOT "C'est que… nous disions du mal de vous."
+1 QUOT "En tout cas, ce soir, point de tour de Nesle"
+1 ASSO @I0042@
+2 RELA Maîtresse
+2 NOTE Maîtresse de Gautier d'Aunay, frère de Philippe et écuyer de Poitiers.
+2 NOTE Elle charge Philippe de dire à Gautier qu'elle « soupirera » après lui ce soir.
+2 QUOT "Blanche se trouvait être la maîtresse de son frère, Gautier d'Aunay, écuyer du comte de Poitiers"
+1 ASSO @I0041@
+2 RELA Alliée
+2 NOTE Elle défend devant Philippe d'Aunay la nécessité d'avoir donné le change au roi.
+2 NOTE Elle compare les deux frères et préfère Gautier.
+2 QUOT "En vérité, dit Blanche, votre frère est plus agréable que vous."
+1 ASSO @I0001@
+2 RELA Belle-fille
+2 NOTE Seule personne qui ose lui parler sur ce ton sans trembler ; elle le désarme et le fait sourire.
+2 NOTE Elle rapporte les propos aigres de Marguerite sur le roi.
+2 QUOT "Elle était la seule personne qui osât lui parler d'un tel ton et qui ne tremblât pas en sa présence."
+1 ASSO @I0010@
+2 RELA Complice
+2 NOTE Partage avec Marguerite le secret des amours et des nuits à la tour de Nesle.
+2 NOTE Ce soir-là, elle constate : « point de tour de Nesle ».
+2 QUOT "l'intrigue des deux autres brus royales"
 1 FAMS @F0005@
 1 FAMC @F0008@
 
@@ -471,7 +575,7 @@
 2 CONT Traits physiques : non précisés. Traits mentaux : Fidèle ami, mais « ne sait rien taire ».
 2 CONT Rôle : Intermédiaire utile (lettre Comminges, lettre Molay) qu'il ne faut pas mettre dans le secret du scandale.
 2 CONT Opinions politiques : Favorable à la clémence envers le Temple / Molay ; proche de la haute aristocratie.
-2 CONT Actions décisives principales : Demande une lettre d'Isabelle au roi pour Molay ; doit servir, sans le savoir, au placement de madame de Comminges.
+2 CONT Actions décisives principales : Demande une lettre d'Isabelle au roi pour Molay ; doit servir, sans le savoir, au placement de madame de Comminges ; emploie Philippe d'Aunay comme écuyer.
 1 ASSO @I0009@
 2 RELA Protecteur / ami
 2 NOTE Robert lui doit une « grande dette » et le dit son meilleur ami.
@@ -482,6 +586,12 @@
 2 NOTE Demande la clémence pour Molay via Isabelle.
 2 NOTE Instrument politique dans l'affaire du Temple au moment du jugement imminent.
 2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+1 ASSO @I0041@
+2 RELA Maître
+2 NOTE Philippe d'Aunay est écuyer de sa maison ; ses terres sont dans le comté de Valois.
+2 NOTE Jeanne menace de lui conseiller d'envoyer l'écuyer quelques mois en Valois pour le calmer.
+2 QUOT "Messire Philippe d'Aunay, écuyer de notre oncle Valois"
+1 FAMS @F0014@
 1 FAMC @F0009@
 
 0 @I0015@ INDI
@@ -493,11 +603,16 @@
 1 OCCU Coadjuteur au gouvernement ; intendant des finances ; conseiller de Philippe le Bel
 1 QUOT "et j'envoie mille merveilles à Marigny… et j'en marie une, et j'en marie deux, et j'en marie trois."
 2 TYPE Première mention
-1 NOTE Homme « sorti de rien » selon Robert d'Artois ; pilier du pouvoir royal avec Nogaret. Accusé d'avoir frappé le Temple pour abaisser chevalerie et hauts barons ; d'avoir été soudoyé par Mahaut.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (hors scène).
-2 CONT Rôle : Omniprésence politique dans les accusations de Robert.
+1 NOTE Homme « sorti de rien » selon Robert ; coadjuteur et recteur du royaume. Sa statue fait face à celle du roi dans la Galerie mercière. Son frère Jean, archevêque de Sens, a conduit l'affaire du Temple avec le grand inquisiteur.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Non précisé (hors scène au parvis).
+2 CONT Rôle : Omniprésence politique ; frère du juge ecclésiastique du 18 mars.
 2 CONT Opinions politiques : Servant de la raison d'État de Philippe le Bel.
-2 CONT Actions décisives principales : (Rapportées) rôle central dans le procès du Temple et dans les faveurs accordées à Mahaut.
+2 CONT Actions décisives principales : Procès du Temple ; travaux du Palais ; placé son frère à Sens pour les condamnations.
+1 EVEN
+2 TYPE Statue dans la Galerie mercière
+2 DATE BEF MAR 1314
+2 PLAC Galerie mercière, Palais de la Cité, Paris, France
+2 NOTE Effigie placée face à celle du roi parmi les quarante rois francs.
 1 ASSO @I0001@
 2 RELA Conseiller
 2 NOTE Conseiller tout-puissant dans la dernière partie du règne.
@@ -513,6 +628,7 @@
 2 NOTE Robert affirme que Mahaut lui envoyait « mille merveilles ».
 2 NOTE Lien supposé entre mariages bourguignons et faveur ministérielle.
 2 QUOT "Et j'envoie mille merveilles à Marigny…"
+1 FAMC @F0015@
 0 @I0016@ INDI
 1 NAME Guillaume /de Nogaret/
 1 SEX M
@@ -522,11 +638,11 @@
 1 OCCU Garde des Sceaux ; légiste de Philippe le Bel
 1 QUOT "souffle malice dans l'oreille de Nogaret, et j'envoie mille merveilles à Marigny…"
 2 TYPE Première mention
-1 NOTE Autre homme « sorti de rien » ; instruit le procès des Templiers. Mahaut aurait « soufflé malice » à son oreille.
-2 CONT Traits physiques : non précisés. Traits mentaux : non précisés (hors scène).
-2 CONT Rôle : Architecte juridique de la destruction du Temple, dans le discours de Robert.
-2 CONT Opinions politiques : Légiste au service de la couronne contre papauté et Temple.
-2 CONT Actions décisives principales : (Rapportées) frappe contre Molay et l'Ordre avec Marigny.
+1 NOTE Garde des Sceaux qui a dirigé les tortures de Molay (brodequins, étirement) et s'est saisi du grand-maître le vendredi 13 octobre 1307. Voix froide, insistante ; cruauté « procédurière » (deniers pour ôter les fers).
+2 CONT Traits physiques : non précisés. Traits mentaux : Froideur, obstination à obtenir l'aveu, cruauté administrative.
+2 CONT Rôle : Bourreau politique du Temple ; hantise de Molay dans sa geôle.
+2 CONT Opinions politiques : Légiste au service de la destruction de l'Ordre.
+2 CONT Actions décisives principales : A torturé Molay jusqu'à l'aveu ; a arrêté le grand-maître à la maison mère ; a calculé l'indemnité d'entretien pour affamer les prisonniers.
 1 ASSO @I0001@
 2 RELA Conseiller
 2 NOTE Garde des Sceaux et bras juridique du roi.
@@ -535,13 +651,14 @@
 1 ASSO @I0015@
 2 RELA Collègue
 2 NOTE Toujours nommé avec Marigny dans la diatribe de Westminster.
-2 NOTE Duo responsable du « grand méfait » imminent contre Molay.
+2 NOTE Duo responsable du « grand méfait » contre Molay.
 2 QUOT "qu'on doit une fois de plus à Nogaret et à Marigny !"
 1 ASSO @I0017@
-2 RELA Accusateur / bourreau politique
-2 NOTE Robert impute à Nogaret (et Marigny) la mort annoncée de Molay.
-2 NOTE Symbole de la haine entre légistes royaux et grand-maître templier.
-2 QUOT "c'est grand méfait qu'on va encore commettre là, et qu'on doit une fois de plus à Nogaret et à Marigny !"
+2 RELA Accusateur / tortionnaire
+2 NOTE A conduit les séances de torture jusqu'à l'aveu forcé de Molay.
+2 NOTE Sa voix revient au grand-maître comme un cauchemar.
+2 QUOT "Et toujours la voix sinistre de Guillaume de Nogaret : « Mais avouez donc, messire…»"
+
 0 @I0017@ INDI
 1 NAME Jacques /de Molay/
 1 SEX M
@@ -551,21 +668,28 @@
 1 OCCU Grand-maître de l'Ordre du Temple ; parrain d'Isabelle
 1 QUOT "votre parrain, le grand-maître Jacques de Molay, ne soit mis à mort. Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
 2 TYPE Première mention
-1 NOTE Vieil homme, « noble et grand », prisonnier depuis des années. Jugement imminent ; Valois et Robert veulent qu'Isabelle écrive pour la clémence.
-2 CONT Traits physiques : Vieil homme. Traits mentaux : Noblesse passée ; fautes déjà expiées, selon Robert.
-2 CONT Rôle : Figure centrale du prologue (procès du Temple) ; enjeu moral du chapitre 1.
-2 CONT Opinions politiques : Chef de l'Ordre souverain qui a osé tenir tête à Philippe le Bel.
-2 CONT Actions décisives principales : A tenu Isabelle sur les fonts baptismaux ; attend son jugement.
+1 QUOT "Jacques de Molay ! Jacques de Molay ! Je suis Jacques de Molay !"
+1 NOTE Prisonnier du Temple, conduit le 18 mars 1314 devant Notre-Dame. Après une sentence au mur (prison perpétuelle) présentée comme clémence, il proteste à pleine voix, retire ses aveux obtenus sous la torture, affirme l'innocence de l'Ordre — et est déclaré relaps avec Charnay.
+2 CONT Traits physiques : Apparence de centenaire ; barbe d'ancêtre, bouche édentée ; guenilles ; tempes décharnées où le sang bat ; groupe des quatre « sculpté dans la cendre ».
+2 CONT Traits mentaux : Colère croissante ; murmure « Mensonge… » ; vertige d'impuissance ; puis paix intérieure après la protestation.
+2 CONT Rôle : Grand-maître qui brise le scénario du jugement public.
+2 CONT Opinions politiques : L'Ordre est innocent et saint ; ses trois vrais ennemis absents restent le roi, Nogaret et le pape.
+2 CONT Actions décisives principales : Avoue sous la torture puis retire tout au parvis ; proteste contre la sentence ; est remis à la justice du roi comme relaps et renvoyé au Temple.
 1 EVEN
-2 TYPE Arrestation et long procès
-2 DATE OCT 1307
-2 PLAC France
-2 NOTE Arrêté avec l'Ordre ; le procès dure sept ans jusqu'au seuil du récit.
+2 TYPE Arrestation des Templiers
+2 DATE 13 OCT 1307
+2 PLAC Hôtel du Temple, Paris
+2 NOTE Vendredi 13 : Nogaret vient se saisir de Molay et des cent quarante chevaliers de la maison mère, au lendemain des obsèques de l'impératrice de Constantinople.
+1 EVEN
+2 TYPE Conduite au jugement
+2 DATE 18 MAR 1314
+2 PLAC Du Temple à Notre-Dame de Paris
+2 NOTE Alain de Pareilles escorte Molay et trois dignitaires dans un chariot ouvert sous les clameurs puis le silence de la foule.
 1 ASSO @I0001@
 2 RELA Adversaire royal
-2 NOTE Cible du procès monté par Philippe le Bel.
-2 NOTE Son sort dépend encore d'une éventuelle clémence royale.
-2 QUOT "Il monta contre eux le plus vaste procès dont l'Histoire ait gardé le souvenir"
+2 NOTE Philippe l'a d'abord embrassé et appelé son frère, puis a fait arrêter tout l'Ordre.
+2 NOTE Molay répète ses trois ennemis : Clément, Guillaume, Philippe.
+2 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
 1 ASSO @I0006@
 2 RELA Parrain
 2 NOTE Parrain d'Isabelle.
@@ -576,6 +700,55 @@
 2 NOTE Charles de Valois sollicite Isabelle en sa faveur.
 2 NOTE La haute aristocratie tente in extremis de le sauver.
 2 QUOT "Monseigneur de Valois vous demande d'écrire au roi pour l'inviter à la clémence."
+1 ASSO @I0016@
+2 RELA Victime de torture
+2 NOTE Nogaret l'a soumis aux brodequins et à l'étirement jusqu'à l'aveu forcé.
+2 NOTE La voix froide du garde des Sceaux hante encore sa cellule.
+2 QUOT "Et toujours la voix sinistre de Guillaume de Nogaret : « Mais avouez donc, messire…»"
+1 ASSO @I0033@
+2 RELA Ami / mentor
+2 NOTE Amitié de longue date ; Molay a fait toute la carrière de Charnay, de dix ans son cadet.
+2 NOTE Il le voit comme son successeur et lui serre la main dans le chariot.
+2 QUOT "Une longue amitié unissait les deux hommes ; Jacques de Molay avait fait toute la carrière de Charnay, de dix ans son cadet et dans lequel il voyait son successeur."
+1 ASSO @I0034@
+2 RELA Captif
+2 NOTE Alain de Pareilles le mène à Notre-Dame pour la lecture du jugement.
+2 NOTE Molay pâlit en le voyant : l'appareil d'archers et le chariot annoncent autre chose qu'un simple interrogatoire.
+2 QUOT "— Alors, c'est chose jugée ? demanda Molay au capitaine des archers. — Ce l'est, messire, répondit celui-ci."
+1 ASSO @I0035@
+2 RELA Compagnon de captivité
+2 NOTE Le visiteur général sort de la tour avec les autres dignitaires.
+2 NOTE Molay lui donne l'accolade avant le départ.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+1 ASSO @I0036@
+2 RELA Compagnon de captivité
+2 NOTE Le commandeur d'Aquitaine, héros de Saint-Jean-d'Acre, est hébété et montre ses plaies.
+2 NOTE Il faut le hisser dans le chariot.
+2 QUOT "Le commandeur d'Aquitaine, l'homme qui avait repoussé les Turcs à Saint-Jean-d'Acre, semblait frappé d'hébétude."
+1 EVEN
+2 TYPE Protestation au parvis de Notre-Dame
+2 DATE 18 MAR 1314
+2 PLAC Notre-Dame de Paris, France
+2 NOTE Condamné au mur et au silence ; crie « Je proteste » ; retire ses aveux ; déclaré relaps avec Charnay ; remis à la justice du roi.
+1 QUOT "Je proteste contre une sentence inique, et j'affirme que les crimes dont on nous charge sont crimes inventés !"
+1 QUOT "Je ne suis coupable, répondit Jacques de Molay, que d'avoir cédé à vos cajoleries, menaces et tourments."
+1 QUOT "Je retire tout !"
+1 ASSO @I0040@
+2 RELA Adversaire
+2 NOTE Affronte Jean de Marigny, archevêque de Sens, qui l'accuse d'avoir avoué devant la commission.
+2 NOTE Marigny le déclare relaps et le remet à la justice du roi.
+2 QUOT "Vous mentez ! cria-t-il au grand-maître. Vous avez avoué devant la commission."
+1 ASSO @I0048@
+2 RELA Adversaire
+2 NOTE Le cardinal-légat Arnaud d'Auch lit les attendus ; Molay voudrait lui sauter à la gorge.
+2 NOTE Chaque parole du légat resserre l'étau avant la sentence au mur.
+2 QUOT "Monseigneur Arnaud d'Auch, cardinal d'Albano, premier légat, lisait debout les attendus du jugement."
+1 ASSO @I0037@
+2 RELA Ennemi / maudit
+2 NOTE Molay veut la mort atroce du pape Clément avec celles de Nogaret et du roi.
+2 NOTE Au parvis, il voudrait atteindre ses trois vrais ennemis absents : le roi, le garde des Sceaux, le pape.
+2 QUOT "Qui crèverait ? Clément, Guillaume, Philippe… Le pape, le garde des Sceaux, le roi."
+
 0 @I0018@ INDI
 1 NAME Pierre /de Gaveston/
 2 NICK le Béarnais
@@ -920,6 +1093,245 @@
 1 FAMS @F0009@
 1 FAMC @F0012@
 
+
+0 @I0033@ INDI
+1 NAME Geoffroy /de Charnay/
+2 NICK Précepteur de Normandie
+1 SEX M
+1 BIRT
+2 DATE ABT 1254
+2 PLAC France
+1 OCCU Précepteur de Normandie de l'Ordre du Temple
+1 QUOT "Ce fut le précepteur de Normandie, Geoffroy de Charnay, qui, le premier, s'empêtrant dans ses fers, se précipita vers le grand-maître et l'étreignit."
+2 TYPE Première mention
+1 NOTE Précepteur de Normandie, ami et successeur pressenti de Molay. Au parvis, sa cicatrice blanchit de fureur ; il rejoint la protestation du grand-maître et affirme leur innocence devant Dieu. Déclaré relaps avec Molay.
+2 CONT Traits physiques : Cicatrice au front devenue blanche sur un front cramoisi ; guenilles comme les autres.
+2 CONT Traits mentaux : Fureur égale à celle de Molay ; paix après avoir parlé ; docilité épuisée au retour vers le chariot.
+2 CONT Rôle : Second protestataire ; unique appui fort du grand-maître.
+2 CONT Opinions politiques : Victimes de complots et de fausses promesses ; l'Ordre est innocent.
+2 CONT Actions décisives principales : Paie les fers ; serre la main de Molay ; accuse Marigny de haine et de vindicte ; est renvoyé au Temple.
+1 QUOT "On a abusé de notre affaiblissement, disait-il. Nous sommes victimes de vos complots et de vos fausses promesses."
+1 QUOT "Mais je l'affirme aussi devant Dieu, nous sommes innocents, et ceux qui disent autrement en ont menti par la bouche."
+1 ASSO @I0040@
+2 RELA Adversaire
+2 NOTE S'en prend à l'archevêque de Sens après Molay.
+2 NOTE Déclaré relaps avec le grand-maître.
+2 QUOT "Geoffroy de Charnay, à son tour, s'en prenait à l'archevêque de Sens."
+1 ASSO @I0017@
+2 RELA Ami / successeur pressenti
+2 NOTE Molay a fait sa carrière et le voit comme son successeur.
+2 NOTE Il reste le dernier appui fort du grand-maître dans le chariot.
+2 QUOT "Une longue amitié unissait les deux hommes ; Jacques de Molay avait fait toute la carrière de Charnay, de dix ans son cadet et dans lequel il voyait son successeur."
+1 ASSO @I0035@
+2 RELA Compagnon de captivité
+2 NOTE Sort de la tour avec le visiteur et le commandeur.
+2 NOTE Les quatre dignitaires partagent le même chariot.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+1 ASSO @I0036@
+2 RELA Compagnon de captivité
+2 NOTE Compagnon des mêmes fers et du même départ vers Notre-Dame.
+2 NOTE Voit le commandeur hébété et blessé.
+2 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+
+0 @I0034@ INDI
+1 NAME Alain /de Pareilles/
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Capitaine des archers du roi
+1 QUOT "Au milieu de la cour, messire Alain de Pareilles, capitaine des archers du roi, l'homme qui assistait à toutes les exécutions, qui accompagnait tous les condamnés vers les jugements et les supplices, marchait à pas lents, le visage fermé par un grand air d'ennui."
+2 TYPE Première mention
+1 NOTE Homme aux cheveux couleur d'acier, cotte de mailles, casque au creux du bras ; air d'ennui permanent. Conduit Molay et les dignitaires à Notre-Dame le 18 mars 1314.
+2 CONT Traits physiques : Cheveux couleur d'acier en mèches courtes ; front carré ; cotte de mailles.
+2 CONT Traits mentaux : Visage fermé, ennui professionnel devant les supplices.
+2 CONT Rôle : Bras armé du roi pour les conduites au jugement.
+2 CONT Opinions politiques : Exécute les ordres royaux sans commentaire.
+2 CONT Actions décisives principales : Confirme que « c'est chose jugée » ; au parvis, forme une chaîne d'archers contre la foule ; sur ordre du prévôt, remmène les prisonniers au Temple.
+1 ASSO @I0001@
+2 RELA Capitaine
+2 NOTE Sert le roi comme capitaine des archers.
+2 NOTE Domine le tumulte parisien lors du départ du Temple puis au parvis.
+2 QUOT "messire Alain de Pareilles, capitaine des archers du roi"
+1 ASSO @I0017@
+2 RELA Conducteur
+2 NOTE Escorte Molay du Temple à Notre-Dame, puis le remmène au Temple après la protestation.
+2 NOTE Immobile devant ses soldats pendant la lecture du jugement.
+2 QUOT "Ramenez les prisonniers au Temple ! cria-t-il à Alain de Pareilles."
+1 ASSO @I0047@
+2 RELA Subordonné
+2 NOTE Reçoit les ordres du prévôt Ployebouche pour évacuer les condamnés et nettoyer la place.
+2 NOTE Ses archers poussent les prisonniers dans le chariot à coups de manches de pique.
+2 QUOT "Sur un geste du prévôt à Alain de Pareilles, un groupe d'archers se précipita vers les marches"
+0 @I0035@ INDI
+1 NAME Visiteur /général/
+2 NICK Frère visiteur
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Visiteur général de l'Ordre du Temple
+1 QUOT "trois autres dignitaires apparurent : le visiteur général, le précepteur de Normandie, le commandeur d'Aquitaine."
+2 TYPE Première mention
+1 NOTE Dignitaire templier anonyme ; espère une grâce. À la sentence au mur, il croit d'abord à une grâce de vie (« On ne nous tue point ! ») — joie qui précède la protestation de Molay ; ensuite il ne comprend plus rien.
+2 CONT Traits physiques : Dents cassées ; visage douloureux ; yeux pleins de larmes. Traits mentaux : Espoir naïf, puis stupeur.
+2 CONT Rôle : L'un des quatre ; déclenche involontairement le retournement par son affreuse joie.
+2 CONT Opinions politiques : Espère encore la clémence du pape.
+2 CONT Actions décisives principales : Demande à Molay s'il a vraiment avoué le reniement ; se réjouit de la prison perpétuelle ; est remmené au Temple hébété.
+1 QUOT "Mon frère, mon frère, est-ce jamais moi qui ai dit cela ?"
+1 QUOT "Mes frères, mes frères, bredouilla le visiteur général, ai-je bien entendu ? On ne nous tue point ! On nous fait grâce !"
+1 ASSO @I0017@
+2 RELA Compagnon de captivité
+2 NOTE Sort de la tour avec Molay pour le jugement.
+2 NOTE Reçoit l'accolade du grand-maître.
+2 QUOT "Courage, mes frères, répéta-t-il en donnant ensuite l'accolade aux deux autres dignitaires."
+1 ASSO @I0037@
+2 RELA Suppliant
+2 NOTE Croit que le pape a peut-être décidé leur grâce.
+2 NOTE Son espoir contraste avec le réalisme de Molay.
+2 QUOT "Si l'on nous déferge, c'est peut-être bon signe, dit le visiteur général. Peut-être le pape a-t-il décidé notre grâce."
+
+0 @I0036@ INDI
+1 NAME Commandeur /d'Aquitaine/
+2 NICK Héros de Saint-Jean-d'Acre
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Commandeur d'Aquitaine de l'Ordre du Temple
+1 QUOT "Le commandeur d'Aquitaine, l'homme qui avait repoussé les Turcs à Saint-Jean-d'Acre, semblait frappé d'hébétude."
+2 TYPE Première mention
+1 NOTE Ancien héros d'Acre, désormais hébété et brisé par la captivité ; montre ses plaies sous sa manche ; répète qu'il « fait bon se promener matin ».
+2 CONT Traits physiques : Bras meurtri ; corps décharné ; fers. Traits mentaux : Hébétude, gémissements, propos décousus.
+2 CONT Rôle : L'un des quatre prisonniers du chariot.
+2 CONT Opinions politiques : non précisées (esprit brisé).
+2 CONT Actions décisives principales : Montre ce qu'on lui a fait ; hissé dans le chariot ; au retour du parvis, « ne comprend plus rien » comme le visiteur.
+1 ASSO @I0017@
+2 RELA Compagnon de captivité
+2 NOTE Reçoit l'accolade de Molay avant le départ.
+2 NOTE Partage le chariot vers Notre-Dame.
+2 QUOT "Courage, mes frères, répéta-t-il en donnant ensuite l'accolade aux deux autres dignitaires."
+
+0 @I0037@ INDI
+1 NAME Clément /V/
+2 NICK Pape Clément
+1 SEX M
+1 BIRT
+2 DATE ABT 1264
+2 PLAC France
+1 OCCU Pape (Avignon)
+1 QUOT "On disait que le pape Clément V lui-même n'avait cédé que contre son gré, parce qu'il était dans la dépendance du roi, et qu'il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+2 TYPE Première mention
+1 NOTE Pape dépendant de Philippe le Bel ; Molay le maudit avec Nogaret et le roi. Espoir illusoire du visiteur général ; crainte d'un sort à la Boniface.
+2 CONT Traits physiques : non précisés. Traits mentaux : Craintif, dépendant du roi selon le récit populaire.
+2 CONT Rôle : Troisième ennemi nommé par Molay ; horizon politique du procès.
+2 CONT Opinions politiques : A cédé au roi de France contre le Temple.
+2 CONT Actions décisives principales : (Rapportées) a laissé condamner malgré lui ; objet de la haine de Molay.
+1 ASSO @I0001@
+2 RELA Pape dépendant
+2 NOTE Dans la dépendance du roi de France.
+2 NOTE A cédé « contre son gré » selon le sentiment parisien.
+2 QUOT "parce qu'il était dans la dépendance du roi"
+1 ASSO @I0017@
+2 RELA Ennemi maudit
+2 NOTE Molay veut sa mort dans d'atroces souffrances.
+2 NOTE Rangé avec Guillaume et Philippe parmi les trois noms abhorrés.
+2 QUOT "Qui crèverait ? Clément, Guillaume, Philippe…"
+1 ASSO @I0038@
+2 RELA Successeur inquiet
+2 NOTE Craint le sort de Boniface, giflé sur son trône.
+2 NOTE Cette peur explique, dit-on, sa docilité envers Philippe.
+2 QUOT "il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+
+0 @I0038@ INDI
+1 NAME Boniface /VIII/
+2 NICK Pape Boniface
+1 SEX M
+1 BIRT
+2 DATE ABT 1230
+2 PLAC Italie
+1 DEAT
+2 DATE 11 OCT 1303
+2 PLAC Rome
+1 OCCU Pape (prédécesseur de Clément V)
+1 QUOT "il avait craint de subir le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+2 TYPE Première mention
+1 NOTE Prédécesseur de Clément V ; giflé sur son trône — précédent qui terrifie Clément et sert d'avertissement dans le récit du procès.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Fantôme politique derrière la peur de Clément.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : (Rappelées) humiliation pontificale antérieure.
+1 ASSO @I0037@
+2 RELA Prédécesseur menaçant
+2 NOTE Son sort explique la docilité de Clément envers Philippe.
+2 NOTE Mentionné comme avertissement, non comme acteur présent.
+2 QUOT "le même sort que son prédécesseur, le pape Boniface, giflé sur son trône."
+
+0 @I0039@ INDI
+1 NAME Impératrice /de Constantinople/
+1 SEX F
+1 BIRT
+2 DATE Inconnu
+2 PLAC Inconnu
+1 DEAT
+2 DATE ABT OCT 1307
+2 PLAC France
+1 OCCU Impératrice de Constantinople ; belle-sœur de Philippe le Bel
+1 QUOT "La veille encore il m'embrassait et m'appelait son frère, en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+2 TYPE Première mention
+1 NOTE Belle-sœur de Philippe le Bel (épouse de Charles de Valois dans le récit). Ses obsèques, la veille du vendredi 13 octobre 1307, sont le dernier moment de fausse fraternité entre le roi et Molay.
+2 CONT Traits physiques : non précisés. Traits mentaux : non précisés.
+2 CONT Rôle : Ancrage chronologique de la trahison du 13 octobre 1307.
+2 CONT Opinions politiques : non précisées.
+2 CONT Actions décisives principales : Ses funérailles placent Molay au premier rang auprès du roi.
+1 FAMS @F0014@
+
+0 @I0040@ INDI
+1 NAME Jean /de Marigny/
+2 NICK Archevêque de Sens
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Archevêque de Sens ; frère d'Enguerrand de Marigny
+1 QUOT "il avait fallu y nommer de nouveaux prélats, comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+2 TYPE Première mention
+1 NOTE Jeune archevêque de Sens, frère du recteur du royaume ; a conduit l'affaire du Temple avec le grand inquisiteur. Au parvis, poses alanguies puis rage blanche quand Molay proteste ; déclare Molay et Charnay relaps.
+2 CONT Traits physiques : Jeune ; bellâtre mitré ; blême et tremblant de colère quand la protestation éclate.
+2 CONT Traits mentaux : Superbe, susceptible ; sourit de connivence avec le légat à la sentence au mur ; s'affole quand la foule se retourne.
+2 CONT Rôle : Juge ecclésiastique vedette du 18 mars ; visage public du clan Marigny dans le procès.
+2 CONT Opinions politiques : Aligné sur la volonté royale ; remet les relaps à la justice du roi.
+2 CONT Actions décisives principales : Siège pour condamner ; accuse Molay de mensonge ; déclare deux condamnés relaps et remet l'affaire au bras séculier.
+1 QUOT "Vous mentez ! cria-t-il au grand-maître. Vous avez avoué devant la commission."
+1 QUOT "Deux des condamnés sont déclarés relaps ! dit l'archevêque forçant vainement la voix."
+1 QUOT "Monseigneur Jean de Marigny, le jeune archevêque de Sens, frère du recteur du royaume"
+1 EVEN
+2 TYPE Jugement au parvis de Notre-Dame
+2 DATE 18 MAR 1314
+2 PLAC Notre-Dame de Paris, France
+2 NOTE Conduit l'affaire avec le grand inquisiteur ; après la protestation, déclare Molay et Charnay relaps.
+1 ASSO @I0017@
+2 RELA Accusateur
+2 NOTE Affronte Molay qui retire ses aveux ; le traite de menteur.
+2 NOTE Le déclare relaps et le remet à la justice du roi.
+2 QUOT "Vous avez avoué la sodomie ! dit Jean de Marigny. — Dans la torture ! répliqua Molay."
+1 ASSO @I0033@
+2 RELA Accusateur
+2 NOTE Charnay s'en prend à lui après Molay ; Marigny le range parmi les relaps.
+2 NOTE Sa crosse levée n'impose plus le silence à la foule.
+2 QUOT "Geoffroy de Charnay, à son tour, s'en prenait à l'archevêque de Sens."
+1 ASSO @I0048@
+2 RELA Collègue
+2 NOTE Échange un sourire de connivence avec le premier légat après la sentence au mur.
+2 NOTE Tous deux incarnent la force de l'Église face aux quatre dignitaires.
+2 QUOT "Le premier légat et le jeune archevêque de Sens échangèrent un imperceptible sourire de connivence."
+1 ASSO @I0047@
+2 RELA Interlocuteur
+2 NOTE Se concerte avec le prévôt pendant l'émeute naissante.
+2 NOTE Ployebouche le presse de décider pour évacuer la place.
+2 QUOT "Jean de Marigny se concertait avec le prévôt de Paris."
+1 FAMC @F0015@
+
 0 @F0001@ FAM
 1 HUSB @I0001@
 1 WIFE @I0002@
@@ -1032,5 +1444,271 @@
 2 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne…"
 1 NOTE Robert II d'Artois : père de Mahaut et de Philippe d'Artois (père de Robert III).
 1 QUOT "On m'a volé l'héritage de mon comté d'Artois, s'écria-t-il, pour le donner à ma tante Mahaut de Bourgogne…"
+
+
+0 @F0014@ FAM
+1 HUSB @I0014@
+1 WIFE @I0039@
+1 NOTE Charles de Valois et l'impératrice de Constantinople, belle-sœur de Philippe le Bel ; ses obsèques précèdent l'arrestation des Templiers.
+1 QUOT "en me donnant la première place aux obsèques de sa belle-sœur l'impératrice de Constantinople…"
+
+0 @F0015@ FAM
+1 CHIL @I0015@
+2 NOTE Premier ministre ; son frère est nommé prélat pour condamner les Templiers.
+2 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+1 CHIL @I0040@
+2 NOTE Jean de Marigny, archevêque de Sens ; frère d'Enguerrand.
+2 QUOT "Monseigneur Jean de Marigny, le jeune archevêque de Sens, frère du recteur du royaume"
+1 NOTE Fratrie Marigny : Enguerrand et son frère prélat.
+1 QUOT "comme le frère du premier ministre Marigny, pour accomplir cette besogne."
+
+0 @I0041@ INDI
+1 NAME Philippe /d'Aunay/
+1 SEX M
+1 BIRT
+2 DATE ABT 1290
+2 PLAC Vémars, France
+1 OCCU Écuyer de Charles de Valois ; seigneur de Vémars et d'Aunay-lès-Bondy
+1 QUOT "Messire Philippe d'Aunay, écuyer de notre oncle Valois, répondit la comtesse de Poitiers."
+2 TYPE Première mention
+1 NOTE Bel écuyer de la maison de Valois, depuis quatre ans amant de Marguerite de Bourgogne. Jaloux, sensible, trop gentilhomme pour réclamer son dû aux princesses qui l'écorchent.
+2 CONT Traits physiques : Beau garçon ; longs cils soyeux ; menton blanc qui tremble dans le chagrin ; rougit facilement.
+2 CONT Traits mentaux : Jaloux, colérique puis pitoyable ; appréhension sourde devant le regard du roi ; orgueil blessé d'être traité en valet.
+2 CONT Rôle : Amant de la reine de Navarre ; fil surveillé par Robert d'Artois.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Se plaint de Marguerite devant Jeanne et Blanche ; paie leurs emplettes ; court à l'hôtel de Nesle avec une ceinture-prétexte.
+1 QUOT "Je suis un bien grand sot de me laisser humilier par une femme qui me traite en valet"
+1 QUOT "Oh ! Madame, murmura-t-il. Je crois que j'en mourrais."
+1 ASSO @I0010@
+2 RELA Amant
+2 NOTE Amant de Marguerite depuis quatre ans.
+2 NOTE Souffre de ses caprices et l'accuse sans preuve d'autres amants.
+2 QUOT "Philippe d'Aunay, écuyer de Monseigneur de Valois, était depuis quatre ans l'amant de Marguerite de Bourgogne"
+1 ASSO @I0011@
+2 RELA Protégé
+2 NOTE Jeanne favorise ses rendez-vous avec Marguerite et lui fournit des prétextes.
+2 NOTE Elle le réprimande pour sa « sotte jalousie » et menace de le faire envoyer en Valois.
+2 QUOT "épouse constante mais entremetteuse bénévole"
+1 ASSO @I0012@
+2 RELA Allié
+2 NOTE Blanche, maîtresse de son frère, partage le secret et le couvre devant le roi.
+2 NOTE Il lui reproche aigrement ses paroles au roi ; elle lui répond qu'il a manqué de présence d'esprit.
+2 QUOT "Et que vouliez-vous que je fisse ? s'écria Blanche."
+1 ASSO @I0014@
+2 RELA Écuyer
+2 NOTE Officier de la maison de Monseigneur de Valois ; terres dans le comté de Valois.
+2 NOTE Jeanne peut obtenir de l'oncle qu'on l'éloigne quelques mois.
+2 QUOT "Messire Philippe d'Aunay, écuyer de notre oncle Valois"
+1 ASSO @I0001@
+2 RELA Sujet intimidé
+2 NOTE Le roi le confond toujours avec Gautier ; son regard de glace le met mal à l'aise.
+2 NOTE Il reste court et bredouillant quand le souverain surgit.
+2 QUOT "Chaque fois qu'il me voit, il me demande mon nom. Cela fait bien la sixième fois."
+1 ASSO @I0009@
+2 RELA Surveillé
+2 NOTE Robert d'Artois l'observe d'un regard de chasseur puis le suit des yeux vers la rue.
+2 NOTE L'écuyer ne remarque pas le colosse aux bottes rouges sur l'escalier.
+2 QUOT "Le seigneur aux bottes rouges le suivit du regard, un regard de chasseur."
+1 FAMC @F0016@
+
+0 @I0042@ INDI
+1 NAME Gautier /d'Aunay/
+1 SEX M
+1 BIRT
+2 DATE ABT 1288
+2 PLAC Vémars, France
+1 OCCU Écuyer du comte de Poitiers
+1 QUOT "Blanche se trouvait être la maîtresse de son frère, Gautier d'Aunay, écuyer du comte de Poitiers."
+2 TYPE Première mention
+1 NOTE Frère aîné ou cadet de Philippe d'Aunay ; écuyer de Philippe de Poitiers ; amant de Blanche de Bourgogne. Absent de la Galerie mercière ce matin-là, mais au centre des confidences.
+2 CONT Traits physiques : Non précisé (hors scène). Traits mentaux : Dit « plus agréable » que Philippe par Blanche ; « mieux traité » selon son frère.
+2 CONT Rôle : Second amant du scandale des brus ; pendant de Philippe auprès de Blanche.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Liaison avec Blanche ; ce soir-là privé de la tour de Nesle comme les autres.
+1 ASSO @I0012@
+2 RELA Amant
+2 NOTE Maîtresse : Blanche, épouse de Charles de France.
+2 NOTE Blanche le fait saluer par Philippe : elle « soupirera » après lui.
+2 QUOT "Blanche se trouvait être la maîtresse de son frère, Gautier d'Aunay, écuyer du comte de Poitiers"
+1 ASSO @I0004@
+2 RELA Écuyer
+2 NOTE Au service de Monseigneur de Poitiers.
+2 NOTE Son maître ignore, ici, l'adultère qu'il entretient avec Blanche.
+2 QUOT "un frère qui est à Monseigneur de Poitiers"
+1 FAMC @F0016@
+
+0 @I0043@ INDI
+1 NAME Gautier /d'Aunay/ le père
+2 NICK Messire Gautier d'Aunay le père
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Seigneur de Vémars et d'Aunay-lès-Bondy
+1 QUOT "Prends garde, mon fils, lui avait dit un jour messire Gautier d'Aunay le père ; les femmes les plus riches sont celles qui coûtent le plus cher."
+2 TYPE Première mention
+1 NOTE Père de Philippe et Gautier d'Aunay. Cité pour sa maxime sur le coût des femmes riches ; la fortune familiale (Vémars, Aunay-lès-Bondy) dispense ses fils de compter.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Prudent en affaires de femmes, du moins en paroles.
+2 CONT Rôle : Ancrage familial et foncier des deux écuyers.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Avertissement à son fils Philippe sur les dépenses des princesses.
+1 FAMS @F0016@
+
+0 @I0044@ INDI
+1 NAME /Tolomei/
+2 NICK le banquier Tolomei
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Sienne, Italie
+1 OCCU Banquier
+1 QUOT "À mon oncle, le banquier Tolomei… pour vous servir, répondit le jeune homme"
+2 TYPE Première mention
+1 NOTE Banquier siennois établi à Paris ; oncle de Guccio Baglioni. Propriétaire des trois lévriers que mène son neveu le jour du jugement des Templiers.
+2 CONT Traits physiques : Non précisé (hors scène). Traits mentaux : Non précisé.
+2 CONT Rôle : Référence bancaire italienne ; lien de Guccio à Paris.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Envoie (ou laisse) son neveu promener ses chiens de courre dans la Cité.
+1 FAMC @F0017@
+
+0 @I0045@ INDI
+1 NAME Guccio /Baglioni/
+1 SEX M
+1 BIRT
+2 DATE ABT 1296
+2 PLAC Sienne, Italie
+1 OCCU Neveu du banquier Tolomei
+1 QUOT "Et qui veut prendre en gire Guccio Baglioni n'a qu'à le dire !"
+2 TYPE Première mention
+1 NOTE Jeune Toscan de dix-huit ans au plus, menant les lévriers de son oncle ; bouscule et injure Philippe le Bel sans le reconnaître, puis lance son nom comme un défi.
+2 CONT Traits physiques : Petite taille bien prise ; yeux noirs ; menton fin ; dague ciselée au côté.
+2 CONT Traits mentaux : Orgueil susceptible des Toscans ; forçant la voix pour faire l'homme ; moins assuré qu'il ne veut le paraître.
+2 CONT Rôle : Première étincelle comique et inquiète du matin parisien ; révélateur de la promenade incognito du roi.
+2 CONT Opinions politiques : Fier qu'à Sienne « chaque citoyen peut être roi à son tour ».
+2 CONT Actions décisives principales : Heurte le roi ; se nomme devant la foule ; s'éloigne avec ses chiens.
+1 QUOT "Non sipuo vedere un cretino peggiore…"
+1 QUOT "Dans ma ville de Sienne, chaque citoyen peut être roi à son tour."
+1 ASSO @I0001@
+2 RELA Insolent
+2 NOTE Bouscule le roi au chaperon blanc et l'injurie en italien avant d'apprendre qui il est.
+2 NOTE Les sergents l'encadrent ; il s'incline, bonnet ôté.
+2 QUOT "Il a manqué jeter le roi par terre, et de surcroît il l'a injurié."
+1 FAMC @F0018@
+
+0 @I0046@ INDI
+1 NAME Parent /Tolomei/
+2 NICK Parent de Guccio (frère ou sœur du banquier)
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC Sienne, Italie
+1 OCCU Non précisé
+1 QUOT "À mon oncle, le banquier Tolomei… pour vous servir"
+2 TYPE Première mention
+1 NOTE Identité non précisée dans le texte ; personnage de liaison pour établir que le banquier Tolomei est l'oncle de Guccio Baglioni.
+2 CONT Traits physiques : Non précisé. Traits mentaux : Non précisé.
+2 CONT Rôle : Maillon généalogique oncle↔neveu.
+2 CONT Opinions politiques : Non précisé.
+2 CONT Actions décisives principales : Non précisé.
+1 FAMC @F0017@
+1 FAMS @F0018@
+
+
+0 @F0016@ FAM
+1 HUSB @I0043@
+1 CHIL @I0041@
+2 NOTE Fils de messire Gautier d'Aunay le père ; frère de Gautier l'écuyer.
+2 QUOT "Oui, Sire, un frère qui est à Monseigneur de Poitiers, répondit le jeune d'Aunay"
+1 CHIL @I0042@
+2 NOTE Frère de Philippe ; écuyer de Poitiers.
+2 QUOT "Blanche se trouvait être la maîtresse de son frère, Gautier d'Aunay, écuyer du comte de Poitiers."
+1 NOTE Famille d'Aunay : domaines de Vémars et d'Aunay-lès-Bondy, entre Pontoise et Luzarches.
+1 QUOT "Les d'Aunay pouvaient se dispenser de compter ; leurs domaines de Vémars et d'Aunay-lès-Bondy, entre Pontoise et Luzarches, leur assuraient d'importants revenus."
+
+0 @F0017@ FAM
+1 CHIL @I0044@
+2 NOTE Banquier ; oncle de Guccio Baglioni.
+2 QUOT "À mon oncle, le banquier Tolomei… pour vous servir"
+1 CHIL @I0046@
+2 NOTE Frère ou sœur du banquier ; parent de Guccio (identité non précisée).
+2 QUOT "À mon oncle, le banquier Tolomei… pour vous servir"
+1 NOTE Fratrie Tolomei permettant le lien d'oncle à neveu.
+1 QUOT "À mon oncle, le banquier Tolomei… pour vous servir"
+
+0 @F0018@ FAM
+1 HUSB @I0046@
+1 CHIL @I0045@
+2 NOTE Guccio Baglioni, neveu du banquier Tolomei.
+2 QUOT "À mon oncle, le banquier Tolomei… pour vous servir, répondit le jeune homme"
+1 NOTE Parent Tolomei (I0046, sexe non précisé — étiquette HUSB technique) → Guccio ; le banquier est donc l'oncle.
+1 QUOT "À mon oncle, le banquier Tolomei… pour vous servir"
+
+0 @I0047@ INDI
+1 NAME Jean /Ployebouche/
+2 NICK Prévôt de Paris
+1 SEX M
+1 BIRT
+2 DATE ABT 1264
+2 PLAC Paris, France
+1 OCCU Prévôt de Paris
+1 QUOT "Seul laïc de cette assemblée, le prévôt de Paris, Jean Ployebouche, personnage d'une cinquantaine d'années, courtaud, au visage contracté, paraissait peu satisfait de se trouver là."
+2 TYPE Première mention
+1 NOTE Prévôt de Paris, seul laïc du tribunal ; représente le pouvoir royal et le maintien de l'ordre. Peureux des émeutes (souvenir de 1306), il presse Marigny de décider, fait remmener les prisonniers au Temple et court aviser le roi.
+2 CONT Traits physiques : Cinquantaine d'années ; courtaud ; visage contracté.
+2 CONT Traits mentaux : Inquiet, débordé ; craint pour sa situation et sa peau ; virant sur lui-même.
+2 CONT Rôle : Bras civil de l'ordre public au parvis.
+2 CONT Opinions politiques : Servant du roi ; priorise le calme parisien.
+2 CONT Actions décisives principales : Se concerte avec Marigny ; ordonne l'évacuation ; crie de ramener les prisonniers au Temple ; part prévenir Philippe le Bel.
+1 QUOT "N'importe quoi, Monseigneur, décidez n'importe quoi, disait le prévôt ; mais il ne faut point les laisser là."
+1 QUOT "Ramenez les prisonniers au Temple ! cria-t-il à Alain de Pareilles. Pour moi, je cours en aviser le roi."
+1 ASSO @I0001@
+2 RELA Prévôt
+2 NOTE Représente le pouvoir royal au tribunal ; court l'aviser après le tumulte.
+2 NOTE Chargé du maintien de l'ordre sur le parvis.
+2 QUOT "Il représentait le pouvoir royal et était chargé du maintien de l'ordre."
+1 ASSO @I0040@
+2 RELA Interlocuteur
+2 NOTE Presse l'archevêque de décider pendant que la foule menace d'emporter tout le monde.
+2 NOTE Ses yeux vont de la foule au capitaine et à l'archevêque.
+2 QUOT "N'importe quoi, Monseigneur, décidez n'importe quoi"
+1 ASSO @I0034@
+2 RELA Supérieur
+2 NOTE Fait signe à Pareilles d'amener le chariot et de remmener les condamnés.
+2 NOTE Lui crie de ramener les prisonniers au Temple.
+2 QUOT "Sur un geste du prévôt à Alain de Pareilles, un groupe d'archers se précipita vers les marches"
+1 ASSO @I0017@
+2 RELA Surveillant
+2 NOTE Fait pousser Molay et les autres dans le chariot pour les arracher à l'émeute.
+2 NOTE Veut nettoyer la place au plus vite.
+2 QUOT "Ramenez les prisonniers au Temple !"
+
+0 @I0048@ INDI
+1 NAME Arnaud /d'Auch/
+2 NICK Cardinal d'Albano
+2 NICK Premier légat
+1 SEX M
+1 BIRT
+2 DATE Inconnu
+2 PLAC France
+1 OCCU Cardinal d'Albano ; premier légat pontifical
+1 QUOT "Monseigneur Arnaud d'Auch, cardinal d'Albano, premier légat, lisait debout les attendus du jugement."
+2 TYPE Première mention
+1 NOTE Premier des trois cardinaux envoyés par le pape pour rendre la sentence sans appel. Lit les attendus avec emphase et onctuosité ; condamne les quatre dignitaires au mur et au silence. Sourit de connivence avec Jean de Marigny.
+2 CONT Traits physiques : Non précisé hors habits cardinalices. Traits mentaux : Satisfait de se donner en spectacle ; emphase excessive qui impatiente le peuple.
+2 CONT Rôle : Voix pontificale du jugement public.
+2 CONT Opinions politiques : Signifie que la sentence est sans recours devant le Saint-Siège.
+2 CONT Actions décisives principales : Lit les griefs et aveux ; prononce la condamnation au mur ; s'enfuit dans Notre-Dame quand l'émeute gronde.
+1 QUOT "Considérant que les accusés ont avoué et reconnu, les condamnons… au mur et au silence pour le reste de leurs jours"
+1 ASSO @I0017@
+2 RELA Légat
+2 NOTE Lit les attendus visant Molay et les trois autres ; Molay voudrait l'étrangler.
+2 NOTE Prononce la prison perpétuelle avant la protestation.
+2 QUOT "Monseigneur Arnaud d'Auch, cardinal d'Albano, premier légat, lisait debout les attendus du jugement."
+1 ASSO @I0040@
+2 RELA Collègue
+2 NOTE Échange un sourire de connivence avec l'archevêque de Sens après la sentence.
+2 NOTE Fait partie du Tribunal qui se réfugie ensuite dans la cathédrale.
+2 QUOT "Le premier légat et le jeune archevêque de Sens échangèrent un imperceptible sourire de connivence."
+
 
 0 TRLR

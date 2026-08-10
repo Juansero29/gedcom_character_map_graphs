@@ -8,9 +8,14 @@ let focusScope = "depth"; // "depth" | "nucleus"
 /** Sub-filter while focusScope === "nucleus". */
 let nucleusKind = "all"; // "all" | "parents" | "children" | "siblings"
 let hoverRestoreTimer = null;
-/** @type {null | { kind: "node", id: string } | { kind: "link", key: string }} */
+/** @type {null | { kind: "node", id: string } | { kind: "link", key: string } | { kind: "pair", ids: string[], path?: string[] }} */
 let activeHover = null;
+/** Neighbor id while a focused-character pair/relation flyout is shown. */
+let pairHoverNeighborId = null;
 let nodeDragMoved = false;
+/** Deferred single-click focus — cancelled when a dblclick activates the family nucleus. */
+let nodeClickTimer = null;
+const NODE_CLICK_DELAY_MS = 280;
 let currentLayoutMode = normalizeLayoutMode(
   localStorage.getItem("cm_layout") || "genealogy"
 );
@@ -31,6 +36,8 @@ let currentLinkDepthMode = (() => {
 })();
 let currentNarrative = null;
 let currentNarrativeTime = null;
+/** Character ids highlighted for the active narrative event (`@I…@`). */
+let activeNarrativeCast = null;
 /** @type {{ query: string, sex: "all"|"M"|"F", birthAfter: number|null, birthBefore: number|null, vitality: "all"|"living"|"deceased", bookEvidence: boolean, linkKind: "all"|"blood"|"other" }} */
 let graphFilters = {
   query: "",
@@ -39,7 +46,8 @@ let graphFilters = {
   birthBefore: null,
   vitality: "all",
   bookEvidence: false,
-  linkKind: "all",
+  // Default: blood tree only; ASSO appear via filter all/other or node focus
+  linkKind: "blood",
 };
 let filtersApplyTimer = null;
 
@@ -354,10 +362,14 @@ function narrativeBounds(narrative) {
   return { start, end, spanMs: Math.max(+end - +start, 1) };
 }
 
-function momentAtTime(narrative, atDate) {
-  const moments = [...(narrative?.moments || [])].sort(
+function sortedNarrativeMoments(narrative) {
+  return [...(narrative?.moments || [])].sort(
     (a, b) => +new Date(a.at) - +new Date(b.at)
   );
+}
+
+function momentAtTime(narrative, atDate) {
+  const moments = sortedNarrativeMoments(narrative);
   if (!moments.length) return null;
   let current = moments[0];
   for (const m of moments) {
@@ -365,6 +377,136 @@ function momentAtTime(narrative, atDate) {
     else break;
   }
   return current;
+}
+
+function momentIndexAtTime(narrative, atDate) {
+  const moments = sortedNarrativeMoments(narrative);
+  if (!moments.length) return -1;
+  let idx = 0;
+  for (let i = 0; i < moments.length; i++) {
+    if (+new Date(moments[i].at) <= +atDate) idx = i;
+    else break;
+  }
+  return idx;
+}
+
+function normalizeNarrativeCharacterId(raw) {
+  const s = String(raw || "").trim();
+  if (!s) return "";
+  if (s.startsWith("@") && s.endsWith("@")) return s;
+  if (/^I\d+$/i.test(s)) return `@${s.toUpperCase()}@`;
+  return s;
+}
+
+function narrativeCastIds(moment) {
+  const ids = new Set();
+  for (const raw of moment?.characters || []) {
+    const id = normalizeNarrativeCharacterId(raw);
+    if (id) ids.add(id);
+  }
+  return ids;
+}
+
+function shortDisplayName(node) {
+  const name = String(node?.name || "").trim();
+  if (!name) return node?.id || "";
+  const parts = name.split(/\s+/);
+  if (parts.length <= 3) return name;
+  return `${parts[0]} ${parts[parts.length - 1]}`;
+}
+
+function isNarrativeFriseOpen() {
+  const panel = document.getElementById("narrativePanel");
+  if (!panel || panel.classList.contains("is-hidden")) return false;
+  return !panel.classList.contains("is-collapsed");
+}
+
+/** Drop event-cast highlight and restore free graph exploration (or pinned focus). */
+function releaseNarrativeFriseHighlight() {
+  cancelHoverRestore();
+  activeHover = null;
+  activeNarrativeCast = null;
+  d3.selectAll("body > .tooltip, .tooltip, .link-tooltip").style(
+    "display",
+    "none"
+  );
+  d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
+  if (lastFocusedNode || lastFocusedLink) {
+    restorePersistentEmphasis();
+  } else {
+    clearGraphEmphasis(0);
+  }
+}
+
+function emphasizeNarrativeCast(ids, { duration = 160 } = {}) {
+  const cast = ids instanceof Set ? ids : new Set(ids || []);
+  if (!isNarrativeFriseOpen()) {
+    activeNarrativeCast = null;
+    return;
+  }
+  activeNarrativeCast = cast.size ? cast : null;
+  if (!cast.size) {
+    if (!isSelectionPinned() && !activeHover) clearGraphEmphasis(duration);
+    return;
+  }
+  d3.selectAll(".node, .node-label-root").classed("is-event-cast", (d) =>
+    cast.has(d.id)
+  );
+  emphasizeGraph({
+    nodeIds: cast,
+    linkKeep: (l) => {
+      const { sourceId, targetId } = linkEnds(l);
+      return cast.has(sourceId) && cast.has(targetId);
+    },
+    raiseId: null,
+    duration,
+    raise: true,
+    revealKeptLinks: true,
+  });
+}
+
+function syncNarrativeCastFromTime({ force = false } = {}) {
+  if (!currentNarrative || !currentNarrativeTime) {
+    activeNarrativeCast = null;
+    d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
+    return;
+  }
+  if (!isNarrativeFriseOpen()) {
+    // Keep time/ages, but never leave a cast highlight while collapsed
+    if (activeNarrativeCast) releaseNarrativeFriseHighlight();
+    else activeNarrativeCast = null;
+    return;
+  }
+  const moment = momentAtTime(currentNarrative, currentNarrativeTime);
+  const cast = narrativeCastIds(moment);
+  if (!force && (isSelectionPinned() || activeHover)) {
+    activeNarrativeCast = cast.size ? cast : null;
+    return;
+  }
+  if (cast.size) emphasizeNarrativeCast(cast);
+  else {
+    activeNarrativeCast = null;
+    if (!isSelectionPinned() && !activeHover) clearGraphEmphasis(120);
+  }
+}
+
+function goToNarrativeMoment(index, { clearFocus = true } = {}) {
+  if (!currentNarrative) return;
+  const moments = sortedNarrativeMoments(currentNarrative);
+  if (!moments.length) return;
+  const i = Math.max(0, Math.min(moments.length - 1, index));
+  const date = new Date(moments[i].at);
+  if (Number.isNaN(+date)) return;
+  if (clearFocus) {
+    lastFocusedNode = null;
+    lastFocusedLink = null;
+    focusScope = "depth";
+    nucleusKind = "all";
+    syncFocusChip();
+    restoreFocusNeighborSpread({ animate: false });
+  }
+  setNarrativeTime(date);
+  syncNarrativeCastFromTime({ force: true });
 }
 
 function formatNarrativeClock(date, narrative) {
@@ -431,18 +573,20 @@ function nodeSecondaryLabel(d) {
 }
 
 function refreshNodeAgeLabels() {
-  const nodes = d3.selectAll(".node");
-  if (nodes.empty()) return;
-  nodes.select(".node-year").text((d) => nodeSecondaryLabel(d));
-  nodes.classed("is-dead-at-time", (d) => {
+  const years = d3.selectAll(".node-year");
+  if (years.empty()) return;
+  years.text((d) => nodeSecondaryLabel(d));
+  const markDead = (d) => {
     if (!currentNarrativeTime) return false;
     const info = ageAtNarrative(d, currentNarrativeTime);
     return info?.kind === "dead";
-  });
-  resizeNodeLabelBackground(nodes.select(".node-label-group"));
+  };
+  d3.selectAll(".node").classed("is-dead-at-time", markDead);
+  d3.selectAll(".node-label-root").classed("is-dead-at-time", markDead);
+  resizeNodeLabelBackground(d3.selectAll(".node-label-group"));
 }
 
-function setNarrativeTime(date, { updateSlider = true } = {}) {
+function setNarrativeTime(date, { updateSlider = true, syncCast = true } = {}) {
   currentNarrativeTime = date;
   window.__narrativeTime = date;
   if (updateSlider && currentNarrative) {
@@ -458,6 +602,7 @@ function setNarrativeTime(date, { updateSlider = true } = {}) {
   }
   updateNarrativePanelUI();
   refreshNodeAgeLabels();
+  if (syncCast) syncNarrativeCastFromTime();
   // Living/deceased filter depends on narrative time
   if (graphFilters.vitality !== "all" && window.allNodes?.length) {
     rebuildCurrentGraph();
@@ -486,6 +631,10 @@ function updateNarrativePanelUI() {
   const span = document.getElementById("narrativeSpan");
   const meta = document.getElementById("narrativeMeta");
   const momentEl = document.getElementById("narrativeMoment");
+  const castEl = document.getElementById("narrativeCast");
+  const indexEl = document.getElementById("narrativeEventIndex");
+  const prevBtn = document.getElementById("narrativePrev");
+  const nextBtn = document.getElementById("narrativeNext");
 
   if (when) {
     when.textContent = formatNarrativeClock(
@@ -495,7 +644,11 @@ function updateNarrativePanelUI() {
   }
   const whenCollapsed = document.getElementById("narrativeWhenCollapsed");
   if (whenCollapsed) {
-    whenCollapsed.textContent = when?.textContent || "";
+    const moment = momentAtTime(currentNarrative, currentNarrativeTime);
+    const momentLabel = moment
+      ? localizeNarrativeField(moment.label)
+      : when?.textContent || "";
+    whenCollapsed.textContent = momentLabel;
   }
   if (span) {
     const spanLabel = localizeNarrativeField(currentNarrative.spanLabel);
@@ -517,8 +670,23 @@ function updateNarrativePanelUI() {
     }
     meta.textContent = bits.join(" · ");
   }
+
+  const moments = sortedNarrativeMoments(currentNarrative);
+  const momentIdx = momentIndexAtTime(currentNarrative, currentNarrativeTime);
+  const moment = momentIdx >= 0 ? moments[momentIdx] : null;
+
+  if (indexEl) {
+    indexEl.textContent = moments.length
+      ? t("narrativeEventOf", {
+          n: String(momentIdx + 1),
+          total: String(moments.length),
+        })
+      : "";
+  }
+  if (prevBtn) prevBtn.disabled = momentIdx <= 0;
+  if (nextBtn) nextBtn.disabled = momentIdx < 0 || momentIdx >= moments.length - 1;
+
   if (momentEl) {
-    const moment = momentAtTime(currentNarrative, currentNarrativeTime);
     if (moment) {
       momentEl.innerHTML = `
         <div class="narrative-moment-label">${escapeHtmlGlobal(
@@ -533,9 +701,30 @@ function updateNarrativePanelUI() {
     }
   }
 
+  if (castEl) {
+    const castIds = [...narrativeCastIds(moment)];
+    const roster = window.allNodes || allNodes || [];
+    const nodes = castIds
+      .map((id) => roster.find((n) => n.id === id))
+      .filter(Boolean);
+    if (nodes.length) {
+      castEl.hidden = false;
+      castEl.innerHTML = nodes
+        .map(
+          (n) =>
+            `<span class="narrative-cast-chip" title="${escapeHtmlGlobal(
+              n.name || n.id
+            )}">${escapeHtmlGlobal(shortDisplayName(n))}</span>`
+        )
+        .join("");
+    } else {
+      castEl.hidden = true;
+      castEl.innerHTML = "";
+    }
+  }
+
   document.querySelectorAll(".narrative-tick").forEach((btn) => {
     const at = btn.dataset.at;
-    const moment = momentAtTime(currentNarrative, currentNarrativeTime);
     btn.classList.toggle("is-active", moment && moment.at === at);
   });
 }
@@ -550,21 +739,41 @@ function escapeHtmlGlobal(value) {
 
 function bindNarrativePanel() {
   const slider = document.getElementById("narrativeSlider");
-  if (!slider || slider.dataset.bound) return;
-  slider.dataset.bound = "1";
-  slider.addEventListener("input", () => {
-    if (!currentNarrative) return;
-    const bounds = narrativeBounds(currentNarrative);
-    if (!bounds) return;
-    const ratio = Number(slider.value) / Number(slider.max || 1000);
-    const date = new Date(+bounds.start + ratio * bounds.spanMs);
-    setNarrativeTime(date, { updateSlider: false });
-  });
+  if (slider && !slider.dataset.bound) {
+    slider.dataset.bound = "1";
+    slider.addEventListener("input", () => {
+      if (!currentNarrative) return;
+      const bounds = narrativeBounds(currentNarrative);
+      if (!bounds) return;
+      const ratio = Number(slider.value) / Number(slider.max || 1000);
+      const date = new Date(+bounds.start + ratio * bounds.spanMs);
+      setNarrativeTime(date, { updateSlider: false });
+    });
+  }
+
+  const prevBtn = document.getElementById("narrativePrev");
+  const nextBtn = document.getElementById("narrativeNext");
+  if (prevBtn && !prevBtn.dataset.bound) {
+    prevBtn.dataset.bound = "1";
+    prevBtn.addEventListener("click", () => {
+      const idx = momentIndexAtTime(currentNarrative, currentNarrativeTime);
+      if (idx > 0) goToNarrativeMoment(idx - 1);
+    });
+  }
+  if (nextBtn && !nextBtn.dataset.bound) {
+    nextBtn.dataset.bound = "1";
+    nextBtn.addEventListener("click", () => {
+      const moments = sortedNarrativeMoments(currentNarrative);
+      const idx = momentIndexAtTime(currentNarrative, currentNarrativeTime);
+      if (idx >= 0 && idx < moments.length - 1) goToNarrativeMoment(idx + 1);
+    });
+  }
 }
 
 function setChapterNarrative(narrative) {
   currentNarrative = narrative || null;
   window.__chapterNarrative = currentNarrative;
+  activeNarrativeCast = null;
   const panel = document.getElementById("narrativePanel");
   const ticks = document.getElementById("narrativeTicks");
   bindNarrativePanel();
@@ -576,34 +785,34 @@ function setChapterNarrative(narrative) {
     panel.classList.add("is-hidden");
     currentNarrativeTime = null;
     window.__narrativeTime = null;
+    d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
     refreshNodeAgeLabels();
     return;
   }
 
   panel.classList.remove("is-hidden");
   if (ticks) {
-    const moments = [...(currentNarrative.moments || [])].sort(
-      (a, b) => +new Date(a.at) - +new Date(b.at)
-    );
+    const moments = sortedNarrativeMoments(currentNarrative);
     ticks.innerHTML = moments
-      .map((m) => {
+      .map((m, i) => {
         const label = localizeNarrativeField(m.label);
-        return `<button type="button" class="narrative-tick" data-at="${escapeHtmlGlobal(
+        return `<button type="button" class="narrative-tick" role="listitem" data-at="${escapeHtmlGlobal(
           m.at
-        )}" title="${escapeHtmlGlobal(label)}"><span>${escapeHtmlGlobal(
+        )}" data-index="${i}" title="${escapeHtmlGlobal(label)}"><span>${escapeHtmlGlobal(
           label
         )}</span></button>`;
       })
       .join("");
     ticks.querySelectorAll(".narrative-tick").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const date = new Date(btn.dataset.at);
-        if (!Number.isNaN(+date)) setNarrativeTime(date);
+        const idx = Number(btn.dataset.index);
+        if (Number.isFinite(idx)) goToNarrativeMoment(idx);
       });
     });
   }
 
-  setNarrativeTime(bounds.start);
+  setNarrativeTime(bounds.start, { syncCast: false });
+  syncNarrativeCastFromTime({ force: true });
 }
 
 function findChapterNarrative(filePath) {
@@ -910,7 +1119,12 @@ function makeFocusLinkKeep(
   mode = currentLinkDepthMode
 ) {
   if (mode === "all") {
-    return (link) => link.type === "family";
+    return (link) => {
+      if (link.type === "family") return true;
+      // Direct ASSO of the focused character (filter may still hide them)
+      const { sourceId, targetId } = linkEnds(link);
+      return sourceId === nodeId || targetId === nodeId;
+    };
   }
   if (depth <= 0) return () => false;
 
@@ -995,7 +1209,15 @@ function isLinkInDepth(
   depth = currentLinkDepth,
   mode = currentLinkDepthMode
 ) {
-  if (mode === "all") return link.type === "family";
+  // Blood-default: hide ASSO until filter says otherwise or a node is focused
+  if (!isAssocVisible(link)) return false;
+  if (graphFilters.linkKind === "other" && link.type === "family") return false;
+
+  if (mode === "all") {
+    if (link.type === "family") return true;
+    // ASSO already passed isAssocVisible (filter all/other, or focused ego)
+    return true;
+  }
   if (depth <= 0) return false;
   const ego = depthEgoId();
   if (ego) return makeFocusLinkKeep(ego, depth, mode)(link);
@@ -1099,7 +1321,8 @@ function countActiveGraphFilters() {
   if (graphFilters.birthBefore != null) n += 1;
   if (graphFilters.vitality !== "all") n += 1;
   if (graphFilters.bookEvidence) n += 1;
-  if (graphFilters.linkKind !== "all") n += 1;
+  // "blood" is the default — only all/other count as an active link filter
+  if (graphFilters.linkKind !== "blood") n += 1;
   return n;
 }
 
@@ -1115,7 +1338,7 @@ function clearGraphFiltersState() {
     birthBefore: null,
     vitality: "all",
     bookEvidence: false,
-    linkKind: "all",
+    linkKind: "blood",
   };
   writeFiltersToDom();
   persistGraphFilters();
@@ -1218,9 +1441,265 @@ function nodeMatchesGraphFilters(node) {
 }
 
 function linkMatchesKindFilter(link) {
-  if (graphFilters.linkKind === "blood") return link.type === "family";
+  // "other" → ASSO only. "blood" / "all" keep both in the model so a node
+  // click can reveal that character's ASSO without a rebuild.
   if (graphFilters.linkKind === "other") return link.type !== "family";
   return true;
+}
+
+/** Non-blood links: visible when filter is all/other, or on focused node. */
+function isAssocVisible(link) {
+  if (link.type === "family") return true;
+  if (graphFilters.linkKind === "all" || graphFilters.linkKind === "other") {
+    return true;
+  }
+  const ego = lastFocusedNode?.id;
+  if (!ego) return false;
+  const { sourceId, targetId } = linkEnds(link);
+  return sourceId === ego || targetId === ego;
+}
+
+/** Set by createGraph — redraws node transforms + link paths. */
+let redrawGraphGeometry = () => {};
+/** Active d3.zoom behavior + svg selection (for focus fit). */
+let graphZoom = null;
+let graphSvg = null;
+
+/** Manual zoom via chrome buttons (no auto-fit on load). */
+function zoomGraphBy(factor) {
+  if (!graphZoom || !graphSvg) return;
+  graphSvg
+    .transition()
+    .duration(220)
+    .ease(d3.easeCubicOut)
+    .call(graphZoom.scaleBy, factor);
+}
+/** True while a focus fan-out has moved nodes off their home packing. */
+let focusFanActive = false;
+
+function snapshotHomePositionsIfNeeded() {
+  (allNodes || []).forEach((n) => {
+    if (n.homeX == null && n.x != null) {
+      n.homeX = n.x;
+      n.homeY = n.y;
+      n.homeTargetX = n.targetX != null ? n.targetX : n.x;
+    }
+  });
+}
+
+function clearFocusLinkLanes() {
+  (allLinks || []).forEach((l) => {
+    delete l._focusLane;
+    delete l._focusLaneCount;
+  });
+}
+
+/** Collect direct neighbors used by focus fan / fit (family keep + ASSO). */
+function focusDirectNeighborIds(egoId) {
+  const keep = makeFocusLinkKeep(egoId, currentLinkDepth);
+  const neighborIds = new Set();
+  const assoLinks = [];
+  (allLinks || []).forEach((l) => {
+    const { sourceId, targetId } = linkEnds(l);
+    if (sourceId !== egoId && targetId !== egoId) return;
+    const other = sourceId === egoId ? targetId : sourceId;
+    if (l.type === "family") {
+      if (!keep(l)) return;
+      neighborIds.add(other);
+      return;
+    }
+    neighborIds.add(other);
+    assoLinks.push({ link: l, otherId: other });
+  });
+  return { neighborIds, assoLinks };
+}
+
+function assignFocusAssoLanes(assoLinks, neighbors) {
+  assoLinks.sort((a, b) => {
+    const na = neighbors.findIndex((node) => node.id === a.otherId);
+    const nb = neighbors.findIndex((node) => node.id === b.otherId);
+    return na - nb;
+  });
+  assoLinks.forEach((a, i) => {
+    a.link._focusLane = i;
+    a.link._focusLaneCount = assoLinks.length;
+  });
+}
+
+/**
+ * On focus: separate stacked ASSO (lanes) and frame the neighborhood.
+ * Layered layouts keep the packed tree — a radial fan was stacking labels
+ * on top of unrelated nodes. Force layout still uses a ring fan.
+ */
+function applyFocusNeighborSpread(egoId, { animate = true } = {}) {
+  const ego = (allNodes || []).find((n) => n.id === egoId);
+  if (!ego || ego.x == null) return;
+
+  snapshotHomePositionsIfNeeded();
+  clearFocusLinkLanes();
+
+  const { neighborIds, assoLinks } = focusDirectNeighborIds(egoId);
+  const neighbors = (allNodes || []).filter((n) => neighborIds.has(n.id));
+
+  const egoX = ego.homeX ?? ego.x;
+  const egoY = ego.homeY ?? ego.y;
+  neighbors.sort((a, b) => {
+    const aa = Math.atan2((a.homeY ?? a.y) - egoY, (a.homeX ?? a.x) - egoX);
+    const bb = Math.atan2((b.homeY ?? b.y) - egoY, (b.homeX ?? b.x) - egoX);
+    return aa - bb;
+  });
+  assignFocusAssoLanes(assoLinks, neighbors);
+
+  // Genealogy / chrono: preserve readable packing; only lane ASSO (never auto-zoom)
+  if (isLayeredLayout()) {
+    const hadFan = focusFanActive || (allNodes || []).some((n) => n.focusYOffset);
+    focusFanActive = false;
+    if (hadFan) {
+      (allNodes || []).forEach((node) => {
+        if (node.homeX != null) {
+          node.x = node.homeX;
+          node.targetX = node.homeTargetX ?? node.homeX;
+        }
+        node.focusYOffset = 0;
+        if (node.homeY != null) {
+          node.y = node.homeY;
+          node.fy = node.homeY;
+        }
+      });
+      redrawGraphGeometry();
+    }
+    return;
+  }
+
+  if (!neighbors.length) {
+    focusFanActive = false;
+    return;
+  }
+
+  const from = new Map(
+    (allNodes || []).map((node) => [
+      node.id,
+      {
+        x: node.x,
+        y: node.y,
+        yo: node.focusYOffset || 0,
+      },
+    ])
+  );
+
+  const n = neighbors.length;
+  // Radius grows with neighbor count + label sizes so pills stay separable
+  const avgHalf =
+    neighbors.reduce((s, node) => s + estimateNodeLabelHalfWidth(node), 0) /
+      Math.max(n, 1) || 60;
+  const radius = Math.max(
+    200,
+    Math.min(420, 110 + n * (avgHalf * 0.55 + 16))
+  );
+
+  const toX = new Map();
+  const toYo = new Map();
+
+  (allNodes || []).forEach((node) => {
+    if (!neighborIds.has(node.id) && node.id !== egoId) {
+      toX.set(node.id, node.homeX ?? node.x);
+      toYo.set(node.id, 0);
+    }
+  });
+  toX.set(egoId, egoX);
+  toYo.set(egoId, 0);
+  ego.targetX = egoX;
+
+  neighbors.forEach((node, i) => {
+    const angle = (2 * Math.PI * i) / n - Math.PI / 2;
+    const tx = egoX + Math.cos(angle) * radius;
+    const ty = egoY + Math.sin(angle) * radius;
+    toX.set(node.id, tx);
+    node.targetX = tx;
+    toYo.set(node.id, ty - (node.homeY ?? node.y));
+  });
+
+  focusFanActive = true;
+
+  const applyAt = (t) => {
+    (allNodes || []).forEach((node) => {
+      const f = from.get(node.id);
+      if (!f) return;
+      const destX = toX.has(node.id) ? toX.get(node.id) : f.x;
+      const destYo = toYo.has(node.id) ? toYo.get(node.id) : 0;
+      node.x = f.x + (destX - f.x) * t;
+      node.focusYOffset = f.yo + (destYo - f.yo) * t;
+      const homeY = node.homeY ?? f.y - f.yo;
+      node.y = homeY + node.focusYOffset;
+      node.targetX = destX;
+    });
+    redrawGraphGeometry();
+  };
+
+  if (!animate) {
+    applyAt(1);
+    return;
+  }
+
+  if (simulation) simulation.stop();
+  d3.transition("focus-fan")
+    .duration(420)
+    .ease(d3.easeCubicOut)
+    .tween("focus-fan", () => (t) => applyAt(t));
+}
+
+function restoreFocusNeighborSpread({ animate = true } = {}) {
+  if (!focusFanActive && !(allNodes || []).some((n) => n.focusYOffset)) {
+    clearFocusLinkLanes();
+    return;
+  }
+  clearFocusLinkLanes();
+  const from = new Map(
+    (allNodes || []).map((node) => [
+      node.id,
+      { x: node.x, y: node.y, yo: node.focusYOffset || 0 },
+    ])
+  );
+
+  const finish = () => {
+    (allNodes || []).forEach((node) => {
+      if (node.homeX != null) {
+        node.x = node.homeX;
+        node.targetX = node.homeTargetX ?? node.homeX;
+      }
+      node.focusYOffset = 0;
+      if (node.homeY != null) node.y = node.homeY;
+      if (isLayeredLayout() && node.homeY != null) node.fy = node.homeY;
+    });
+    focusFanActive = false;
+    redrawGraphGeometry();
+    if (simulation) simulation.alpha(0.12).restart();
+  };
+
+  if (!animate) {
+    finish();
+    return;
+  }
+
+  if (simulation) simulation.stop();
+  d3.transition("focus-fan")
+    .duration(380)
+    .ease(d3.easeCubicOut)
+    .tween("focus-fan-restore", () => (t) => {
+      (allNodes || []).forEach((node) => {
+        const f = from.get(node.id);
+        if (!f) return;
+        const toX = node.homeX ?? f.x;
+        const toY = node.homeY ?? f.y;
+        node.x = f.x + (toX - f.x) * t;
+        node.y = f.y + (toY - f.y) * t;
+        node.focusYOffset = f.yo * (1 - t);
+        node.targetX = toX;
+        if (isLayeredLayout()) node.fy = node.y;
+      });
+      redrawGraphGeometry();
+    })
+    .on("end", finish);
 }
 
 function getFilteredGraphData() {
@@ -1260,7 +1739,7 @@ function readFiltersFromDom() {
     document.querySelector('input[name="filterLinkKind"]:checked')?.value ||
     "all";
   graphFilters.linkKind =
-    linkKind === "blood" || linkKind === "other" ? linkKind : "all";
+    linkKind === "all" || linkKind === "other" ? linkKind : "blood";
 }
 
 function writeFiltersToDom() {
@@ -1309,9 +1788,9 @@ function loadGraphFilters() {
           : "all",
       bookEvidence: Boolean(parsed.bookEvidence),
       linkKind:
-        parsed.linkKind === "blood" || parsed.linkKind === "other"
+        parsed.linkKind === "all" || parsed.linkKind === "other"
           ? parsed.linkKind
-          : "all",
+          : "blood",
     };
   } catch (_) {
     /* ignore */
@@ -1398,6 +1877,7 @@ function rebuildCurrentGraph() {
       }) || null;
   }
   restorePersistentEmphasis();
+  syncFocusChip();
 }
 
 /**
@@ -1501,6 +1981,552 @@ function assignBandX(nodes, marginLeft, layoutWidth, bandKeyFn) {
       node.x = marginLeft + 40 + t * (layoutWidth - 80);
     });
   });
+}
+
+/**
+ * Connected components over blood edges (Parent/Spouse) so distinct
+ * family trees can be laid out side-by-side without interleaving.
+ */
+function familyTreeComponents(nodes, links) {
+  const ids = nodes.map((n) => n.id);
+  const parent = new Map(ids.map((id) => [id, id]));
+  const find = (a) => {
+    let cur = a;
+    while (parent.get(cur) !== cur) cur = parent.get(cur);
+    let walk = a;
+    while (walk !== cur) {
+      const next = parent.get(walk);
+      parent.set(walk, cur);
+      walk = next;
+    }
+    return cur;
+  };
+  const union = (a, b) => {
+    const ra = find(a);
+    const rb = find(b);
+    if (ra !== rb) parent.set(ra, rb);
+  };
+  const idSet = new Set(ids);
+  links.forEach((l) => {
+    if (l.type !== "family") return;
+    // Parent / Spouse / Sibling — keep blood siblings in the same tree component
+    // (e.g. Marigny brothers with a CHIL-only FAM and no parents on record).
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    if (!idSet.has(sid) || !idSet.has(tid)) return;
+    union(sid, tid);
+  });
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const groups = new Map();
+  ids.forEach((id) => {
+    const r = find(id);
+    if (!groups.has(r)) groups.set(r, []);
+    groups.get(r).push(byId.get(id));
+  });
+  return [...groups.values()];
+}
+
+/** Canvas text metrics matching label CSS (Manrope / 12px + 9.5px). */
+let _labelMeasureCtx = null;
+function getLabelMeasureCtx() {
+  if (_labelMeasureCtx) return _labelMeasureCtx;
+  const canvas = document.createElement("canvas");
+  _labelMeasureCtx = canvas.getContext("2d");
+  return _labelMeasureCtx;
+}
+
+/** Full label pill width (name + secondary line + padding). */
+function estimateNodeLabelWidth(node) {
+  const ctx = getLabelMeasureCtx();
+  if (!ctx) {
+    return Math.max(96, 28 + Math.min(String(node?.name || "").length, 32) * 7.2);
+  }
+  const name = String(node?.name || "?");
+  const secondary =
+    node?.birthYear != null
+      ? `${node.birthYearInferred ? "~" : ""}${Math.round(node.birthYear)}`
+      : "99 ans";
+  ctx.font = '650 12px Manrope, "Segoe UI", sans-serif';
+  const nameW = ctx.measureText(name).width;
+  ctx.font = '600 9.5px Manrope, "Segoe UI", sans-serif';
+  const secW = ctx.measureText(secondary).width;
+  // padX 5 each side in resizeNodeLabelBackground + small safety
+  return Math.ceil(Math.max(nameW, secW) + 18);
+}
+
+function estimateNodeLabelHalfWidth(node) {
+  return estimateNodeLabelWidth(node) / 2;
+}
+
+/** Air between adjacent label pills (layered layouts). */
+const LABEL_PILL_GAP = 18;
+/** Vertical band where two under-node labels can collide. */
+const LABEL_PILL_BAND_H = 48;
+
+/**
+ * Push nodes apart in X so under-node label pills never overlap
+ * when they share a similar vertical band. Prefers shifting right
+ * so left anchors stay stable.
+ */
+function resolveLabelPillOverlaps(nodes, getY) {
+  if (!nodes?.length) return;
+  const GAP = LABEL_PILL_GAP;
+  for (let iter = 0; iter < 10; iter++) {
+    const sorted = [...nodes].sort(
+      (a, b) => (a.targetX ?? a.x ?? 0) - (b.targetX ?? b.x ?? 0)
+    );
+    let moved = false;
+    for (let i = 0; i < sorted.length; i++) {
+      const a = sorted[i];
+      const ax = a.targetX ?? a.x ?? 0;
+      const ay = getY(a);
+      const ha = estimateNodeLabelHalfWidth(a);
+      for (let j = i + 1; j < sorted.length; j++) {
+        const b = sorted[j];
+        const bx = b.targetX ?? b.x ?? 0;
+        const minDist = ha + estimateNodeLabelHalfWidth(b) + GAP;
+        if (bx - ax > minDist + 240) break;
+        if (Math.abs(getY(b) - ay) > LABEL_PILL_BAND_H) continue;
+        if (bx - ax >= minDist) continue;
+        const push = minDist - (bx - ax);
+        for (let k = j; k < sorted.length; k++) {
+          const n = sorted[k];
+          n.targetX = (n.targetX ?? n.x ?? 0) + push;
+          n.x = n.targetX;
+        }
+        moved = true;
+        break;
+      }
+    }
+    if (!moved) break;
+  }
+}
+
+/**
+ * MyHeritage-style layered genealogy placement:
+ * family trees side-by-side, spouse units adjacent, children under parents.
+ * Width grows with label sizes — never squeeze pills into the viewport.
+ * Sets node.targetX (+ x). Returns content max X (right edge of labels).
+ */
+function layoutGenealogyPositions(nodes, links, marginLeft, _minLayoutWidth) {
+  const comps = familyTreeComponents(nodes, links);
+  const trees = comps.filter((c) => c.length > 1);
+  const isolates = comps.filter((c) => c.length === 1).map((c) => c[0]);
+  trees.sort((a, b) => {
+    const size = b.length - a.length;
+    if (size) return size;
+    const na = String(a[0]?.name || "");
+    const nb = String(b[0]?.name || "");
+    return na.localeCompare(nb, "fr");
+  });
+
+  const treeGap = 220;
+  let cursor = marginLeft + 36;
+
+  trees.forEach((comp) => {
+    layoutGenealogyComponent(comp, links, cursor);
+    const right = Math.max(
+      ...comp.map(
+        (n) => (n.targetX ?? n.x ?? cursor) + estimateNodeLabelHalfWidth(n)
+      ),
+      cursor
+    );
+    cursor = right + treeGap;
+  });
+
+  // Loners (no blood ties in the snapshot) — spaced by their own label width
+  if (isolates.length) {
+    isolates.sort((a, b) =>
+      String(a.name || "").localeCompare(String(b.name || ""), "fr")
+    );
+    let x = cursor + 40;
+    isolates.forEach((n) => {
+      const half = estimateNodeLabelHalfWidth(n);
+      n.targetX = x + half;
+      n.x = n.targetX;
+      x = n.targetX + half + LABEL_PILL_GAP + 8;
+    });
+  }
+
+  return nodes;
+}
+
+/**
+ * Lay out one blood-connected family tree starting at originX.
+ * Grows to the right as needed — no viewport width clamp.
+ */
+function layoutGenealogyComponent(nodes, links, originX) {
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const spouseOf = new Map();
+  const parentsOf = new Map(); // child -> [parent ids]
+  const childrenOf = new Map(); // parent -> [child ids]
+
+  const add = (map, key, val) => {
+    if (!map.has(key)) map.set(key, []);
+    const arr = map.get(key);
+    if (!arr.includes(val)) arr.push(val);
+  };
+
+  const siblingsOf = new Map();
+  links.forEach((l) => {
+    if (l.type !== "family") return;
+    const sid = typeof l.source === "object" ? l.source.id : l.source;
+    const tid = typeof l.target === "object" ? l.target.id : l.target;
+    if (!byId.has(sid) || !byId.has(tid)) return;
+    if (l.relation === "Spouse") {
+      spouseOf.set(sid, tid);
+      spouseOf.set(tid, sid);
+    } else if (l.relation === "Parent") {
+      add(parentsOf, tid, sid);
+      add(childrenOf, sid, tid);
+    } else if (l.relation === "Sibling") {
+      add(siblingsOf, sid, tid);
+      add(siblingsOf, tid, sid);
+    }
+  });
+
+  const gens = [
+    ...new Set(nodes.map((n) => n.generation ?? 0)),
+  ].sort((a, b) => a - b);
+
+  /** Build spouse-aware units per generation (pair or singleton). */
+  function unitsForGen(g) {
+    const members = nodes.filter((n) => (n.generation ?? 0) === g);
+    const seen = new Set();
+    const units = [];
+    const sorted = [...members].sort((a, b) => {
+      const ya = a.birthYear ?? 0;
+      const yb = b.birthYear ?? 0;
+      if (ya !== yb) return ya - yb;
+      return String(a.name || "").localeCompare(String(b.name || ""), "fr");
+    });
+    sorted.forEach((n) => {
+      if (seen.has(n.id)) return;
+      const spId = spouseOf.get(n.id);
+      const sp = spId ? byId.get(spId) : null;
+      if (sp && (sp.generation ?? 0) === g && !seen.has(sp.id)) {
+        // Husband / male left when sexes differ
+        const left =
+          n.sex === "M" && sp.sex !== "M"
+            ? n
+            : sp.sex === "M" && n.sex !== "M"
+              ? sp
+              : String(n.name || "").localeCompare(String(sp.name || ""), "fr") <=
+                  0
+                ? n
+                : sp;
+        const right = left === n ? sp : n;
+        units.push({ ids: [left.id, right.id], nodes: [left, right] });
+        seen.add(left.id);
+        seen.add(right.id);
+      } else {
+        units.push({ ids: [n.id], nodes: [n] });
+        seen.add(n.id);
+      }
+    });
+    // Keep sibling units contiguous (CHIL-only FAMs have no parent barycenter)
+    return clusterUnitsBySibling(units, siblingsOf);
+  }
+
+  /** Reorder generation units so sibling-linked units sit next to each other. */
+  function clusterUnitsBySibling(units, sibMap) {
+    if (units.length < 2) return units;
+    const unitOfId = new Map();
+    units.forEach((u, i) => u.ids.forEach((id) => unitOfId.set(id, i)));
+    const parentIdx = units.map((_, i) => i);
+    const findIdx = (i) => {
+      let cur = i;
+      while (parentIdx[cur] !== cur) cur = parentIdx[cur];
+      let walk = i;
+      while (walk !== cur) {
+        const next = parentIdx[walk];
+        parentIdx[walk] = cur;
+        walk = next;
+      }
+      return cur;
+    };
+    const unionIdx = (a, b) => {
+      const ra = findIdx(a);
+      const rb = findIdx(b);
+      if (ra !== rb) parentIdx[ra] = rb;
+    };
+    units.forEach((u, i) => {
+      u.ids.forEach((id) => {
+        (sibMap.get(id) || []).forEach((sid) => {
+          if (unitOfId.has(sid)) unionIdx(i, unitOfId.get(sid));
+        });
+      });
+    });
+    const clusters = new Map();
+    units.forEach((u, i) => {
+      const r = findIdx(i);
+      if (!clusters.has(r)) clusters.set(r, []);
+      clusters.get(r).push(u);
+    });
+    const ordered = [];
+    clusters.forEach((group) => {
+      group.sort((a, b) =>
+        String(a.nodes[0]?.name || "").localeCompare(
+          String(b.nodes[0]?.name || ""),
+          "fr"
+        )
+      );
+      ordered.push(...group);
+    });
+    return ordered;
+  }
+
+  const unitsByGen = new Map();
+  gens.forEach((g) => unitsByGen.set(g, unitsForGen(g)));
+
+  const indexOf = new Map(); // nodeId -> unit index in its gen
+  function reindex(g) {
+    const units = unitsByGen.get(g) || [];
+    units.forEach((u, i) => u.ids.forEach((id) => indexOf.set(id, i)));
+  }
+  gens.forEach(reindex);
+
+  function unitBarycenter(unit, neighborIds) {
+    const scores = [];
+    unit.ids.forEach((id) => {
+      (neighborIds(id) || []).forEach((nid) => {
+        if (indexOf.has(nid)) scores.push(indexOf.get(nid));
+      });
+    });
+    if (!scores.length) return null;
+    return scores.reduce((a, b) => a + b, 0) / scores.length;
+  }
+
+  const nameKey = (unit) => String(unit.nodes[0]?.name || "");
+
+  // Barycenter sweeps to untangle
+  for (let iter = 0; iter < 12; iter++) {
+    for (let gi = 1; gi < gens.length; gi++) {
+      const g = gens[gi];
+      const units = unitsByGen.get(g);
+      units.forEach((u) => {
+        u._score = unitBarycenter(u, (id) => parentsOf.get(id));
+      });
+      units.sort((a, b) => {
+        const sa = a._score;
+        const sb = b._score;
+        if (sa == null && sb == null) return 0;
+        if (sa == null) return 1;
+        if (sb == null) return -1;
+        return (
+          sa - sb ||
+          nameKey(a).localeCompare(nameKey(b), "fr")
+        );
+      });
+      reindex(g);
+    }
+    for (let gi = gens.length - 2; gi >= 0; gi--) {
+      const g = gens[gi];
+      const units = unitsByGen.get(g);
+      units.forEach((u) => {
+        u._score = unitBarycenter(u, (id) => childrenOf.get(id));
+      });
+      units.sort((a, b) => {
+        const sa = a._score;
+        const sb = b._score;
+        if (sa == null && sb == null) return 0;
+        if (sa == null) return 1;
+        if (sb == null) return -1;
+        return (
+          sa - sb ||
+          nameKey(a).localeCompare(nameKey(b), "fr")
+        );
+      });
+      reindex(g);
+    }
+  }
+
+  const unitGap = LABEL_PILL_GAP;
+
+  function measureUnit(unit) {
+    if (unit.nodes.length === 2) {
+      const h0 = estimateNodeLabelHalfWidth(unit.nodes[0]);
+      const h1 = estimateNodeLabelHalfWidth(unit.nodes[1]);
+      // Centers far enough that the two pills never touch
+      unit._spouseGap = Math.max(h0 + h1 + LABEL_PILL_GAP, 100);
+      // Footprint: left pill edge → right pill edge
+      unit._w = unit._spouseGap + h0 + h1;
+    } else {
+      const h = estimateNodeLabelHalfWidth(unit.nodes[0]);
+      unit._spouseGap = 0;
+      unit._w = h * 2;
+    }
+  }
+
+  function assignUnitCenters(unit) {
+    const cx = unit._cx;
+    if (unit.nodes.length === 2) {
+      unit.nodes[0].targetX = cx - unit._spouseGap / 2;
+      unit.nodes[1].targetX = cx + unit._spouseGap / 2;
+    } else {
+      unit.nodes[0].targetX = cx;
+    }
+    unit.nodes.forEach((n) => {
+      n.x = n.targetX;
+    });
+  }
+
+  /** Prefer the member with the largest sibship so in-laws don't yank the block. */
+  function primaryBloodChildId(unit, genMembers) {
+    let bestId = null;
+    let bestScore = -1;
+    unit.ids.forEach((id) => {
+      const parents = parentsOf.get(id) || [];
+      if (!parents.length) return;
+      const key = [...parents].sort().join("+");
+      let score = 0;
+      genMembers.forEach((n) => {
+        if (unit.ids.includes(n.id)) return;
+        const pp = parentsOf.get(n.id) || [];
+        if (pp.length && [...pp].sort().join("+") === key) score += 1;
+      });
+      score += parents.length * 0.1;
+      if (score > bestScore) {
+        bestScore = score;
+        bestId = id;
+      }
+    });
+    return bestId;
+  }
+
+  function parentCoupleKey(unit, genMembers) {
+    const primary = primaryBloodChildId(unit, genMembers);
+    const parentIds = primary
+      ? parentsOf.get(primary) || []
+      : [...new Set(unit.ids.flatMap((id) => parentsOf.get(id) || []))];
+    if (!parentIds.length) {
+      return `solo:${unit.ids.slice().sort().join("-")}`;
+    }
+    return [...parentIds].sort().join("+");
+  }
+
+  function parentAnchorX(unit, genMembers) {
+    const primary = primaryBloodChildId(unit, genMembers);
+    const ids = primary ? [primary] : unit.ids;
+    const refs = [];
+    ids.forEach((id) => {
+      (parentsOf.get(id) || []).forEach((p) => {
+        const pn = byId.get(p);
+        if (pn?.targetX != null) refs.push(pn.targetX);
+      });
+    });
+    if (!refs.length) return null;
+    return refs.reduce((a, b) => a + b, 0) / refs.length;
+  }
+
+  /**
+   * Pack a generation: keep each sibship (same parents) as one contiguous
+   * block centered under the parents. Never compress below label widths.
+   */
+  function placeRow(units, preferParentAnchor) {
+    units.forEach(measureUnit);
+    const genMembers = units.flatMap((u) => u.nodes);
+
+    const groupMap = new Map();
+    units.forEach((unit) => {
+      const key = parentCoupleKey(unit, genMembers);
+      if (!groupMap.has(key)) groupMap.set(key, []);
+      groupMap.get(key).push(unit);
+    });
+
+    const groups = [...groupMap.entries()].map(([key, members]) => {
+      members.sort(
+        (a, b) =>
+          (a.nodes[0].birthYear ?? 0) - (b.nodes[0].birthYear ?? 0) ||
+          nameKey(a).localeCompare(nameKey(b), "fr")
+      );
+      const anchors = members
+        .map((m) => parentAnchorX(m, genMembers))
+        .filter((x) => x != null);
+      const desired =
+        anchors.length > 0
+          ? anchors.reduce((a, b) => a + b, 0) / anchors.length
+          : null;
+      const width =
+        members.reduce((a, u) => a + u._w, 0) +
+        unitGap * Math.max(0, members.length - 1);
+      return { key, members, desired, width };
+    });
+
+    if (!preferParentAnchor || groups.every((g) => g.desired == null)) {
+      let cursor = originX + 24;
+      groups.forEach((group) => {
+        group.cx = cursor + group.width / 2;
+        cursor += group.width + unitGap;
+      });
+    } else {
+      groups.forEach((group) => {
+        group.cx =
+          group.desired != null ? group.desired : originX + group.width / 2;
+      });
+      groups.sort(
+        (a, b) =>
+          (a.desired ?? 0) - (b.desired ?? 0) ||
+          nameKey(a.members[0]).localeCompare(nameKey(b.members[0]), "fr")
+      );
+
+      // Push right only — never squeeze groups back together
+      for (let i = 1; i < groups.length; i++) {
+        const prev = groups[i - 1];
+        const minCx =
+          prev.cx + prev.width / 2 + unitGap + groups[i].width / 2;
+        if (groups[i].cx < minCx) groups[i].cx = minCx;
+      }
+
+      // Keep the row starting near the tree origin (shift as a block if needed)
+      if (groups.length) {
+        const left = groups[0].cx - groups[0].width / 2;
+        if (left < originX + 12) {
+          const shift = originX + 12 - left;
+          groups.forEach((g) => (g.cx += shift));
+        }
+      }
+    }
+
+    // Expand each group’s members left→right around group.cx
+    groups.forEach((group) => {
+      let x0 = group.cx - group.width / 2;
+      group.members.forEach((unit) => {
+        unit._cx = x0 + unit._w / 2;
+        x0 += unit._w + unitGap;
+        assignUnitCenters(unit);
+      });
+    });
+
+    // Rewrite unitsByGen order for this gen (left → right)
+    const ordered = [];
+    groups
+      .slice()
+      .sort((a, b) => a.cx - b.cx)
+      .forEach((g) => ordered.push(...g.members));
+    return ordered;
+  }
+
+  gens.forEach((g, gi) => {
+    const ordered = placeRow(unitsByGen.get(g) || [], gi > 0);
+    unitsByGen.set(g, ordered);
+    reindex(g);
+  });
+
+  // Light parent-centering pass without breaking sibship blocks
+  for (let iter = 0; iter < 2; iter++) {
+    gens.forEach((g, gi) => {
+      if (gi === 0) return;
+      const ordered = placeRow(unitsByGen.get(g) || [], true);
+      unitsByGen.set(g, ordered);
+      reindex(g);
+    });
+  }
+
+  // Separate pills on the same generation row inside this tree
+  resolveLabelPillOverlaps(nodes, (n) => (n.generation ?? 0) * 1000);
+
+  return nodes;
 }
 
 /** Spread nodes across layout width by birth-year cohorts (chrono). */
@@ -1772,15 +2798,26 @@ function parseGedcom(data) {
       } else if (currentFamily && level === "1") {
         if (!currentFamily.notes) currentFamily.notes = [];
         if (!currentFamily.citations) currentFamily.citations = [];
+        if (!currentFamily.childMeta) currentFamily.childMeta = {};
         switch (tag) {
           case "HUSB":
             currentFamily.husband = value;
+            currentContext = "family";
+            currentField = null;
             break;
           case "WIFE":
             currentFamily.wife = value;
+            currentContext = "family";
+            currentField = null;
             break;
           case "CHIL":
             currentFamily.children.push(value);
+            if (!currentFamily.childMeta[value]) {
+              currentFamily.childMeta[value] = { notes: [], citations: [] };
+            }
+            currentContext = "family-child";
+            currentFamily._currentChild = value;
+            currentField = null;
             break;
           case "NOTE":
             currentFamily.notes.push(value);
@@ -1792,6 +2829,22 @@ function parseGedcom(data) {
             currentContext = "family-quote";
             currentField = currentFamily.citations;
             break;
+        }
+      } else if (currentFamily && level === "2" && currentContext === "family-child") {
+        const childId = currentFamily._currentChild;
+        const meta = childId ? currentFamily.childMeta?.[childId] : null;
+        if (meta) {
+          if (tag === "NOTE") {
+            meta.notes.push(value);
+            currentField = meta.notes;
+          } else if (tag === "QUOT") {
+            meta.citations.push(value);
+            currentField = meta.citations;
+          } else if (tag === "CONC" && currentField?.length) {
+            currentField[currentField.length - 1] += value;
+          } else if (tag === "CONT" && currentField?.length) {
+            currentField[currentField.length - 1] += " " + value;
+          }
         }
       } else if (
         currentFamily &&
@@ -1875,10 +2928,14 @@ function parseGedcom(data) {
   });
 
   // Familles
+  // FAM-level QUOT proves the couple / household in the text → Spouse only.
+  // Per-child 2 QUOT/NOTE under 1 CHIL → Parent links for that child only.
+  // Sibling edges stay clean (no recycled marriage quotes).
   Object.values(families).forEach((fam) => {
     const { husband, wife, children } = fam;
     const famNotes = fam.notes || [];
     const famCitations = fam.citations || [];
+    const childMeta = fam.childMeta || {};
 
     // Couple
     if (husband && wife) {
@@ -1894,14 +2951,17 @@ function parseGedcom(data) {
 
     // Parents → Enfants
     children.forEach((child) => {
+      const meta = childMeta[child] || {};
+      const childNotes = meta.notes || [];
+      const childCitations = meta.citations || [];
       if (husband) {
         links.push({
           source: husband,
           target: child,
           relation: "Parent",
           type: "family",
-          notes: famNotes,
-          citations: famCitations,
+          notes: childNotes,
+          citations: childCitations,
         });
       }
       if (wife) {
@@ -1910,8 +2970,8 @@ function parseGedcom(data) {
           target: child,
           relation: "Parent",
           type: "family",
-          notes: famNotes,
-          citations: famCitations,
+          notes: childNotes,
+          citations: childCitations,
         });
       }
     });
@@ -1924,8 +2984,8 @@ function parseGedcom(data) {
           target: children[j],
           relation: "Sibling",
           type: "family",
-          notes: famNotes,
-          citations: famCitations,
+          notes: [],
+          citations: [],
         });
       }
     }
@@ -1980,7 +3040,8 @@ function createGraph(data) {
   allNodes = data.nodes;
   allLinks = data.links;
   inferBirthYears(data.nodes, data.links);
-  if (layoutMode === "genealogy") {
+  // Generations drive horizontal family packing in both layered modes
+  if (isLayeredLayout(layoutMode)) {
     assignGenerations(data.nodes, data.links);
   }
 
@@ -1993,29 +3054,44 @@ function createGraph(data) {
   const maxGen = gens.length ? Math.max(...gens) : 0;
 
   const spread = getHorizontalSpread();
+  const genCount = Math.max(1, maxGen - minGen + 1);
   const margin = {
-    top: 56,
+    top: 72,
     right: 120,
-    bottom: 56,
-    left: isLayeredLayout(layoutMode) ? 72 : 40,
+    // Room for labels under nodes + narrative/legend chrome
+    bottom: isLayeredLayout(layoutMode) ? 160 : 56,
+    left: isLayeredLayout(layoutMode) ? 78 : 40,
   };
-  const innerH = Math.max(height - margin.top - margin.bottom, 200);
+  const innerH = Math.max(height - margin.top - margin.bottom, 220);
+  // Comfortable vertical rhythm between generation bands (MyHeritage-like)
+  const genBandH =
+    layoutMode === "genealogy"
+      ? Math.max(innerH / Math.max(genCount - 1, 1), 188)
+      : null;
+  const genealogyInnerH =
+    layoutMode === "genealogy"
+      ? Math.max(innerH, genBandH * Math.max(genCount - 1, 1))
+      : innerH;
+  // Chrono: stretch the year axis a bit so birth bands breathe
+  const chronoInnerH =
+    layoutMode === "chrono" ? Math.max(innerH, 520) : innerH;
 
   const layeredY = (d) => {
     if (layoutMode === "genealogy") {
-      if (maxGen === minGen) return margin.top + innerH / 2;
+      if (maxGen === minGen) return margin.top + genealogyInnerH / 2;
       const t = ((d.generation ?? 0) - minGen) / (maxGen - minGen);
-      return margin.top + t * innerH;
+      return margin.top + t * genealogyInnerH;
     }
     const t = (d.birthYear - minYear) / yearSpan;
-    return margin.top + t * innerH;
+    return margin.top + t * chronoInnerH;
   };
-  // Virtual canvas wider than the viewport — pan horizontally to explore
-  const layoutWidth = Math.max(
-    (width - margin.left - margin.right) * spread,
-    320
+  // Virtual canvas — layered layouts grow with label sizes (pan/zoom to explore)
+  let layoutWidth = Math.max(
+    (width - margin.left - margin.right) *
+      (isLayeredLayout(layoutMode) ? Math.max(spread, 2.4) : spread),
+    isLayeredLayout(layoutMode) ? 1100 : 320
   );
-  const worldCenterX = margin.left + layoutWidth / 2;
+  let worldCenterX = margin.left + layoutWidth / 2;
 
   // Initial positions
   const sorted =
@@ -2032,19 +3108,24 @@ function createGraph(data) {
     } else {
       n.fy = null;
       n.fx = null;
+      n.targetX = null;
       n.x = worldCenterX + (Math.random() - 0.5) * layoutWidth * 0.55;
       n.y = height / 2 + (Math.random() - 0.5) * height * 0.45;
     }
   });
-  if (layoutMode === "chrono") {
-    assignCohortX(sorted, margin.left, layoutWidth);
-  } else if (layoutMode === "genealogy") {
-    assignBandX(
-      sorted,
-      margin.left,
-      layoutWidth,
-      (n) => n.generation ?? 0
+  if (isLayeredLayout(layoutMode)) {
+    // Same untangled family packing for genealogy + chrono (Y differs)
+    layoutGenealogyPositions(sorted, data.links, margin.left, layoutWidth);
+    // Separate pills that share a vertical band (critical for chrono)
+    resolveLabelPillOverlaps(sorted, layeredY);
+    const contentRight = Math.max(
+      ...sorted.map(
+        (n) => (n.targetX ?? n.x ?? margin.left) + estimateNodeLabelHalfWidth(n)
+      ),
+      margin.left + 400
     );
+    layoutWidth = Math.max(layoutWidth, contentRight - margin.left + 100);
+    worldCenterX = margin.left + layoutWidth / 2;
   }
 
   const zoomRoot = svg.append("g").attr("class", "zoom-root");
@@ -2068,6 +3149,13 @@ function createGraph(data) {
   const zoom = d3
     .zoom()
     .scaleExtent([0.15, 4])
+    .filter((event) => {
+      // Accidental double-tap zoom is jarring on phones
+      if (event.type === "dblclick") return false;
+      // Multi-touch pinch always allowed
+      if (event.touches && event.touches.length >= 2) return true;
+      return (!event.ctrlKey || event.type === "wheel") && !event.button;
+    })
     .on("start", () => {
       zoomPanMoved = false;
     })
@@ -2078,6 +3166,7 @@ function createGraph(data) {
         src &&
         (src.type === "mousemove" ||
           src.type === "touchmove" ||
+          src.type === "pointermove" ||
           src.type === "wheel")
       ) {
         zoomPanMoved = true;
@@ -2089,7 +3178,10 @@ function createGraph(data) {
         zoomPanMoved = false;
       }, 50);
     });
-  svg.call(zoom);
+  svg.call(zoom)
+    .on("dblclick.zoom", null);
+  graphZoom = zoom;
+  graphSvg = svg;
   svg.on("click.clearFocus", (event) => {
     if (event.defaultPrevented || zoomPanMoved) return;
     // Node / link handlers stopPropagation; anything else is empty canvas
@@ -2104,8 +3196,8 @@ function createGraph(data) {
       for (let g = minGen; g <= maxGen; g++) {
         const y =
           tickCount === 0
-            ? margin.top + innerH / 2
-            : margin.top + ((g - minGen) / tickCount) * innerH;
+            ? margin.top + genealogyInnerH / 2
+            : margin.top + ((g - minGen) / tickCount) * genealogyInnerH;
         axis
           .append("line")
           .attr("class", "timeline-guide")
@@ -2140,7 +3232,7 @@ function createGraph(data) {
       const tickCount = Math.min(8, Math.round(yearSpan / 10) + 1);
       for (let i = 0; i <= tickCount; i++) {
         const year = Math.round(minYear + (yearSpan * i) / tickCount);
-        const y = margin.top + (innerH * i) / tickCount;
+        const y = margin.top + (chronoInnerH * i) / tickCount;
         axis
           .append("line")
           .attr("class", "timeline-guide")
@@ -2171,51 +3263,84 @@ function createGraph(data) {
   }
 
   const familyLinks = data.links.filter((l) => l.type === "family");
-  const assocLinks = data.links.filter((l) => l.type !== "family");
+  // Keep ASSO + siblings in the DOM (visibility via isLinkInDepth / focus)
+  const drawableLinks = data.links.filter((l) => {
+    if (graphFilters.linkKind === "other") return l.type !== "family";
+    return true;
+  });
+
+  const nodeById = new Map(data.nodes.map((n) => [n.id, n]));
+  // co-parent lookup for MyHeritage parent elbows: parentId|childId → co-parent id
+  const coParentId = new Map();
+  if (isLayeredLayout(layoutMode)) {
+    const parentsByChild = new Map();
+    familyLinks.forEach((l) => {
+      if (l.relation !== "Parent") return;
+      const sid = typeof l.source === "object" ? l.source.id : l.source;
+      const tid = typeof l.target === "object" ? l.target.id : l.target;
+      if (!parentsByChild.has(tid)) parentsByChild.set(tid, []);
+      const arr = parentsByChild.get(tid);
+      if (!arr.includes(sid)) arr.push(sid);
+    });
+    parentsByChild.forEach((parents, childId) => {
+      if (parents.length < 2) return;
+      parents.forEach((p) => {
+        const other = parents.find((x) => x !== p);
+        if (other) coParentId.set(`${p}|${childId}`, other);
+      });
+    });
+  }
 
   if (isLayeredLayout(layoutMode)) {
+    // Deterministic family packing + light polish (ASSO never pull the tree)
     simulation = d3
       .forceSimulation(data.nodes)
       .force(
-        "linkFamily",
+        "linkSpouse",
         d3
-          .forceLink(familyLinks)
+          .forceLink(familyLinks.filter((l) => l.relation === "Spouse"))
           .id((d) => d.id)
-          .distance((d) =>
-            d.relation === "Spouse" ? 90 * spread : 130 * Math.sqrt(spread)
-          )
-          .strength((d) => (d.relation === "Spouse" ? 0.55 : 0.22))
+          .distance((d) => {
+            const s = typeof d.source === "object" ? d.source : null;
+            const t = typeof d.target === "object" ? d.target : null;
+            if (s && t) {
+              return (
+                estimateNodeLabelHalfWidth(s) +
+                estimateNodeLabelHalfWidth(t) +
+                LABEL_PILL_GAP
+              );
+            }
+            return 120;
+          })
+          .strength(0.25)
       )
-      .force(
-        "linkAssoc",
-        d3
-          .forceLink(assocLinks)
-          .id((d) => d.id)
-          .distance(200 * Math.sqrt(spread))
-          .strength(0.03)
-      )
-      .force("charge", d3.forceManyBody().strength(-520 * spread))
       .force(
         "collide",
         d3
           .forceCollide()
-          .radius(
-            (d) =>
-              22 +
-              Math.min(String(d.name || "").length, 22) * (1.35 + spread * 0.35)
-          )
-          .strength(0.95)
+          .radius((d) => estimateNodeLabelHalfWidth(d) + LABEL_PILL_GAP / 2)
+          .strength(0.85)
       )
-      .force("y", d3.forceY(layeredY).strength(0.95))
-      // Very light centering so nodes can occupy the full layout width
-      .force("x", d3.forceX(worldCenterX).strength(0.012 / spread));
+      .force("y", d3.forceY(layeredY).strength(1))
+      .force(
+        "x",
+        d3
+          .forceX((d) => d.targetX ?? worldCenterX)
+          .strength(0.92)
+      )
+      .alphaDecay(0.12)
+      .alphaMin(0.001);
   } else {
+    const forceLinks =
+      graphFilters.linkKind === "all" || graphFilters.linkKind === "other"
+        ? data.links
+        : familyLinks;
     simulation = d3
       .forceSimulation(data.nodes)
       .force(
         "link",
         d3
-          .forceLink(data.links)
+          .forceLink(forceLinks)
           .id((d) => d.id)
           .distance(160 * Math.sqrt(spread))
           .strength(0.28)
@@ -2234,51 +3359,102 @@ function createGraph(data) {
       .force("center", d3.forceCenter(worldCenterX, height / 2).strength(0.35));
   }
 
+  const linkEndNode = (end) =>
+    typeof end === "object" && end ? end : nodeById.get(end);
+
   const linkPath = (d) => {
-    const sx = d.source.x;
-    const sy = d.source.y;
-    const tx = d.target.x;
-    const ty = d.target.y;
+    const src = linkEndNode(d.source);
+    const tgt = linkEndNode(d.target);
+    if (!src || !tgt || src.x == null || tgt.x == null) return "";
+    const sx = src.x;
+    const sy = src.y;
+    const tx = tgt.x;
+    const ty = tgt.y;
     if (!isLayeredLayout(layoutMode)) {
       return `M${sx},${sy}L${tx},${ty}`;
     }
-    // Smooth vertical-ish curves to reduce crossings visually
+    // Layered: orthogonal pedigree routing (couple bar → drop → sibship bar → child)
+    if (d.type === "family") {
+      if (d.relation === "Spouse") {
+        const y = (sy + ty) / 2;
+        return `M${sx},${y}L${tx},${y}`;
+      }
+      if (d.relation === "Parent") {
+        const pid = src.id;
+        const cid = tgt.id;
+        const coId = coParentId.get(`${pid}|${cid}`);
+        const co = coId ? nodeById.get(coId) : null;
+        const coupleMidX = co && co.x != null ? (sx + co.x) / 2 : sx;
+        const barY = sy + (ty - sy) * 0.55;
+        return `M${sx},${sy}L${coupleMidX},${sy}L${coupleMidX},${barY}L${tx},${barY}L${tx},${ty}`;
+      }
+      const midY = Math.min(sy, ty) - 18;
+      return `M${sx},${sy}C${sx},${midY} ${tx},${midY} ${tx},${ty}`;
+    }
+    // ASSO: fan lanes when focused so stacked chords stay separable / clickable
+    const laneCount = d._focusLaneCount || 0;
+    const lane = d._focusLane ?? 0;
+    if (laneCount > 1) {
+      const t = lane / (laneCount - 1); // 0…1
+      const side = lane % 2 === 0 ? -1 : 1;
+      const rank = Math.floor(lane / 2);
+      const bulge = side * (55 + rank * 38);
+      // Stagger the apex along the chord so long parallel arcs don't overlap
+      const along = 0.22 + t * 0.56;
+      const cx = sx + (tx - sx) * along;
+      const cy = sy + (ty - sy) * along + bulge;
+      return `M${sx},${sy}Q${cx},${cy} ${tx},${ty}`;
+    }
     const midY = (sy + ty) / 2;
-    const bend = (sx + tx) / 2 + (sx < tx ? -18 : 18);
+    const bow = Math.max(40, Math.min(90, Math.abs(ty - sy) * 0.28));
+    const bend = (sx + tx) / 2 - Math.sign(tx - sx || 1) * bow;
     return `M${sx},${sy}C${sx},${midY} ${bend},${midY} ${tx},${ty}`;
   };
 
+  // Paint order: links (back) → circles → labels (front).
+  // Names stay readable over red/grey curves on desktop and mobile.
   const linksLayer = container.append("g").attr("class", "links");
+  const nodesLayer = container.append("g").attr("class", "nodes");
+  const labelsLayer = container.append("g").attr("class", "node-labels");
 
-  // Wide invisible hit targets (esp. for thin dashed association lines)
+  // Wide invisible hit targets (esp. for thin dashed association lines / fat fingers)
+  const coarseHits = isCoarsePointer();
   const linkHit = linksLayer
     .selectAll("path.link-hit")
-    .data(data.links)
+    .data(drawableLinks)
     .enter()
     .append("path")
     .attr("class", (d) => `link-hit link-hit-${d.type || "association"}`)
     .attr("fill", "none")
     .attr("stroke", "transparent")
-    .attr("stroke-width", (d) => (d.type === "family" ? 12 : 18))
+    .attr("stroke-width", (d) => {
+      if (d.type === "family") return coarseHits ? 22 : 14;
+      return coarseHits ? 28 : 18;
+    })
     .attr("stroke-linecap", "round")
-    .style("cursor", "pointer");
+    .classed("is-depth-hidden", (d) => !isLinkInDepth(d))
+    .style("cursor", "pointer")
+    .style("pointer-events", (d) => (isLinkInDepth(d) ? "stroke" : "none"));
 
   const link = linksLayer
     .selectAll("path.link")
-    .data(data.links)
+    .data(drawableLinks)
     .enter()
     .append("path")
     .attr("class", (d) => `link link-${d.type || "association"}`)
     .attr("fill", "none")
-    .attr("stroke", (d) => (d.type === "family" ? "#b42318" : "#5c6b7a"))
-    .attr("stroke-width", (d) => (d.type === "family" ? 2.2 : 1.6))
-    .attr("stroke-opacity", (d) => (d.type === "family" ? 0.85 : 0.42))
-    .attr("stroke-dasharray", (d) => (d.type === "family" ? null : "5 4"))
-    .style("pointer-events", "none");
+    .attr("stroke", (d) => (d.type === "family" ? "#b4534a" : "#8a96a3"))
+    .attr("stroke-width", (d) =>
+      d.type === "family" ? (d.relation === "Spouse" ? 2.15 : 1.55) : 1.25
+    )
+    .attr("stroke-opacity", (d) => (d.type === "family" ? 0.82 : 0.45))
+    .attr("stroke-dasharray", (d) => (d.type === "family" ? null : "4 5"))
+    .attr("stroke-linecap", "round")
+    .attr("stroke-linejoin", "round")
+    .style("pointer-events", "none")
+    .style("opacity", (d) => (isLinkInDepth(d) ? 1 : 0));
 
-  const node = container
-    .append("g")
-    .attr("class", "nodes")
+  const node = nodesLayer
     .selectAll("g")
     .data(data.nodes)
     .enter()
@@ -2286,42 +3462,52 @@ function createGraph(data) {
     .attr("class", "node")
     .call(drag(simulation));
 
-  node
-    .append("circle")
-    .attr("r", 9)
-    .attr("fill", (d) => (d.sex === "M" ? "#2563eb" : "#db2777"))
-    .attr("stroke", "#fff")
-    .attr("stroke-width", 2);
+  const labelRoot = labelsLayer
+    .selectAll("g.node-label-root")
+    .data(data.nodes)
+    .enter()
+    .append("g")
+    .attr("class", "node-label-root");
 
-  const labelGroup = node.append("g").attr("class", "node-label-group");
+  const labelGroup = labelRoot.append("g").attr("class", "node-label-group");
+  const labelBelow = isLayeredLayout(layoutMode);
 
   labelGroup
     .append("rect")
     .attr("class", "node-label-bg")
-    .attr("rx", 5)
-    .attr("ry", 5);
+    .attr("rx", labelBelow ? 6 : 5)
+    .attr("ry", labelBelow ? 6 : 5);
 
   labelGroup
     .append("text")
     .attr("class", "node-label")
-    .attr("x", 14)
-    .attr("y", 4)
+    .attr("text-anchor", labelBelow ? "middle" : "start")
+    .attr("x", labelBelow ? 0 : 14)
+    .attr("y", labelBelow ? 26 : 4)
     .text((d) => d.name);
 
   labelGroup
     .append("text")
     .attr("class", "node-year")
-    .attr("x", 14)
-    .attr("y", 18)
+    .attr("text-anchor", labelBelow ? "middle" : "start")
+    .attr("x", labelBelow ? 0 : 14)
+    .attr("y", labelBelow ? 40 : 18)
     .text((d) => nodeSecondaryLabel(d));
 
   resizeNodeLabelBackground(labelGroup);
-  if (currentNarrativeTime) {
-    node.classed("is-dead-at-time", (d) => {
-      const info = ageAtNarrative(d, currentNarrativeTime);
-      return info?.kind === "dead";
-    });
-  }
+
+  // Invisible fat hit target under the visible circle (≈44px on phone)
+  node
+    .append("circle")
+    .attr("class", "node-hit")
+    .attr("r", coarseHits ? 22 : 16);
+
+  node
+    .append("circle")
+    .attr("r", isLayeredLayout(layoutMode) ? 11 : 9)
+    .attr("fill", (d) => (d.sex === "M" ? "#2563eb" : "#db2777"))
+    .attr("stroke", "#fff")
+    .attr("stroke-width", isLayeredLayout(layoutMode) ? 2.4 : 2);
 
   node
     .append("text")
@@ -2329,6 +3515,15 @@ function createGraph(data) {
     .attr("y", 4)
     .attr("class", "cross")
     .text((d) => (d.death && d.death.status ? "✝" : ""));
+
+  if (currentNarrativeTime) {
+    const markDead = (d) => {
+      const info = ageAtNarrative(d, currentNarrativeTime);
+      return info?.kind === "dead";
+    };
+    node.classed("is-dead-at-time", markDead);
+    labelRoot.classed("is-dead-at-time", markDead);
+  }
 
   const tooltip = d3
     .select("body")
@@ -2341,98 +3536,232 @@ function createGraph(data) {
     .style("display", "none");
 
   node
-    .on("mouseenter", (event, d) => {
-      // Locked selection: ignore greyed-out nodes entirely
-      if (!isPinnedNode(d.id)) return;
-      cancelHoverRestore();
-
-      // After a node click: hovering another node highlights the pair
-      // (and their link, with the same tooltip as hovering that link).
+    .on("mouseenter.hover", (event, d) => {
+      applyNodeHoverPreview(d, tooltip, event);
+    })
+    .on("mousemove.hover", (event, d) => {
       if (
-        lastFocusedNode &&
-        d.id !== lastFocusedNode.id &&
-        !lastFocusedLink
+        !isPinnedNode(d.id) &&
+        !(lastFocusedNode && d.id !== lastFocusedNode.id)
       ) {
-        applyPinnedNodePairHover(lastFocusedNode.id, d, tooltip, event);
+        return;
+      }
+      placeTooltipAtPointer(tooltip, event);
+    })
+    .on("mouseleave.hover", () => {
+      endFocusedPairHover(tooltip);
+    });
+
+  // Pointer left the neighbor onto link-hit / backdrop / chrome — mouseleave on
+  // the node alone is unreliable because fat link-hits sit under the cursor path.
+  svg.on("mousemove.pairGuard", (event) => {
+    guardFocusedPairHover(tooltip, event);
+  });
+  svg.on("mouseleave.hoverClear", () => {
+    endFocusedPairHover(tooltip);
+  });
+  // Backdrop is under nodes/links; moving onto empty graph must clear the flyout
+  d3.select(zoomRoot.node())
+    .select(".graph-backdrop")
+    .on("mousemove.pairGuard", (event) => {
+      guardFocusedPairHover(tooltip, event);
+    })
+    .on("mouseenter.pairGuard", (event) => {
+      guardFocusedPairHover(tooltip, event);
+    });
+
+  // Touch: short tap = focus; one-finger hold = mouse hover preview; move = pan/zoom
+  const LONG_PRESS_MS = 420;
+  const TOUCH_MOVE_PX = 14;
+  let touchTimer = null;
+  let touchStart = null;
+  let touchLongPressed = false;
+  let touchMoved = false;
+  let touchSuppressClick = false;
+
+  const clearTouchTimer = () => {
+    if (touchTimer) clearTimeout(touchTimer);
+    touchTimer = null;
+  };
+
+  node
+    .on("touchstart.interact", (event, d) => {
+      if (event.touches && event.touches.length > 1) {
+        if (touchLongPressed) clearHoverPreview(tooltip);
+        clearTouchTimer();
+        touchStart = null;
+        touchLongPressed = false;
+        touchMoved = false;
+        return;
+      }
+      const t = event.touches[0];
+      touchStart = { x: t.clientX, y: t.clientY, id: d.id, pageX: t.pageX, pageY: t.pageY };
+      touchLongPressed = false;
+      touchMoved = false;
+      touchSuppressClick = false;
+      clearTouchTimer();
+      touchTimer = setTimeout(() => {
+        if (!touchStart || touchStart.id !== d.id) return;
+        touchLongPressed = true;
+        touchSuppressClick = true;
+        applyNodeHoverPreview(d, tooltip, {
+          pageX: touchStart.pageX,
+          pageY: touchStart.pageY,
+          clientX: touchStart.x,
+          clientY: touchStart.y,
+          touches: event.touches,
+          type: "touchstart",
+        });
+      }, LONG_PRESS_MS);
+    })
+    .on("touchmove.interact", (event) => {
+      if (!touchStart) return;
+      if (event.touches && event.touches.length > 1) {
+        if (touchLongPressed) clearHoverPreview(tooltip);
+        clearTouchTimer();
+        touchStart = null;
+        touchLongPressed = false;
+        touchMoved = true;
+        return;
+      }
+      const t = event.touches[0];
+      if (
+        Math.hypot(t.clientX - touchStart.x, t.clientY - touchStart.y) >
+        TOUCH_MOVE_PX
+      ) {
+        touchMoved = true;
+        clearTouchTimer();
+        if (touchLongPressed) {
+          clearHoverPreview(tooltip);
+          touchLongPressed = false;
+        }
+        touchStart = null;
+      }
+    })
+    .on("touchend.interact", (event, d) => {
+      clearTouchTimer();
+      const wasLong = touchLongPressed;
+      const wasTap = Boolean(touchStart) && !touchMoved && !wasLong;
+      touchStart = null;
+      touchLongPressed = false;
+      touchMoved = false;
+
+      if (wasLong) {
+        // Hold = hover while pressed; release clears like mouseleave
+        event.preventDefault();
+        clearHoverPreview(tooltip);
+        touchSuppressClick = true;
+        setTimeout(() => {
+          touchSuppressClick = false;
+        }, 400);
         return;
       }
 
-      activeHover = { kind: "node", id: d.id };
-      showPersonHoverTooltip(d, tooltip, event);
-      if (isSelectionPinned()) return;
-      emphasizeNeighborhood(d.id, {
-        raiseId: null,
-        duration: 100,
-        raise: false,
-      });
-    })
-    .on("mousemove", (event, d) => {
-      if (!isPinnedNode(d.id)) return;
-      tooltip
-        .style("top", event.pageY + 10 + "px")
-        .style("left", event.pageX + 10 + "px");
-    })
-    .on("mouseleave", (event, d) => {
-      if (!isPinnedNode(d.id) && isSelectionPinned()) return;
-      if (
-        activeHover?.kind === "node" ||
-        activeHover?.kind === "pair" ||
-        activeHover?.kind === "link"
-      ) {
-        activeHover = null;
+      if (wasTap && !nodeDragMoved) {
+        if (isSelectionPinned() && !isPinnedNode(d.id)) {
+          event.preventDefault();
+          return;
+        }
+        // Prevent iOS ghost click; handle tap directly
+        event.preventDefault();
+        event.stopPropagation();
+        touchSuppressClick = true;
+        setTimeout(() => {
+          touchSuppressClick = false;
+        }, 400);
+        cancelHoverRestore();
+        focusNode(d);
       }
-      tooltip.style("display", "none");
-      scheduleHoverRestore();
+    })
+    .on("touchcancel.interact", () => {
+      clearTouchTimer();
+      if (touchLongPressed) clearHoverPreview(tooltip);
+      touchStart = null;
+      touchLongPressed = false;
+      touchMoved = false;
     });
 
-  // Leaving the canvas entirely must always clear hover emphasis
-  svg.on("mouseleave.hoverClear", () => {
-    activeHover = null;
-    tooltip.style("display", "none");
-    scheduleHoverRestore();
-  });
-
-  let pressTimer;
-  const longPressDuration = 500;
-
   node.on("click", (event, d) => {
-    // d3-drag marks defaultPrevented when a real drag happened
-    if (event.defaultPrevented || nodeDragMoved) return;
-    // While pinned, only the focused neighborhood stays clickable
-    if (isSelectionPinned() && !isPinnedNode(d.id)) {
+    if (touchSuppressClick) {
+      event.preventDefault();
       event.stopPropagation();
       return;
     }
-    cancelHoverRestore();
+    // d3-drag marks defaultPrevented when a real drag happened
+    if (event.defaultPrevented || nodeDragMoved) return;
+    // Second click of a double-click — let dblclick.nucleus handle it
+    if (event.detail > 1) {
+      event.stopPropagation();
+      return;
+    }
     event.stopPropagation();
-    focusNode(d);
+
+    const runFocus = () => {
+      nodeClickTimer = null;
+      cancelHoverRestore();
+      focusNode(d);
+    };
+
+    // Already on this node: defer so a quick second click can become nucleus
+    // without focusNode() resetting focusScope to "depth" first.
+    if (lastFocusedNode?.id === d.id) {
+      clearTimeout(nodeClickTimer);
+      nodeClickTimer = setTimeout(runFocus, NODE_CLICK_DELAY_MS);
+      return;
+    }
+
+    clearTimeout(nodeClickTimer);
+    nodeClickTimer = null;
+    runFocus();
   });
 
-  node
-    .on("mousedown", (event, d) => {
-      if (isSelectionPinned() && !isPinnedNode(d.id)) return;
-      pressTimer = setTimeout(() => {
-        cancelHoverRestore();
-        focusNode(d);
-      }, longPressDuration);
-    })
-    .on("mouseup", () => clearTimeout(pressTimer))
-    .on("mouseleave", () => clearTimeout(pressTimer));
+  // Double-click → family nucleus (parents / children / siblings) on the graph
+  node.on("dblclick.nucleus", (event, d) => {
+    event.preventDefault();
+    event.stopPropagation();
+    clearTimeout(nodeClickTimer);
+    nodeClickTimer = null;
+    if (nodeDragMoved) return;
+    cancelHoverRestore();
+    activeHover = null;
+    d3.selectAll("body > .tooltip, .tooltip").style("display", "none");
+    // Same toggle as the sheet button: 2nd double-click returns to neighborhood
+    if (focusScope === "nucleus" && lastFocusedNode?.id === d.id) {
+      focusScope = "depth";
+      nucleusKind = "all";
+      lastFocusedNode =
+        allNodes.find((n) => n.id === d.id) ||
+        (window.allNodes || []).find((n) => n.id === d.id) ||
+        d;
+      hideCharacterSheet({ refit: false });
+      emphasizeFocusedNode(d.id, {
+        raiseId: d.id,
+        duration: 200,
+        raise: true,
+      });
+      applyFocusNeighborSpread(d.id, { animate: false });
+      syncFocusChip();
+      return;
+    }
+    activateFamilyNucleus(d.id, "all");
+  });
 
-  node
-    .on("touchstart", (event, d) => {
-      if (isSelectionPinned() && !isPinnedNode(d.id)) return;
-      pressTimer = setTimeout(() => {
-        cancelHoverRestore();
-        focusNode(d);
-      }, longPressDuration);
-    })
-    .on("touchend", () => clearTimeout(pressTimer));
+  redrawGraphGeometry = () => {
+    link.attr("d", linkPath);
+    linkHit.attr("d", linkPath);
+    node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    labelRoot.attr("transform", (d) => `translate(${d.x},${d.y})`);
+  };
 
   simulation.on("tick", () => {
+    if (focusFanActive) {
+      // Fan layout owns positions; don't fight the tween / freeze
+      redrawGraphGeometry();
+      return;
+    }
     if (isLayeredLayout(layoutMode)) {
       data.nodes.forEach((d) => {
-        const targetY = layeredY(d);
+        const targetY = layeredY(d) + (d.focusYOffset || 0);
         d.y += (targetY - d.y) * 0.35;
         d.x = Math.max(
           margin.left + 24,
@@ -2446,35 +3775,34 @@ function createGraph(data) {
       });
     }
 
-    link.attr("d", linkPath);
-    linkHit.attr("d", linkPath);
-    node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    redrawGraphGeometry();
   });
 
-  // Fit view: prefer readable height; keep horizontal spacing (pan to explore)
+  // No auto-zoom — user pans / pinches / uses +/- controls. Snapshot homes only.
+  let didSnapshotHomes = false;
   simulation.on("end", () => {
     try {
-      const xs = data.nodes.map((n) => n.x);
-      const ys = data.nodes.map((n) => n.y);
-      const minX = Math.min(...xs) - 100;
-      const maxX = Math.max(...xs) + 180;
-      const minY = Math.min(...ys) - 60;
-      const maxY = Math.max(...ys) + 60;
-      const bw = Math.max(maxX - minX, 1);
-      const bh = Math.max(maxY - minY, 1);
-      // Fit height first so labels stay readable; width may overflow → pan
-      const scaleH = (height * 0.9) / bh;
-      const scaleW = (width * 0.92) / bw;
-      // Allow mild zoom-out for width, but never crush below ~55% of height fit
-      const scale = Math.min(scaleH, Math.max(scaleW, scaleH * 0.55), 1.55);
-      const tx = (width - bw * scale) / 2 - minX * scale;
-      const ty = (height - bh * scale) / 2 - minY * scale;
-      svg
-        .transition()
-        .duration(450)
-        .call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+      data.nodes.forEach((n) => {
+        if (n.homeX == null || !didSnapshotHomes) {
+          n.homeX = n.x;
+          n.homeY = n.y;
+          n.homeTargetX = n.targetX != null ? n.targetX : n.x;
+        }
+        n.focusYOffset = 0;
+      });
+      didSnapshotHomes = true;
+      focusFanActive = false;
+      clearFocusLinkLanes();
+      if (lastFocusedNode?.id) {
+        applyFocusNeighborSpread(lastFocusedNode.id, { animate: false });
+        emphasizeFocusedNode(lastFocusedNode.id, {
+          raiseId: lastFocusedNode.id,
+          duration: 0,
+          raise: true,
+        });
+      }
     } catch (_) {
-      /* ignore fit errors */
+      /* ignore */
     }
   });
 
@@ -2597,7 +3925,7 @@ function findAnyLinkBetween(aId, bId, links = allLinks) {
   );
 }
 
-function emphasizeNodePair(aId, bId, { duration = 100, raise = false } = {}) {
+function emphasizeNodePair(aId, bId, { duration = 80, raise = false } = {}) {
   const keep = linkKeepBetween(aId, bId);
   emphasizeGraph({
     nodeIds: new Set([aId, bId]),
@@ -2607,26 +3935,243 @@ function emphasizeNodePair(aId, bId, { duration = 100, raise = false } = {}) {
     raise,
     // Pair hover should show the connecting edge even if depth-filtered
     revealKeptLinks: true,
+    pairHighlight: true,
   });
+}
+
+/** Coarse pointer (phones) — larger hit targets, touch-first gestures. */
+function isCoarsePointer() {
+  try {
+    return (
+      (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+      (window.matchMedia && window.matchMedia("(hover: none)").matches) ||
+      ("ontouchstart" in window && window.innerWidth <= 900)
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
+function pointerPageXY(event) {
+  const src = event?.sourceEvent || event;
+  const touch = src?.touches?.[0] || src?.changedTouches?.[0];
+  if (touch) {
+    return { pageX: touch.pageX, pageY: touch.pageY, clientX: touch.clientX, clientY: touch.clientY };
+  }
+  return {
+    pageX: src?.pageX ?? 0,
+    pageY: src?.pageY ?? 0,
+    clientX: src?.clientX ?? 0,
+    clientY: src?.clientY ?? 0,
+  };
+}
+
+/** Place tooltip near pointer; on touch, prefer above the finger. */
+function placeTooltipAtPointer(tooltip, event, { above = false } = {}) {
+  if (!tooltip || !event) return;
+  const p = pointerPageXY(event);
+  const el = typeof tooltip.node === "function" ? tooltip.node() : null;
+  const tipW = el?.offsetWidth || 280;
+  const tipH = el?.offsetHeight || 80;
+  let left = p.pageX + 10;
+  let top = p.pageY + 10;
+  if (above) {
+    left = Math.max(8, Math.min(window.innerWidth - tipW - 8, p.pageX - tipW / 2));
+    top = Math.max(8, p.pageY - tipH - 18);
+  } else {
+    left = Math.max(8, Math.min(window.innerWidth - tipW - 8, left));
+    top = Math.max(8, Math.min(window.innerHeight - tipH - 8, top));
+  }
+  tooltip.style("top", `${top}px`).style("left", `${left}px`);
+}
+
+/**
+ * Free hover: only the edges that touch this node (star), not the whole depth ball.
+ * Avoids lighting up “other people’s” family links among relatives.
+ */
+function makeHoverStarLinkKeep(nodeId) {
+  return (link) => {
+    const { sourceId, targetId } = linkEnds(link);
+    return sourceId === nodeId || targetId === nodeId;
+  };
+}
+
+function hoverStarNodeIds(nodeId) {
+  const ids = new Set([nodeId]);
+  (allLinks || []).forEach((link) => {
+    const { sourceId, targetId } = linkEnds(link);
+    if (sourceId !== nodeId && targetId !== nodeId) return;
+    // Respect kind filter for family vs ASSO; ASSO of ego always allowed on hover
+    if (link.type === "family") {
+      if (graphFilters.linkKind === "other") return;
+    } else if (
+      graphFilters.linkKind !== "all" &&
+      graphFilters.linkKind !== "other"
+    ) {
+      // blood default: still show ego ASSO on hover preview
+    }
+    ids.add(sourceId === nodeId ? targetId : sourceId);
+  });
+  return ids;
+}
+
+function emphasizeHoverStar(
+  nodeId,
+  { raiseId = null, duration = 80, raise = false } = {}
+) {
+  const keep = makeHoverStarLinkKeep(nodeId);
+  emphasizeGraph({
+    nodeIds: hoverStarNodeIds(nodeId),
+    linkKeep: keep,
+    raiseId,
+    duration,
+    raise,
+    revealKeptLinks: true,
+    snapLinks: true,
+  });
+}
+
+/**
+ * Same visual as mouseenter on a node (neighborhood / pair + tooltip).
+ * Used by desktop hover and one-finger long-press on touch.
+ */
+function applyNodeHoverPreview(d, tooltip, event) {
+  if (!d) return false;
+  cancelHoverRestore();
+  // Focused character: hovering anyone shows the relation (direct or kinship path)
+  if (lastFocusedNode && d.id !== lastFocusedNode.id && !lastFocusedLink) {
+    applyPinnedNodePairHover(lastFocusedNode.id, d, tooltip, event);
+    return true;
+  }
+  pairHoverNeighborId = null;
+  if (!isPinnedNode(d.id)) return false;
+  activeHover = { kind: "node", id: d.id };
+  showPersonHoverTooltip(d, tooltip, event);
+  if (!isSelectionPinned()) {
+    // Star of this node only — not the full kinship ball
+    emphasizeHoverStar(d.id, {
+      raiseId: null,
+      duration: 80,
+      raise: false,
+    });
+  } else if (lastFocusedNode && d.id === lastFocusedNode.id) {
+    // Hovering ego itself: keep focus neighborhood, just show its card
+    restorePersistentEmphasis();
+  }
+  return true;
+}
+
+function applyLinkHoverPreview(d, tooltip, event) {
+  if (!d || !isPinnedLink(d)) return false;
+  // Fat link-hit strokes sit around nodes. While a character is focused,
+  // relation flyouts come from hovering other nodes only — otherwise leaving
+  // a neighbor immediately re-enters a link-hit and the flyout sticks.
+  if (lastFocusedNode && !lastFocusedLink) return false;
+  cancelHoverRestore();
+  const { sourceId, targetId } = linkEnds(d);
+  const source = allNodes.find((n) => n.id === sourceId);
+  const target = allNodes.find((n) => n.id === targetId);
+  if (!source || !target) return false;
+  activeHover = { kind: "link", key: `${sourceId}→${targetId}` };
+  showLinkHoverTooltip(d, tooltip, event);
+  emphasizeNodePair(sourceId, targetId, { duration: 100, raise: false });
+  return true;
+}
+
+function clearHoverPreview(tooltip) {
+  if (
+    activeHover?.kind === "node" ||
+    activeHover?.kind === "pair" ||
+    activeHover?.kind === "link"
+  ) {
+    activeHover = null;
+  }
+  if (tooltip) tooltip.style("display", "none");
+  scheduleHoverRestore();
+}
+
+/** Leave a hovered neighbor while focused → hide flyout + restore ego view. */
+function endFocusedPairHover(tooltip) {
+  const hadPair = Boolean(pairHoverNeighborId);
+  pairHoverNeighborId = null;
+  clearHoverPreview(tooltip);
+  if (!lastFocusedNode || lastFocusedLink) return;
+  cancelHoverRestore();
+  activeHover = null;
+  if (hadPair || lastFocusedNode) restorePersistentEmphasis();
+}
+
+/**
+ * Reliable clear: mouseleave on nodes is often stolen by fat link-hits.
+ * While a pair flyout is open, any pointer position not over that neighbor
+ * (and not over another node that will replace the hover) closes it.
+ */
+function guardFocusedPairHover(tooltip, event) {
+  if (!pairHoverNeighborId || !lastFocusedNode || lastFocusedLink) return;
+  const src = event?.sourceEvent || event;
+  const x = src?.clientX;
+  const y = src?.clientY;
+  if (x == null || y == null) return;
+  const el = document.elementFromPoint(x, y);
+  const nodeEl = el?.closest?.("g.node");
+  if (nodeEl) {
+    const id = d3.select(nodeEl).datum()?.id;
+    if (id === pairHoverNeighborId) return;
+    // Different node (including ego): mouseenter handler switches the preview
+    return;
+  }
+  endFocusedPairHover(tooltip);
+}
+
+function personNicknamesList(person) {
+  const raw = [];
+  if (Array.isArray(person?.nicknames) && person.nicknames.length) {
+    raw.push(...person.nicknames);
+  } else if (person?.nickname) {
+    raw.push(
+      ...String(person.nickname)
+        .split(/\s*·\s*/)
+        .filter(Boolean)
+    );
+  }
+  const seen = new Set();
+  const out = [];
+  for (const n of raw) {
+    const label = String(n || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!label) continue;
+    const key = label.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(label);
+  }
+  return out;
 }
 
 function showPersonHoverTooltip(person, tooltip, event) {
   if (!person || !tooltip) return;
+  const t = window.t || ((k) => k);
   const yearLabel =
     person.birthYear != null
       ? `${person.birthYearInferred ? "~" : ""}${Math.round(person.birthYear)}`
       : "?";
+  const nicks = personNicknamesList(person);
+  const nickHtml = nicks.length
+    ? `<div class="tooltip-aka"><span class="tooltip-aka-label">${escapeHtmlGlobal(
+        nicks.length === 1 ? t("nickname") : t("nicknames")
+      )}</span> ${escapeHtmlGlobal(nicks.join(" · "))}</div>`
+    : "";
+  const occ = person.occupation
+    ? `<div class="tooltip-occ">${escapeHtmlGlobal(person.occupation)}</div>`
+    : "";
   tooltip.style("display", "block");
   tooltip.html(
-    `<strong>${person.name}</strong><br>${person.occupation || ""}<br>${
-      window.t ? window.t("birth") : "Birth"
-    }: ${yearLabel}`
+    `<strong>${escapeHtmlGlobal(person.name || "")}</strong>${nickHtml}${occ}<div>${escapeHtmlGlobal(
+      t("birth")
+    )}: ${escapeHtmlGlobal(yearLabel)}</div>`
   );
-  if (event) {
-    tooltip
-      .style("top", event.pageY + 10 + "px")
-      .style("left", event.pageX + 10 + "px");
-  }
+  if (event) placeTooltipAtPointer(tooltip, event, { above: isTouchLikeEvent(event) });
 }
 
 function showLinkHoverTooltip(link, tooltip, event) {
@@ -2649,27 +4194,99 @@ function showLinkHoverTooltip(link, tooltip, event) {
   );
   const evidenceHtml = formatRelationEvidenceHtml(link, reverseLink);
   tooltip.style("display", "block").html(`${phrasesHtml}${evidenceHtml}`);
-  if (event) {
-    tooltip
-      .style("top", event.pageY + 10 + "px")
-      .style("left", event.pageX + 10 + "px");
+  if (event) placeTooltipAtPointer(tooltip, event, { above: isTouchLikeEvent(event) });
+}
+
+function isTouchLikeEvent(event) {
+  const src = event?.sourceEvent || event;
+  return Boolean(
+    src?.touches?.length ||
+      src?.changedTouches?.length ||
+      src?.pointerType === "touch" ||
+      src?.type?.startsWith?.("touch")
+  );
+}
+
+/** Emphasize nodes + edges along a kinship path (inclusive). */
+function emphasizeNodePath(pathIds, { raiseId = null, duration = 80, raise = true } = {}) {
+  const path = pathIds || [];
+  const nodeIds = new Set(path);
+  const edgeKeys = new Set();
+  for (let i = 0; i < path.length - 1; i++) {
+    edgeKeys.add([path[i], path[i + 1]].sort().join("|"));
   }
+  const keep = (l) => {
+    const { sourceId, targetId } = linkEnds(l);
+    return edgeKeys.has([sourceId, targetId].sort().join("|"));
+  };
+  emphasizeGraph({
+    nodeIds,
+    linkKeep: keep,
+    raiseId: raiseId || path[path.length - 1],
+    duration,
+    raise,
+    revealKeptLinks: true,
+    pairHighlight: true,
+  });
 }
 
 /**
- * While a character is focused, hovering another node highlights both
- * (and their connecting edge when it exists — with the link tooltip).
+ * While a character is focused, hovering another node highlights the pair
+ * (direct edge, or multi-hop blood path) and shows the relation tooltip.
  */
 function applyPinnedNodePairHover(focusedId, hoveredNode, tooltip, event) {
   const hoveredId = hoveredNode.id;
+  pairHoverNeighborId = hoveredId;
+  const t = window.t || ((k) => k);
   const link = findAnyLinkBetween(focusedId, hoveredId);
   if (link) {
     const { sourceId, targetId } = linkEnds(link);
-    activeHover = { kind: "link", key: `${sourceId}→${targetId}` };
+    activeHover = {
+      kind: "pair",
+      ids: [focusedId, hoveredId],
+      key: `${sourceId}→${targetId}`,
+    };
     emphasizeNodePair(focusedId, hoveredId, { duration: 100, raise: true });
     showLinkHoverTooltip(link, tooltip, event);
     return;
   }
+
+  const blood = describeBloodRelation(
+    focusedId,
+    hoveredId,
+    t,
+    familyAdj,
+    allLinks
+  );
+  if (blood?.path?.length >= 2) {
+    activeHover = {
+      kind: "pair",
+      ids: [focusedId, hoveredId],
+      path: blood.path,
+    };
+    emphasizeNodePath(blood.path, {
+      raiseId: hoveredId,
+      duration: 100,
+      raise: true,
+    });
+    const phrases = [blood.forwardPhraseHtml, blood.reversePhraseHtml].filter(
+      Boolean
+    );
+    let html = renderRelationPhraseListHtml(phrases);
+    if (blood.forwardDetailHtml) {
+      html += `<div class="evidence-block"><div class="evidence-label">${escapeHtml(
+        t("kinPathShowDetail")
+      )}</div><p class="muted" style="margin:4px 0 0;font-style:normal">${
+        blood.forwardDetailHtml
+      }</p></div>`;
+    }
+    tooltip.style("display", "block").html(html);
+    if (event) {
+      placeTooltipAtPointer(tooltip, event, { above: isTouchLikeEvent(event) });
+    }
+    return;
+  }
+
   activeHover = { kind: "pair", ids: [focusedId, hoveredId] };
   emphasizeGraph({
     nodeIds: new Set([focusedId, hoveredId]),
@@ -2678,12 +4295,25 @@ function applyPinnedNodePairHover(focusedId, hoveredNode, tooltip, event) {
     duration: 100,
     raise: true,
   });
-  showPersonHoverTooltip(hoveredNode, tooltip, event);
+  const focused =
+    allNodes.find((n) => n.id === focusedId) ||
+    (window.allNodes || []).find((n) => n.id === focusedId);
+  tooltip.style("display", "block").html(
+    `<strong>${escapeHtml(focused?.name || "")}</strong> · <strong>${escapeHtml(
+      hoveredNode.name || ""
+    )}</strong><br><span class="muted">${escapeHtml(t("pairNoRelation"))}</span>`
+  );
+  if (event) {
+    placeTooltipAtPointer(tooltip, event, { above: isTouchLikeEvent(event) });
+  }
 }
 
 function syncHitPointerEvents(keepLink, locked, revealKeptLinks = false) {
-  const linkVisible = (l) =>
-    (revealKeptLinks && keepLink(l)) || isLinkInDepth(l);
+  // Match emphasizeGraph: when a selection/hover set is active, only kept links
+  const linkVisible = (l) => {
+    if (revealKeptLinks || locked) return keepLink(l);
+    return isLinkInDepth(l);
+  };
   d3.selectAll(".link-hit")
     .classed("is-emphasized", (l) => keepLink(l) && linkVisible(l))
     .classed("is-dimmed", (l) => locked && !keepLink(l))
@@ -2701,6 +4331,8 @@ function emphasizeGraph({
   duration = 140,
   raise = true,
   revealKeptLinks = false,
+  pairHighlight = false,
+  snapLinks = false,
 } = {}) {
   const keepNode = nodeIds ? (id) => nodeIds.has(id) : () => true;
   const keepLink =
@@ -2711,10 +4343,16 @@ function emphasizeGraph({
       return keepNode(sourceId) && keepNode(targetId);
     });
   const locked = Boolean(nodeIds);
-  const linkVisible = (l) =>
-    (revealKeptLinks && keepLink(l)) || isLinkInDepth(l);
+  // When isolating a hover/focus set, do NOT fall back to global isLinkInDepth
+  // (that would keep every blood edge lit in "upto" with no ego / mode all).
+  const linkVisible = (l) => {
+    if (revealKeptLinks || locked) return keepLink(l);
+    return isLinkInDepth(l);
+  };
+  const linkHot = (l) => keepLink(l) && linkVisible(l);
+  const instantLinks = pairHighlight || snapLinks || locked;
 
-  d3.selectAll(".node")
+  d3.selectAll(".node, .node-label-root")
     .classed("is-emphasized", (d) => keepNode(d.id))
     .classed("is-dimmed", (d) => locked && !keepNode(d.id))
     .classed("is-locked-out", (d) => isSelectionPinned() && !keepNode(d.id))
@@ -2723,17 +4361,36 @@ function emphasizeGraph({
     .duration(duration)
     .style("opacity", (d) => (keepNode(d.id) ? 1 : 0.12));
 
-  d3.selectAll(".link")
-    .classed("is-emphasized", (l) => keepLink(l) && linkVisible(l))
+  const linkSel = d3
+    .selectAll(".link")
+    .classed("is-emphasized", (l) => linkHot(l))
+    .classed("is-pair-highlight", (l) => pairHighlight && linkHot(l))
     .classed("is-dimmed", (l) => locked && !keepLink(l))
     .classed("is-depth-hidden", (l) => !linkVisible(l))
-    .interrupt()
-    .transition()
-    .duration(duration)
-    .style("opacity", (l) => {
-      if (!linkVisible(l)) return 0;
-      return keepLink(l) ? 1 : 0.07;
-    });
+    .interrupt();
+
+  const applyLinkOpacity = (sel) =>
+    sel
+      .style("opacity", (l) => (linkHot(l) ? 1 : 0))
+      .attr("opacity", (l) => (linkHot(l) ? 1 : 0))
+      .attr("stroke-opacity", (l) => (linkHot(l) ? 1 : 0));
+
+  if (instantLinks) {
+    applyLinkOpacity(linkSel);
+    if (!pairHighlight) {
+      linkSel.classed("is-pair-highlight", false);
+    }
+  } else {
+    linkSel.classed("is-pair-highlight", false);
+    applyLinkOpacity(
+      linkSel.transition().duration(duration)
+    );
+  }
+
+  d3.selectAll(".link-hit")
+    .classed("is-pair-highlight", (l) => pairHighlight && linkHot(l))
+    .classed("is-depth-hidden", (l) => !linkVisible(l))
+    .attr("opacity", (l) => (linkVisible(l) ? 1 : 0));
 
   // dimmed hits must not capture hover/click while a selection is active
   syncHitPointerEvents(
@@ -2744,12 +4401,12 @@ function emphasizeGraph({
 
   if (!raise) return;
 
+  // Preserve paint order: links → circles → labels (names always on top)
+  d3.select("g.links").raise();
   d3.selectAll(".link")
-    .filter((l) => keepLink(l))
+    .filter((l) => linkHot(l))
     .raise();
-
-  const nodesLayer = d3.select("g.nodes");
-  if (!nodesLayer.empty()) nodesLayer.raise();
+  d3.select("g.nodes").raise();
 
   if (nodeIds) {
     d3.selectAll(".node")
@@ -2757,6 +4414,18 @@ function emphasizeGraph({
       .raise();
     if (raiseId) {
       d3.selectAll(".node")
+        .filter((d) => d.id === raiseId)
+        .raise();
+    }
+  }
+
+  d3.select("g.node-labels").raise();
+  if (nodeIds) {
+    d3.selectAll(".node-label-root")
+      .filter((d) => keepNode(d.id) && d.id !== raiseId)
+      .raise();
+    if (raiseId) {
+      d3.selectAll(".node-label-root")
         .filter((d) => d.id === raiseId)
         .raise();
     }
@@ -2790,6 +4459,9 @@ function emphasizeNeighborhood(
     raiseId,
     duration,
     raise,
+    // Show ego's ASSO/family edges even when the global blood filter hides them
+    revealKeptLinks: true,
+    snapLinks: true,
   });
 }
 
@@ -2804,6 +4476,8 @@ function emphasizeFamilyNucleus(
     raiseId,
     duration,
     raise,
+    // Nucleus edges must show even if the depth filter would hide them
+    revealKeptLinks: true,
   });
 }
 
@@ -2821,10 +4495,11 @@ function emphasizeFocusedNode(
 
 function clearGraphEmphasis(duration = 160) {
   activeHover = null;
-  d3.selectAll(".node")
+  d3.selectAll(".node, .node-label-root")
     .classed("is-dimmed", false)
     .classed("is-emphasized", false)
     .classed("is-locked-out", false)
+    .classed("is-event-cast", false)
     .interrupt()
     .transition()
     .duration(duration)
@@ -2832,12 +4507,13 @@ function clearGraphEmphasis(duration = 160) {
   d3.selectAll(".link, .link-hit")
     .classed("is-dimmed", false)
     .classed("is-emphasized", false)
+    .classed("is-pair-highlight", false)
     .classed("is-locked-out", false)
     .classed("is-depth-hidden", (l) => !isLinkInDepth(l))
     .interrupt()
-    .transition()
-    .duration(duration)
-    .style("opacity", (l) => (isLinkInDepth(l) ? 1 : 0));
+    .style("opacity", (l) => (isLinkInDepth(l) ? 1 : 0))
+    .attr("opacity", (l) => (isLinkInDepth(l) ? 1 : 0))
+    .attr("stroke-opacity", null);
   d3.selectAll(".link-hit").style("pointer-events", (l) =>
     isLinkInDepth(l) ? "stroke" : "none"
   );
@@ -2850,13 +4526,25 @@ function clearGraphEmphasis(duration = 160) {
 
 function restorePersistentEmphasis() {
   // Active hover preview wins — including pair/link preview while pinned
-  if (activeHover?.kind === "link") {
+  if (activeHover?.kind === "link" && activeHover.key) {
     const [sourceId, targetId] = activeHover.key.split("→");
     emphasizeNodePair(sourceId, targetId, { duration: 80, raise: false });
     return;
   }
+  if (activeHover?.kind === "pair" && activeHover.path?.length >= 2) {
+    emphasizeNodePath(activeHover.path, {
+      raiseId: activeHover.ids?.[1],
+      duration: 80,
+      raise: false,
+    });
+    return;
+  }
   if (activeHover?.kind === "pair" && activeHover.ids?.length === 2) {
     const [aId, bId] = activeHover.ids;
+    if (activeHover.key || findAnyLinkBetween(aId, bId)) {
+      emphasizeNodePair(aId, bId, { duration: 80, raise: false });
+      return;
+    }
     emphasizeGraph({
       nodeIds: new Set([aId, bId]),
       linkKeep: () => false,
@@ -2889,6 +4577,7 @@ function restorePersistentEmphasis() {
   if (lastFocusedNode) {
     const id = lastFocusedNode.id;
     lastFocusedNode = allNodes.find((n) => n.id === id) || lastFocusedNode;
+    d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
     emphasizeFocusedNode(id, {
       raiseId: id,
       duration: 120,
@@ -2906,108 +4595,213 @@ function restorePersistentEmphasis() {
           (e.sourceId === targetId && e.targetId === sourceId)
         );
       }) || lastFocusedLink;
+    d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
     emphasizeNodePair(sourceId, targetId, { duration: 120, raise: true });
     return;
   }
+  if (activeNarrativeCast?.size && isNarrativeFriseOpen()) {
+    emphasizeNarrativeCast(activeNarrativeCast, { duration: 120 });
+    return;
+  }
+  d3.selectAll(".node, .node-label-root").classed("is-event-cast", false);
   clearGraphEmphasis();
 }
 
 function enrichLinkTooltips() {
   const tooltip = d3.select(".tooltip");
+  const LONG_PRESS_MS = 420;
+  const TOUCH_MOVE_PX = 14;
+  let touchTimer = null;
+  let touchStart = null;
+  let touchLongPressed = false;
+  let touchMoved = false;
+  let touchSuppressClick = false;
+
+  const clearTouchTimer = () => {
+    if (touchTimer) clearTimeout(touchTimer);
+    touchTimer = null;
+  };
+
+  const openLinkFocus = (event, d) => {
+    if (isSelectionPinned() && !isPinnedLink(d)) {
+      event.stopPropagation();
+      return;
+    }
+    cancelHoverRestore();
+    activeHover = null;
+    const ends = linkEnds(d);
+    lastFocusedLink = d;
+    lastFocusedNode = null;
+
+    if (prioritizeClickOverFilters()) {
+      rebuildCurrentGraph();
+      lastFocusedLink =
+        allLinks.find((l) => {
+          const e = linkEnds(l);
+          return (
+            (e.sourceId === ends.sourceId && e.targetId === ends.targetId) ||
+            (e.sourceId === ends.targetId && e.targetId === ends.sourceId)
+          );
+        }) || lastFocusedLink;
+    }
+
+    const { sourceId, targetId } = linkEnds(lastFocusedLink);
+    const source =
+      allNodes.find((n) => n.id === sourceId) ||
+      (window.allNodes || []).find((n) => n.id === sourceId);
+    const target =
+      allNodes.find((n) => n.id === targetId) ||
+      (window.allNodes || []).find((n) => n.id === targetId);
+    const reverseLink = allLinks.find((l) => {
+      const e = linkEnds(l);
+      return e.sourceId === targetId && e.targetId === sourceId;
+    });
+
+    const t = window.t || ((k) => k);
+    const evidenceHtml = formatRelationEvidenceHtml(lastFocusedLink, reverseLink);
+    const phrasesHtml = formatLinkRelationHeaderHtml(
+      lastFocusedLink,
+      reverseLink,
+      source,
+      target,
+      t
+    );
+
+    showModalContent(source, target, `${phrasesHtml}${evidenceHtml}`);
+
+    emphasizeGraph({
+      nodeIds: new Set([sourceId, targetId]),
+      linkKeep: (l) => {
+        const e = linkEnds(l);
+        return (
+          (e.sourceId === sourceId && e.targetId === targetId) ||
+          (e.sourceId === targetId && e.targetId === sourceId)
+        );
+      },
+      raiseId: sourceId,
+      duration: 220,
+      raise: true,
+    });
+
+    event.stopPropagation();
+  };
 
   d3.selectAll(".link-hit")
-    .on("mouseenter", function (event, d) {
-      if (!isPinnedLink(d)) return;
-      cancelHoverRestore();
-      const { sourceId, targetId } = linkEnds(d);
-      const source = allNodes.find((n) => n.id === sourceId);
-      const target = allNodes.find((n) => n.id === targetId);
-      if (!source || !target) return;
-
-      activeHover = { kind: "link", key: `${sourceId}→${targetId}` };
-      showLinkHoverTooltip(d, tooltip, event);
-      // Always isolate the pair (also while a character is focused)
-      emphasizeNodePair(sourceId, targetId, { duration: 100, raise: false });
+    .on("mouseenter.hover", function (event, d) {
+      applyLinkHoverPreview(d, tooltip, event);
     })
-    .on("mousemove", function (event, d) {
+    .on("mousemove.hover", function (event, d) {
+      if (lastFocusedNode && !lastFocusedLink) return;
       if (!isPinnedLink(d)) return;
-      tooltip
-        .style("top", event.pageY + 10 + "px")
-        .style("left", event.pageX + 10 + "px");
+      placeTooltipAtPointer(tooltip, event);
     })
-    .on("mouseleave", function (event, d) {
+    .on("mouseleave.hover", function (event, d) {
+      // Character focus: link flyouts are disabled (see applyLinkHoverPreview)
+      if (lastFocusedNode && !lastFocusedLink) return;
       if (!isPinnedLink(d) && isSelectionPinned()) return;
-      if (activeHover?.kind === "link") activeHover = null;
-      tooltip.style("display", "none");
-      scheduleHoverRestore();
+      clearHoverPreview(tooltip);
+    })
+    .on("touchstart.interact", function (event, d) {
+      if (event.touches && event.touches.length > 1) {
+        if (touchLongPressed) clearHoverPreview(tooltip);
+        clearTouchTimer();
+        touchStart = null;
+        touchLongPressed = false;
+        touchMoved = false;
+        return;
+      }
+      if (!isPinnedLink(d)) return;
+      const t = event.touches[0];
+      touchStart = {
+        x: t.clientX,
+        y: t.clientY,
+        pageX: t.pageX,
+        pageY: t.pageY,
+        key: `${linkEnds(d).sourceId}→${linkEnds(d).targetId}`,
+      };
+      touchLongPressed = false;
+      touchMoved = false;
+      touchSuppressClick = false;
+      clearTouchTimer();
+      touchTimer = setTimeout(() => {
+        if (!touchStart) return;
+        touchLongPressed = true;
+        touchSuppressClick = true;
+        applyLinkHoverPreview(d, tooltip, {
+          pageX: touchStart.pageX,
+          pageY: touchStart.pageY,
+          clientX: touchStart.x,
+          clientY: touchStart.y,
+          touches: event.touches,
+          type: "touchstart",
+        });
+      }, LONG_PRESS_MS);
+    })
+    .on("touchmove.interact", function (event) {
+      if (!touchStart) return;
+      if (event.touches && event.touches.length > 1) {
+        if (touchLongPressed) clearHoverPreview(tooltip);
+        clearTouchTimer();
+        touchStart = null;
+        touchLongPressed = false;
+        touchMoved = true;
+        return;
+      }
+      const t = event.touches[0];
+      if (
+        Math.hypot(t.clientX - touchStart.x, t.clientY - touchStart.y) >
+        TOUCH_MOVE_PX
+      ) {
+        touchMoved = true;
+        clearTouchTimer();
+        if (touchLongPressed) {
+          clearHoverPreview(tooltip);
+          touchLongPressed = false;
+        }
+        touchStart = null;
+      }
+    })
+    .on("touchend.interact", function (event, d) {
+      clearTouchTimer();
+      const wasLong = touchLongPressed;
+      const wasTap = Boolean(touchStart) && !touchMoved && !wasLong;
+      touchStart = null;
+      touchLongPressed = false;
+      touchMoved = false;
+
+      if (wasLong) {
+        event.preventDefault();
+        clearHoverPreview(tooltip);
+        touchSuppressClick = true;
+        setTimeout(() => {
+          touchSuppressClick = false;
+        }, 400);
+        return;
+      }
+
+      if (wasTap) {
+        event.preventDefault();
+        touchSuppressClick = true;
+        setTimeout(() => {
+          touchSuppressClick = false;
+        }, 400);
+        openLinkFocus(event, d);
+      }
+    })
+    .on("touchcancel.interact", function () {
+      clearTouchTimer();
+      if (touchLongPressed) clearHoverPreview(tooltip);
+      touchStart = null;
+      touchLongPressed = false;
+      touchMoved = false;
     })
     .on("click", function (event, d) {
-      if (isSelectionPinned() && !isPinnedLink(d)) {
+      if (touchSuppressClick) {
+        event.preventDefault();
         event.stopPropagation();
         return;
       }
-      cancelHoverRestore();
-      activeHover = null;
-      const ends = linkEnds(d);
-      lastFocusedLink = d;
-      lastFocusedNode = null;
-
-      if (prioritizeClickOverFilters()) {
-        rebuildCurrentGraph();
-        lastFocusedLink =
-          allLinks.find((l) => {
-            const e = linkEnds(l);
-            return (
-              (e.sourceId === ends.sourceId &&
-                e.targetId === ends.targetId) ||
-              (e.sourceId === ends.targetId &&
-                e.targetId === ends.sourceId)
-            );
-          }) || lastFocusedLink;
-      }
-
-      const { sourceId, targetId } = linkEnds(lastFocusedLink);
-      const source =
-        allNodes.find((n) => n.id === sourceId) ||
-        (window.allNodes || []).find((n) => n.id === sourceId);
-      const target =
-        allNodes.find((n) => n.id === targetId) ||
-        (window.allNodes || []).find((n) => n.id === targetId);
-      const reverseLink = allLinks.find((l) => {
-        const e = linkEnds(l);
-        return e.sourceId === targetId && e.targetId === sourceId;
-      });
-
-      const t = window.t || ((k) => k);
-      const evidenceHtml = formatRelationEvidenceHtml(
-        lastFocusedLink,
-        reverseLink
-      );
-      const phrasesHtml = formatLinkRelationHeaderHtml(
-        lastFocusedLink,
-        reverseLink,
-        source,
-        target,
-        t
-      );
-
-      showModalContent(source, target, `${phrasesHtml}${evidenceHtml}`);
-
-      emphasizeGraph({
-        nodeIds: new Set([sourceId, targetId]),
-        linkKeep: (l) => {
-          const e = linkEnds(l);
-          return (
-            (e.sourceId === sourceId && e.targetId === targetId) ||
-            (e.sourceId === targetId && e.targetId === sourceId)
-          );
-        },
-        raiseId: sourceId,
-        duration: 220,
-        raise: true,
-      });
-
-      event.stopPropagation();
+      openLinkFocus(event, d);
     });
 }
 
@@ -4074,12 +5868,28 @@ function renderBloodRelationsBody(person, t) {
   if (!rows.length) {
     return `<p class="sheet-empty">${escapeHtml(t("noBloodLinks"))}</p>`;
   }
+  // FAM QUOT/NOTE are copied onto every edge of that family — show each
+  // evidence string once on the sheet instead of under every relative.
+  const seenNotes = new Set();
+  const seenCitations = new Set();
+  const takeFresh = (values, seen) =>
+    (values || []).filter((v) => {
+      const key = String(v || "")
+        .trim()
+        .replace(/^["«»']+|["«»']+$/g, "")
+        .trim()
+        .toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
   return `<ul class="sheet-rel-list" data-rel-list="blood">${rows
     .map((row) => {
       const otherName = nodeNameById(row.otherId);
       const evidence = formatRelationEvidenceLists(
-        row.notes,
-        row.citations,
+        takeFresh(row.notes, seenNotes),
+        takeFresh(row.citations, seenCitations),
         t
       );
       const haystack = relationSearchHaystack(otherName, [
@@ -4536,6 +6346,18 @@ function renderPersonProfile(person) {
 function drag(sim) {
   return d3
     .drag()
+    .clickDistance(8)
+    .filter((event) => {
+      // Touch: pan/pinch + tap/long-press own the gesture (do not steal for node drag)
+      if (
+        event.type?.startsWith?.("touch") ||
+        event.pointerType === "touch" ||
+        (event.touches && event.touches.length)
+      ) {
+        return false;
+      }
+      return !event.button;
+    })
     .on("start", (event, d) => {
       nodeDragMoved = false;
       d.__dragStartX = d.x;
@@ -4564,6 +6386,7 @@ function drag(sim) {
       if (isLayeredLayout()) {
         // Re-lock to year / generation band after drag
         d.fy = d.y;
+        if (isLayeredLayout()) d.targetX = d.x;
       } else {
         d.fy = null;
       }
@@ -4577,6 +6400,7 @@ function drag(sim) {
 function focusNode(clickedNode) {
   cancelHoverRestore();
   activeHover = null;
+  pairHoverNeighborId = null;
   focusScope = "depth";
   nucleusKind = "all";
   const id = clickedNode?.id;
@@ -4586,31 +6410,27 @@ function focusNode(clickedNode) {
   lastFocusedNode = master;
   lastFocusedLink = null;
 
-  if (prioritizeClickOverFilters()) {
+  const rebuilt = prioritizeClickOverFilters();
+  if (rebuilt) {
     rebuildCurrentGraph();
   }
 
   lastFocusedNode = allNodes.find((n) => n.id === id) || master;
   if (!lastFocusedNode) return;
 
+  // Keep any open sheet closed — click explores the graph neighborhood only
+  hideCharacterSheet({ refit: false });
+
   emphasizeFocusedNode(lastFocusedNode.id, {
     raiseId: lastFocusedNode.id,
     duration: 220,
     raise: true,
   });
-  showModalContent(lastFocusedNode);
-  // Re-assert focus after layout shift from opening the detail panel
-  requestAnimationFrame(() => {
-    if (lastFocusedNode?.id === id && !activeHover) {
-      emphasizeFocusedNode(id, { raiseId: id, duration: 160, raise: true });
-    }
-  });
-  setTimeout(() => {
-    if (lastFocusedNode?.id === id && !activeHover) {
-      lastFocusedNode = allNodes.find((n) => n.id === id) || lastFocusedNode;
-      emphasizeFocusedNode(id, { raiseId: id, duration: 160, raise: true });
-    }
-  }, 220);
+  // Layered: lanes only; force: optional ring. Never auto-zoom.
+  if (!rebuilt) {
+    applyFocusNeighborSpread(lastFocusedNode.id, { animate: true });
+  }
+  syncFocusChip();
 }
 
 function bindSheetRelationPathToggles(root) {
@@ -4671,6 +6491,9 @@ function activateFamilyNucleus(personId, kind = "all") {
     raise: true,
     kind: nucleusKind,
   });
+  // Show nucleus on the graph (chip), not behind an open sheet
+  hideCharacterSheet({ refit: false });
+  syncFocusChip();
   return true;
 }
 
@@ -4891,11 +6714,34 @@ function showModalContent(nodeA, nodeB = null, relationInfo = null) {
   }
   modal._restoreModalWidth?.();
   bindSheetRelationJumps(content);
+  syncSheetNucleusButtons(content);
+  syncFocusChip();
+}
+
+/** Hide the character sheet without clearing graph focus / nucleus. */
+function hideCharacterSheet({ refit = false } = {}) {
+  const modal = document.getElementById("modalContainer");
+  if (!modal || modal.classList.contains("hidden")) {
+    syncFocusChip();
+    return;
+  }
+  modal.classList.add("hidden");
+  modal.classList.remove("is-dual");
+  document.body.style.overflow = "";
+  syncFocusChip();
+
+  // Never rebuild / auto-zoom on close — keep the user's pan/zoom
+  if (lastFocusedNode || lastFocusedLink) {
+    restorePersistentEmphasis();
+  }
 }
 
 function clearGraphSelection() {
   cancelHoverRestore();
+  clearTimeout(nodeClickTimer);
+  nodeClickTimer = null;
   activeHover = null;
+  pairHoverNeighborId = null;
   d3.selectAll("body > .tooltip, .tooltip, .link-tooltip").style(
     "display",
     "none"
@@ -4916,19 +6762,78 @@ function clearGraphSelection() {
     document.body.style.overflow = "";
   }
 
+  syncFocusChip();
+
   if (modalOpen || hadFocus) {
-    clearGraphEmphasis(220);
+    restoreFocusNeighborSpread({ animate: true });
     d3.selectAll(".node circle")
       .transition()
       .duration(220)
       .attr("fill", (d) => (d.sex === "M" ? "#2563eb" : "#db2777"));
+    if (activeNarrativeCast?.size && isNarrativeFriseOpen()) {
+      emphasizeNarrativeCast(activeNarrativeCast, { duration: 220 });
+    } else {
+      clearGraphEmphasis(220);
+    }
+  } else if (activeNarrativeCast?.size && isNarrativeFriseOpen()) {
+    restoreFocusNeighborSpread({ animate: false });
+    emphasizeNarrativeCast(activeNarrativeCast, { duration: 120 });
   } else {
+    restoreFocusNeighborSpread({ animate: false });
     clearGraphEmphasis(120);
   }
 }
 
+/** Close sheet only — keep focus / nucleus on the graph. */
 function closeModal() {
-  clearGraphSelection();
+  hideCharacterSheet({ refit: false });
+}
+
+function syncFocusChip() {
+  const chip = document.getElementById("focusChip");
+  const label = document.getElementById("focusChipLabel");
+  const meta = document.getElementById("focusChipMeta");
+  if (!chip) return;
+
+  const modal = document.getElementById("modalContainer");
+  const sheetOpen = modal && !modal.classList.contains("hidden");
+  const person = lastFocusedNode;
+  // Always show when a person is focused and the sheet is closed (desktop + mobile)
+  const show = Boolean(person) && !sheetOpen && !lastFocusedLink;
+
+  chip.classList.toggle("is-hidden", !show);
+  if (!show || !person) return;
+
+  const t = window.t || ((k) => k);
+  if (label) label.textContent = person.name || "";
+  if (meta) {
+    meta.textContent =
+      focusScope === "nucleus"
+        ? t(
+            nucleusKind === "parents"
+              ? "sheetNucleusParents"
+              : nucleusKind === "children"
+                ? "sheetNucleusChildren"
+                : nucleusKind === "siblings"
+                  ? "sheetNucleusSiblings"
+                  : "sheetFamilyNucleus"
+          )
+        : t("focusChipNeighborhood");
+  }
+}
+
+function bindFocusChip() {
+  const chip = document.getElementById("focusChip");
+  if (!chip || chip.dataset.bound) return;
+  chip.dataset.bound = "1";
+  chip.querySelector("[data-focus-reopen]")?.addEventListener("click", () => {
+    if (!lastFocusedNode) return;
+    showModalContent(lastFocusedNode);
+    syncFocusChip();
+  });
+  chip.querySelector("[data-focus-clear]")?.addEventListener("click", () => {
+    clearGraphSelection();
+  });
 }
 
 function showModalContentForLink(
@@ -5104,6 +7009,17 @@ document.addEventListener("DOMContentLoaded", function () {
     return p;
   }
 
+  /**
+   * Turn a site-root path (`/ged/...`) into a URL relative to this page.
+   * Needed on GitHub Pages where the app lives under
+   * `/gedcom_character_map_graphs/public/` — a leading `/` would hit the
+   * domain root and 404.
+   */
+  function resolveAppUrl(pathFromSiteRoot) {
+    const rel = String(pathFromSiteRoot || "").replace(/^\/+/, "");
+    return new URL(rel, document.baseURI).href;
+  }
+
   function mergeCatalogWithFiles(catalogBooks, files) {
     const byFile = new Map();
     (catalogBooks || []).forEach((book) => {
@@ -5248,7 +7164,7 @@ document.addEventListener("DOMContentLoaded", function () {
   async function loadFile(fileName, meta = {}) {
     const file = normalizeFilePath(fileName);
     try {
-      const response = await fetch(file);
+      const response = await fetch(resolveAppUrl(file));
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const gedcomData = await response.text();
       if (gedcomData.trim().startsWith("<!")) {
@@ -5275,7 +7191,8 @@ document.addEventListener("DOMContentLoaded", function () {
       setChapterNarrative(
         meta.narrative || findChapterNarrative(file)
       );
-      document.getElementById("library")?.classList.remove("is-mobile-open");
+      // Free the graph after picking a chapter (desktop + mobile)
+      setLibraryCollapsed(true);
     } catch (error) {
       console.error("Error loading file:", error);
       setLibraryStatus(
@@ -5299,7 +7216,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let liveFiles = [];
     try {
-      const listRes = await fetch("/ged");
+      const listRes = await fetch(resolveAppUrl("/ged"));
       if (listRes.ok) {
         const contentType = listRes.headers.get("content-type") || "";
         if (contentType.includes("application/json")) {
@@ -5320,17 +7237,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function syncLibraryScrim(open) {
+    const scrim = document.getElementById("libraryScrim");
+    if (!scrim) return;
+    const show = Boolean(open) && window.innerWidth <= 900;
+    scrim.hidden = !show;
+    document.body.classList.toggle("library-drawer-open", show);
+  }
+
   function setLibraryCollapsed(collapsed) {
     const shell = document.getElementById("appShell");
     const library = document.getElementById("library");
     if (!shell) return;
     shell.classList.toggle("library-collapsed", collapsed);
-    library?.classList.toggle("is-mobile-open", !collapsed && window.innerWidth <= 900);
+    const mobileOpen = !collapsed && window.innerWidth <= 900;
+    library?.classList.toggle("is-mobile-open", mobileOpen);
+    syncLibraryScrim(mobileOpen);
     localStorage.setItem("cm_library_collapsed", collapsed ? "1" : "0");
-    // Recenter graph after layout change
-    requestAnimationFrame(() => {
-      if (window.allNodes?.length) rebuildCurrentGraph();
-    });
+    // Recenter graph after layout change (desktop column change; skip on mobile drawer)
+    if (window.innerWidth > 900) {
+      requestAnimationFrame(() => {
+        if (window.allNodes?.length) rebuildCurrentGraph();
+      });
+    }
   }
 
   function refreshLocale() {
@@ -5350,6 +7279,7 @@ document.addEventListener("DOMContentLoaded", function () {
       refreshNodeAgeLabels();
     }
     syncLinkDepthControl();
+    syncFocusChip();
   }
 
   document.getElementById("bookList")?.addEventListener("click", (event) => {
@@ -5381,17 +7311,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   document.getElementById("sidebarToggle")?.addEventListener("click", () => {
-    if (window.innerWidth <= 900) {
-      document.getElementById("library")?.classList.add("is-mobile-open");
-      setLibraryCollapsed(false);
-    } else {
-      setLibraryCollapsed(false);
-    }
+    setLibraryCollapsed(false);
   });
 
   document.getElementById("collapseLibrary")?.addEventListener("click", () => {
     setLibraryCollapsed(true);
   });
+
+  document.getElementById("libraryScrim")?.addEventListener("click", () => {
+    setLibraryCollapsed(true);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    const library = document.getElementById("library");
+    if (library?.classList.contains("is-mobile-open")) {
+      setLibraryCollapsed(true);
+    }
+  });
+
+  function setHelpPopoverOpen(open) {
+    const pop = document.getElementById("helpPopover");
+    const toggle = document.getElementById("helpToggle");
+    if (!pop || !toggle) return;
+    pop.classList.toggle("is-hidden", !open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) {
+      setFiltersPopoverOpen(false);
+      setSettingsPopoverOpen(false);
+    }
+  }
 
   function setSettingsPopoverOpen(open) {
     const pop = document.getElementById("settingsPopover");
@@ -5399,8 +7348,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!pop || !toggle) return;
     pop.classList.toggle("is-hidden", !open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    if (open) setFiltersPopoverOpen(false);
+    if (open) {
+      setFiltersPopoverOpen(false);
+      setHelpPopoverOpen(false);
+    }
   }
+
+  document.getElementById("helpToggle")?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const pop = document.getElementById("helpPopover");
+    const open = pop?.classList.contains("is-hidden");
+    setHelpPopoverOpen(Boolean(open));
+  });
+  document.getElementById("helpClose")?.addEventListener("click", () => {
+    setHelpPopoverOpen(false);
+  });
 
   document.getElementById("settingsToggle")?.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -5454,7 +7416,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const pop = document.getElementById("filtersPopover");
     const open = pop?.classList.contains("is-hidden");
     setFiltersPopoverOpen(Boolean(open));
-    if (open) setSettingsPopoverOpen(false);
+    if (open) {
+      setSettingsPopoverOpen(false);
+      setHelpPopoverOpen(false);
+    }
   });
   document.getElementById("filtersClose")?.addEventListener("click", () => {
     setFiltersPopoverOpen(false);
@@ -5505,11 +7470,29 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       setSettingsPopoverOpen(false);
     }
+    const helpAnchor = document.querySelector(".help-anchor");
+    const helpPop = document.getElementById("helpPopover");
+    if (
+      helpAnchor &&
+      helpPop &&
+      !helpPop.classList.contains("is-hidden") &&
+      !helpAnchor.contains(event.target)
+    ) {
+      setHelpPopoverOpen(false);
+    }
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      setFiltersPopoverOpen(false);
-      setSettingsPopoverOpen(false);
+    if (event.key !== "Escape") return;
+    setFiltersPopoverOpen(false);
+    setSettingsPopoverOpen(false);
+    setHelpPopoverOpen(false);
+    const narrativePanel = document.getElementById("narrativePanel");
+    if (
+      narrativePanel &&
+      !narrativePanel.classList.contains("is-hidden") &&
+      !narrativePanel.classList.contains("is-collapsed")
+    ) {
+      setNarrativeCollapsed(true);
     }
   });
 
@@ -5522,10 +7505,27 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("cm_legend_collapsed", collapsed ? "1" : "0");
   }
 
-  setLegendCollapsed(localStorage.getItem("cm_legend_collapsed") === "1");
+  const narrowViewport = () =>
+    window.matchMedia("(max-width: 900px)").matches;
+
+  const legendStored = localStorage.getItem("cm_legend_collapsed");
+  setLegendCollapsed(
+    legendStored === "1" || (legendStored == null && narrowViewport())
+  );
   document.getElementById("legendToggle")?.addEventListener("click", () => {
     const legend = document.getElementById("graphLegend");
     setLegendCollapsed(!legend?.classList.contains("is-collapsed"));
+  });
+
+  document.getElementById("zoomInBtn")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    zoomGraphBy(1.35);
+  });
+  document.getElementById("zoomOutBtn")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    zoomGraphBy(1 / 1.35);
   });
 
   function setNarrativeCollapsed(collapsed) {
@@ -5535,36 +7535,74 @@ document.addEventListener("DOMContentLoaded", function () {
     panel.classList.toggle("is-collapsed", collapsed);
     toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
     localStorage.setItem("cm_narrative_collapsed", collapsed ? "1" : "0");
+    if (collapsed) {
+      releaseNarrativeFriseHighlight();
+    } else {
+      syncNarrativeCastFromTime({
+        force: !(lastFocusedNode || lastFocusedLink),
+      });
+    }
   }
 
-  setNarrativeCollapsed(localStorage.getItem("cm_narrative_collapsed") === "1");
+  const narrativeStored = localStorage.getItem("cm_narrative_collapsed");
+  setNarrativeCollapsed(
+    narrativeStored === "1" ||
+      (narrativeStored == null && narrowViewport())
+  );
   document.getElementById("narrativeToggle")?.addEventListener("click", () => {
     const panel = document.getElementById("narrativePanel");
     setNarrativeCollapsed(!panel?.classList.contains("is-collapsed"));
   });
+  document.getElementById("narrativeClose")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setNarrativeCollapsed(true);
+  });
 
   let resizeTimer = null;
+  let wasMobileLibrary = window.innerWidth <= 900;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => rebuildCurrentGraph(), 180);
+    resizeTimer = setTimeout(() => {
+      const isMobile = window.innerWidth <= 900;
+      if (isMobile !== wasMobileLibrary) {
+        wasMobileLibrary = isMobile;
+        // Crossing breakpoint: keep drawer closed on phone, restore desktop column logic
+        if (isMobile) setLibraryCollapsed(true);
+        else {
+          const stored = localStorage.getItem("cm_library_collapsed") === "1";
+          setLibraryCollapsed(stored);
+        }
+      } else {
+        syncLibraryScrim(
+          !document.getElementById("appShell")?.classList.contains(
+            "library-collapsed"
+          ) && isMobile
+        );
+      }
+      rebuildCurrentGraph();
+    }, 180);
   });
 
   window.setLang(window.getLang());
   window.applyStaticI18n();
   setLayoutMode(getLayoutMode());
   setHorizontalSpread(getHorizontalSpread());
-  if (localStorage.getItem("cm_library_collapsed") === "1") {
+  // Phone: drawer starts closed (toggle opens it). Desktop: respect stored collapse.
+  if (window.innerWidth <= 900 || localStorage.getItem("cm_library_collapsed") === "1") {
     setLibraryCollapsed(true);
+  } else {
+    syncLibraryScrim(false);
   }
+  bindFocusChip();
   initLibrary();
 
-  let pressTimer = null;
-  let longPressDuration = 500;
-
   window.loadFile = loadFile;
+  window.closeModal = closeModal;
 });
 
 // Add these lines at the end of graph.js
 window.parseGedcom = parseGedcom;
 window.createGraph = createGraph;
 window.formatName = formatName;
+window.clearGraphSelection = clearGraphSelection;
